@@ -271,7 +271,7 @@ Shows whole numbers (1, 2, 3, 4, 5) for straightforward user ratings.
     <syncfusion:SfRating.ItemContainerStyle>
         <Style TargetType="syncfusion:SfRatingItem">
             <Setter Property="RatedFill" Value="#FFD700"/>
-            <Setter Property="UnRatedFill" Value="#E8E8E8"/>
+            <Setter Property="UnratedFill" Value="#E8E8E8"/>
         </Style>
     </syncfusion:SfRating.ItemContainerStyle>
 </syncfusion:SfRating>

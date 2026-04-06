@@ -332,8 +332,6 @@ Control the physical dimensions of the badge.
 
 ```xaml
 <notification:SfBadge 
-    Width="Auto"
-    Height="Auto"
     Padding="8,4"
     Shape="Rectangle"
     Content="NEW FEATURE"

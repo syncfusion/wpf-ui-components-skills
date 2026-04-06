@@ -367,7 +367,7 @@ public class ViewModel
                            FontSize="12"
                            Foreground="Gray"/>
                 
-                <StackPanel Grid.Column="1" Padding="10,8,0,8">
+                <StackPanel Grid.Column="1">
                     <TextBlock Text="{Binding Name}"
                                FontFamily="Segoe UI"
                                FontSize="12"

@@ -11,9 +11,20 @@ ColorPicker provides two main events to handle user interactions:
 | `ColorChanged` | Selected solid color changes | React to solid color selection |
 | `SelectedBrushChanged` | Selected brush (gradient) changes | React to gradient or brush changes |
 
+**When to use ColorChanged:**
+- Updating UI element backgrounds/foregrounds in real-time
+- Tracking color history for undo/redo
+- Validating color selections against constraints
+- Updating color-dependent properties
+
+**When to use SelectedBrushChanged:**
+- Handling gradient changes specifically
+- Managing complex brush compositions
+- Detecting mode switches (solid ↔ gradient)
+
 ## ColorChanged Event
 
-Fires when the user selects or modifies a solid color value.
+Use `ColorChanged` to react when the user selects or modifies a solid color value. Fires for any color property modification.
 
 ### XAML Event Binding
 ```xaml
@@ -80,7 +91,10 @@ private void ColorPicker_ColorChanged(DependencyObject d,
 
 ## SelectedBrushChanged Event
 
-Fires when the selected brush (gradient or solid) changes. This event is useful for gradient changes or when you need to track both solid and gradient selections.
+Subscribe to track brush changes (both solid and gradient). Use this event to:
+- Detect when users switch between solid and gradient modes
+- Apply gradients to shapes or UI elements in real-time
+- Differentiate between SolidColorBrush, LinearGradientBrush, and RadialGradientBrush types
 
 ### XAML Event Binding
 ```xaml
@@ -178,208 +192,23 @@ private void OnColorSelectionChanged(string message)
 
 ## Integration Patterns
 
-### Pattern 1: Two-Way Binding to View Model
+**Pattern 1: Two-Way Binding to ViewModel**
+Bind Color property directly to XAML: `Color="{Binding SelectedColor, Mode=TwoWay}"` then implement INotifyPropertyChanged in your ViewModel.
 
-```xaml
-<syncfusion:ColorPicker Color="{Binding SelectedColor, Mode=TwoWay}"/>
-```
+**Pattern 2: Validation and Constraints**
+In ColorChanged event, validate the new color. If invalid, revert: `colorPicker.Color = (Color)e.OldValue;` and show user feedback.
 
-```csharp
-public class ColorViewModel : INotifyPropertyChanged
-{
-    private Color _selectedColor;
-    
-    public Color SelectedColor
-    {
-        get => _selectedColor;
-        set
-        {
-            if (_selectedColor != value)
-            {
-                _selectedColor = value;
-                OnPropertyChanged(nameof(SelectedColor));
-            }
-        }
-    }
-    
-    public event PropertyChangedEventHandler PropertyChanged;
-    
-    protected void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-}
-```
+**Pattern 3: Color History Tracking**
+Maintain a List<Color> in ColorChanged event. Track previously selected colors for undo/redo or display color history UI.
 
-### Pattern 2: Validation and Constraints
+**Pattern 4: Export/Import Color Configuration**
+In button click handlers, serialize color settings to JSON or XML: `Color.ToString()` and `Brush.ToString()`. On import, parse and set: `colorPicker.Color = (Color)ColorConverter.ConvertFromString(...)`.
 
-```csharp
-private void ColorPicker_ColorChanged(DependencyObject d, 
-                                      DependencyPropertyChangedEventArgs e)
-{
-    Color newColor = (Color)e.NewValue;
-    
-    // Only allow bright colors (luminosity > 128)
-    int luminosity = (int)(0.299 * newColor.R + 0.587 * newColor.G + 0.114 * newColor.B);
-    
-    if (luminosity < 128)
-    {
-        MessageBox.Show("Please select a brighter color");
-        // Reset to previous color
-        colorPicker.Color = (Color)e.OldValue;
-    }
-}
-```
+**Pattern 5: Real-Time Preview with Multiple Shapes**
+Bind multiple shapes (Rectangle, Ellipse, etc.) to the same `SelectedBrushChanged` event. Update all preview elements: `rect.Fill = selectedBrush;` to show brush changes across different geometries.
 
-### Pattern 3: Color History Tracking
-
-```csharp
-private List<Color> colorHistory = new List<Color>();
-
-private void ColorPicker_ColorChanged(DependencyObject d, 
-                                      DependencyPropertyChangedEventArgs e)
-{
-    Color newColor = (Color)e.NewValue;
-    
-    // Add to history if different from last
-    if (colorHistory.Count == 0 || colorHistory.Last() != newColor)
-    {
-        colorHistory.Add(newColor);
-    }
-    
-    // Limit history to 10 items
-    if (colorHistory.Count > 10)
-    {
-        colorHistory.RemoveAt(0);
-    }
-    
-    UpdateHistoryUI();
-}
-
-private void UpdateHistoryUI()
-{
-    // Display color history in UI
-    historyStackPanel.Children.Clear();
-    foreach (var color in colorHistory)
-    {
-        var rectangle = new Rectangle
-        {
-            Width = 20,
-            Height = 20,
-            Fill = new SolidColorBrush(color),
-            Margin = new Thickness(2)
-        };
-        historyStackPanel.Children.Add(rectangle);
-    }
-}
-```
-
-### Pattern 4: Export Color Configuration
-
-```csharp
-private void ExportColorSettings_Click(object sender, RoutedEventArgs e)
-{
-    var colorSettings = new
-    {
-        Color = colorPicker.Color.ToString(),
-        Brush = colorPicker.Brush.ToString(),
-        Timestamp = DateTime.Now
-    };
-    
-    string json = JsonConvert.SerializeObject(colorSettings, Formatting.Indented);
-    
-    // Save to file or database
-    File.WriteAllText("color_settings.json", json);
-    MessageBox.Show("Color settings exported");
-}
-
-private void ImportColorSettings_Click(object sender, RoutedEventArgs e)
-{
-    string json = File.ReadAllText("color_settings.json");
-    var colorSettings = JsonConvert.DeserializeObject(json);
-    
-    // Restore color
-    colorPicker.Color = (Color)ColorConverter.ConvertFromString(colorSettings.Color);
-    MessageBox.Show("Color settings imported");
-}
-```
-
-### Pattern 5: Real-Time Preview with Multiple Shapes
-
-```xaml
-<Grid>
-    <StackPanel Orientation="Vertical" Margin="10">
-        <!-- Color Picker -->
-        <syncfusion:ColorPicker SelectedBrushChanged="ColorPicker_SelectedBrushChanged"
-                                Height="300"
-                                Name="colorPicker"/>
-        
-        <!-- Preview Shapes -->
-        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-            <Rectangle Name="rectPreview" Width="80" Height="80" Margin="5"/>
-            <Ellipse Name="circlePreview" Width="80" Height="80" Margin="5"/>
-            <Polygon Name="trianglePreview" Points="40,0 80,80 0,80" Width="80" Height="80" Margin="5"/>
-        </StackPanel>
-        
-        <!-- Texture Sample -->
-        <TextBlock Name="textPreview"
-                   Text="Sample Text"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   Margin="0,10,0,0"
-                   Padding="10"
-                   Background="LightGray"/>
-    </StackPanel>
-</Grid>
-```
-
-```csharp
-private void ColorPicker_SelectedBrushChanged(DependencyObject d, 
-                                              DependencyPropertyChangedEventArgs e)
-{
-    Brush selectedBrush = (Brush)e.NewValue;
-    
-    // Update all preview shapes
-    rectPreview.Fill = selectedBrush;
-    circlePreview.Fill = selectedBrush;
-    trianglePreview.Fill = selectedBrush;
-    textPreview.Background = selectedBrush;
-}
-```
-
-### Pattern 6: Disable Button Until Valid Selection
-
-```xaml
-<Grid>
-    <StackPanel>
-        <syncfusion:ColorPicker Name="colorPicker"/>
-        <Button Name="applyButton" 
-                Click="ApplyButton_Click"
-                IsEnabled="False">
-            Apply Color
-        </Button>
-    </StackPanel>
-</Grid>
-```
-
-```csharp
-private void ColorPicker_ColorChanged(DependencyObject d, 
-                                      DependencyPropertyChangedEventArgs e)
-{
-    Color selectedColor = (Color)e.NewValue;
-    
-    // Enable button only if color is sufficiently different from default
-    bool isValid = selectedColor != Colors.White;
-    applyButton.IsEnabled = isValid;
-}
-
-private void ApplyButton_Click(object sender, RoutedEventArgs e)
-{
-    Color finalColor = colorPicker.Color;
-    // Apply color to application
-    MessageBox.Show($"Applying color: {finalColor}");
-}
-```
+**Pattern 6: Validate Before Applying**
+Track valid state in ColorChanged handler. Disable action buttons until validation passes. On valid selection, apply color and provide user feedback.
 
 ## Event Timing and Order
 

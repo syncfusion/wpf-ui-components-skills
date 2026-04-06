@@ -45,33 +45,6 @@ comboBox.DefaultText = "Choose Items...";
 <syncfusion:ComboBoxAdv DefaultText="Select a country from the list"/>
 ```
 
-#### Pattern 2: Required Field Indicator
-
-```xml
-<syncfusion:ComboBoxAdv DefaultText="* Select a category (required)"/>
-```
-
-#### Pattern 3: Search Hint
-
-```xml
-<syncfusion:ComboBoxAdv IsEditable="True"
-                        AutoCompleteMode="Suggest"
-                        DefaultText="Type to search..."/>
-```
-
-#### Pattern 4: Contextual Hint
-
-```xml
-<syncfusion:ComboBoxAdv DefaultText="Filter by status: Active, Inactive, Pending"/>
-```
-
-#### Pattern 5: MultiSelect Hint
-
-```xml
-<syncfusion:ComboBoxAdv AllowMultiSelect="True"
-                        DefaultText="Select one or more options"/>
-```
-
 ### Best Practices for Watermarks
 
 **1. Be Clear and Concise**
@@ -159,57 +132,6 @@ comboBox.SelectedValueDelimiter = " | ";
                         DisplayMemberPath="Name"/>
 ```
 **Result:** Denmark | Canada | Russia
-
-#### Pattern 2: Semicolon Separator
-
-```xml
-<syncfusion:ComboBoxAdv AllowMultiSelect="True"
-                        SelectedValueDelimiter="; "
-                        ItemsSource="{Binding Items}"/>
-```
-**Result:** Item1; Item2; Item3
-
-#### Pattern 3: Bullet Separator
-
-```xml
-<syncfusion:ComboBoxAdv AllowMultiSelect="True"
-                        SelectedValueDelimiter=" • "
-                        ItemsSource="{Binding Tags}"/>
-```
-**Result:** Tag1 • Tag2 • Tag3
-
-#### Pattern 4: Comma with Space (More Readable)
-
-```xml
-<syncfusion:ComboBoxAdv AllowMultiSelect="True"
-                        SelectedValueDelimiter=", "
-                        ItemsSource="{Binding Options}"/>
-```
-**Result:** Option1, Option2, Option3
-
-#### Pattern 5: Line Break (Vertical List)
-
-```xml
-<syncfusion:ComboBoxAdv AllowMultiSelect="True"
-                        SelectedValueDelimiter="&#10;"
-                        Height="Auto"
-                        ItemsSource="{Binding Items}"/>
-```
-**Result:**
-```
-Item1
-Item2
-Item3
-```
-
-#### Pattern 6: Custom Symbol
-
-```xml
-<syncfusion:ComboBoxAdv AllowMultiSelect="True"
-                        SelectedValueDelimiter=" → "
-                        ItemsSource="{Binding Steps}"/>
-```
-**Result:** Step1 → Step2 → Step3
 
 ### Delimiter with Watermark
 

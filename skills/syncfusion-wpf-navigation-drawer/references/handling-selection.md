@@ -37,21 +37,21 @@ if (selectedItem != null)
     <syncfusion:NavigationItem x:Name="inboxItem" 
                                Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem x:Name="sentItem" 
                                Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem x:Name="draftsItem" 
                                Header="Drafts">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M6.9999996,48.353..." Fill="White"/>
+            <Path Data="M3,3h18v14H3V3z M5,5v10h14V5H5z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -88,7 +88,7 @@ private void SelectDrafts_Click(object sender, RoutedEventArgs e)
 ```xaml
 <syncfusion:NavigationItem Header="Inbox" IsSelected="True">
     <syncfusion:NavigationItem.Icon>
-        <Path Data="M32.032381,16.445429..." Fill="White"/>
+        <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
     </syncfusion:NavigationItem.Icon>
 </syncfusion:NavigationItem>
 ```
@@ -101,7 +101,7 @@ NavigationItem inboxItem = new NavigationItem()
     IsSelected = true,
     Icon = new Path()
     {
-        Data = Geometry.Parse("M32.032381,16.445429..."),
+        Data = Geometry.Parse("M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"),
         Fill = Brushes.White
     }
 };
@@ -160,7 +160,7 @@ public class ViewModel : INotifyPropertyChanged
             PageName = "DashboardPage",
             Icon = new Path()
             {
-                Data = Geometry.Parse("M32.032381,16.445429..."),
+                Data = Geometry.Parse("M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"),
                 Fill = Brushes.White
             }
         });
@@ -171,7 +171,7 @@ public class ViewModel : INotifyPropertyChanged
             PageName = "ReportsPage",
             Icon = new Path()
             {
-                Data = Geometry.Parse("M42.128046,6.7269681..."),
+                Data = Geometry.Parse("M2,21L23,12L2,3v7l15,2L2,13V21z"),
                 Fill = Brushes.White
             }
         });
@@ -182,7 +182,7 @@ public class ViewModel : INotifyPropertyChanged
             PageName = "SettingsPage",
             Icon = new Path()
             {
-                Data = Geometry.Parse("M6.9999996,48.353..."),
+                Data = Geometry.Parse("M3,3h18v14H3V3z M5,5v10h14V5H5z"),
                 Fill = Brushes.White
             }
         });
@@ -254,7 +254,7 @@ Customize the appearance of the selected item.
                            IsSelected="True"
                            SelectionBackground="#FF6200EE">
     <syncfusion:NavigationItem.Icon>
-        <Path Data="M32.032381,16.445429..." Fill="White"/>
+        <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
     </syncfusion:NavigationItem.Icon>
 </syncfusion:NavigationItem>
 ```
@@ -270,7 +270,7 @@ NavigationItem item = new NavigationItem()
     ),
     Icon = new Path()
     {
-        Data = Geometry.Parse("M32.032381,16.445429..."),
+        Data = Geometry.Parse("M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"),
         Fill = Brushes.White
     }
 };
@@ -283,7 +283,7 @@ NavigationItem item = new NavigationItem()
     <syncfusion:NavigationItem Header="Settings" 
                                SelectionBackground="Transparent">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M13.999999,3.9500002..." Fill="White"/>
+            <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
 </syncfusion:SfNavigationDrawer.FooterItems>
@@ -300,7 +300,7 @@ NavigationItem item = new NavigationItem()
         </LinearGradientBrush>
     </syncfusion:NavigationItem.SelectionBackground>
     <syncfusion:NavigationItem.Icon>
-        <Path Data="M32.032381,16.445429..." Fill="White"/>
+        <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
     </syncfusion:NavigationItem.Icon>
 </syncfusion:NavigationItem>
 ```
@@ -386,19 +386,19 @@ public class NavigationViewModel : INotifyPropertyChanged
             { 
                 Title = "Dashboard", 
                 Description = "Overview of your data",
-                Icon = CreateIcon("M32.032381,16.445429...")
+                Icon = CreateIcon("M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z")
             },
             new PageModel 
             { 
                 Title = "Analytics", 
                 Description = "Detailed analytics and reports",
-                Icon = CreateIcon("M42.128046,6.7269681...")
+                Icon = CreateIcon("M2,21L23,12L2,3v7l15,2L2,13V21z")
             },
             new PageModel 
             { 
                 Title = "Settings", 
                 Description = "Configure your preferences",
-                Icon = CreateIcon("M6.9999996,48.353...")
+                Icon = CreateIcon("M3,3h18v14H3V3z M5,5v10h14V5H5z")
             }
         };
         
@@ -441,3 +441,4 @@ public class PageModel
 ## Sample Code
 
 View complete sample on GitHub: [Handling Selection Sample](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Handling_Selection)
+

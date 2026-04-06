@@ -117,7 +117,7 @@ License registration requirements on build servers depend on the assembly source
 1. **Use any developer license** to generate keys for build environments
 2. **Register the key in application code** before building
 3. **Don't require internet connection** - validation works offline
-4. **Consider CI validation** - Use LicenseKeyValidator utility to catch errors early
+4. **Consider CI validation** - Use programmatic validation, unit-test validation, or an internally-hosted, vetted validator to catch errors early (do NOT download and run external binaries from the internet)
 5. **Store keys securely** - Use environment variables or secret management
 
 ### Example Build Server Setup

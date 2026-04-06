@@ -61,53 +61,7 @@ xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 
 ## Creating TabControl via C#
 
-### Basic Setup
-```csharp
-using Syncfusion.Windows.Tools.Controls;
-using System.Windows;
-
-public partial class MainWindow : Window {
-    public MainWindow() {
-        InitializeComponent();
-        
-        // Create TabControl instance
-        TabControlExt tabControl = new TabControlExt();
-        tabControl.Height = 300;
-        tabControl.Width = 400;
-        
-        // Add to window
-        this.Content = tabControl;
-    }
-}
-```
-
-### Adding TabItems Programmatically
-```csharp
-// Create TabItems
-TabItemExt tabItem1 = new TabItemExt() 
-{
-    Header = "Tab 1",
-    Content = new TextBlock() 
-    { 
-        Text = "Content for Tab 1",
-        Margin = new Thickness(10)
-    }
-};
-
-TabItemExt tabItem2 = new TabItemExt() 
-{
-    Header = "Tab 2",
-    Content = new TextBlock() 
-    { 
-        Text = "Content for Tab 2",
-        Margin = new Thickness(10)
-    }
-};
-
-// Add to TabControl
-tabControl.Items.Add(tabItem1);
-tabControl.Items.Add(tabItem2);
-```
+Create `TabControlExt` instance and set dimensions, then add to window/container. Create `TabItemExt` objects with `Header` and `Content` properties, then add to `tabControl.Items.Add(tabItem)`. Import: `using Syncfusion.Windows.Tools.Controls;`
 
 ## Tab Item Structure
 
@@ -127,32 +81,7 @@ Each `TabItemExt` consists of:
 
 ## Tab Placement Options
 
-Control where the tab headers appear using `TabStripPlacement`:
-
-**Top Placement (Default):**
-```xml
-<syncfusion:TabControlExt TabStripPlacement="Top" Name="tabControl" />
-```
-
-**Bottom Placement:**
-```xml
-<syncfusion:TabControlExt TabStripPlacement="Bottom" Name="tabControl" />
-```
-
-**Left Placement:**
-```xml
-<syncfusion:TabControlExt TabStripPlacement="Left" Name="tabControl" />
-```
-
-**Right Placement:**
-```xml
-<syncfusion:TabControlExt TabStripPlacement="Right" Name="tabControl" />
-```
-
-**C# Equivalent:**
-```csharp
-tabControl.TabStripPlacement = Dock.Bottom;  // or Dock.Left, Dock.Right, Dock.Top
-```
+Control tab header placement with `TabStripPlacement`: Top (default), Bottom, Left, Right. Set via `TabStripPlacement="Left"` in XAML or `tabControl.TabStripPlacement = Dock.Left` in C#.
 
 ## Adding Icons to Tab Headers
 
@@ -197,16 +126,4 @@ Use containers to organize complex content:
 5. **Content Sizing**: Ensure tab content fits the available space; use proper containers
 6. **Performance**: For many TabItems, consider lazy-loading content or using virtualization
 
-## Common Issues
 
-**Issue: TabControl not appearing**
-- Verify that `Syncfusion.Tools.WPF` assembly is referenced
-- Check that namespace is correctly imported: `xmlns:syncfusion="http://schemas.syncfusion.com/wpf"`
-
-**Issue: Namespace not recognized**
-- Ensure NuGet packages are installed correctly
-- Rebuild the solution after adding references
-
-**Issue: Content not displaying**
-- Check that TabItems have proper `Header` and `Content` properties
-- Verify content controls are properly initialized

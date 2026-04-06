@@ -495,23 +495,15 @@ private void OnPopupOpened(object sender, EventArgs e)
     SearchItemPath="Name"
     AutoCompleteMode="Suggest"
     SuggestionMode="Contains"
-    
-    <!-- Dropdown Customization -->
     DropDownBackground="WhiteSmoke"
     MaxDropDownHeight="350"
     SuggestionBoxPlacement="Bottom"
     ShowSuggestionsOnFocus="True"
     PopupDelay="00:00:00.3"
-    
-    <!-- Selection Styling -->
     SelectionBackgroundColor="LightSkyBlue"
     AutoHighlightMatchedItem="True"
-    
-    <!-- Events -->
     SuggestionPopupOpened="OnPopupOpened"
     SuggestionPopupClosed="OnPopupClosed"
-    
-    <!-- Data -->
     AutoCompleteSource="{Binding Employees}" />
 ```
 

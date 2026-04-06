@@ -20,6 +20,8 @@ xmlns:diagram="clr-namespace:Syncfusion.UI.Xaml.Diagram;assembly=Syncfusion.SfDi
 
 `MermaidBlockTemplate` accepts a `DataTemplate`. When a `mermaid` code block is found in the Markdown, the control instantiates this template and passes the raw Mermaid text as `DataContext`.
 
+> ⚠️ **Security note:** The `DataContext` string comes directly from the Markdown source. If that Markdown was loaded from a remote or user-supplied source, treat this string as untrusted. Validate it before passing to `LoadDiagramFromMermaid()` — at minimum check that it is non-null, within a reasonable length limit, and matches expected Mermaid syntax patterns.
+
 ---
 
 ## Full Example — Flowchart in Markdown
@@ -73,6 +75,9 @@ flowchart TD
 using Syncfusion.UI.Xaml.Diagram;
 using Syncfusion.UI.Xaml.Diagram.Layout;
 
+// Maximum length allowed for a Mermaid block — adjust to your app's requirements
+private const int MaxMermaidLength = 10_000;
+
 private void mermaidDiagram_Loaded(object sender, RoutedEventArgs e)
 {
     if (sender is SfDiagram diagram)
@@ -83,6 +88,29 @@ private void mermaidDiagram_Loaded(object sender, RoutedEventArgs e)
 
         // Get the Mermaid text from DataContext (set by the viewer)
         var mermaidText = diagram.DataContext as string;
+
+        // Validate the Mermaid source before rendering
+        // DataContext originates from Markdown content which may be untrusted
+        if (string.IsNullOrWhiteSpace(mermaidText))
+            return;
+
+        if (mermaidText.Length > MaxMermaidLength)
+        {
+            // Reject oversized payloads — could be a DoS or injection attempt
+            return;
+        }
+
+        // Only render known supported diagram types
+        var trimmed = mermaidText.TrimStart();
+        var supportedPrefixes = new[] { "flowchart ", "flowchart\n", "graph " };
+        bool isSupportedType = Array.Exists(supportedPrefixes,
+            p => trimmed.StartsWith(p, StringComparison.OrdinalIgnoreCase));
+
+        if (!isSupportedType)
+        {
+            // Unsupported or unexpected diagram type — skip rendering
+            return;
+        }
 
         // Configure flowchart layout
         diagram.LayoutManager = new LayoutManager
@@ -96,7 +124,7 @@ private void mermaidDiagram_Loaded(object sender, RoutedEventArgs e)
             }
         };
 
-        // Parse and render the Mermaid diagram
+        // Parse and render the validated Mermaid diagram
         diagram.LoadDiagramFromMermaid(mermaidText);
     }
 }
@@ -128,7 +156,9 @@ private void mermaidDiagram_Loaded(object sender, RoutedEventArgs e)
 ## Gotchas
 
 - **`SfDiagram` assembly is required** — without `Syncfusion.SfDiagram.WPF`, the template cannot be created; install the NuGet package `Syncfusion.SfDiagram.WPF`
-- **`DataContext` is the raw Mermaid string** — in the `Loaded` handler, always cast `diagram.DataContext as string` to get the Mermaid source text
+- **`DataContext` is untrusted input** — the raw Mermaid string comes from Markdown content which may originate from remote or user-supplied sources; always validate length, content type, and diagram type prefix before calling `LoadDiagramFromMermaid()`
+- **Allowlist diagram types** — check that the Mermaid block starts with a known supported keyword (e.g., `flowchart`, `graph`) before rendering; reject unrecognized types
+- **Enforce a length limit** — large Mermaid payloads can cause DoS; reject strings above a reasonable maximum (e.g., 10 000 characters)
 - **`PageSettings = null` is recommended** — setting it prevents the default page border from interfering with diagram sizing
 - **Fixed Width/Height** — set explicit `Width` and `Height` on the `SfDiagram` in the template; auto-sizing may not work correctly for all diagram sizes
 - **Only `flowchart` type is shown in docs** — other Mermaid diagram types (sequence, gantt, etc.) may or may not be supported; verify with your Syncfusion version

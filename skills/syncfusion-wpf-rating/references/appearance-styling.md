@@ -25,6 +25,7 @@ The SfRating control provides extensive customization options for appearance and
 - [ItemContainerStyle](#itemcontainerstyle)
 - [Complete Styling Examples](#complete-styling-examples)
 
+
 ## Overview
 
 The SfRating control's styling properties are set through the `ItemContainerStyle` property, which targets individual `SfRatingItem` objects. This pattern allows consistent styling across all rating items.
@@ -84,14 +85,14 @@ this.Content = rating;
 
 ### Unrated Items (Unselected)
 
-The `UnRatedFill` property sets the fill color for unselected rating items.
+The `UnratedFill` property sets the fill color for unselected rating items.
 
 **XAML:**
 ```xml
 <syncfusion:SfRating ItemsCount="5" Value="2">
     <syncfusion:SfRating.ItemContainerStyle>
         <Style TargetType="syncfusion:SfRatingItem">
-            <Setter Property="UnRatedFill" Value="LightGray"/>
+            <Setter Property="UnratedFill" Value="LightGray"/>
         </Style>
     </syncfusion:SfRating.ItemContainerStyle>
 </syncfusion:SfRating>
@@ -455,7 +456,7 @@ The `ItemContainerStyle` property applies a consistent style to all auto-generat
         <Style TargetType="syncfusion:SfRatingItem">
             <!-- Fill colors -->
             <Setter Property="RatedFill" Value="Gold"/>
-            <Setter Property="UnRatedFill" Value="LightGray"/>
+            <Setter Property="UnratedFill" Value="LightGray"/>
             
             <!-- Stroke properties -->
             <Setter Property="RatedStroke" Value="Orange"/>
@@ -514,7 +515,7 @@ this.Content = rating;
     <syncfusion:SfRating.ItemContainerStyle>
         <Style TargetType="syncfusion:SfRatingItem">
             <Setter Property="RatedFill" Value="#FFD700"/>
-            <Setter Property="UnRatedFill" Value="#E0E0E0"/>
+            <Setter Property="UnratedFill" Value="#E0E0E0"/>
             <Setter Property="RatedStroke" Value="#FFA500"/>
             <Setter Property="RatedStrokeThickness" Value="1"/>
         </Style>
@@ -533,7 +534,7 @@ this.Content = rating;
     <syncfusion:SfRating.ItemContainerStyle>
         <Style TargetType="syncfusion:SfRatingItem">
             <Setter Property="RatedFill" Value="#2196F3"/>
-            <Setter Property="UnRatedFill" Value="White"/>
+            <Setter Property="UnratedFill" Value="White"/>
             <Setter Property="UnratedStroke" Value="#BDBDBD"/>
             <Setter Property="UnratedStrokeThickness" Value="2"/>
             <Setter Property="PointerOverFill" Value="#64B5F6"/>
@@ -552,7 +553,7 @@ this.Content = rating;
     <syncfusion:SfRating.ItemContainerStyle>
         <Style TargetType="syncfusion:SfRatingItem">
             <Setter Property="RatedFill" Value="Black"/>
-            <Setter Property="UnRatedFill" Value="Transparent"/>
+            <Setter Property="UnratedFill" Value="Transparent"/>
             <Setter Property="UnratedStroke" Value="#E0E0E0"/>
             <Setter Property="UnratedStrokeThickness" Value="2"/>
             <Setter Property="PointerOverFill" Value="#424242"/>
@@ -571,7 +572,7 @@ this.Content = rating;
     <syncfusion:SfRating.ItemContainerStyle>
         <Style TargetType="syncfusion:SfRatingItem">
             <Setter Property="RatedFill" Value="#4CAF50"/>
-            <Setter Property="UnRatedFill" Value="#F5F5F5"/>
+            <Setter Property="UnratedFill" Value="#F5F5F5"/>
             <Setter Property="RatedStroke" Value="#388E3C"/>
             <Setter Property="RatedStrokeThickness" Value="2"/>
             <Setter Property="PointerOverFill" Value="#81C784"/>

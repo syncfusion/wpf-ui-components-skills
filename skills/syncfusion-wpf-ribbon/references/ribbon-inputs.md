@@ -299,8 +299,8 @@ private void OnStyleChanged(object sender, SelectionChangedEventArgs e)
 
 ```xml
 <syncfusion:RibbonListBox ItemsSource="{Binding Options}"
-                          SelectedItem="{Binding SelectedOption}"
-                          
+                          SelectedItem="{Binding SelectedOption}" />
+```
 
 ```csharp
 public class MyViewModel
@@ -454,19 +454,4 @@ Ensure changes flow both directions:
 </syncfusion:RibbonBar>
 ```
 
-## Troubleshooting
-
-### Issue: ComboBox not showing items
-**Solution:** Ensure items are `RibbonComboBoxItem` elements, not regular `ComboBoxItem`.
-
-### Issue: Data binding not updating
-**Solution:** Verify view model implements `INotifyPropertyChanged` and raises `PropertyChanged` events.
-
-### Issue: Radio buttons not mutually exclusive
-**Solution:** Ensure all radio buttons in a group have the same `GroupName` property.
-
-### Issue: TextBox text not updating view model
-**Solution:** Use `UpdateSourceTrigger=PropertyChanged` for real-time updates.
-
-### Issue: ListBox selection not working
-**Solution:** Check that `SelectionChanged` event handler is properly wired and that binding is bi-directional with `Mode=TwoWay`.
+For troubleshooting common input-control issues, see [references/troubleshooting.md](references/troubleshooting.md).

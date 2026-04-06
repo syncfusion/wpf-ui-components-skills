@@ -245,115 +245,6 @@ public void ClearAllTabs()
                           Name="tabControl" />
 ```
 
-## Data Binding Scenarios
-
-### Scenario 1: Document Editor with File Tabs
-
-```csharp
-public class DocumentViewModel : INotifyPropertyChanged
-{
-    public ObservableCollection<DocumentTabViewModel> OpenDocuments { get; set; }
-    public DocumentTabViewModel SelectedDocument { get; set; }
-    
-    public class DocumentTabViewModel
-    {
-        public string FileName { get; set; }
-        public string FilePath { get; set; }
-        public bool IsModified { get; set; }
-        public string DocumentContent { get; set; }
-        
-        public string DisplayTitle => IsModified ? $"{FileName}*" : FileName;
-    }
-}
-```
-
-**XAML:**
-
-```xml
-<syncfusion:TabControlExt ItemsSource="{Binding OpenDocuments}"
-                          SelectedItem="{Binding SelectedDocument, Mode=TwoWay}"
-                          CloseButtonType="Individual">
-    <syncfusion:TabControlExt.ItemTemplate>
-        <DataTemplate>
-            <TextBlock Text="{Binding DisplayTitle}" Margin="5,0" />
-        </DataTemplate>
-    </syncfusion:TabControlExt.ItemTemplate>
-    
-    <syncfusion:TabControlExt.ContentTemplate>
-        <DataTemplate>
-            <TextBox Text="{Binding DocumentContent}" Margin="10" TextWrapping="Wrap" />
-        </DataTemplate>
-    </syncfusion:TabControlExt.ContentTemplate>
-</syncfusion:TabControlExt>
-```
-
-### Scenario 2: Settings Panel with Grouped Tabs
-
-```csharp
-public class SettingsViewModel
-{
-    public ObservableCollection<SettingCategory> Categories { get; set; }
-    public SettingCategory SelectedCategory { get; set; }
-    
-    public SettingsViewModel()
-    {
-        Categories = new ObservableCollection<SettingCategory>
-        {
-            new SettingCategory 
-            { 
-                Name = "General",
-                Settings = new ObservableCollection<Setting>()
-                {
-                    new Setting { Name = "Theme", Value = "Dark" },
-                    new Setting { Name = "Language", Value = "English" }
-                }
-            },
-            new SettingCategory 
-            { 
-                Name = "Advanced",
-                Settings = new ObservableCollection<Setting>()
-                {
-                    new Setting { Name = "Debug Mode", Value = "Off" }
-                }
-            }
-        };
-        
-        SelectedCategory = Categories[0];
-    }
-}
-
-public class SettingCategory
-{
-    public string Name { get; set; }
-    public ObservableCollection<Setting> Settings { get; set; }
-}
-
-public class Setting
-{
-    public string Name { get; set; }
-    public string Value { get; set; }
-}
-```
-
-### Scenario 3: Dynamic Tab Creation from Data Source
-
-```csharp
-public async Task LoadTabsFromDatabase()
-{
-    var data = await _database.GetAllTabsAsync();
-    
-    foreach (var item in data)
-    {
-        TabItems.Add(new TabItemViewModel
-        {
-            Title = item.Title,
-            Content = item.Content,
-            IconPath = item.IconPath
-        });
-    }
-}
-```
-
 ## Handling Selection Changes in MVVM
 
 Monitor selected tab changes in your view model:
@@ -388,29 +279,7 @@ private void OnTabSelected(TabItemViewModel tab)
 
 ## Data Binding Best Practices
 
-1. **Use ObservableCollection**: For automatic collection updates
-2. **INotifyPropertyChanged**: Implement for property change notifications
-3. **Two-Way Binding**: For selected item binding: `Mode=TwoWay`
-4. **Template Selectors**: For complex content display logic
-5. **Lazy Loading**: Load tab content only when tab is selected
-6. **Weak Event Patterns**: Prevent memory leaks from event subscriptions
-7. **Async Data Loading**: Load data asynchronously to avoid UI freezing
-
-## Common Data Binding Issues
-
-**Issue: Items not updating in UI**
-- Solution: Use `ObservableCollection<T>` instead of `List<T>`
-- Verify `INotifyPropertyChanged` is implemented correctly
-
-**Issue: SelectedItem not binding**
-- Solution: Use `Mode=TwoWay` binding
-- Ensure selected item is actually in the Items collection
-
-**Issue: Template not being applied**
-- Solution: Check data type in template selector
-- Verify template resources are properly defined
-
-**Issue: Performance degradation with many tabs**
-- Solution: Implement virtualization
-- Use lazy loading for tab content
-- Consider pagination instead of many tabs
+- Use `ObservableCollection` for automatic updates
+- Implement `INotifyPropertyChanged` for property changes
+- Use `Mode=TwoWay` for selected item binding
+- Load tab content only when tab is selected (lazy loading)

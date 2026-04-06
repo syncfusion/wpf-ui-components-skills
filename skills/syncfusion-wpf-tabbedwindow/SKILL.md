@@ -12,20 +12,7 @@ A comprehensive guide for implementing the Syncfusion WPF Tabbed Window control,
 
 ## When to Use This Skill
 
-Use this skill when you need to:
-
-- **Build document-based applications** with multiple documents in tabs (similar to Visual Studio, Visual Studio Code, or modern web browsers)
-- **Implement browser-style tab interfaces** with integrated chrome and tab navigation
-- **Create multi-document interfaces (MDI)** with modern tabbed layouts instead of traditional MDI windows
-- **Enable tear-off functionality** allowing users to drag tabs out to create floating windows
-- **Support tab merging** between multiple windows through drag-and-drop operations
-- **Implement dynamic tab management** with add/close/select operations and new tab buttons
-- **Build MVVM-compatible tabbed interfaces** with data binding to observable collections
-- **Create professional desktop applications** requiring flexible workspace organization
-- **Implement code editors, document viewers, or content management tools** with tabbed navigation
-- **Support multiple window layouts** with tabs integrated into window chrome or as content
-
-This skill covers all aspects of the Tabbed Window control including setup, window modes, tab management, data binding, tear-off windows, tab merging, and customization.
+Use this skill for document-based applications with multiple tabs, browser-style interfaces, tear-off windows, tab merging, and MVVM binding. Covers setup, window modes, tab management, data binding, floating windows, and customization.
 
 ## Component Overview
 
@@ -246,25 +233,6 @@ public partial class MainWindow : SfChromelessWindow
 </syncfusion:SfTabControl>
 ```
 
-### Pattern 3: Multi-Window with Merge Validation
-
-```csharp
-private void OnPreviewTabMerge(object sender, TabMergePreviewEventArgs e)
-{
-    var draggedItem = e.DraggedItem;
-    
-    // Validate merge operation
-    if (draggedItem is DocumentTab doc && doc.IsReadOnly)
-    {
-        e.Allow = false;
-        MessageBox.Show("Cannot move read-only documents");
-        return;
-    }
-    
-    e.Allow = true;
-}
-```
-
 ## Key Properties and Events
 
 ### Core Properties
@@ -296,27 +264,7 @@ private void OnPreviewTabMerge(object sender, TabMergePreviewEventArgs e)
 | `ContentTemplate` | DataTemplate for tab content |
 | `ItemContainerStyle` | Style for SfTabItem containers |
 
-## Common Use Cases
 
-### Use Case 1: Code Editor or IDE
-**Scenario:** Building a development tool with multiple file tabs  
-**Mode:** Tabbed (chrome-integrated)  
-**Features:** Drag-drop reordering, close buttons, new tab button, tear-off for multi-monitor
-
-### Use Case 2: Document Management System
-**Scenario:** Enterprise application managing multiple documents  
-**Mode:** Tabbed or Normal  
-**Features:** MVVM binding, tab merging, dynamic add/remove, data-driven tabs
-
-### Use Case 3: Multi-Window Workspace
-**Scenario:** Professional tool with floating panels and documents  
-**Mode:** Tabbed  
-**Features:** Tear-off windows, cross-window merging, merge validation, flexible layouts
-
-### Use Case 4: Browser-Style Application
-**Scenario:** Web-like interface with browser tabs  
-**Mode:** Tabbed  
-**Features:** Close buttons, new tab button, drag reordering, keyboard shortcuts
 
 ## Best Practices
 
@@ -328,10 +276,4 @@ private void OnPreviewTabMerge(object sender, TabMergePreviewEventArgs e)
 6. **Keyboard Support:** Document keyboard shortcuts for users (Ctrl+Tab, Ctrl+Shift+Tab, Ctrl+T)
 7. **Visual Feedback:** Ensure drag-drop operations have clear visual indicators for user guidance
 
-## Troubleshooting Quick Tips
 
-- **Tabs not draggable?** Verify `AllowDragDrop="True"` is set
-- **New tab button not appearing?** Check `EnableNewTabButton="True"` and ensure event handler is attached
-- **Tab merging not working?** Ensure both windows have `AllowDragDrop` enabled
-- **MVVM binding not working?** Verify `ItemTemplate` and `ContentTemplate` are configured
-- **Assembly reference errors?** Ensure both `Syncfusion.SfChromelessWindow.WPF` and `Syncfusion.Shared.WPF` are referenced

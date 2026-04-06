@@ -129,8 +129,8 @@ namespace RatingApp
 ```csharp
 private void SfRating_ValueChanged(object sender, ValueChangedEventArgs e)
 {
-    double oldValue = e.OldValue;
-    double newValue = e.NewValue;
+    var oldValue = e.OldValue;
+    var newValue = e.NewValue;
     MessageBox.Show($"Rating changed from {oldValue} to {newValue}");
 }
 ```

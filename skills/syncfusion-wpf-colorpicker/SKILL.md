@@ -93,61 +93,15 @@ grid.Children.Add(colorPicker);
 
 ## Common Patterns
 
-### Pattern 1: Solid Color Selection
-Use when you need users to pick a single solid color for a brush or property.
-```xaml
-<syncfusion:ColorPicker x:Name="solidColorPicker"
-                        Color="Blue"
-                        IsColorPaletteVisible="True"/>
-```
+**Pattern 1: Solid Color Selection** - Set `Color` property and `IsColorPaletteVisible="True"` for user solid color picking.
 
-### Pattern 2: Gradient Selection
-Use when you need users to create linear or radial gradients for advanced styling.
-```xaml
-<syncfusion:ColorPicker x:Name="gradientPicker" Width="200">
-    <syncfusion:ColorPicker.Brush>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="Yellow" Offset="0.0" />
-            <GradientStop Color="Red" Offset="0.5" />
-            <GradientStop Color="Blue" Offset="1.0" />
-        </LinearGradientBrush>
-    </syncfusion:ColorPicker.Brush>
-</syncfusion:ColorPicker>
-```
+**Pattern 2: Gradient Selection** - Set `Brush` property with `LinearGradientBrush` or `RadialGradientBrush` with `GradientStops` for gradient selection.
 
-### Pattern 3: Respond to Color Changes
-Use when you need to react to user color selections in real-time.
-```csharp
-ColorPicker colorPicker = new ColorPicker();
-colorPicker.ColorChanged += ColorPicker_ColorChanged;
-colorPicker.SelectedBrushChanged += ColorPicker_SelectedBrushChanged;
+**Pattern 3: Respond to Color Changes** - Subscribe to `ColorChanged` and `SelectedBrushChanged` events to handle real-time color/brush updates.
 
-private void ColorPicker_ColorChanged(DependencyObject d, 
-                                      DependencyPropertyChangedEventArgs e)
-{
-    // Handle color change
-    Color selectedColor = (Color)e.NewValue;
-}
+**Pattern 4: Hide Alpha Channel** - Set `IsAlphaVisible="False"` for opaque colors only.
 
-private void ColorPicker_SelectedBrushChanged(DependencyObject d, 
-                                              DependencyPropertyChangedEventArgs e)
-{
-    // Handle brush change
-    Brush selectedBrush = (Brush)e.NewValue;
-}
-```
-
-### Pattern 4: Hide Alpha Channel
-Use when you only need opaque colors without transparency options.
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="False" />
-```
-
-### Pattern 5: Lock to Solid Colors Only
-Use when you want to prevent users from switching to gradient modes.
-```xaml
-<syncfusion:ColorPicker EnableSolidToGradientSwitch="false" />
-```
+**Pattern 5: Lock to Solid Colors** - Set `EnableSolidToGradientSwitch="False"` to prevent gradient mode switching.
 
 ## Key Properties
 

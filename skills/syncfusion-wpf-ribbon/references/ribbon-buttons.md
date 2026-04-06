@@ -3,7 +3,7 @@
 ## Table of Contents
 - [RibbonButton Basics](#ribbonbutton-basics)
 - [RibbonSplitButton](#ribbonsplitbutton)
-- [SimpleMenuButton](#simplemenubuttton)
+- [SimpleMenuButton](#simplemenubutton)
 - [RibbonMenuItem](#ribbonmenuitem)
 - [Nested Menus](#nested-menus)
 - [Command Binding](#command-binding)
@@ -415,22 +415,4 @@ Command is automatically disabled if form is invalid.
                            IsEnabled="{Binding HasSelection}" />
 ```
 
-## Troubleshooting
-
-### Issue: Button not responding to clicks
-**Solution:** Check that `Click` event handler or `Command` binding is properly configured. Verify event handler method exists in code-behind.
-
-### Issue: Menu items not showing
-**Solution:** Ensure you're using `RibbonMenuItem` inside `SplitButton` or `MenuButton`, not regular `MenuItem`.
-
-### Issue: Icon not displaying
-**Solution:** Verify image path is correct. Use `pack://application:,,,/YourAssembly;component/Resources/image.png` format for embedded resources.
-
-### Issue: Disabled button not grayed out
-**Solution:** If using `IsEnabled` binding, ensure view model property is properly implementing `INotifyPropertyChanged`.
-
-### Issue: Split button dropdown not opening
-**Solution:** Ensure you have items (like `RibbonMenuItem`) inside the `SplitButton`.
-
-### Issue: Command not executing
-**Solution:** Check that view model is set as `DataContext`. Verify `ICommand` implementation and `RelayCommand` class is available.
+For troubleshooting common issues with buttons and menus, see [references/troubleshooting.md](references/troubleshooting.md).

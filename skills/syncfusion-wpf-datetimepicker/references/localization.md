@@ -14,20 +14,20 @@ DateTimeEdit reads localized strings from a `.resx` resource file named `Syncfus
 
 ## Step 1: Set the Application Culture
 
-Set `CurrentUICulture` **after** `InitializeComponent()`:
+Set `CurrentUICulture` **before** `InitializeComponent()`:
 
 ```csharp
 public MainWindow()
 {
-    InitializeComponent();
-
-    // Set to French
+    // Set to French BEFORE InitializeComponent
     System.Threading.Thread.CurrentThread.CurrentUICulture =
         new System.Globalization.CultureInfo("fr-FR");
+
+    InitializeComponent();
 }
 ```
 
-> Set the culture **before** the DateTimeEdit is rendered for it to take effect.
+> Set the culture **before** `InitializeComponent()` so the DateTimeEdit control can read localized strings during initialization.
 
 ---
 
@@ -70,9 +70,11 @@ Open the `.resx` file in the Resource Designer and add the localized strings:
 // MainWindow.xaml.cs
 public MainWindow()
 {
-    InitializeComponent();
+    // Set culture BEFORE InitializeComponent
     System.Threading.Thread.CurrentThread.CurrentUICulture =
         new System.Globalization.CultureInfo("fr-FR");
+
+    InitializeComponent();
 }
 ```
 

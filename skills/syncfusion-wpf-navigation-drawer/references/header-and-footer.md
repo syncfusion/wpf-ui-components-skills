@@ -27,7 +27,7 @@ Customize the toggle button icon (Compact/Expanded modes).
     
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -66,7 +66,7 @@ Add custom content next to the toggle button icon.
     
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -85,7 +85,7 @@ Show or hide the toggle button.
                                IsToggleButtonVisible="False">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -113,13 +113,13 @@ Add navigation items to the footer section (Compact/Expanded modes).
     <!-- Main navigation items -->
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -128,7 +128,7 @@ Add navigation items to the footer section (Compact/Expanded modes).
         <syncfusion:NavigationItem Header="Settings" 
                                    SelectionBackground="Transparent">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
@@ -136,7 +136,7 @@ Add navigation items to the footer section (Compact/Expanded modes).
                                    ItemType="Button"
                                    SelectionBackground="Transparent">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:SfNavigationDrawer.FooterItems>
@@ -155,7 +155,7 @@ navigationDrawer.FooterItems.Add(new NavigationItem()
     SelectionBackground = Brushes.Transparent,
     Icon = new Path()
     {
-        Data = Geometry.Parse("M13.999999,3.9500002..."),
+        Data = Geometry.Parse("M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     }
@@ -168,7 +168,7 @@ navigationDrawer.FooterItems.Add(new NavigationItem()
     SelectionBackground = Brushes.Transparent,
     Icon = new Path()
     {
-        Data = Geometry.Parse("M13.999999,3.9500002..."),
+        Data = Geometry.Parse("M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     }
@@ -185,7 +185,7 @@ navigationDrawer.FooterItems.Add(new NavigationItem()
 <syncfusion:SfNavigationDrawer DisplayMode="Expanded">
     <syncfusion:NavigationItem Header="Home">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -194,7 +194,7 @@ navigationDrawer.FooterItems.Add(new NavigationItem()
                                    ItemType="Button"
                                    Command="{Binding SignOutCommand}">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:SfNavigationDrawer.FooterItems>
@@ -227,7 +227,7 @@ Adjust the height of the header section containing the toggle button.
     
     <syncfusion:NavigationItem Header="Dashboard">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -254,14 +254,14 @@ Adjust the height of the footer section.
                                FooterHeight="70">
     <syncfusion:NavigationItem Header="Home">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:SfNavigationDrawer.FooterItems>
         <syncfusion:NavigationItem Header="Settings">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:SfNavigationDrawer.FooterItems>
@@ -379,7 +379,7 @@ In Default mode, use `DrawerHeaderView` and `DrawerFooterView` for complete cust
     
     <syncfusion:NavigationItem Header="Dashboard">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -395,7 +395,7 @@ In Default mode, use `DrawerHeaderView` and `DrawerFooterView` for complete cust
 <syncfusion:SfNavigationDrawer DisplayMode="Expanded">
     <syncfusion:NavigationItem Header="Home">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -404,19 +404,19 @@ In Default mode, use `DrawerHeaderView` and `DrawerFooterView` for complete cust
         
         <syncfusion:NavigationItem Header="Help" ItemType="Button">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="Settings">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="About" ItemType="Button">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:SfNavigationDrawer.FooterItems>
@@ -441,7 +441,7 @@ In Default mode, use `DrawerHeaderView` and `DrawerFooterView` for complete cust
     
     <syncfusion:NavigationItem Header="Products">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -454,3 +454,4 @@ In Default mode, use `DrawerHeaderView` and `DrawerFooterView` for complete cust
 ## Sample Code
 
 View complete sample on GitHub: [Header and Footer Sample](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Header_and_Footer)
+

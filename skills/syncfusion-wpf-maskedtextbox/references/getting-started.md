@@ -299,7 +299,7 @@ The event fires based on the `ValidationMode` property:
 
 ## Complete Getting Started Example
 
-Here's a complete example combining all concepts:
+A compact example demonstrating a minimal setup with phone and email fields.
 
 ### XAML
 
@@ -310,83 +310,37 @@ Here's a complete example combining all concepts:
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         Title="MaskedEdit Demo" Height="300" Width="400">
     <StackPanel Margin="20">
-        <TextBlock Text="Enter Phone Number:" FontWeight="Bold" Margin="0,0,0,5"/>
-        <syncfusion:SfMaskedEdit 
-            x:Name="phoneInput"
-            Mask="\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}" 
-            MaskType="RegEx"
-            PromptChar="_"
-            Watermark="(___) ___-____"
-            Width="200"
-            Height="30"
-            HorizontalAlignment="Left"
-            ValueChanged="PhoneInput_ValueChanged"/>
-        
-        <TextBlock Text="Enter Email:" FontWeight="Bold" Margin="0,20,0,5"/>
-        <syncfusion:SfMaskedEdit 
-            x:Name="emailInput"
-            Mask="[A-Za-z0-9._%-]+@[A-Za-z0-9]+\.[A-Za-z]{2,3}"
-            MaskType="RegEx"
-            Watermark="example@domain.com"
-            Width="250"
-            Height="30"
-            HorizontalAlignment="Left"
-            ValidationMode="LostFocus"/>
-        
-        <Button Content="Submit" Width="100" Margin="0,20,0,0" 
-                HorizontalAlignment="Left" Click="Submit_Click"/>
+        <syncfusion:SfMaskedEdit x:Name="phoneInput"
+                                 Mask="\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}"
+                                 MaskType="RegEx"
+                                 PromptChar="_"
+                                 Watermark="(___) ___-____"
+                                 Width="200"/>
+
+        <syncfusion:SfMaskedEdit x:Name="emailInput"
+                                 Mask="[A-Za-z0-9._%-]+@[A-Za-z0-9]+\.[A-Za-z]{2,3}"
+                                 MaskType="RegEx"
+                                 Watermark="example@domain.com"
+                                 Width="250"/>
     </StackPanel>
 </Window>
 ```
 
-### Code-Behind
+### Code-Behind (minimal)
 
 ```csharp
-using System;
 using System.Windows;
-using Syncfusion.Windows.Controls.Input;
 
 namespace MaskedEditDemo
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
-        private void PhoneInput_ValueChanged(object sender, EventArgs e)
-        {
-            var maskedEdit = sender as SfMaskedEdit;
-            
-            // Update UI or validate as user types
-            if (!string.IsNullOrWhiteSpace(maskedEdit.Value) && !maskedEdit.HasError)
-            {
-                // Valid phone number entered
-                Console.WriteLine($"Phone: {maskedEdit.Value}");
-            }
-        }
-
-        private void Submit_Click(object sender, RoutedEventArgs e)
-        {
-            // Validate both fields
-            if (!phoneInput.HasError && !emailInput.HasError)
-            {
-                string phone = phoneInput.Value;
-                string email = emailInput.Value;
-                
-                MessageBox.Show($"Phone: {phone}\nEmail: {email}", 
-                    "Form Submitted", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Please fill all fields correctly.", 
-                    "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
+        public MainWindow() => InitializeComponent();
     }
 }
 ```
+
+See `references/mask-patterns-input-restriction.md` for a comprehensive list of masks and examples.
 
 ## License Configuration
 
@@ -405,10 +359,7 @@ public partial class App : Application
 }
 ```
 
-**Get your license key:**
-- **Free Community License:** https://www.syncfusion.com/products/communitylicense
-- **Trial License:** Provided during trial download
-- **Commercial License:** From your license dashboard
+**Get your license key:** Obtain a license key from the Syncfusion licensing portal or your Syncfusion account dashboard.
 
 ## Next Steps
 

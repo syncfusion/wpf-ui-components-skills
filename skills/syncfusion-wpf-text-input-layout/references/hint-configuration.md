@@ -688,7 +688,7 @@ public void LoadUserProfile(UserProfile profile)
             <TextBox FontSize="18" Padding="8"/>
             
             <inputLayout:SfTextInputLayout.LeadingView>
-                <Label Text="🔍" FontSize="20"/>
+                <Label Content="🔍" FontSize="20"/>
             </inputLayout:SfTextInputLayout.LeadingView>
         </inputLayout:SfTextInputLayout>
     </StackPanel>

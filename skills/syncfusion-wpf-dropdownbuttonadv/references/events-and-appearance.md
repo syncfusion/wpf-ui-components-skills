@@ -85,9 +85,10 @@ DropDownMenuItem item = new DropDownMenuItem();
 item.IsCheckable = true;
 item.IsCheckedChanged += indiaItem_IsCheckedChanged;
 
-private void indiaItem_IsCheckedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+private void indiaItem_IsCheckedChanged(object sender, RoutedEventArgs e)
 {
-    bool isChecked = (bool)e.NewValue;
+    var item = sender as DropDownMenuItem;
+    bool isChecked = item?.IsChecked ?? false;
     // React to check state change
 }
 ```

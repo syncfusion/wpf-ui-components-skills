@@ -75,69 +75,11 @@ public class ViewModel : INotifyPropertyChanged
 
 ## Working with Color Brushes
 
-### Get the Selected Brush
-```csharp
-// Get the current brush
-Brush selectedBrush = colorPickerPalette.SelectedBrush;
-
-// Use the brush to apply formatting
-myTextBlock.Foreground = selectedBrush;
-myRectangle.Fill = selectedBrush;
-```
-
-### Set a Brush
-```xaml
-<!-- XAML -->
-<syncfusion:ColorPickerPalette SelectedBrush="Yellow"
-                               Name="colorPickerPalette"/>
-```
-
-```csharp
-// C# - Named brushes
-colorPickerPalette.SelectedBrush = Brushes.Green;
-colorPickerPalette.SelectedBrush = Brushes.CornflowerBlue;
-
-// C# - Custom brush
-var myBrush = new SolidColorBrush(Color.FromRgb(100, 150, 200));
-colorPickerPalette.SelectedBrush = myBrush;
-```
-
-### Bind Brush to UI Element
-```xaml
-<StackPanel>
-    <syncfusion:ColorPickerPalette x:Name="colorPickerPalette"
-                                   Width="60"
-                                   Height="40" />
-    <Rectangle Width="100" 
-               Height="100" 
-               Fill="{Binding SelectedBrush, ElementName=colorPickerPalette}" />
-</StackPanel>
-```
+Access `SelectedBrush` property to get/set brush values. Set XAML: `SelectedBrush="Yellow"` or C#: `colorPickerPalette.SelectedBrush = Brushes.Green`. Bind to UI elements: `Fill="{Binding SelectedBrush, ElementName=colorPickerPalette}"`.
 
 ## Automatic Color Defaults
 
-The automatic color is a reset option users can click to return to a predefined default:
-
-### Setting Automatic Color
-```xaml
-<syncfusion:ColorPickerPalette AutomaticColor="Green"
-                               AutomaticColorVisibility="Visible"
-                               Name="colorPickerPalette" 
-                               Width="60"
-                               Height="40">
-</syncfusion:ColorPickerPalette>
-```
-
-```csharp
-colorPickerPalette.AutomaticColor = Colors.Green;
-colorPickerPalette.AutomaticColorVisibility = Visibility.Visible;
-```
-
-### Hiding Automatic Color
-```xaml
-<syncfusion:ColorPickerPalette AutomaticColorVisibility="Collapsed"
-                               Name="colorPickerPalette" />
-```
+Set `AutomaticColor` to a default (e.g., `Colors.Green`) and show with `AutomaticColorVisibility="Visible"`. Hide with `AutomaticColorVisibility="Collapsed"`.
 
 ```csharp
 colorPickerPalette.AutomaticColorVisibility = Visibility.Collapsed;
@@ -163,48 +105,7 @@ public class TextEditorViewModel
 
 ## Transparent Color Selection
 
-### Enable Transparent (No Color) Option
-```xaml
-<syncfusion:ColorPickerPalette NoColorVisibility="Visible"
-                               Name="colorPickerPalette"/>
-```
-
-```csharp
-colorPickerPalette.NoColorVisibility = Visibility.Visible;
-```
-
-### Set and Detect Transparent Color
-```csharp
-// Set transparent
-colorPickerPalette.Color = Colors.Transparent;
-
-// Detect if transparent
-if (colorPickerPalette.Color == Colors.Transparent)
-{
-    // Handle no color case
-}
-
-// Check in event handler
-private void ColorPickerPalette_SelectedBrushChanged(object sender, SelectedBrushChangedEventArgs e)
-{
-    if (e.NewColor == Colors.Transparent)
-    {
-        // Apply transparent styling
-    }
-}
-```
-
-### Use Case: Optional Background
-```xaml
-<StackPanel>
-    <TextBlock Text="Background Color (Optional):" />
-    <syncfusion:ColorPickerPalette x:Name="backgroundColorPicker"
-                                   Color="White"
-                                   NoColorVisibility="Visible"
-                                   Width="60"
-                                   Height="40" />
-</StackPanel>
-```
+Enable "No Color" with `NoColorVisibility="Visible"`. Set transparent: `colorPickerPalette.Color = Colors.Transparent`. Detect in code: `if (colorPickerPalette.Color == Colors.Transparent)` or in event: `if (e.NewColor == Colors.Transparent)`.
 
 ## Theme Colors & Variants
 
@@ -298,7 +199,7 @@ var customColors = new ObservableCollection<CustomColor>
     new CustomColor { Color = Color.FromArgb(255, 17, 235, 248), ColorName = "Aqua" },
     new CustomColor { Color = Color.FromArgb(255, 248, 15, 166), ColorName = "Deep Pink" },
     new CustomColor { Color = Color.FromArgb(255, 139, 167, 194), ColorName = "Dark Gray" },
-    new CustomColor { Color = Color.FromArgb(255, 245, 60, 207), ColorName = "Lime Green" },
+    new CustomColor { Color = Color.FromArgb(255, 245, 60, 207), ColorName = "Hot Pink" },
     new CustomColor { Color = Color.FromArgb(255, 194, 146, 149), ColorName = "Olive Drab" }
 };
 
@@ -317,7 +218,7 @@ colorPickerPalette.CustomHeaderVisibility = Visibility.Visible;
             <syncfusion:CustomColor Color="#FF11EBF8" ColorName="Aqua" />
             <syncfusion:CustomColor Color="#FFF80FA6" ColorName="Deep Pink" />
             <syncfusion:CustomColor Color="#FF8BA7C2" ColorName="Dark Gray" />
-            <syncfusion:CustomColor Color="#F53CDF07" ColorName="Lime Green" />
+            <syncfusion:CustomColor Color="#F53CDF07" ColorName="Hot Pink" />
             <syncfusion:CustomColor Color="#C2929545" ColorName="Olive Drab" />
         </local:ViewModel.NewColorCollection>
     </local:ViewModel>

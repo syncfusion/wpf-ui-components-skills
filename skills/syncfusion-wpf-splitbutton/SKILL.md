@@ -1,6 +1,6 @@
 ---
 name: syncfusion-wpf-splitbutton
-description: Implement Syncfusion WPF SplitButton (SplitButtonAdv) with dropdown menus, command binding, and data binding. This skill applies whenever a user mentions WPF splitbutton, dropdown buttons with menus, the SplitButtonAdv control, implementing splitbutton patterns, button–menu combinations, or scenarios that require a button with both a default action and a dropdown menu. It is also relevant for WPF command-enabled splitbutton, MVVM-based splitbutton implementations, data‑bound dropdown menus, or any situation involving buttons that offer selectable dropdown items.
+description: Implement Syncfusion WPF SplitButton (SplitButtonAdv) with dropdown menus, command binding, and data binding. Use this when working with split buttons, dropdown buttons with menus, or button-menu combinations. This skill covers SplitButtonAdv setup, default actions with dropdown menus, command binding, MVVM implementation, and data-bound dropdown items in WPF applications.
 metadata:
   author: "Syncfusion Inc"
   version: "33.1.44"

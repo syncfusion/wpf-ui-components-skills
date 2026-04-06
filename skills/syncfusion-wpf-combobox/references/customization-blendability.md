@@ -2,12 +2,9 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [Expression Blend Integration](#expression-blend-integration)
 - [Theme Support](#theme-support)
 - [Style Customization](#style-customization)
 - [Template Customization](#template-customization)
-- [Color and Appearance](#color-and-appearance)
-- [Best Practices](#best-practices)
 - [Troubleshooting](#troubleshooting)
 
 ## Overview
@@ -137,111 +134,9 @@ SfSkinManager.SetTheme(comboBoxAdv, new Theme("FluentDark"));
 
 ### Available Built-In Themes
 
-| Theme Name | Description |
-|------------|-------------|
-| **MaterialLight** | Google Material Design light theme |
-| **MaterialDark** | Google Material Design dark theme |
-| **MaterialLightBlue** | Material with blue accent |
-| **MaterialDarkBlue** | Material dark with blue accent |
-| **FluentLight** | Microsoft Fluent Design light |
-| **FluentDark** | Microsoft Fluent Design dark |
-| **Office2019Colorful** | Office 2019 colorful theme |
-| **Office2019Black** | Office 2019 black theme |
-| **Office2019White** | Office 2019 white theme |
-| **Office2019DarkGray** | Office 2019 dark gray theme |
-| **Office2019HighContrast** | Office 2019 high contrast |
-| **Office2019HighContrastWhite** | Office 2019 high contrast white |
-| **Office2016Colorful** | Office 2016 colorful theme |
-| **Office2016White** | Office 2016 white theme |
-| **Office2016DarkGray** | Office 2016 dark gray |
-| **Office2016Black** | Office 2016 black theme |
-| **VisualStudio2015** | Visual Studio 2015 theme |
-| **VisualStudio2013** | Visual Studio 2013 theme |
-| **Metro** | Windows Metro design |
-| **Lime** | Lime green accent theme |
-| **Saffron** | Saffron yellow accent theme |
+Syncfusion provides Material, Fluent, Office 2019/2016, and Visual Studio themes. Common choices: **MaterialLight**, **MaterialDark**, **FluentLight**, **FluentDark**, **Office2019Colorful**.
 
-### Theme Examples
-
-#### Material Light
-
-```xml
-<syncfusionskin:SfSkinManager.Theme>
-    <syncfusionskin:Theme ThemeName="MaterialLight"/>
-</syncfusionskin:SfSkinManager.Theme>
-
-<syncfusion:ComboBoxAdv ItemsSource="{Binding Countries}"
-                        DisplayMemberPath="Name"
-                        Height="30" Width="200"/>
-```
-
-#### Fluent Dark
-
-```xml
-<syncfusionskin:SfSkinManager.Theme>
-    <syncfusionskin:Theme ThemeName="FluentDark"/>
-</syncfusionskin:SfSkinManager.Theme>
-
-<syncfusion:ComboBoxAdv ItemsSource="{Binding Products}"
-                        DisplayMemberPath="ProductName"/>
-```
-
-#### Office 2019 Colorful
-
-```xml
-<syncfusionskin:SfSkinManager.Theme>
-    <syncfusionskin:Theme ThemeName="Office2019Colorful"/>
-</syncfusionskin:SfSkinManager.Theme>
-
-<syncfusion:ComboBoxAdv AllowMultiSelect="True"
-                        EnableToken="True"/>
-```
-
-## Creating Custom Themes with ThemeStudio
-
-ThemeStudio is Syncfusion's online tool for creating custom color schemes.
-
-### Using ThemeStudio
-
-**Step 1: Access ThemeStudio**
-
-Visit: [https://help.syncfusion.com/wpf/themes/theme-studio](https://help.syncfusion.com/wpf/themes/theme-studio)
-
-**Step 2: Select Base Theme**
-
-Choose a base theme to customize (e.g., MaterialLight, FluentLight)
-
-**Step 3: Customize Colors**
-
-- Primary color
-- Secondary color
-- Accent colors
-- Background colors
-- Text colors
-- Border colors
-
-**Step 4: Preview**
-
-Preview your theme across different Syncfusion controls
-
-**Step 5: Export**
-
-Download the custom theme assembly or resource dictionary
-
-**Step 6: Apply to Application**
-
-```xml
-<syncfusionskin:SfSkinManager.Theme>
-    <syncfusionskin:Theme ThemeName="MyCustomTheme"/>
-</syncfusionskin:SfSkinManager.Theme>
-```
-
-### Custom Theme Benefits
-
-- **Brand consistency**: Match your company colors
-- **Unique appearance**: Stand out from default themes
-- **Accessibility**: Adjust contrast and colors for accessibility
-- **Professional look**: Polish your application's appearance
+For complete theme list and custom themes, see [Syncfusion Themes Documentation](https://help.syncfusion.com/wpf/themes/theme-studio).
 
 ## Style Customization
 

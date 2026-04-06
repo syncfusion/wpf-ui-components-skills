@@ -9,7 +9,6 @@ This guide covers toolbar state management including Docked, Floating, and Hidde
 - [Docking Restrictions](#docking-restrictions)
 - [ToolBarStateChanged Event](#toolbarstatechanged-event)
 - [State Transitions](#state-transitions)
-- [Best Practices](#best-practices)
 
 ## Overview of Toolbar States
 
@@ -374,25 +373,6 @@ private void ToolBar_StateChanged(object sender, ToolBarStateChangedEventArgs e)
 }
 ```
 
-**Persist toolbar locations:**
-
-```csharp
-private void ToolBar_StateChanged(object sender, ToolBarStateChangedEventArgs e)
-{
-    ToolBarAdv toolBar = sender as ToolBarAdv;
-    
-    // Save state to settings
-    Settings.Default[toolBar.ToolBarName + "_State"] = e.NewState.ToString();
-    
-    if (e.NewState == ToolBarState.Floating)
-    {
-        Settings.Default[toolBar.ToolBarName + "_Location"] = toolBar.FloatingBarLocation;
-    }
-    
-    Settings.Default.Save();
-}
-```
-
 **Prevent unwanted state changes:**
 
 ```csharp
@@ -454,191 +434,14 @@ ToolBarManager.SetToolBarState(toolBar, ToolBarState.Hidden);
 ToolBarManager.SetToolBarState(toolBar, previousState);
 ```
 
-### Managing Toolbar Visibility Menu
+### Managing Toolbar Visibility
 
-Common pattern: View menu with checkboxes for each toolbar:
-
-```csharp
-private void UpdateViewMenu()
-{
-    menuToolbars.Items.Clear();
-    
-    foreach (ToolBarAdv toolBar in allToolBars)
-    {
-        MenuItem menuItem = new MenuItem
-        {
-            Header = toolBar.ToolBarName,
-            IsCheckable = true,
-            IsChecked = ToolBarManager.GetToolBarState(toolBar) != ToolBarState.Hidden
-        };
-        
-        menuItem.Checked += (s, e) =>
-        {
-            // Show toolbar (restore to docked)
-            ToolBarManager.SetToolBarState(toolBar, ToolBarState.Docked);
-        };
-        
-        menuItem.Unchecked += (s, e) =>
-        {
-            // Hide toolbar
-            ToolBarManager.SetToolBarState(toolBar, ToolBarState.Hidden);
-        };
-        
-        menuToolbars.Items.Add(menuItem);
-    }
-}
-```
-
-## Complete Example
-
-```xaml
-<Window x:Class="ToolBarStates.MainWindow"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="Toolbar States Demo" Height="600" Width="800">
-    
-    <syncfusion:ToolBarManager x:Name="toolBarManager">
-        <!-- Top Toolbar Tray -->
-        <syncfusion:ToolBarManager.TopToolBarTray>
-            <syncfusion:ToolBarTrayAdv>
-                <!-- Main toolbar - always docked at top -->
-                <syncfusion:ToolBarAdv 
-                    x:Name="mainToolBar"
-                    ToolBarName="Main Menu"
-                    CanDockAtTop="True"
-                    CanDockAtBottom="False"
-                    CanDockAtLeft="False"
-                    CanDockAtRight="False"
-                    ToolBarStateChanged="ToolBar_StateChanged">
-                    <Button Content="New"/>
-                    <Button Content="Open"/>
-                    <Button Content="Save"/>
-                </syncfusion:ToolBarAdv>
-                
-                <!-- Tools toolbar - can float -->
-                <syncfusion:ToolBarAdv 
-                    x:Name="toolsToolBar"
-                    ToolBarName="Tools"
-                    syncfusion:ToolBarManager.ToolBarState="Floating"
-                    FloatingBarLocation="600,300"
-                    ToolBarStateChanged="ToolBar_StateChanged">
-                    <Button Content="Tool 1"/>
-                    <Button Content="Tool 2"/>
-                    <Button Content="Tool 3"/>
-                </syncfusion:ToolBarAdv>
-            </syncfusion:ToolBarTrayAdv>
-        </syncfusion:ToolBarManager.TopToolBarTray>
-        
-        <!-- Main Content -->
-        <syncfusion:ToolBarManager.Content>
-            <DockPanel>
-                <!-- Status bar -->
-                <StatusBar DockPanel.Dock="Bottom">
-                    <StatusBarItem x:Name="statusText" Content="Ready"/>
-                </StatusBar>
-                
-                <!-- Content area -->
-                <TextBox AcceptsReturn="True" TextWrapping="Wrap"/>
-            </DockPanel>
-        </syncfusion:ToolBarManager.Content>
-    </syncfusion:ToolBarManager>
-</Window>
-```
-
-**Code-behind:**
+Toggle toolbar visibility via a View menu using `ToolBarManager.SetToolBarState`:
 
 ```csharp
-public partial class MainWindow : Window
-{
-    public MainWindow()
-    {
-        InitializeComponent();
-        LoadToolBarStates();
-    }
-    
-    private void ToolBar_StateChanged(object sender, ToolBarStateChangedEventArgs e)
-    {
-        ToolBarAdv toolBar = sender as ToolBarAdv;
-        
-        // Update status bar
-        statusText.Content = $"{toolBar.ToolBarName}: {e.OldState} → {e.NewState}";
-        
-        // Prevent hiding main toolbar
-        if (toolBar.ToolBarName == "Main Menu" && e.NewState == ToolBarState.Hidden)
-        {
-            MessageBox.Show("Main menu cannot be hidden", "Warning");
-            ToolBarManager.SetToolBarState(toolBar, ToolBarState.Docked);
-            return;
-        }
-        
-        // Save state
-        SaveToolBarState(toolBar);
-        
-        // Log floating position
-        if (e.NewState == ToolBarState.Floating)
-        {
-            Console.WriteLine($"{toolBar.ToolBarName} floating at {toolBar.FloatingBarLocation}");
-        }
-    }
-    
-    private void SaveToolBarState(ToolBarAdv toolBar)
-    {
-        Properties.Settings.Default[toolBar.ToolBarName + "_State"] = 
-            ToolBarManager.GetToolBarState(toolBar).ToString();
-        
-        Properties.Settings.Default[toolBar.ToolBarName + "_Location"] = 
-            toolBar.FloatingBarLocation;
-        
-        Properties.Settings.Default.Save();
-    }
-    
-    private void LoadToolBarStates()
-    {
-        foreach (ToolBarAdv toolBar in new[] { mainToolBar, toolsToolBar })
-        {
-            // Load saved state
-            string stateSetting = Properties.Settings.Default[toolBar.ToolBarName + "_State"] as string;
-            if (Enum.TryParse<ToolBarState>(stateSetting, out ToolBarState savedState))
-            {
-                ToolBarManager.SetToolBarState(toolBar, savedState);
-            }
-            
-            // Load floating location
-            if (Properties.Settings.Default[toolBar.ToolBarName + "_Location"] is Point location)
-            {
-                toolBar.FloatingBarLocation = location;
-            }
-        }
-    }
-    
-    protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-    {
-        // Save all toolbar states before closing
-        foreach (ToolBarAdv toolBar in new[] { mainToolBar, toolsToolBar })
-        {
-            SaveToolBarState(toolBar);
-        }
-        
-        base.OnClosing(e);
-    }
-}
+// Show toolbar
+ToolBarManager.SetToolBarState(toolBar, ToolBarState.Docked);
+
+// Hide toolbar
+ToolBarManager.SetToolBarState(toolBar, ToolBarState.Hidden);
 ```
-
-## Best Practices
-
-1. **Provide View Menu**: Let users show/hide toolbars via menu
-2. **Save State**: Persist toolbar states and positions across sessions
-3. **Set Meaningful Names**: Use clear `ToolBarName` (becomes floating window title)
-4. **Restrict Critical Toolbars**: Prevent hiding/floating of essential toolbars
-5. **Default Floating Positions**: Set reasonable `FloatingBarLocation` values
-6. **Handle State Changes**: Use `ToolBarStateChanged` for logging/validation
-7. **Docking Restrictions**: Use `CanDock` properties to guide user behavior
-8. **Test Transitions**: Verify all state transitions work correctly
-9. **Floating Window Styling**: Customize appearance via `FloatingToolBarStyle`
-10. **Document Behavior**: Tell users they can drag toolbars to float/dock
-
-## Related Topics
-
-- **Getting Started**: Basic toolbar setup → [getting-started.md](getting-started.md)
-- **ToolBarManager**: Multi-position layout (required for states) → [toolbar-manager.md](toolbar-manager.md)
-- **Customization**: FloatingToolBarStyle → [customization-theming.md](customization-theming.md)
-- **Positioning**: Band and overflow → [positioning-and-layout.md](positioning-and-layout.md)

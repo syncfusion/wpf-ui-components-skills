@@ -448,9 +448,9 @@ private void OnTextChanged(object sender, TextChangedEventArgs e)
     </smarttexteditor:SfSmartTextEditor.SuggestionInlineStyle>
     
     <smarttexteditor:SfSmartTextEditor.UserPhrases>
-        <x:String>Thank you for reaching out to our support team.</x:String>
-        <x:String>We've received your inquiry and are investigating.</x:String>
-        <x:String>Could you please provide additional details?</x:String>
+        <sys:String>Thank you for reaching out to our support team.</sys:String>
+        <sys:String>We've received your inquiry and are investigating.</sys:String>
+        <sys:String>Could you please provide additional details?</sys:String>
     </smarttexteditor:SfSmartTextEditor.UserPhrases>
 </smarttexteditor:SfSmartTextEditor>
 ```

@@ -106,8 +106,6 @@ The spell checker dialog displays:
 - **Action buttons**: Change, Change All, Ignore, Ignore All, Add to Dictionary
 - **Navigation buttons**: Next error word
 
-![SpellChecker Dialog Structure](../../../../../../../docs/gettingstarted-images/Control_Structure.png)
-
 ## First Spell Check
 
 When you run the application and click "Spell Check":
@@ -116,8 +114,6 @@ When you run the application and click "Spell Check":
 2. Error words are highlighted with red foreground
 3. Click an error word to see suggestions
 4. Double-click a suggestion to replace, or use the action buttons
-
-![First Spell Check](../../../../../../../docs/gettingstarted-images/Getting_Started.png)
 
 ## Context Menu Spell Check
 
@@ -141,8 +137,6 @@ Enable context menu for quick corrections without opening the dialog:
 spellChecker.EnableContextMenu = true;
 spellChecker.EnableSpellCheck = true;
 ```
-
-![Context Menu Spell Check](../../../../../../../docs/gettingstarted-images/contextmenu.gif)
 
 ## Enable or Disable Spell Checking
 
@@ -245,13 +239,6 @@ spellChecker.EnableContextMenu = true; // Right-click for quick fixes
 SfSpellChecker.SetSpellChecker(textbox, spellChecker);
 // Also provide button for full dialog experience
 ```
-
-## Next Steps
-
-- **Learn spell check methods:** Read [spell-check-methods.md](spell-check-methods.md)
-- **Configure ignore options:** Read [ignore-options.md](ignore-options.md)
-- **Add custom dictionaries:** Read [dictionary-support.md](dictionary-support.md)
-- **Customize appearance:** Read [customization.md](customization.md)
 
 ## Sample Applications
 

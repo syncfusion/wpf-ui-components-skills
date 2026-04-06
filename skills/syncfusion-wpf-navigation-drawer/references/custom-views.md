@@ -468,7 +468,7 @@ Customize the drawer's background color using the `DrawerBackground` property.
                                DrawerBackground="#2c3e50">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -690,3 +690,4 @@ private void NavigateToInbox()
 ## Sample Code
 
 View complete sample on GitHub: [Custom View Sample](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Custom_View)
+

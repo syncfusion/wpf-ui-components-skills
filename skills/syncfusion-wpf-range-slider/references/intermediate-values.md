@@ -157,7 +157,7 @@ private void PriceRangeSlider_RangeChanged(object sender, RangeChangedEventArgs 
     {
         double intermediateStart = slider.IntermediateRangeStart;
         // Update UI with intermediate start value
-        UpdatePriceDisplay(intermediateStart);
+        // UpdatePriceDisplay(intermediateStart);
     }
 }
 ```

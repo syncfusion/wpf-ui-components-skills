@@ -74,10 +74,6 @@ This option creates a copy of the default SfDataPager style that you can modify.
 1. Select **Object** → **Edit Style** → **Edit a Copy**
 2. The **Create Style Resource** dialog opens
 
-**Create Style Resource Dialog:**
-
-![Create Style Resource Dialog](create-style-resource.png)
-
 **Dialog Options:**
 - **Key (Name)**: Enter a name for your style
   - Use descriptive names (e.g., "CustomDataPagerStyle")
@@ -177,10 +173,6 @@ Visual Studio provides similar style editing capabilities through its XAML desig
 
 1. Right-click SfDataPager → **Edit Template** → **Edit a Copy**
 2. The **Create Style Resource** dialog opens
-
-**Create Style Resource Dialog:**
-
-![Visual Studio Create Style Resource](vs-create-style-resource.png)
 
 **Dialog Options:**
 - **Key (Name)**: Enter a name for your style

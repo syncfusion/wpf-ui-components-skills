@@ -30,8 +30,6 @@ When using SfDataPager with SfDataGrid, add these assemblies:
 
 The SfDataPager control consists of the following elements:
 
-![DataPager Control Elements](wpf-datapager-control.png)
-
 ### Control Elements
 
 - **FirstPageButton**: Moves the current page index to the first page and displays the first page data

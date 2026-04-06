@@ -54,217 +54,23 @@ This automatically installs both required assemblies and their dependencies.
 
 If you have Syncfusion Essential Studio installed:
 
-1. Right-click your project → Add → Syncfusion Reference
-2. Select "WPF" platform
-3. Find and check "CheckListBox" in the control list
-4. Click OK to add required assemblies
+# Getting Started with CheckListBox (summary)
 
-### Verify Installation
+This shortened getting-started guide includes the minimal steps to get a CheckListBox into your WPF project. Longer walkthroughs, complete examples, and troubleshooting were moved to an extras file to keep this page concise.
 
-After installation, verify the assemblies are referenced:
-- Open Solution Explorer → References
-- Look for `Syncfusion.Shared.WPF` and `Syncfusion.Tools.WPF`
-
-## Creating Your First CheckListBox
-
-### Step 1: Create a WPF Project
-
-1. Open Visual Studio
-2. File → New → Project
-3. Select "WPF App (.NET Framework)" or "WPF Application"
-4. Name your project (e.g., "CheckListBoxDemo")
-5. Click Create
-
-### Step 2: Install Syncfusion Packages
-
-Follow the [Assembly Deployment](#assembly-deployment) steps above to install the required packages.
-
-### Step 3: Add the CheckListBox Control
-
-Choose one of the methods below based on your preference.
-
-## Adding Control via Designer
-
-The simplest way to add CheckListBox is through the Visual Studio designer.
-
-**Steps:**
-
-1. Open `MainWindow.xaml` in Design view
-2. Open the Toolbox (View → Toolbox or Ctrl+Alt+X)
-3. Scroll to find "Syncfusion Controls for WPF" section
-4. Locate **CheckListBox** control
-5. Drag and drop it onto your window designer
-
-**What happens automatically:**
-- Required assemblies are referenced
-- Namespace declarations are added to XAML
-- Control is placed in the visual tree
-
-The designer will generate XAML similar to:
+Quick start:
+1. Install the NuGet: `Install-Package Syncfusion.Tools.WPF`.
+2. Add `xmlns:syncfusion="http://schemas.syncfusion.com/wpf"` to your `Window`.
+3. Place a control:
 
 ```xml
-<syncfusion:CheckListBox HorizontalAlignment="Left" 
-                         Height="300" 
-                         Margin="10,10,0,0" 
-                         VerticalAlignment="Top" 
-                         Width="200"/>
+<syncfusion:CheckListBox x:Name="checkListBox" Width="200" Height="300" Margin="20" />
 ```
 
-## Adding Control in XAML
+4. Populate items statically or bind via `ItemsSource`.
+5. Use `SelectedItems` or `ItemContainerStyle` for checkbox state management (see `data-binding-examples.md`).
 
-For more control over the implementation, add the CheckListBox manually in XAML.
-
-### Step 1: Import Syncfusion Namespace
-
-Add the Syncfusion WPF schema to your Window declaration:
-
-```xml
-<Window x:Class="CheckListBoxDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="CheckListBox Demo" Height="450" Width="800">
-```
-
-**Key namespace:**
-```xml
-xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-```
-
-### Step 2: Declare the CheckListBox
-
-Add the control inside your layout container:
-
-```xml
-<Window x:Class="CheckListBoxDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="CheckListBox Demo" Height="450" Width="800">
-    <Grid>
-        <syncfusion:CheckListBox x:Name="checkListBox" 
-                                 Width="200" 
-                                 Height="300"
-                                 Margin="20"/>
-    </Grid>
-</Window>
-```
-
-**Key attributes:**
-- `x:Name="checkListBox"` - Assigns a name for code-behind access
-- `Width` and `Height` - Set control dimensions
-- `Margin` - Adds spacing around the control
-
-## Adding Control in C#
-
-You can create and configure the CheckListBox entirely in code-behind.
-
-### Step 1: Import Namespace
-
-Add the using directive at the top of your C# file:
-
-```csharp
-using Syncfusion.Windows.Tools.Controls;
-```
-
-### Step 2: Create and Add the Control
-
-In your window constructor or loaded event:
-
-```csharp
-using System.Windows;
-using Syncfusion.Windows.Tools.Controls;
-
-namespace CheckListBoxDemo
-{
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-
-            // Create CheckListBox instance
-            CheckListBox checkListBox = new CheckListBox
-            {
-                Width = 200,
-                Height = 300,
-                Margin = new Thickness(20)
-            };
-
-            // Add to window (if window Content is not set)
-            this.Content = checkListBox;
-            
-            // Or add to existing Grid
-            // myGrid.Children.Add(checkListBox);
-        }
-    }
-}
-```
-
-**Alternative: Add to existing layout**
-
-```csharp
-// If you have a Grid named 'MainGrid' in XAML
-CheckListBox checkListBox = new CheckListBox
-{
-    Width = 200,
-    Height = 300
-};
-
-MainGrid.Children.Add(checkListBox);
-```
-
-## Populating Items
-
-There are two main approaches to populate the CheckListBox with items.
-
-### Approach 1: Using CheckListBoxItem (Static Items)
-
-Best for: Fixed lists that don't change at runtime.
-
-**In XAML:**
-
-```xml
-<syncfusion:CheckListBox x:Name="checkListBox" Height="250" Width="200">
-    <syncfusion:CheckListBoxItem Content="Austria" />
-    <syncfusion:CheckListBoxItem Content="Australia" />
-    <syncfusion:CheckListBoxItem Content="Canada" />
-    <syncfusion:CheckListBoxItem Content="Finland" />
-    <syncfusion:CheckListBoxItem Content="New Zealand" />
-</syncfusion:CheckListBox>
-```
-
-**In C#:**
-
-```csharp
-CheckListBox checkListBox = new CheckListBox
-{
-    Height = 250,
-    Width = 200
-};
-
-// Create and add items
-checkListBox.Items.Add(new CheckListBoxItem { Content = "Austria" });
-checkListBox.Items.Add(new CheckListBoxItem { Content = "Australia" });
-checkListBox.Items.Add(new CheckListBoxItem { Content = "Canada" });
-checkListBox.Items.Add(new CheckListBoxItem { Content = "Finland" });
-checkListBox.Items.Add(new CheckListBoxItem { Content = "New Zealand" });
-
-this.Content = checkListBox;
-```
-
-**Setting initial checked state:**
-
-```xml
-<syncfusion:CheckListBoxItem Content="Canada" IsSelected="True" />
-```
-
-```csharp
-var item = new CheckListBoxItem 
-{ 
-    Content = "Canada",
-    IsSelected = true 
-};
+For full XAML/C# examples, localization steps, and event handlers see: [getting-started-extras.md](getting-started-extras.md)
 checkListBox.Items.Add(item);
 ```
 

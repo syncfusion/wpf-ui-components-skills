@@ -10,14 +10,14 @@ metadata:
 
 The [TileViewControl](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shared.TileViewControl.html) is a WPF container that hosts [TileViewItems](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shared.TileViewItem.html) in a customizable matrix layout. It supports auto-arrangement, drag-drop reordering, maximize/minimize functionality, and rich customization options.
 
-## When to Use This Skill
+## Use Cases
 
-- **Creating dashboard layouts** - Organize information in a flexible grid of tiles
-- **Implementing drag-drop interfaces** - Allow users to rearrange tiles freely
-- **Building maximizable/minimizable views** - Let tiles expand and collapse
-- **Customizing tile headers and content** - Create rich, branded tile presentations
-- **Data-binding scenarios** - Dynamically populate tiles from data sources
-- **Responsive dashboard applications** - Build modern, interactive WPF interfaces
+- **Dashboards:** Organize information in flexible tile grids
+- **Drag-drop interfaces:** Allow users to rearrange tiles
+- **Expandable views:** Tiles with maximize/minimize functionality
+- **Rich customization:** Branded headers, content, and styling
+- **Data binding:** Dynamic tile population from collections
+- **Interactive apps:** Modern, responsive WPF interfaces
 
 ## Documentation Navigation
 
@@ -63,57 +63,20 @@ The [TileViewControl](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shar
 
 ```xaml
 <Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
-    <Grid>
-        <syncfusion:TileViewControl Name="tileViewControl" Height="400" Width="600">
-            <syncfusion:TileViewItem Header="Tile 1">
-                <TextBlock>Content 1</TextBlock>
-            </syncfusion:TileViewItem>
-            <syncfusion:TileViewItem Header="Tile 2">
-                <TextBlock>Content 2</TextBlock>
-            </syncfusion:TileViewItem>
-            <syncfusion:TileViewItem Header="Tile 3">
-                <TextBlock>Content 3</TextBlock>
-            </syncfusion:TileViewItem>
-        </syncfusion:TileViewControl>
-    </Grid>
+    <syncfusion:TileViewControl Height="400" Width="600">
+        <syncfusion:TileViewItem Header="Tile 1"><TextBlock>Content 1</TextBlock></syncfusion:TileViewItem>
+        <syncfusion:TileViewItem Header="Tile 2"><TextBlock>Content 2</TextBlock></syncfusion:TileViewItem>
+        <syncfusion:TileViewItem Header="Tile 3"><TextBlock>Content 3</TextBlock></syncfusion:TileViewItem>
+    </syncfusion:TileViewControl>
 </Window>
 ```
 
 ## Common Patterns
 
-### Pattern 1: Basic Tile Grid
-Simple tiles in a matrix layout with auto-arrangement:
-```xaml
-<syncfusion:TileViewControl>
-    <syncfusion:TileViewItem Header="Dashboard" MinimizedHeight="100" MinimizedWidth="100"/>
-    <syncfusion:TileViewItem Header="Reports" MinimizedHeight="100" MinimizedWidth="100"/>
-    <syncfusion:TileViewItem Header="Settings" MinimizedHeight="100" MinimizedWidth="100"/>
-</syncfusion:TileViewControl>
-```
-
-### Pattern 2: Maximizable/Minimizable Tiles
-Tiles that expand when selected:
-```xaml
-<syncfusion:TileViewItem Header="Expandable"
-                         CanMaximize="True"
-                         CanMinimize="True"
-                         MaximizedHeight="300"
-                         MaximizedWidth="400"/>
-```
-
-### Pattern 3: Closable Tiles
-Allow users to close tiles with a close button:
-```xaml
-<syncfusion:TileViewItem Header="Closable" 
-                         CanClose="True"
-                         Close="TileViewItem_Close"/>
-```
-
-### Pattern 4: Drag-Drop Arrangement
-Enable users to drag and reorder tiles:
-```csharp
-tileViewControl.AllowDragDrop = true;
-```
+- **Basic grid:** Matrix layout with auto-arranged tiles of uniform size
+- **Maximizable/minimizable:** Tiles with `CanMaximize="True"` and `CanMinimize="True"` that expand on selection
+- **Closable tiles:** Set `CanClose="True"` to show close button with `Close="Handler"` event
+- **Drag-drop reordering:** Set `AllowDragDrop="True"` to enable tile repositioning
 
 ## Key Properties
 

@@ -46,8 +46,8 @@ Mask editing is the **default mode**. The date is split into separate fields (da
 |---|---|
 | `Up` | Increase selected field value by 1 |
 | `Down` | Decrease selected field value by 1 |
-| `Left` | Move to next field (toward end) |
-| `Right` | Move to previous field (toward start) |
+| `Left` | Move to previous field (toward start) |
+| `Right` | Move to next field (toward end) |
 | `Ctrl + Up` | Move calendar view forward (month → year → decade) |
 | `Ctrl + Down` | Move calendar view backward (decade → year → month) |
 | `PageUp` | Move to previous month / year in current view |

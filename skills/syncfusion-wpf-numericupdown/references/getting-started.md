@@ -71,77 +71,17 @@ grid.Children.Add(updown);
 
 ## Basic Properties
 
-### Value Property
+**Value Property** - Set the initial numeric value: `Value="100"` in XAML or `updown.Value = 100;` in C#.
 
-Set the initial numeric value displayed in the control:
-
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" Value="100" Height="25" Width="100"/>
-```
-
-**C#:**
-```csharp
-updown.Value = 100;
-```
-
-### Step Property
-
-Define the interval by which the value increments or decrements when the spin buttons are clicked:
-
-**XAML:**
-```xaml
-<!-- Increments/decrements by 5 on each button click -->
-<syncfusion:UpDown Name="upDown" Value="10" Step="5" Height="25" Width="100"/>
-```
-
-**C#:**
-```csharp
-updown.Value = 10;
-updown.Step = 5;
-```
+**Step Property** - Define the increment/decrement interval when spin buttons are clicked: `Step="5"` in XAML or `updown.Step = 5;` in C#.
 
 ## Theme Application
 
-UpDown supports built-in themes. Apply themes using SfSkinManager:
+Apply built-in themes using `SfSkinManager` in XAML (`syncfusion:SfSkinManager.VisualStyle="MaterialLight"` on Window) or C# (`SfSkinManager.SetVisualStyle(this, VisualStyles.MaterialLight)`).
 
-### Using SfSkinManager
+**Available themes:** MaterialLight, MaterialDark, Office2019Colorful, Office2019Black, Office2019HighContrast, FluentLight, FluentDark.
 
-**XAML:**
-```xaml
-<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        syncfusion:SfSkinManager.VisualStyle="MaterialLight">
-    <Grid>
-        <syncfusion:UpDown Name="upDown" Height="25" Width="100"/>
-    </Grid>
-</Window>
-```
-
-**C#:**
-```csharp
-// Apply theme programmatically
-SfSkinManager.SetVisualStyle(this, VisualStyles.MaterialLight);
-```
-
-### Available Built-in Themes
-
-- MaterialLight
-- MaterialDark
-- Office2019Colorful
-- Office2019Black
-- Office2019HighContrast
-- FluentLight
-- FluentDark
-
-### Creating Custom Themes
-
-Use **Theme Studio** to create custom themes:
-
-1. Launch Theme Studio from Visual Studio Extensions menu
-2. Select UpDown component
-3. Customize colors, fonts, and styles
-4. Export the XAML theme file
-5. Merge the theme in your application resources
+**Custom themes:** Launch Theme Studio from Visual Studio (Extensions menu), customize colors/fonts/styles for UpDown, export as XAML, and merge into application resources.
 
 ## Complete Getting Started Example
 

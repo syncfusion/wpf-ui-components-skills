@@ -66,41 +66,9 @@ domainUpDown.Value = "Friday";
 - When wraparound could cause confusion
 - Priority levels (Low → High should not wrap to Low)
 
-### Complete Example: Day Selector
+### AutoReverse with Collection
 
-```xml
-<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib">
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Select Day:" FontWeight="Bold" Margin="0,0,0,10"/>
-            
-            <syncfusion:SfDomainUpDown x:Name="daySelector"
-                                       Width="180"
-                                       Height="35"
-                                       AutoReverse="True"
-                                       Value="Monday">
-                <syncfusion:SfDomainUpDown.ItemsSource>
-                    <x:Array Type="sys:String">
-                        <sys:String>Monday</sys:String>
-                        <sys:String>Tuesday</sys:String>
-                        <sys:String>Wednesday</sys:String>
-                        <sys:String>Thursday</sys:String>
-                        <sys:String>Friday</sys:String>
-                        <sys:String>Saturday</sys:String>
-                        <sys:String>Sunday</sys:String>
-                    </x:Array>
-                </syncfusion:SfDomainUpDown.ItemsSource>
-            </syncfusion:SfDomainUpDown>
-            
-            <TextBlock Text="(Cycles from Sunday back to Monday)" 
-                      FontSize="10" 
-                      Foreground="Gray"
-                      Margin="0,5,0,0"/>
-        </StackPanel>
-    </Grid>
-</Window>
-```
+Set `AutoReverse="True"` with string array or collection to enable seamless cycling through values like days of the week.
 
 ## Mouse Wheel Gesture Support
 
@@ -316,90 +284,6 @@ Use appropriate binding modes:
 
 <!-- Two-way sync with ViewModel: TwoWay -->
 <syncfusion:SfDomainUpDown Value="{Binding SelectedEmployee, Mode=TwoWay}"/>
-```
-
-## Complete Advanced Example
-
-Combining multiple advanced features:
-
-```xml
-<Window x:Class="DomainUpDownDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        xmlns:local="clr-namespace:DomainUpDownDemo">
-    
-    <Window.DataContext>
-        <local:ViewModel/>
-    </Window.DataContext>
-    
-    <Grid Margin="20">
-        <StackPanel>
-            <TextBlock Text="Advanced DomainUpDown Features Demo" 
-                      FontSize="18" 
-                      FontWeight="Bold" 
-                      Margin="0,0,0,20"/>
-            
-            <!-- Day Selector with AutoReverse -->
-            <GroupBox Header="Day Selector (AutoReverse Enabled)" Margin="0,0,0,15">
-                <StackPanel Margin="10">
-                    <syncfusion:SfDomainUpDown x:Name="daySelector"
-                                               Width="200"
-                                               Height="35"
-                                               AutoReverse="True"
-                                               EnableSpinAnimation="True"
-                                               ItemsSource="{Binding Days}"
-                                               Value="{Binding SelectedDay, Mode=TwoWay}"
-                                               AutomationProperties.Name="Day Selector"/>
-                    
-                    <TextBlock Text="Use arrow keys or mouse wheel to navigate" 
-                              FontSize="10" 
-                              Foreground="Gray" 
-                              Margin="0,5,0,0"/>
-                </StackPanel>
-            </GroupBox>
-            
-            <!-- Employee Selector without AutoReverse -->
-            <GroupBox Header="Employee Selector (No AutoReverse)" Margin="0,0,0,15">
-                <StackPanel Margin="10">
-                    <syncfusion:SfDomainUpDown x:Name="employeeSelector"
-                                               Width="250"
-                                               Height="40"
-                                               AutoReverse="False"
-                                               EnableSpinAnimation="True"
-                                               ItemsSource="{Binding Employees}"
-                                               Value="{Binding SelectedEmployee, Mode=TwoWay}">
-                        <syncfusion:SfDomainUpDown.ContentTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
-                            </DataTemplate>
-                        </syncfusion:SfDomainUpDown.ContentTemplate>
-                    </syncfusion:SfDomainUpDown>
-                    
-                    <TextBlock Margin="0,5,0,0">
-                        <Run Text="Selected: "/>
-                        <Run Text="{Binding SelectedEmployee.Name, Mode=OneWay}" FontWeight="Bold"/>
-                    </TextBlock>
-                </StackPanel>
-            </GroupBox>
-            
-            <!-- Status Info -->
-            <Border Background="#F0F0F0" 
-                   Padding="10" 
-                   CornerRadius="3">
-                <TextBlock TextWrapping="Wrap">
-                    <Run Text="Keyboard shortcuts:"/>
-                    <LineBreak/>
-                    <Run Text="• Up/Down arrows: Navigate items" FontFamily="Consolas"/>
-                    <LineBreak/>
-                    <Run Text="• Home/End: Jump to first/last" FontFamily="Consolas"/>
-                    <LineBreak/>
-                    <Run Text="• Mouse wheel: Scroll when focused" FontFamily="Consolas"/>
-                </TextBlock>
-            </Border>
-        </StackPanel>
-    </Grid>
-</Window>
 ```
 
 ## Best Practices Summary

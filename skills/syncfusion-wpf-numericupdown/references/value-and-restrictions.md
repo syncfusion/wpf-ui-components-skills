@@ -12,35 +12,7 @@
 
 ### Setting Initial Value
 
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" Height="25" Value="50" Width="100" />
-```
-
-**C#:**
-```csharp
-updown.Value = 50;
-```
-
-### Reading Current Value
-
-```csharp
-double currentValue = (double)updown.Value;
-Console.WriteLine($"Current value: {currentValue}");
-```
-
-### Programmatic Value Changes
-
-```csharp
-// Increment by 5
-updown.Value = (double)updown.Value + 5;
-
-// Decrement by 10
-updown.Value = (double)updown.Value - 10;
-
-// Set to maximum
-updown.Value = updown.MaxValue;
-```
+Set the `Value` property in XAML (`Value="50"`) or C# (`updown.Value = 50;`). Read the current value by casting `updown.Value` to the expected numeric type (e.g., `(double)updown.Value`). Programmatic changes increment/decrement by modifying the `Value` property: `updown.Value = (double)updown.Value + 5;` or set directly to max/min using `updown.MaxValue` / `updown.MinValue`.
 
 ## Value Change Events
 
@@ -114,46 +86,11 @@ public partial class MainWindow : Window
 
 ### Basic Min/Max Setup
 
-Restrict the value to a specific range:
+Set `MinValue` and `MaxValue` properties to restrict values to a specific range. Spin buttons stop at boundaries, keyboard input validates based on the validation mode, and programmatic changes are applied after validation. 
 
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  Height="25" 
-                  Width="100"
-                  MinValue="0"
-                  MaxValue="100" />
-```
-
-**C#:**
-```csharp
-updown.MinValue = 0;
-updown.MaxValue = 100;
-```
-
-### How Min/Max Work
-
-- **Using spin buttons:** Stops incrementing/decrementing at boundaries
-- **Keyboard input:** Validates against limits based on validation mode
-- **Programmatic changes:** Applied after validation rules
-
-### Example: Age Input (18-120)
-
-```csharp
-var ageUpDown = new UpDown();
-ageUpDown.MinValue = 18;
-ageUpDown.MaxValue = 120;
-ageUpDown.Value = 25;
-```
-
-### Example: Percentage Input (0-100)
-
-```csharp
-var percentUpDown = new UpDown();
-percentUpDown.MinValue = 0;
-percentUpDown.MaxValue = 100;
-percentUpDown.NumberDecimalDigits = 0;  // No decimals
-```
+**Examples:**
+- Age input: `MinValue="18"` and `MaxValue="120"`
+- Percentage: `MinValue="0"`, `MaxValue="100"`, `NumberDecimalDigits="0"` (no decimals)
 
 ## Validation Modes
 
@@ -163,97 +100,18 @@ Control **when** values are validated against min/max limits.
 
 #### OnKeyPress Validation
 
-Validates on each keystroke. Invalid input is rejected immediately.
-
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  MinValue="0" 
-                  MaxValue="100"
-                  MinValidation="OnKeyPress"
-                  MaxValidation="OnKeyPress" />
-```
-
-**C#:**
-```csharp
-updown.MinValidation = MinValidation.OnKeyPress;
-updown.MaxValidation = MaxValidation.OnKeyPress;
-```
-
-**Behavior:** User cannot type any value outside the range.
-
-**Use Case:** Strict input validation, real-time feedback, preventing any invalid state.
+Set `MinValidation="OnKeyPress"` and `MaxValidation="OnKeyPress"` to validate on each keystroke. Invalid input is rejected immediately; user cannot type values outside the range. **Use case:** Strict input validation, real-time feedback.
 
 #### OnLostFocus Validation
 
-Validates when the control loses keyboard focus. Accepts any input initially, corrects on blur.
-
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  MinValue="0" 
-                  MaxValue="100"
-                  MinValidation="OnLostFocus"
-                  MaxValidation="OnLostFocus" />
-```
-
-**C#:**
-```csharp
-updown.MinValidation = MinValidation.OnLostFocus;
-updown.MaxValidation = MaxValidation.OnLostFocus;
-```
-
-**Behavior:** 
-- User can type any value
-- When focus leaves the control, out-of-range values are clamped
-- Value exceeding max becomes MaxValue
-- Value below min becomes MinValue
-
-**Use Case:** Flexible input, correction on blur, better UX for typos.
+Set `MinValidation="OnLostFocus"` and `MaxValidation="OnLostFocus"` to validate when focus leaves the control. User can type any value initially; out-of-range values are clamped on blur (exceeding max becomes MaxValue, below min becomes MinValue). **Use case:** Flexible input, correction on blur, better UX for typos.
 
 ### Exceed Digit Behavior
 
-Control what happens when user tries to exceed min/max by adding digits.
+When user tries to exceed min/max by adding digits:
 
-#### MaxValueOnExceedMaxDigit
-
-When set to `True`, if the input exceeds MaxValue, the entire value is set to MaxValue instead of truncating the last digit.
-
-**Example:**
-- MaxValue = 100
-- User types "200"
-- Result with True: Value becomes 100 (full reset)
-- Result with False: Value becomes 20 (last digit ignored)
-
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  MaxValue="100"
-                  MaxValueOnExceedMaxDigit="True"
-                  MaxValidation="OnKeyPress" />
-```
-
-**C#:**
-```csharp
-updown.MaxValueOnExceedMaxDigit = true;
-```
-
-#### MinValueOnExceedMinDigit
-
-Similar to MaxValueOnExceedMaxDigit, but for minimum values.
-
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  MinValue="10"
-                  MinValueOnExceedMinDigit="True"
-                  MinValidation="OnKeyPress" />
-```
-
-**C#:**
-```csharp
-updown.MinValueOnExceedMinDigit = true;
-```
+- **`MaxValueOnExceedMaxDigit="True"`** - If input exceeds MaxValue, entire value is set to MaxValue instead of truncating. Example: MaxValue=100, user types "200" → value becomes 100 (not 20).
+- **`MinValueOnExceedMinDigit="True"`** - Similar for minimum values. If input goes below MinValue, entire value is set to MinValue.
 
 ### Complete Validation Example
 
@@ -273,129 +131,30 @@ updown.MinValueOnExceedMinDigit = true;
 
 ## Null Value Handling
 
-### UseNullOption Property
+### Null Value Handling
 
-Enables support for null values (no value set).
+Set `UseNullOption="True"` and `Value="{x:Null}"` to enable null value support.
 
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  UseNullOption="True" 
-                  Value="{x:Null}"
-                  Height="25" 
-                  Width="100" />
-```
+**`NullValue` property** - Defines numeric value to display when Value is null (e.g., `NullValue="0"` shows 0).
 
-**C#:**
-```csharp
-updown.UseNullOption = true;
-updown.Value = null;
-```
+**`NullValueText` property** - Displays placeholder watermark text instead of a number when null (e.g., `NullValueText="Enter a value"`).
 
-### NullValue Property
+**Priority:** If both are specified, `NullValue` takes precedence.
 
-Defines the numeric value to display when Value is null.
-
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  UseNullOption="True"
-                  Value="{x:Null}"
-                  NullValue="0" />
-```
-
-**C#:**
-```csharp
-updown.UseNullOption = true;
-updown.Value = null;
-updown.NullValue = 0;  // Display 0 when null
-```
-
-### NullValueText Property (Watermark)
-
-Display placeholder text instead of a number when Value is null.
-
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  UseNullOption="True"
-                  Value="{x:Null}"
-                  NullValueText="Enter a value" />
-```
-
-**C#:**
-```csharp
-updown.UseNullOption = true;
-updown.Value = null;
-updown.NullValueText = "Enter a value";
-```
-
-**Behavior:** Displays "Enter a value" as placeholder text. When user enters a number, NullValueText disappears.
-
-### Priority: NullValue vs NullValueText
-
-If both are specified, **NullValue takes precedence** and NullValueText is ignored.
-
-### Common Null Value Patterns
-
-**Pattern 1: Optional field with watermark**
-```csharp
-updown.UseNullOption = true;
-updown.Value = null;
-updown.NullValueText = "Not specified";
-```
-
-**Pattern 2: Optional field with default display value**
-```csharp
-updown.UseNullOption = true;
-updown.Value = null;
-updown.NullValue = 0;  // Shows 0 but logically null
-```
+**Patterns:**
+- Optional field with watermark: `UseNullOption="True"`, `NullValueText="Not specified"`
+- Optional field with default display: `UseNullOption="True"`, `NullValue="0"` (shows 0 but logically null)
 
 ## Controlling Edit Permissions
 
 ### AllowEdit Property
 
-Restrict or allow direct text editing in the control.
+Control whether users can edit values directly by typing in the text area.
 
-#### Allow Text Editing (Default)
+- **`AllowEdit="True"` (default)** - Users can click in text area and type values directly.
+- **`AllowEdit="False"`** - Users can **only** change values using spin buttons; direct text input is prevented.
 
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" AllowEdit="True" Height="25" Width="100" />
-```
-
-**C#:**
-```csharp
-updown.AllowEdit = true;  // Default
-```
-
-Users can click in the text area and type values directly.
-
-#### Disable Text Editing
-
-**XAML:**
-```xaml
-<syncfusion:UpDown Name="upDown" 
-                  AllowEdit="False" 
-                  MinValue="0"
-                  MaxValue="100"
-                  Height="25" 
-                  Width="100" />
-```
-
-**C#:**
-```csharp
-updown.AllowEdit = false;
-```
-
-Users can **only** change values using spin buttons. Direct text input is prevented.
-
-**Use Case:** 
-- Strict control over input
-- Force spin button usage
-- Prevent accidental text entry
-- Simple interfaces where buttons are preferred
+**Use cases for `AllowEdit="False"`:** Strict control over input, force spin button usage, prevent accidental text entry, simple interfaces where buttons are preferred.
 
 ### Complete Value Control Example
 

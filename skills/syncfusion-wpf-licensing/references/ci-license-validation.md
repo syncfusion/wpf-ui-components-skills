@@ -1,137 +1,52 @@
 # CI/CD License Validation
 
-## Table of Contents
-- [Overview](#overview)
-- [LicenseKeyValidator Utility](#licensekeyvalidator-utility)
-- [Azure Pipelines Integration](#azure-pipelines-integration)
-- [GitHub Actions Integration](#github-actions-integration)
-- [Jenkins Integration](#jenkins-integration)
-- [ValidateLicense Method](#validatelicense-method)
-- [Unit Test Validation](#unit-test-validation)
-- [Best Practices](#best-practices)
-
 ## Overview
 
 Syncfusion license key validation in CI/CD services ensures that components are properly licensed during continuous integration processes. Validating the license key at the CI level prevents licensing errors during deployment.
 
-**Benefits:**
-- Catch licensing errors early in the build process
-- Prevent deployment of applications with invalid licenses
-- Fail builds when license validation fails
-- Automate license verification across environments
+**⚠️ SECURITY ALERT:**
+Avoid downloading and executing external utilities from remote URLs in CI/CD pipelines. This introduces supply chain risks. Use programmatic validation instead.
+**NOTE (SECURITY):** Legacy instructions that directed CI systems to download and execute an external `LicenseKeyValidator` binary have been removed from this document. Do NOT fetch or run unvetted third-party binaries in CI pipelines. Use the programmatic `ValidateLicense()` method, unit-test validation, or an internally-hosted, versioned artifact with integrity checks. See `SECURITY_ANALYSIS.md` for details.
 
-**Validation Options:**
-1. **LicenseKeyValidator Utility** - PowerShell-based validation tool
-2. **ValidateLicense() Method** - Programmatic validation in code
-3. **Unit Test Validation** - Test-based license verification
 
-## LicenseKeyValidator Utility
+**Recommended Validation Methods (Secure):**
+1. ✅ **ValidateLicense() Method** - Programmatic validation in code (RECOMMENDED)
+2. ✅ **Unit Test Validation** - Test-based license verification (RECOMMENDED)
+3. ✅ **Internal Artifact Host** - If external tool needed, host internally
+4. ⚠️ **Checksum Verification** - If download required, verify integrity
 
-The LicenseKeyValidator is a standalone utility for validating Syncfusion license keys in CI/CD pipelines.
+**Legacy/Not Recommended:**
+- ❌ **LicenseKeyValidator Utility (External Download)** - Security risk, use programmatic validation instead
 
-### Download and Setup
+## LicenseKeyValidator Utility (DEPRECATED - Security Risk)
 
-1. **Download the utility:**
-   - URL: [LicenseKeyValidator.zip](https://s3.amazonaws.com/files2.syncfusion.com/Installs/LicenseKeyValidation/LicenseKeyValidator.zip)
-   - Download and extract to a location accessible by your CI system
+⚠️ **DEPRECATION NOTICE:** The external LicenseKeyValidator utility introduces security risks:
+- Downloads executable from external URL
+- No integrity verification
+- Subject to supply chain attacks
+- Requires MITM-safe network conditions
 
-2. **Extract contents:**
-   ```
-   LicenseKeyValidator/
-   ├── LicenseKeyValidatorConsole.exe
-   ├── LicenseKeyValidation.ps1
-   └── Supporting DLLs
-   ```
+**Recommendation:** Use the programmatic `ValidateLicense()` method instead (see section below). If you must use the external utility, refer to [SECURITY_ANALYSIS.md](../SECURITY_ANALYSIS.md) for secure implementation patterns with checksum verification.
 
-### Configure the PowerShell Script
+### Why This Approach Is Risky
 
-Open **LicenseKeyValidation.ps1** in a text editor:
+1. **External Download:** Utility is fetched from external URL at build time
+2. **No Verification:** No checksums or signatures to verify authenticity
+3. **MITM Vulnerability:** Network traffic could be intercepted
+4. **Supply Chain Risk:** Compromised S3 bucket = compromised builds
+5. **Execution Privilege:** Runs with full pipeline credentials
 
-```powershell
-# LicenseKeyValidation.ps1
+**For secure alternatives, see:**
+- ✅ [Programmatic Validation (Recommended)](#validatelicense-method)
+- ✅ [Unit Test Validation (Recommended)](#unit-test-validation)
+- ✅ [Internal Artifact Hosting](#best-practices)
+- ⚠️ [Checksum Verification (Fallback)](#best-practices)
 
-# Replace the parameters with the desired platform, version, and actual license key
-$result = & $PSScriptRoot"\LicenseKeyValidatorConsole.exe" `
-    /platform:"WPF" `
-    /version:"26.2.4" `
-    /licensekey:"Your License Key"
+## Azure Pipelines Integration (Secure - Programmatic Validation)
 
-Write-Host $result
-```
+Configure license validation in your Azure Pipelines YAML file using programmatic validation:
 
-**Parameters:**
-
-| Parameter | Description | Example |
-|-----------|-------------|---------|
-| `/platform:` | Target Syncfusion platform | `"WPF"`, `"Blazor"`, `"React"`, `"Angular"` |
-| `/version:` | Syncfusion version being used | `"26.2.4"`, `"26.1.35"` |
-| `/licensekey:` | Your actual license key | `"Mgo+DSMBMAY9C3t2..."` |
-
-**Update the script:**
-1. Replace `"WPF"` with your platform
-2. Replace `"26.2.4"` with your Syncfusion version
-3. Replace `"Your License Key"` with your actual license key
-
-**Example for Blazor:**
-```powershell
-$result = & $PSScriptRoot"\LicenseKeyValidatorConsole.exe" `
-    /platform:"Blazor" `
-    /version:"26.2.4" `
-    /licensekey:"Mgo+DSMBMAY9C3t2VFhhQlJBfV5AQmBIYVp..."
-
-Write-Host $result
-```
-
-### Supported Versions
-
-This feature is supported from Syncfusion version **16.2.0.41** and later.
-
-## Azure Pipelines Integration
-
-### Azure Pipelines (YAML)
-
-Configure license validation in your Azure Pipelines YAML file:
-
-#### Step 1: Create User-Defined Variable
-
-In Azure DevOps:
-1. Go to your pipeline
-2. Click **Variables**
-3. Add a new variable:
-   - **Name:** `LICENSE_VALIDATION`
-   - **Value:** `D:\LicenseKeyValidator\LicenseKeyValidation.ps1` (path to your script)
-
-Or define in YAML:
-```yaml
-variables:
-  LICENSE_VALIDATION: 'D:\LicenseKeyValidator\LicenseKeyValidation.ps1'
-```
-
-#### Step 2: Add PowerShell Task
-
-```yaml
-pool:
-  vmImage: 'windows-latest'
-
-variables:
-  LICENSE_VALIDATION: 'D:\LicenseKeyValidator\LicenseKeyValidation.ps1'
-
-steps:
-  - task: PowerShell@2
-    inputs:
-      targetType: filePath
-      filePath: $(LICENSE_VALIDATION)
-    displayName: 'Syncfusion License Validation'
-    
-  # Your other build steps
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'build'
-      projects: '**/*.csproj'
-    displayName: 'Build Project'
-```
-
-**Complete Example:**
+### Option 1: Validation During Build (RECOMMENDED)
 
 ```yaml
 trigger:
@@ -144,20 +59,17 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  LICENSE_VALIDATION: '$(Build.SourcesDirectory)\LicenseKeyValidator\LicenseKeyValidation.ps1'
   buildConfiguration: 'Release'
 
 steps:
   # Checkout code
   - checkout: self
   
-  # Validate Syncfusion license
-  - task: PowerShell@2
+  # Setup .NET
+  - task: UseDotNet@2
     inputs:
-      targetType: filePath
-      filePath: $(LICENSE_VALIDATION)
-    displayName: 'Syncfusion License Validation'
-    continueOnError: false  # Fail build if validation fails
+      version: '8.0.x'
+    displayName: 'Setup .NET'
   
   # Restore dependencies
   - task: DotNetCoreCLI@2
@@ -166,55 +78,172 @@ steps:
       projects: '**/*.csproj'
     displayName: 'Restore NuGet Packages'
   
+  # Build project (license registration happens in Program.cs)
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+      arguments: '--configuration $(buildConfiguration) --no-restore'
+    env:
+      SYNCFUSION_LICENSE_KEY: $(SyncfusionLicenseKey)  # From pipeline secret
+    displayName: 'Build Project with License Registration'
+    continueOnError: false  # Fail if license registration fails
+```
+
+### Option 2: Validation with Unit Tests (RECOMMENDED)
+
+```yaml
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+  - checkout: self
+  
+  - task: UseDotNet@2
+    inputs:
+      version: '8.0.x'
+    displayName: 'Setup .NET'
+  
+  # License validation test
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'test'
+      projects: '**/*LicenseValidation.Tests.csproj'
+      arguments: '--configuration $(buildConfiguration)'
+    env:
+      SYNCFUSION_LICENSE_KEY: $(SyncfusionLicenseKey)
+    displayName: 'Validate Syncfusion License'
+    continueOnError: false  # Fail build if validation fails
+  
   # Build project
   - task: DotNetCoreCLI@2
     inputs:
       command: 'build'
       projects: '**/*.csproj'
       arguments: '--configuration $(buildConfiguration)'
+    env:
+      SYNCFUSION_LICENSE_KEY: $(SyncfusionLicenseKey)
     displayName: 'Build Project'
   
-  # Run tests
+  # Run all tests
   - task: DotNetCoreCLI@2
     inputs:
       command: 'test'
       projects: '**/*Tests.csproj'
       arguments: '--configuration $(buildConfiguration)'
-    displayName: 'Run Tests'
+    env:
+      SYNCFUSION_LICENSE_KEY: $(SyncfusionLicenseKey)
+    displayName: 'Run All Tests'
 ```
 
-### Azure Pipelines (Classic)
+### Setup Pipeline Secret
 
-For classic (GUI-based) Azure Pipelines:
+1. Go to your pipeline in Azure DevOps
+2. Click **Edit** → **Variables**
+3. Click **New variable**
+   - **Name:** `SyncfusionLicenseKey`
+   - **Value:** Your license key
+   - **Keep this value secret:** ✅ (checked)
+4. Click **OK** and **Save**
 
-#### Step 1: Create Variable
+### Complete Example with All Stages
 
-1. Open your pipeline in Azure DevOps
-2. Click **Variables** tab
-3. Add variable:
-   - **Name:** `LICENSE_VALIDATION`
-   - **Value:** `D:\LicenseKeyValidator\LicenseKeyValidation.ps1`
+```yaml
+trigger:
+  branches:
+    include:
+      - main
+      - develop
 
-#### Step 2: Add PowerShell Task
+pool:
+  vmImage: 'windows-latest'
 
-1. Click **+** to add a task
-2. Search for **PowerShell**
-3. Configure:
-   - **Display name:** Syncfusion License Validation
-   - **Type:** File Path
-   - **Script Path:** `$(LICENSE_VALIDATION)`
-4. Save the pipeline
+variables:
+  buildConfiguration: 'Release'
+  dotnetVersion: '8.0.x'
 
-**Task configuration screenshot guidance:**
-- Set **Type** to **"File Path"**
-- Set **Script Path** to **`$(LICENSE_VALIDATION)`**
-- Set **Continue on error** to **false** (fail build on validation error)
+stages:
+  - stage: Build
+    displayName: 'Build and Validate'
+    jobs:
+      - job: ValidateAndBuild
+        displayName: 'Validate License and Build'
+        steps:
+          - checkout: self
+          
+          - task: UseDotNet@2
+            inputs:
+              version: $(dotnetVersion)
+            displayName: 'Setup .NET'
+          
+          # Validate license first (fail fast)
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'test'
+              projects: '**/LicenseValidation.Tests.csproj'
+            env:
+              SYNCFUSION_LICENSE_KEY: $(SyncfusionLicenseKey)
+            displayName: 'Validate License'
+            continueOnError: false
+          
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'restore'
+              projects: '**/*.csproj'
+            displayName: 'Restore'
+          
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'build'
+              projects: '**/*.csproj'
+              arguments: '--configuration $(buildConfiguration) --no-restore'
+            env:
+              SYNCFUSION_LICENSE_KEY: $(SyncfusionLicenseKey)
+            displayName: 'Build'
+          
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'test'
+              projects: '**/*Tests.csproj'
+              arguments: '--configuration $(buildConfiguration)'
+            env:
+              SYNCFUSION_LICENSE_KEY: $(SyncfusionLicenseKey)
+            displayName: 'Test'
 
-## GitHub Actions Integration
+  - stage: Deploy
+    displayName: 'Deploy'
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job: DeployJob
+        displayName: 'Deploy Application'
+        steps:
+          - checkout: self
+          - script: echo Deploying application...
+            displayName: 'Deploy'
+```
 
-Integrate license validation into GitHub Actions workflows:
+**Key Points:**
+- ✅ No external downloads
+- ✅ No executable execution
+- ✅ License key from secure pipeline variable
+- ✅ Validation happens at build time
+- ✅ Build fails if validation fails
 
-### Workflow Configuration
+## GitHub Actions Integration (Secure - Programmatic Validation)
+
+Integrate license validation into GitHub Actions workflows using programmatic validation:
+
+### Basic Workflow
 
 ```yaml
 name: Build and Validate
@@ -238,80 +267,114 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       
-      - name: Syncfusion License Validation
-        shell: pwsh
-        run: |
-          ./LicenseKeyValidator/LicenseKeyValidation.ps1
-        continue-on-error: false
+      - name: Validate Syncfusion License
+        run: dotnet test **/LicenseValidation.Tests.csproj
+        env:
+          SYNCFUSION_LICENSE_KEY: ${{ secrets.SYNCFUSION_LICENSE_KEY }}
       
       - name: Restore dependencies
         run: dotnet restore
       
       - name: Build
         run: dotnet build --configuration Release --no-restore
+        env:
+          SYNCFUSION_LICENSE_KEY: ${{ secrets.SYNCFUSION_LICENSE_KEY }}
       
-      - name: Test
+      - name: Run tests
         run: dotnet test --no-build --verbosity normal
+        env:
+          SYNCFUSION_LICENSE_KEY: ${{ secrets.SYNCFUSION_LICENSE_KEY }}
 ```
 
-### Using Secrets for License Key
-
-Store the license key as a GitHub secret:
+### Setup GitHub Secret
 
 #### Step 1: Add Secret
 
 1. Go to repository **Settings**
 2. Click **Secrets and variables** → **Actions**
 3. Click **New repository secret**
-4. Name: `SYNCFUSION_LICENSE_KEY`
-5. Value: Your license key
+   - Name: `SYNCFUSION_LICENSE_KEY`
+   - Value: Your actual license key
+4. Click **Add secret**
 
-#### Step 2: Update Script to Use Secret
+#### Step 2: Use Secret in Workflow
 
-Create a modified validation script that accepts parameters:
+The secret is automatically available as `${{ secrets.SYNCFUSION_LICENSE_KEY }}`
 
-**LicenseKeyValidation-GitHub.ps1:**
-```powershell
-param(
-    [string]$Platform = "WPF",
-    [string]$Version = "26.2.4",
-    [string]$LicenseKey
-)
+### Advanced Workflow with Multiple Jobs
 
-if ([string]::IsNullOrEmpty($LicenseKey)) {
-    Write-Host "##[error] License key is required"
-    exit 1
-}
-
-$result = & $PSScriptRoot"\LicenseKeyValidatorConsole.exe" `
-    /platform:$Platform `
-    /version:$Version `
-    /licensekey:$LicenseKey
-
-Write-Host $result
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "##[error] License validation failed"
-    exit 1
-}
-```
-
-**GitHub Actions workflow:**
 ```yaml
-- name: Syncfusion License Validation
-  shell: pwsh
-  env:
-    LICENSE_KEY: ${{ secrets.SYNCFUSION_LICENSE_KEY }}
-  run: |
-    ./LicenseKeyValidator/LicenseKeyValidation-GitHub.ps1 `
-      -Platform "WPF" `
-      -Version "26.2.4" `
-      -LicenseKey $env:LICENSE_KEY
+name: Build and Validate
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Validate License
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Validate License
+        run: dotnet test **/LicenseValidation.Tests.csproj
+        env:
+          SYNCFUSION_LICENSE_KEY: ${{ secrets.SYNCFUSION_LICENSE_KEY }}
+
+  build:
+    name: Build and Test
+    needs: validate  # Only run after license validation passes
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Restore
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+        env:
+          SYNCFUSION_LICENSE_KEY: ${{ secrets.SYNCFUSION_LICENSE_KEY }}
+      
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+        env:
+          SYNCFUSION_LICENSE_KEY: ${{ secrets.SYNCFUSION_LICENSE_KEY }}
+
+  deploy:
+    name: Deploy
+    needs: build  # Only run after build succeeds
+    runs-on: windows-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy Application
+        run: echo "Deploying..."
 ```
 
-## Jenkins Integration
+### Security Best Practices
 
-Integrate license validation into Jenkins pipelines:
+1. ✅ Secret only available to repository owner and maintainers
+2. ✅ Secret automatically masked in logs
+3. ✅ Secret not available to pull requests from forks (default)
+4. ✅ Use `SYNCFUSION_LICENSE_KEY` environment variable in code
+5. ❌ Don't hardcode secret in workflow file
+6. ❌ Don't print actual secret value in logs
+
+## Jenkins Integration (Secure - Programmatic Validation)
+
+Integrate license validation into Jenkins pipelines using programmatic validation:
 
 ### Declarative Pipeline
 
@@ -320,7 +383,7 @@ pipeline {
     agent any
     
     environment {
-        LICENSE_VALIDATION = 'D:\\LicenseKeyValidator\\LicenseKeyValidation.ps1'
+        SYNCFUSION_LICENSE_KEY = credentials('syncfusion-license-key')
         DOTNET_CLI_HOME = '/tmp/dotnet'
     }
     
@@ -331,17 +394,9 @@ pipeline {
             }
         }
         
-        stage('Syncfusion License Validation') {
+        stage('Validate License') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'pwsh ${LICENSE_VALIDATION}'
-                    } else {
-                        powershell """
-                            & '${LICENSE_VALIDATION}'
-                        """
-                    }
-                }
+                bat 'dotnet test **\\*LicenseValidation.Tests.csproj'
             }
         }
         
@@ -368,50 +423,150 @@ pipeline {
         failure {
             echo 'Build failed - check license validation'
         }
+        success {
+            echo 'Build succeeded - Syncfusion license validated'
+        }
     }
 }
 ```
 
-### Using Jenkins Credentials
-
-Store license key as Jenkins credential:
+### Setup Jenkins Credential
 
 #### Step 1: Add Credential
 
 1. Go to **Jenkins** → **Manage Jenkins** → **Manage Credentials**
-2. Add a **Secret text** credential
-3. ID: `syncfusion-license-key`
-4. Secret: Your license key
+2. Click **Add Credentials**
+3. Configure:
+   - **Kind:** Secret text
+   - **ID:** `syncfusion-license-key`
+   - **Secret:** Your license key
+4. Click **Create**
 
 #### Step 2: Use in Pipeline
+
+The credential is automatically available as `credentials('syncfusion-license-key')`
+
+### Complete Example with Stages
 
 ```groovy
 pipeline {
     agent any
     
     environment {
-        LICENSE_VALIDATION = 'D:\\LicenseKeyValidator\\LicenseKeyValidation.ps1'
+        SYNCFUSION_LICENSE_KEY = credentials('syncfusion-license-key')
+        BUILD_CONFIGURATION = 'Release'
+        DOTNET_VERSION = '8.0'
+    }
+    
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        timestamps()
+        buildDiscarder(logRotator(numToKeepStr: '10'))
     }
     
     stages {
-        stage('Syncfusion License Validation') {
+        stage('Prepare') {
             steps {
-                withCredentials([string(credentialsId: 'syncfusion-license-key', variable: 'LICENSE_KEY')]) {
-                    powershell """
-                        \$result = & 'D:\\LicenseKeyValidator\\LicenseKeyValidatorConsole.exe' `
-                            /platform:"WPF" `
-                            /version:"26.2.4" `
-                            /licensekey:"${env.LICENSE_KEY}"
-                        Write-Host \$result
-                        if (\$LASTEXITCODE -ne 0) {
-                            throw "License validation failed"
-                        }
-                    """
+                script {
+                    echo "Build started on ${env.BUILD_ID}"
+                    echo ".NET version: ${DOTNET_VERSION}"
                 }
             }
         }
         
-        // Other stages...
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
+        stage('Validate License') {
+            steps {
+                script {
+                    try {
+                        bat 'dotnet test **\\*LicenseValidation.Tests.csproj --verbosity normal'
+                        echo "✓ License validation passed"
+                    } catch (Exception e) {
+                        echo "✗ License validation failed"
+                        throw e
+                    }
+                }
+            }
+        }
+        
+        stage('Restore Dependencies') {
+            steps {
+                bat 'dotnet restore'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                bat "dotnet build --configuration ${BUILD_CONFIGURATION} --no-restore"
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                bat "dotnet test --configuration ${BUILD_CONFIGURATION} --no-build --verbosity normal"
+            }
+        }
+        
+        stage('Package') {
+            steps {
+                bat "dotnet publish --configuration ${BUILD_CONFIGURATION} --output build/output"
+            }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
+        }
+        success {
+            echo 'Build successful with valid license'
+        }
+        failure {
+            echo 'Build failed - check logs above'
+        }
+    }
+}
+```
+
+### Security Best Practices for Jenkins
+
+1. ✅ Store license key as Jenkins credential (not in source)
+2. ✅ Use `credentials('id')` to inject into pipeline
+3. ✅ Credential automatically masked in console logs
+4. ✅ Restrict credential access to specific jobs/pipelines
+5. ✅ Use environment variables to pass credential to build
+6. ❌ Don't hardcode secrets in pipeline script
+7. ❌ Don't echo actual credential values
+
+### Restrict Credential Access (Security)
+
+```groovy
+pipeline {
+    agent any
+    
+    options {
+        credentials {
+            string(credentialsId: 'syncfusion-license-key', variable: 'LICENSE_KEY')
+        }
+    }
+    
+    stages {
+        stage('Validate') {
+            steps {
+                // Credential automatically available as ${LICENSE_KEY}
+                // and masked in console output
+                withCredentials([
+                    string(credentialsId: 'syncfusion-license-key', variable: 'SYNC_KEY')
+                ]) {
+                    bat 'dotnet test'
+                }
+            }
+        }
     }
 }
 ```
@@ -707,154 +862,317 @@ stage('Validate License') {
 
 ## Best Practices
 
-### 1. Fail Fast
+### 1. Use Programmatic Validation (RECOMMENDED)
 
-Configure CI to fail immediately on license validation errors:
+The `ValidateLicense()` method is the most secure approach:
 
-```yaml
-# Azure Pipelines
-continueOnError: false
+✅ **Advantages:**
+- No external downloads
+- No executable execution
+- Source code visible in Syncfusion assemblies
+- Part of verified NuGet ecosystem
+- Simple integration
 
-# GitHub Actions
-continue-on-error: false
-
-# Jenkins - throws exception on failure
+```csharp
+bool isValid = SyncfusionLicenseProvider.ValidateLicense(Platform.WPF);
+if (!isValid) throw new InvalidOperationException("License validation failed");
 ```
 
-### 2. Secure Key Storage
+### 2. Validate Early in Pipeline
 
-Never hardcode license keys in scripts:
-
-- ✅ Use CI/CD secrets/variables
-- ✅ Use environment variables
-- ✅ Use credential management systems
-- ❌ Don't commit keys to repositories
-- ❌ Don't hardcode in pipeline files
-
-### 3. Validate Early
-
-Place license validation as early as possible in the pipeline:
+Place license validation as early as possible to fail fast:
 
 ```yaml
 steps:
   1. Checkout code
-  2. Validate license  ← Do this early
-  3. Restore dependencies
+  2. Setup dependencies
+  3. Validate license  ← Do this early
   4. Build
   5. Test
 ```
 
-### 4. Clear Error Messages
+**Example:**
+```csharp
+// Program.cs - Validate immediately on startup
+var licenseKey = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY");
+SyncfusionLicenseProvider.RegisterLicense(licenseKey);
 
-Provide clear failure messages:
+bool isValid = SyncfusionLicenseProvider.ValidateLicense(
+    Platform.WPF, 
+    out string message
+);
 
-```powershell
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "##[error] Syncfusion license validation failed"
-    Write-Host "##[error] Check platform, version, and license key"
-    exit 1
+if (!isValid)
+{
+    throw new InvalidOperationException($"License validation failed: {message}");
 }
+```
+
+### 3. Fail Build on Validation Error
+
+Configure CI to stop the build if validation fails:
+
+```yaml
+# Azure Pipelines
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '**/LicenseValidation.Tests.csproj'
+  continueOnError: false  # Fail build
+
+# GitHub Actions
+continue-on-error: false
+
+# Jenkins - throws exception
+withCredentials([...]) {
+    bat 'dotnet test ...'  # Build stops on test failure
+}
+```
+
+### 4. Secure License Key Storage
+
+Never hardcode keys or expose them in logs:
+
+- ✅ Use CI/CD secrets/variables (Azure DevOps, GitHub, Jenkins)
+- ✅ Use environment variables
+- ✅ Use secure credential stores (Azure Key Vault, AWS Secrets Manager)
+- ✅ Secrets automatically masked in console logs
+- ❌ Don't commit keys to repositories
+- ❌ Don't hardcode in pipeline files
+- ❌ Don't echo/print actual key values
+
+**Setup:**
+```bash
+# Azure Pipelines - Create pipeline variable marked as secret
+# GitHub Actions - Create repository secret
+# Jenkins - Create secret text credential
 ```
 
 ### 5. Version-Specific Validation
 
-Validate against the exact version being built:
+Validate against the exact Syncfusion version being used:
 
-```yaml
-variables:
-  SYNCFUSION_VERSION: '26.2.4'
+```csharp
+// Get version from environment or configuration
+var syncfusionVersion = "26.2.4";
 
-steps:
-  - script: |
-      ./validate.ps1 -Version $(SYNCFUSION_VERSION)
+// Include in validation messages
+bool isValid = SyncfusionLicenseProvider.ValidateLicense(
+    Platform.WPF, 
+    out string message
+);
+
+Console.WriteLine($"Syncfusion v{syncfusionVersion}: {(isValid ? "✓" : "✗")} {message}");
 ```
 
-### 6. Multi-Platform Projects
+### 6. Multi-Platform Project Validation
 
 For projects using multiple Syncfusion platforms:
 
 ```csharp
-[Test]
+[TestMethod]
 public void ValidateAllPlatforms()
 {
     var platforms = new[] 
     { 
-        Platform.WPF, 
-        Platform.Blazor, 
-        Platform.React 
+        (Platform.WPF, "WPF"),
+        (Platform.Blazor, "Blazor"),
+        (Platform.ASPNETCore, "ASP.NET Core")
     };
     
-    foreach (var platform in platforms)
+    var licenseKey = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY");
+    SyncfusionLicenseProvider.RegisterLicense(licenseKey);
+    
+    foreach (var (platform, name) in platforms)
     {
         bool isValid = SyncfusionLicenseProvider.ValidateLicense(
             platform, 
             out string message
         );
         
-        Assert.IsTrue(isValid, $"{platform}: {message}");
+        Assert.IsTrue(isValid, $"{name}: {message}");
+        TestContext.WriteLine($"✓ {name} license valid: {message}");
     }
 }
 ```
 
 ### 7. Logging and Reporting
 
-Log validation results for troubleshooting:
+Log validation results clearly for troubleshooting:
 
 ```csharp
+bool isValid = SyncfusionLicenseProvider.ValidateLicense(
+    Platform.WPF, 
+    out string validationMessage
+);
+
 if (isValid)
 {
-    Console.WriteLine($"✓ {platform} license valid for v{version}");
+    Console.WriteLine($"✓ Syncfusion license valid for v{version}");
+    return 0;
 }
 else
 {
-    Console.Error.WriteLine($"✗ {platform} validation failed");
+    Console.Error.WriteLine("✗ Syncfusion license validation failed");
+    Console.Error.WriteLine($"  Platform: WPF");
     Console.Error.WriteLine($"  Message: {validationMessage}");
-    Console.Error.WriteLine($"  Version: {version}");
+    return 1;
 }
 ```
 
-## Troubleshooting CI Validation
+### 8. Avoid External Downloads
 
-### Issue: Validation Script Not Found
+❌ **DEPRECATED:** Don't download and execute external tools:
+- No supply chain verification
+- No integrity checking
+- MITM attack risk
+- Execution privileges risk
 
-**Error:** `The system cannot find the path specified`
+✅ **RECOMMENDED:** Use built-in validation methods:
+- Programmatic `ValidateLicense()` method
+- Unit test validation
+- Integrated .NET/NuGet ecosystem
 
-**Solutions:**
-- Verify script path in CI configuration
-- Use `$(Build.SourcesDirectory)` or equivalent for relative paths
-- Check that LicenseKeyValidator was extracted correctly
-- Ensure script is checked into repository or downloaded in CI
+### 9. Document License Requirements
 
-### Issue: PowerShell Execution Policy
+Add documentation about license setup in your CI/CD:
 
-**Error:** `running scripts is disabled on this system`
-
-**Solution:**
 ```yaml
-- script: |
-    powershell -ExecutionPolicy Bypass -File ./LicenseKeyValidation.ps1
+# In your repository README or CI documentation:
+# 
+# License Setup for CI/CD:
+# 1. Create pipeline secret "SyncfusionLicenseKey"
+# 2. Set to your Syncfusion license key
+# 3. License is validated automatically during build
+# 4. Build fails if license is invalid or missing
 ```
 
-### Issue: License Key Not Available
+### 10. Regular Key Rotation
+
+Rotate license keys periodically:
+
+- ✅ Update keys in CI/CD secrets
+- ✅ Revoke old keys in Syncfusion account
+- ✅ Update all deployments
+- ✅ Monitor key access logs
+
+## Troubleshooting CI Validation
+
+### Issue: License Key Not Available in CI
 
 **Error:** License validation fails but works locally
 
 **Solutions:**
-- Verify environment variable/secret is set in CI
-- Check secret name matches code reference
-- Ensure secret is available in the pipeline scope
-- Test with `echo $env:VARIABLE_NAME` (don't log actual key!)
 
-### Issue: Exit Code Issues
+1. **Verify Secret/Variable is Set:**
+   ```yaml
+   # Azure Pipelines - check secret exists
+   - script: echo "Secret is set" # Don't print actual value!
+   ```
 
-**Problem:** Build doesn't fail on validation error
+2. **Check Secret Name Matches Code:**
+   ```csharp
+   // Code expects SYNCFUSION_LICENSE_KEY
+   var key = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY");
+   
+   // Azure DevOps secret must be: SyncfusionLicenseKey
+   // (Reference as $(SyncfusionLicenseKey) or env variable)
+   ```
 
-**Solution:**
-```powershell
-if ($LASTEXITCODE -ne 0) {
-    exit $LASTEXITCODE  # Propagate exit code
+3. **Ensure Credential Scope is Correct:**
+   - In Jenkins: Verify credential is accessible to pipeline job
+   - In GitHub: Verify secret is available to current repository
+   - In Azure: Verify variable is in scope for current stage
+
+### Issue: License Validation Fails During Build
+
+**Error:** `License validation failed: Invalid key`
+
+**Solutions:**
+
+1. **Check Key Format:**
+   - Verify key contains no extra spaces or line breaks
+   - Ensure key hasn't been truncated
+   - Verify key matches Syncfusion version
+
+2. **Verify Version Match:**
+   ```csharp
+   // License key must match this version
+   var syncfusionPackageVersion = "26.2.4";
+   
+   // Generate new key if version changed
+   ```
+
+3. **Check Platform Match:**
+   ```csharp
+   // Platform must match license
+   var platform = Platform.WPF;  // Must match key platform
+   ```
+
+### Issue: Platform-Specific Build Failure
+
+**Error:** `License validation failed for platform X`
+
+**Solution:** Generate separate license keys for each platform:
+
+```csharp
+[TestMethod]
+public void MultiPlatformValidation()
+{
+    // Each platform may need separate validation
+    bool wpfValid = SyncfusionLicenseProvider.ValidateLicense(Platform.WPF);
+    bool blazorValid = SyncfusionLicenseProvider.ValidateLicense(Platform.Blazor);
+    
+    Assert.IsTrue(wpfValid && blazorValid, "Platform validation failed");
 }
 ```
+
+### Issue: Build Passes Locally But Fails in CI
+
+**Error:** Validation works locally but fails in CI pipeline
+
+**Causes and Solutions:**
+
+1. **Different .NET Version:**
+   ```yaml
+   # Ensure CI uses same .NET version as local
+   - uses: actions/setup-dotnet@v3
+     with:
+       dotnet-version: '8.0.x'  # Match your local version
+   ```
+
+2. **Different NuGet Version:**
+   ```bash
+   # Update NuGet in CI to match local
+   dotnet nuget locals all --clear
+   dotnet restore  # Force fresh restore
+   ```
+
+3. **Key Environment Differences:**
+   - CI system clock skew (clock must be within range of key validity)
+   - Locale/culture differences
+   - Architecture differences (x86 vs x64)
+
+### Issue: Cannot Find LicenseValidation Assembly
+
+**Error:** `Could not load file or assembly 'Syncfusion.Licensing'`
+
+**Solutions:**
+
+1. **Add NuGet Package:**
+   ```bash
+   dotnet add package Syncfusion.Licensing
+   ```
+
+2. **Verify Reference:**
+   ```csharp
+   using Syncfusion.Licensing;  // Required import
+   ```
+
+3. **Check .csproj:**
+   ```xml
+   <PackageReference Include="Syncfusion.Licensing" Version="26.2.4" />
+   ```
 
 ## Summary
 
@@ -865,7 +1183,13 @@ CI/CD license validation ensures:
 - ✅ Early detection of version/platform mismatches
 - ✅ Secure key management via CI secrets
 
-Choose the validation method that best fits your workflow:
-- **LicenseKeyValidator:** Standalone utility for any CI system
-- **ValidateLicense():** Programmatic validation in custom scripts
-- **Unit Tests:** Test-based validation integrated with test pipelines
+**Recommended Validation Methods:**
+1. ✅ **Programmatic Validation** (`ValidateLicense()`) - No external tools
+2. ✅ **Unit Test Validation** - Integrated with test pipeline
+3. ✅ **Build-time Validation** - During project build in Program.cs
+
+**NOT Recommended:**
+- ❌ External tool downloads - Security and supply chain risk
+- ❌ External PowerShell execution - Unverifiable code execution
+
+See [SECURITY_ANALYSIS.md](../SECURITY_ANALYSIS.md) for more security details.

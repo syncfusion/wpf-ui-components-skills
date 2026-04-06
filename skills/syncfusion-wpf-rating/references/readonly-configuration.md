@@ -225,7 +225,7 @@ Differentiate read-only ratings visually:
     <syncfusion:SfRating.ItemContainerStyle>
         <Style TargetType="syncfusion:SfRatingItem">
             <Setter Property="RatedFill" Value="Gray"/>
-            <Setter Property="UnRatedFill" Value="LightGray"/>
+            <Setter Property="UnratedFill" Value="LightGray"/>
             <Setter Property="RatedStroke" Value="DarkGray"/>
         </Style>
     </syncfusion:SfRating.ItemContainerStyle>
@@ -357,7 +357,7 @@ While the control doesn't automatically change appearance in read-only mode, you
     <syncfusion:SfRating.ItemContainerStyle>
         <Style TargetType="syncfusion:SfRatingItem">
             <Setter Property="RatedFill" Value="#9E9E9E"/>
-            <Setter Property="UnRatedFill" Value="#E0E0E0"/>
+            <Setter Property="UnratedFill" Value="#E0E0E0"/>
         </Style>
     </syncfusion:SfRating.ItemContainerStyle>
 </syncfusion:SfRating>

@@ -671,7 +671,7 @@ Always test your slider with:
             SmallChange="1"
             LargeChange="10"
             ToolTipFormat="N0"
-            ToolTipDisplayMode="OnThumbMove"
+            ToolTipDisplayMode="OnFocus"
             ThumbToolTipPlacement="TopLeft"
             Focusable="True" />
     </StackPanel>

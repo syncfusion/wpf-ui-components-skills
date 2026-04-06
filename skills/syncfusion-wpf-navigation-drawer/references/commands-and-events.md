@@ -132,19 +132,19 @@ Triggered when a navigation item is clicked.
                                ItemClicked="NavigationDrawer_ItemClicked">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Drafts">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M6.9999996,48.353..." Fill="White"/>
+            <Path Data="M3,3h18v14H3V3z M5,5v10h14V5H5z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -182,18 +182,18 @@ Triggered when a navigation item with sub-items is expanded.
                                ItemExpanded="NavigationDrawer_ItemExpanded">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
         
         <syncfusion:NavigationItem Header="Primary">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.5189972,7.3780194..." Fill="White"/>
+                <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="Social">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M22.133972,14.194015..." Fill="White"/>
+                <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:NavigationItem>
@@ -227,18 +227,18 @@ Triggered when a navigation item with sub-items is collapsed.
                                ItemCollapsed="NavigationDrawer_ItemCollapsed">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
         
         <syncfusion:NavigationItem Header="Primary">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.5189972,7.3780194..." Fill="White"/>
+                <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="Social">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M22.133972,14.194015..." Fill="White"/>
+                <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:NavigationItem>
@@ -363,7 +363,7 @@ public class ViewModel : INotifyPropertyChanged
                                Command="{Binding ClickCommand}"
                                CommandParameter="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -371,7 +371,7 @@ public class ViewModel : INotifyPropertyChanged
                                Command="{Binding ClickCommand}"
                                CommandParameter="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -379,7 +379,7 @@ public class ViewModel : INotifyPropertyChanged
                                Command="{Binding ClickCommand}"
                                CommandParameter="Drafts">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M6.9999996,48.353..." Fill="White"/>
+            <Path Data="M3,3h18v14H3V3z M5,5v10h14V5H5z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -389,7 +389,7 @@ public class ViewModel : INotifyPropertyChanged
                                    Command="{Binding ClickCommand}"
                                    CommandParameter="LogOut">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:SfNavigationDrawer.FooterItems>
@@ -471,7 +471,7 @@ public class MainViewModel : INotifyPropertyChanged
                                CommandParameter="Dashboard"
                                IsSelected="True">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -479,14 +479,14 @@ public class MainViewModel : INotifyPropertyChanged
                                Command="{Binding NavigateCommand}"
                                CommandParameter="Reports">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
         
         <syncfusion:NavigationItem Header="Sales"
                                    Command="{Binding NavigateCommand}"
                                    CommandParameter="SalesReport">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.5189972,7.3780194..." Fill="White"/>
+                <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
@@ -494,7 +494,7 @@ public class MainViewModel : INotifyPropertyChanged
                                    Command="{Binding NavigateCommand}"
                                    CommandParameter="Analytics">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M22.133972,14.194015..." Fill="White"/>
+                <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:NavigationItem>
@@ -554,3 +554,4 @@ private void NavigationDrawer_ItemCollapsed(object sender, NavigationItemCollaps
 ## Sample Code
 
 View complete sample on GitHub: [Commands Sample](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Commands)
+

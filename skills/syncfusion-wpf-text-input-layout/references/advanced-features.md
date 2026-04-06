@@ -471,7 +471,7 @@ inputLayout.CharCountVisibility = Visibility.Visible;
 - **Description**: View (typically Label or Icon) at the leading edge.
 - **Usage**:
 ```csharp
-inputLayout.LeadingView = new Label { Text = "🔍", FontSize = 18 };
+inputLayout.LeadingView = new Label { Content = "🔍", FontSize = 18 };
 ```
 
 #### LeadingViewPosition
@@ -489,7 +489,7 @@ inputLayout.LeadingViewPosition = ViewPosition.Inside;
 - **Description**: View at the trailing edge.
 - **Usage**:
 ```csharp
-inputLayout.TrailingView = new Label { Text = "✓", FontSize = 18 };
+inputLayout.TrailingView = new Label { Content = "✓", FontSize = 18 };
 ```
 
 #### TrailingViewPosition
@@ -657,11 +657,11 @@ public enum ViewPosition
 ```csharp
 // Icon inside the input container
 inputLayout.LeadingViewPosition = ViewPosition.Inside;
-inputLayout.LeadingView = new Label { Text = "🔍" };
+inputLayout.LeadingView = new Label { Content = "🔍" };
 
 // Icon outside the input container
 inputLayout.TrailingViewPosition = ViewPosition.Outside;
-inputLayout.TrailingView = new Label { Text = "ℹ" };
+inputLayout.TrailingView = new Label { Content = "ℹ" };
 ```
 
 ---

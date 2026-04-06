@@ -394,7 +394,7 @@ Use nested menus for complex command hierarchies:
 
 ### Issue: Groups not aligning properly
 **Solution:** Use explicit `SizeForm` values (Large, Normal, Small) for consistent layout.
-backstage
+
 ### Issue: Backstage content not showing
 **Solution:** Ensure `BackstageItemHost` has proper content and height. Use containers like `StackPanel` or `Grid`.
 

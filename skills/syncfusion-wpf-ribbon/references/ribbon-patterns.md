@@ -341,41 +341,9 @@ public class DocumentViewModel : INotifyPropertyChanged
 </syncfusion:RibbonBar>
 ```
 
-## Performance Best Practices
+---
 
-### Best Practice 1: Lazy Load Tab Content
-
-Don't create all controls upfront:
-
-```csharp
-public void InitializeAdvancedTab()
-{
-    var advancedTab = MainRibbon.Items.OfType<RibbonTab>()
-        .FirstOrDefault(t => t.Header?.ToString() == "Advanced");
-    
-    if (advancedTab?.Items.Count == 0)
-    {
-        // Load content on first access
-        AddAdvancedTabContent(advancedTab);
-    }
-}
-```
-
-### Best Practice 2: Use Data Binding for Dynamic Content
-
-```xml
-<syncfusion:RibbonComboBox Label="Recent Files"
-                           ItemsSource="{Binding RecentFiles}"
-                           SelectedItem="{Binding SelectedFile}" />
-```
-
-### Best Practice 3: Virtualize Galleries
-
-```xml
-<syncfusion:RibbonGallery Label="Styles"
-                          VirtualizingStackPanel.IsVirtualizing="True">
-</syncfusion:RibbonGallery>
-```
+Continued in [references/ribbon-patterns-continued.md](references/ribbon-patterns-continued.md)
 
 ## Common Mistakes
 
@@ -451,7 +419,10 @@ public void InitializeAdvancedTab()
         <syncfusion:RibbonButton Label="Print" />
         <syncfusion:MenuItemSeparator />
     
-    <syncfusion:RibbonTab Caption="Home">
+            </syncfusion:ApplicationMenu>
+        </syncfusion:Ribbon.ApplicationMenu>
+    
+        <syncfusion:RibbonTab Caption="Home">
         <syncfusion:RibbonBar Header="Clipboard">
             <syncfusion:RibbonButton Label="Cut" SizeForm="Large" />
             <syncfusion:RibbonButton Label="Copy" SizeForm="Large" />
@@ -484,7 +455,7 @@ public void InitializeAdvancedTab()
             <syncfusion:RibbonCheckBox Label="Show Details" />
         </syncfusion:RibbonBar>
     </syncfusion:RibbonTab>
-</syncfusion:Ribbon>Content
+</syncfusion:Ribbon>
 ```
 
 ## Migration Strategies

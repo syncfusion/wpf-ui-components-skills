@@ -116,51 +116,12 @@ public partial class MainWindow : Window {
 
 ## Common Patterns
 
-### Pattern 1: Color Panel Customization
-**When:** You want specific color panels visible
-```xaml
-<syncfusion:ColorPickerPalette 
-    Themes="Metro"
-    GenerateThemeVariants="True" 
-    GenerateStandardVariants="True"
-    ThemePanelVisibility="Visible"
-    StandardPanelVisibility="Visible"
-    RecentlyUsedPanelVisibility="Visible"
-    MoreColorOptionVisibility="Visible"
-    NoColorVisibility="Visible" />
-```
+- **Color Panel Customization:** Set `ThemePanelVisibility`, `StandardPanelVisibility`, `RecentlyUsedPanelVisibility`, `MoreColorOptionVisibility` to control which panels appear
+- **Custom Colors Collection:** Bind `CustomColorsCollection` property to `ObservableCollection<CustomColor>` and set `SetCustomColors="True"`
+- **Split Mode with Command:** Set `Mode="Split"` and bind `SelectedCommand` for button behavior with dropdown access
+- **Expanded Palette Mode:** Set `Mode="Palette"` to show palette always visible; adjust `BorderWidth`/`BorderHeight` for color item sizing
 
-### Pattern 2: Custom Colors Collection
-**When:** You want users to select from custom predefined colors
-```csharp
-var customColors = new ObservableCollection<CustomColor>
-{
-    new CustomColor { Color = Color.FromArgb(255, 17, 235, 248), ColorName = "Aqua" },
-    new CustomColor { Color = Color.FromArgb(255, 248, 15, 166), ColorName = "Deep Pink" }
-};
-
-colorPickerPalette.CustomColorsCollection = customColors;
-colorPickerPalette.SetCustomColors = true;
-colorPickerPalette.CustomHeaderText = "Brand Colors";
-```
-
-### Pattern 3: Split Mode with Command
-**When:** You want button and dropdown behavior with command execution
-```xaml
-<syncfusion:ColorPickerPalette 
-    Mode="Split"
-    SelectedCommand="{Binding ApplyColorCommand}"
-    Color="{Binding SelectedColor, Mode=TwoWay}" />
-```
-
-### Pattern 4: Expanded Palette Mode
-**When:** You want the palette always visible without dropdown
-```xaml
-<syncfusion:ColorPickerPalette 
-    Mode="Palette"
-    BorderWidth="30"
-    BorderHeight="30" />
-```
+See [appearance-customization.md](references/appearance-customization.md) and [events-interactions.md](references/events-interactions.md) for complete examples.
 
 ---
 
@@ -189,17 +150,10 @@ colorPickerPalette.CustomHeaderText = "Brand Colors";
 
 ## Common Use Cases
 
-**Use Case 1: Text Color Picker**
-User needs to apply text formatting colors. Use dropdown mode with standard and theme colors, handle SelectedBrushChanged to apply color to selected text.
-
-**Use Case 2: Shape Fill Selector**
-Designer needs to set fill colors for shapes. Use Split mode with custom brand colors, trigger SelectedCommand to apply color to selected shapes.
-
-**Use Case 3: Theme Color Picker**
-User needs to pick a color that matches application theme. Use Palette mode with GenerateThemeVariants enabled to show base and variant colors.
-
-**Use Case 4: Color History Panel**
-Application tracks recently used colors. Enable RecentlyUsedPanelVisibility and let users quickly reselect previously used colors.
+- **Text Color Picker:** Dropdown mode with standard/theme colors + `SelectedBrushChanged` to apply formatting
+- **Shape Fill Selector:** Split mode with custom brand colors + `SelectedCommand` binding
+- **Theme Color Picker:** Palette mode with `GenerateThemeVariants="True"` to show color variants
+- **Color History Panel:** Enable `RecentlyUsedPanelVisibility="Visible"` for quick access to recent colors
 
 ---
 

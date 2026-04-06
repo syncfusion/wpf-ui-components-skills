@@ -79,7 +79,7 @@ The SfRangeSlider provides:
 - ThumbToolTipPlacement (TopLeft, BottomRight, None)
 - ThumbToolTipPrecision for decimal places
 - ToolTipFormat for value formatting
-- ToolTipDisplayMode (Always, OnThumbMove, Never)
+- ToolTipDisplayMode (Always, OnFocus)
 - ToolTipStyle for custom appearance
 - Advanced tooltip customization
 
@@ -337,7 +337,7 @@ namespace RangeSliderDemo
 - `ThumbToolTipPlacement` - Tooltip position (TopLeft, BottomRight, None)
 - `ThumbToolTipPrecision` - Decimal places in tooltip
 - `ToolTipFormat` - Format string for tooltip values
-- `ToolTipDisplayMode` - When to show tooltip (Always, OnThumbMove, Never)
+- `ToolTipDisplayMode` - When to show tooltip (Always, OnFocus)
 - `ToolTipStyle` - Custom style for tooltips
 
 ### Layout

@@ -106,6 +106,12 @@ The Syncfusion WPF Ribbon is a comprehensive navigation component that provides 
 - Performance considerations
 - Design best practices
 
+### Troubleshooting
+📄 **Read:** [references/troubleshooting.md](references/troubleshooting.md)
+- Button and menu issues
+- Input control issues
+- General setup problems
+
 ## Quick Start Example
 
 Here's a minimal WPF ribbon setup to get started:

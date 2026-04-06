@@ -232,113 +232,28 @@ When creating custom templates, preserve these named parts:
 
 ## Complete Custom Style Example
 
-A comprehensive example combining all styling options:
+Combine multiple styling options to create a polished control:
 
 ```xml
-<Window x:Class="DomainUpDownDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        xmlns:editors="clr-namespace:Syncfusion.Windows.Controls;assembly=Syncfusion.SfInput.WPF">
-    
-    <Window.Resources>
-        <!-- Custom Up/Down Button Style -->
-        <Style x:Key="ModernUpDownButtonStyle" TargetType="editors:SfUpDown">
-            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="editors:SfUpDown">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="2"
-                                CornerRadius="4"
-                                Background="White">
-                            <Grid x:Name="PART_OuterGrid">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                
-                                <ContentControl x:Name="PART_Content" 
-                                              Grid.Column="0"
-                                              IsTabStop="False" 
-                                              Focusable="False" 
-                                              Margin="10,0,0,0"
-                                              Content="{TemplateBinding UpDownContent}"/>
-                                
-                                <Button x:Name="PART_DownButton"
-                                       Grid.Column="1"
-                                       Width="35"
-                                       Background="#E8F4F8"
-                                       BorderBrush="DarkSlateGray"
-                                       Foreground="DarkSlateGray"
-                                       BorderThickness="0,0,1,0"
-                                       FontSize="18"
-                                       Command="{TemplateBinding DownCommand}"
-                                       IsTabStop="False"
-                                       Content="◄"/>
-                                
-                                <Button x:Name="PART_UpButton"
-                                       Grid.Column="2"
-                                       Width="35"
-                                       Background="#E8F4F8"
-                                       BorderBrush="DarkSlateGray"
-                                       Foreground="DarkSlateGray"
-                                       BorderThickness="0"
-                                       FontSize="18"
-                                       Command="{TemplateBinding UpCommand}"
-                                       Content="►"
-                                       IsTabStop="False"/>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-        <!-- Customized SfDomainUpDown Style -->
-        <Style x:Key="ModernDomainUpDownStyle" TargetType="syncfusion:SfDomainUpDown">
-            <Setter Property="AccentBrush" Value="#4A90E2"/>
-            <Setter Property="Foreground" Value="#333333"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="UpDownStyle" Value="{StaticResource ModernUpDownButtonStyle}"/>
-        </Style>
-    </Window.Resources>
-    
-    <Grid>
-        <syncfusion:SfDomainUpDown x:Name="DomainUpDown" 
-                                   Style="{StaticResource ModernDomainUpDownStyle}"
-                                   Height="44" 
-                                   Width="280" 
-                                   ItemsSource="{Binding Employees}">
-            <syncfusion:SfDomainUpDown.ContentTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" 
-                               HorizontalAlignment="Left" 
-                               VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Name}" 
-                                  VerticalAlignment="Center" 
-                                  FontWeight="SemiBold"
-                                  Margin="0,0,8,0"/>
-                        <TextBlock Text="{Binding Email}" 
-                                  VerticalAlignment="Center"
-                                  Foreground="Gray"
-                                  FontSize="11"/>
-                    </StackPanel>
-                </DataTemplate>
-            </syncfusion:SfDomainUpDown.ContentTemplate>
-        </syncfusion:SfDomainUpDown>
-    </Grid>
-</Window>
+<!-- Define custom button and domain-updown styles in Window.Resources -->
+<Style x:Key="ModernUpDownButtonStyle" TargetType="editors:SfUpDown">
+    <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+    <Setter Property="Template">
+        <!-- Define template with PART_OuterGrid, PART_Content, PART_UpButton, PART_DownButton -->
+    </Setter>
+</Style>
+
+<Style x:Key="ModernDomainUpDownStyle" TargetType="syncfusion:SfDomainUpDown">
+    <Setter Property="AccentBrush" Value="#4A90E2"/>
+    <Setter Property="UpDownStyle" Value="{StaticResource ModernUpDownButtonStyle}"/>
+    <!-- Add other properties: FontSize, BorderThickness, Padding, etc. -->
+</Style>
+
+<!-- Use the custom style -->
+<syncfusion:SfDomainUpDown Style="{StaticResource ModernDomainUpDownStyle}" ItemsSource="{Binding Items}"/>
 ```
+
+For full template details, refer to the "Customizing Up/Down Button Style" section above.
 
 ## Color Customization
 

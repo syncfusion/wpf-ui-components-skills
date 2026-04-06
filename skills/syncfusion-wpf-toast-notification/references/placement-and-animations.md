@@ -5,7 +5,6 @@
 - [Toast Placement](#toast-placement)
 - [Animation Types](#animation-types)
 - [Combining Placement and Animations](#combining-placement-and-animations)
-- [Edge Cases and Troubleshooting](#edge-cases-and-troubleshooting)
 
 ## Overview
 
@@ -35,93 +34,20 @@ The `Placement` property controls where toasts appear on the screen or within th
 | **BottomCenter** | Centered at bottom | Form validation, input feedback |
 | **BottomRight** | Bottom-right corner | Chat messages, system notifications |
 
-### Top Placements
+### Placement Example
 
 ```csharp
-// Top-Left corner
+// Set Placement property to position toast
 SfToastNotification.Show(this, new ToastOptions
 {
-    Title = "Top Left",
-    Message = "Notification at top-left corner.",
+    Title = "Notification",
+    Message = "Positioned at specific location.",
     Mode = ToastMode.Screen,
-    Placement = ToastPlacement.TopLeft
-});
-
-// Top-Center
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Important Alert",
-    Message = "This is centered at the top for maximum visibility.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.TopCenter,
-    Severity = ToastSeverity.Warning
-});
-
-// Top-Right corner (default)
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Top Right",
-    Message = "Default notification position.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.TopRight
+    Placement = ToastPlacement.TopCenter  // or other positions
 });
 ```
 
-### Center Placements
-
-```csharp
-// Left-Center
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Navigation",
-    Message = "Menu opened.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.LeftCenter
-});
-
-// Right-Center
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Status Update",
-    Message = "Synchronization in progress...",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.RightCenter
-});
-```
-
-### Bottom Placements
-
-```csharp
-// Bottom-Left corner
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Low Priority",
-    Message = "Background task completed.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.BottomLeft
-});
-
-// Bottom-Center
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Form Validation",
-    Message = "Please correct the errors before submitting.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.BottomCenter,
-    Severity = ToastSeverity.Error
-});
-
-// Bottom-Right corner
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "New Message",
-    Message = "You have a new chat message.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.BottomRight
-});
-```
-
-### Placement Recommendations by Use Case
+### Placement Recommendations
 
 | Use Case | Recommended Placement | Reason |
 |----------|----------------------|---------|
@@ -162,11 +88,6 @@ SfToastNotification.Show(this, new ToastOptions
 });
 ```
 
-**Characteristics:**
-- Smooth, subtle effect
-- Good for non-intrusive notifications
-- Universal, works well in all placements
-
 ### Zoom Animations
 
 ```csharp
@@ -181,11 +102,6 @@ SfToastNotification.Show(this, new ToastOptions
     Placement = ToastPlacement.TopCenter
 });
 ```
-
-**Characteristics:**
-- More attention-grabbing than fade
-- Scales from center while fading
-- Good for important notifications
 
 ### Slide Animations
 
@@ -202,49 +118,9 @@ SfToastNotification.Show(this, new ToastOptions
 });
 ```
 
-**Characteristics:**
-- Directional movement
-- Natural for bottom placements
-- Mobile-friendly pattern
-
 ### Flip Animations
 
-```csharp
-// Flip Left Down
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Flip Effect",
-    Message = "This toast flips in from left-down.",
-    Mode = ToastMode.Screen,
-    ShowAnimationType = ToastAnimation.FlipLeftDownIn,
-    CloseAnimationType = ToastAnimation.FlipLeftDownOut
-});
-
-// Flip Left Up
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Flip Effect",
-    Message = "This toast flips in from left-up.",
-    Mode = ToastMode.Screen,
-    ShowAnimationType = ToastAnimation.FlipLeftUpIn,
-    CloseAnimationType = ToastAnimation.FlipLeftUpOut
-});
-
-// Flip Right Down
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Flip Effect",
-    Message = "This toast flips in from right-down.",
-    Mode = ToastMode.Screen,
-    ShowAnimationType = ToastAnimation.FlipRightDownIn,
-    CloseAnimationType = ToastAnimation.FlipRightDownOut
-});
-```
-
-**Characteristics:**
-- 3D rotation effect
-- More dramatic, playful
-- Use sparingly for special notifications
+Use FlipLeftDownIn/Out, FlipLeftUpIn/Out, or FlipRightDownIn/Out for 3D flip effects.
 
 ### No Animation
 
@@ -269,71 +145,9 @@ SfToastNotification.Show(this, new ToastOptions
 
 ## Combining Placement and Animations
 
-### Pattern 1: Top-Center with Slide
+Combine `Placement` and animation properties for customized appearance. Match animations to placement (SlideBottomIn/Out for top/bottom, FadeIn/Out for sides).
 
-```csharp
-// Slide down from top for validation errors
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Validation Error",
-    Message = "Please fill in all required fields.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.TopCenter,
-    Severity = ToastSeverity.Error,
-    ShowAnimationType = ToastAnimation.SlideBottomIn,  // Slide from top
-    CloseAnimationType = ToastAnimation.SlideBottomOut
-});
-```
 
-### Pattern 2: Bottom-Right with Fade
-
-```csharp
-// Fade in at bottom-right for status updates
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Update",
-    Message = "New version available.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.BottomRight,
-    Severity = ToastSeverity.Info,
-    ShowAnimationType = ToastAnimation.FadeIn,
-    CloseAnimationType = ToastAnimation.FadeOut
-});
-```
-
-### Pattern 3: Top-Center with Zoom (Attention-Grabbing)
-
-```csharp
-// Zoom in at center for critical alerts
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Critical Warning",
-    Message = "Your session will expire in 2 minutes.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.TopCenter,
-    Severity = ToastSeverity.Warning,
-    Variant = ToastVariant.Filled,
-    ShowAnimationType = ToastAnimation.FadeZoomIn,
-    CloseAnimationType = ToastAnimation.FadeZoomOut,
-    Duration = TimeSpan.FromSeconds(10)
-});
-```
-
-### Pattern 4: Contextual Placement with Flip
-
-```csharp
-// Flip in from corner for playful notifications
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Achievement Unlocked!",
-    Message = "You've completed 100 tasks.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.BottomLeft,
-    Severity = ToastSeverity.Success,
-    ShowAnimationType = ToastAnimation.FlipLeftUpIn,
-    CloseAnimationType = ToastAnimation.FlipLeftUpOut
-});
-```
 
 ### Animation Recommendations by Placement
 
@@ -347,149 +161,9 @@ SfToastNotification.Show(this, new ToastOptions
 
 ---
 
-## Edge Cases and Troubleshooting
-
-### Issue: Placement Not Working
-
-**Problem:** Toast appears at default position despite setting Placement.
-
-**Cause:** Mode is set to Default (native OS notifications don't support custom placement).
-
-**Solution:**
-```csharp
-// WRONG: Placement with Default mode (ignored)
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Test",
-    Mode = ToastMode.Default,              // ❌ Native mode
-    Placement = ToastPlacement.TopLeft     // Ignored
-});
-
-// CORRECT: Use Window or Screen mode
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Test",
-    Mode = ToastMode.Screen,               // ✅ Screen mode
-    Placement = ToastPlacement.TopLeft     // Applied
-});
-```
-
-### Issue: Animations Not Visible
-
-**Problem:** Toast appears/disappears instantly despite animation settings.
-
-**Possible Causes:**
-1. Mode is set to Default
-2. System has animations disabled
-3. ShowAnimationType/CloseAnimationType set to None
-
-**Solution:**
-```csharp
-// Ensure proper mode and animation types
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Animated",
-    Mode = ToastMode.Screen,                    // ✅ Use Screen/Window mode
-    ShowAnimationType = ToastAnimation.FadeIn,  // ✅ Not None
-    CloseAnimationType = ToastAnimation.FadeOut // ✅ Not None
-});
-```
-
-### Issue: Toast Blocked by UI Elements
-
-**Problem:** Toast appears but is hidden behind other UI elements.
-
-**Solution:** Choose appropriate placement that doesn't overlap critical UI:
-
-```csharp
-// If top-right is blocked by toolbar, use bottom-right
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Alternative Position",
-    Message = "Positioned to avoid UI overlap.",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.BottomRight  // Alternative position
-});
-```
-
-### Issue: Multiple Toasts Overlapping
-
-**Problem:** Multiple toasts stack on top of each other at same position.
-
-**Solution:** Use different placements or stagger timing:
-
-```csharp
-// Different placements for multiple toasts
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Notification 1",
-    Placement = ToastPlacement.TopRight
-});
-
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Notification 2",
-    Placement = ToastPlacement.BottomRight  // Different position
-});
-
-// OR: Close previous before showing new
-SfToastNotification.CloseAll();
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Latest Notification"
-});
-```
-
-### Issue: Animation Too Fast/Slow
-
-**Problem:** Animation duration doesn't match expectations.
-
-**Note:** Animation speed is controlled by the control's internal timing. You can't directly adjust it, but you can:
-
-**Workaround:**
-```csharp
-// Use different animation types for perceived speed difference
-// Fade feels faster than Slide
-// Zoom feels faster than Flip
-
-// Faster feel: Fade
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Quick",
-    ShowAnimationType = ToastAnimation.FadeIn
-});
-
-// Slower feel: Flip
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Slower",
-    ShowAnimationType = ToastAnimation.FlipRightDownIn
-});
-```
-
 ## Best Practices
 
-1. **Match animation to severity:**
-   - Errors/Warnings: Zoom or Fade (attention-grabbing)
-   - Info/Success: Fade or Slide (subtle)
-
-2. **Consider placement context:**
-   - Bottom placements: Use Slide animations
-   - Corner placements: Use Fade or Flip
-   - Center placements: Use Zoom for emphasis
-
-3. **Be consistent:**
-   - Use same placement for similar notification types
-   - Use same animations throughout app for consistency
-
-4. **Accessibility:**
-   - Provide option to disable animations for users sensitive to motion
-   - Don't rely solely on animation for critical information
-
-5. **Performance:**
-   - Use None animation for rapid, successive notifications
-   - Limit number of simultaneous animated toasts
-
-6. **Test visibility:**
-   - Ensure toasts don't overlap critical UI elements
-   - Test all placements in your application layout
+1. **Match animation to severity:** Errors/Warnings use attention-grabbing animations (Zoom, Fade); Info/Success use subtle (Fade, Slide)
+2. **Be consistent:** Use same placement and animations throughout app for predictable UX
+3. **Test visibility:** Ensure toasts don't overlap critical UI elements
+4. **Performance:** Use None animation for rapid successive notifications; limit simultaneous animated toasts

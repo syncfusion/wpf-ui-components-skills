@@ -284,27 +284,17 @@ textBoxExt.ShowClearButton = true;
     Width="450"
     Height="45"
     Padding="12,8"
-    
-    <!-- Watermark -->
     Watermark="Search..."
     WatermarkTemplate="{StaticResource CustomWatermark}"
-    
-    <!-- Text Styling -->
     FontSize="14"
     FontFamily="Segoe UI"
     FontWeight="Normal"
     Foreground="Black"
-    
-    <!-- Background & Border -->
     Background="White"
     BorderBrush="LightGray"
     BorderThickness="1"
-    
-    <!-- Buttons -->
     ShowDropDownButton="True"
     ShowClearButton="True"
-    
-    <!-- AutoComplete -->
     SearchItemPath="Name"
     AutoCompleteMode="Suggest"
     AutoCompleteSource="{Binding Employees}"/>

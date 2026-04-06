@@ -185,103 +185,30 @@ public void ResetLayout()
 
 ## Serialization Formats
 
-### Binary Format
+DockingManager supports multiple serialization formats:
 
-Compact binary serialization:
+| Format | Usage | Pros | Cons |
+|--------|-------|------|------|
+| **Binary** | `AppMode.Binary` | Compact, fast | Not human-readable |
+| **XML** | `AppMode.XML` | Human-readable, debuggable | Larger file size |
+| **IsolatedStorage** | (default) | Automatic, no code needed | Can't customize path |
 
-**C#:**
+**Example - XML serialization:**
 ```csharp
-// Save as binary
-using (FileStream stream = new FileStream(path, FileMode.Create))
-{
-    dockManager.SaveDockState(stream, AppMode.Binary);
-}
-
-// Load binary
-using (FileStream stream = new FileStream(path, FileMode.Open))
-{
-    dockManager.LoadDockState(stream, AppMode.Binary);
-}
-```
-
-**Advantages:**
-- Smaller file size
-- Faster serialization
-
-**Disadvantages:**
-- Not human-readable
-- Harder to debug
-
-### XML Format
-
-Human-readable XML serialization:
-
-**C#:**
-```csharp
-// Save as XML
+// Save to XML
 using (FileStream stream = new FileStream(path, FileMode.Create))
 {
     dockManager.SaveDockState(stream, AppMode.XML);
 }
 
-// Load XML
+// Load from XML
 using (FileStream stream = new FileStream(path, FileMode.Open))
 {
     dockManager.LoadDockState(stream, AppMode.XML);
 }
 ```
 
-**Advantages:**
-- Human-readable
-- Easy to debug
-- Manual editing possible
-
-**Disadvantages:**
-- Larger file size
-- Slower serialization
-
-### XmlWriter Format
-
-Use XmlWriter for more control:
-
-**C#:**
-```csharp
-// Save using XmlWriter
-using (FileStream stream = new FileStream(path, FileMode.Create))
-using (XmlWriter writer = XmlWriter.Create(stream, new XmlWriterSettings { Indent = true }))
-{
-    writer.WriteStartDocument();
-    writer.WriteStartElement("DockingLayout");
-    
-    dockManager.SaveDockState(writer);
-    
-    writer.WriteEndElement();
-    writer.WriteEndDocument();
-}
-
-// Load using XmlReader
-using (FileStream stream = new FileStream(path, FileMode.Open))
-using (XmlReader reader = XmlReader.Create(stream))
-{
-    reader.ReadToFollowing("DockingLayout");
-    dockManager.LoadDockState(reader);
-}
-```
-
-### IsolatedStorage (Default)
-
-Automatic storage in user profile:
-
-**C#:**
-```csharp
-// Save to IsolatedStorage (no path needed)
-dockManager.SaveDockState();
-
-// Load from IsolatedStorage
-dockManager.LoadDockState();
-```
-
-**Location:** User's IsolatedStorage folder (typically in AppData\Local)
+Use `XmlWriter`/`XmlReader` for custom XML handling with more control.
 
 ## Controlling Serialization
 
@@ -515,113 +442,9 @@ public void ClearSavedState()
 
 ## Common Patterns
 
-### Auto-Save with Debounce
+**Auto-Save with Debounce:** Use `DispatcherTimer` to delay saves after layout changes (prevents rapid successive saves).
 
-Save layout after user changes, with delay:
-
-**C#:**
-```csharp
-private DispatcherTimer _saveTimer;
-
-public MainWindow()
-{
-    InitializeComponent();
-    
-    _saveTimer = new DispatcherTimer
-    {
-        Interval = TimeSpan.FromSeconds(2)
-    };
-    _saveTimer.Tick += (s, e) =>
-    {
-        _saveTimer.Stop();
-        SaveLayout();
-    };
-    
-    // Hook layout change events
-    dockManager.WindowStateChanged += OnLayoutChanged;
-    dockManager.ActiveWindowChanged += OnLayoutChanged;
-}
-
-private void OnLayoutChanged(object sender, EventArgs e)
-{
-    // Restart timer on any change
-    _saveTimer.Stop();
-    _saveTimer.Start();
-}
-
-private void SaveLayout()
-{
-    try
-    {
-        dockManager.SaveDockState();
-    }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"Failed to save layout: {ex.Message}");
-    }
-}
-```
-
-### Layout Menu Integration
-
-**XAML:**
-```xml
-<Menu>
-    <MenuItem Header="View">
-        <MenuItem Header="Save Layout As..." Click="SaveLayoutAs_Click" />
-        <MenuItem Header="Load Layout" x:Name="LoadLayoutMenu" />
-        <Separator />
-        <MenuItem Header="Reset to Default" Click="ResetLayout_Click" />
-    </MenuItem>
-</Menu>
-```
-
-**C#:**
-```csharp
-private LayoutManager _layoutManager;
-
-public MainWindow()
-{
-    InitializeComponent();
-    _layoutManager = new LayoutManager(dockManager);
-    
-    // Populate load menu
-    Loaded += (s, e) => PopulateLayoutMenu();
-}
-
-private void PopulateLayoutMenu()
-{
-    LoadLayoutMenu.Items.Clear();
-    
-    foreach (var layout in _layoutManager.GetSavedLayouts())
-    {
-        MenuItem item = new MenuItem { Header = layout };
-        item.Click += (s, e) => _layoutManager.LoadLayout(layout);
-        LoadLayoutMenu.Items.Add(item);
-    }
-}
-
-private void SaveLayoutAs_Click(object sender, RoutedEventArgs e)
-{
-    // Show input dialog
-    string name = ShowInputDialog("Save Layout", "Enter layout name:");
-    if (!string.IsNullOrEmpty(name))
-    {
-        _layoutManager.SaveLayout(name);
-        PopulateLayoutMenu();
-        MessageBox.Show($"Layout '{name}' saved successfully!");
-    }
-}
-
-private void ResetLayout_Click(object sender, RoutedEventArgs e)
-{
-    if (MessageBox.Show("Reset to default layout?", "Confirm", 
-        MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-    {
-        dockManager.ResetState();
-    }
-}
-```
+**Layout Profiles:** Save multiple named layouts to allow users to switch between workspace configurations. Hook `WindowStateChanged` and `ActiveWindowChanged` events to detect layout modifications.
 
 ## Troubleshooting
 

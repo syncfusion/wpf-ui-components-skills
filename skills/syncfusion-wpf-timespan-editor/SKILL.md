@@ -38,49 +38,15 @@ Use the TimeSpanEdit control when you need to:
 
 ---
 
-## Documentation and Navigation Guide
+## Documentation Guide
 
-### Getting Started
-📄 **Read:** [references/getting-started.md](references/getting-started.md)
-- Assembly installation and NuGet setup
-- Adding TimeSpanEdit via Designer
-- Adding TimeSpanEdit via XAML
-- Adding TimeSpanEdit via C# code
-- Basic setup examples
-
-### Value Setting & Custom Formats
-📄 **Read:** [references/value-and-formats.md](references/value-and-formats.md)
-- Setting time values programmatically
-- Custom format strings (d, h, m, s, z)
-- Format examples with labels ("days", "hours", etc.)
-- Displaying milliseconds
-- Null values and watermark text
-
-### User Interactions
-📄 **Read:** [references/user-interactions.md](references/user-interactions.md)
-- Field navigation with mouse and keyboard
-- Step intervals for precise increments
-- UpDown button controls
-- Mouse wheel interaction
-- Click & drag (extended scrolling)
-- Keyboard arrow key navigation
-- ReadOnly mode for preventing edits
-
-### Constraints & Events
-📄 **Read:** [references/constraints-and-events.md](references/constraints-and-events.md)
-- Min/Max value constraints
-- ValueChanged event handling
-- Event binding in XAML and C#
-- Value change notifications
-
-### Appearance & Theming
-📄 **Read:** [references/appearance-and-theming.md](references/appearance-and-theming.md)
-- Background and selection colors
-- Foreground text color
-- Flow direction (RTL support)
-- Built-in theme application
-- SfSkinManager integration
-- ThemeStudio custom themes
+| Topic | File | Focus |
+|-------|------|-------|
+| **Setup** | [getting-started.md](references/getting-started.md) | Install NuGet, add via Designer/XAML/C# |
+| **Formats** | [value-and-formats.md](references/value-and-formats.md) | Custom format strings, labels, milliseconds |
+| **Interactions** | [user-interactions.md](references/user-interactions.md) | Keyboard, mouse, buttons, drag, arrow keys |
+| **Constraints & Events** | [constraints-and-events.md](references/constraints-and-events.md) | Min/Max, ValueChanged event, validation |
+| **Appearance** | [appearance-and-theming.md](references/appearance-and-theming.md) | Colors, themes, RTL, SfSkinManager |
 
 ---
 
@@ -127,54 +93,22 @@ Add this to your WPF project:
 
 ## Common Patterns
 
-### Pattern 1: Duration Entry with Constraints
-Restrict time selection to specific range (e.g., 2-10 days):
+| Use Case | XAML Setup |
+|----------|-----------|
+| **With Constraints** | `MinValue="2.00:00:00" MaxValue="10.00:00:00"` |
+| **Custom Format** | `Format="d 'days' h 'hours' m 'minutes' s 'seconds'"` |
+| **Precise Intervals** | `StepInterval="1.00:15:30" IncrementOnScrolling="True"` |
+| **Read-Only** | `IsReadOnly="True" ShowArrowButtons="False"` |
+| **Nullable** | `AllowNull="True" NullString="Enter duration..."` |
 
+**Quick Example:**
 ```xml
+<!-- Constrained input with custom format -->
 <syncfusion:TimeSpanEdit 
     Value="5.08:30:00"
     MinValue="2.00:00:00"
     MaxValue="10.00:00:00"
-    ShowArrowButtons="True" />
-```
-
-### Pattern 2: Custom Formatted Display
-Show user-friendly format with labels:
-
-```xml
-<syncfusion:TimeSpanEdit 
-    Value="3.14:25:30"
-    Format="d 'days' h 'hours' m 'minutes' s 'seconds'" />
-```
-
-### Pattern 3: Precise Step Intervals
-Control increment/decrement precision:
-
-```xml
-<syncfusion:TimeSpanEdit 
-    Value="5.10:00:00"
-    StepInterval="1.00:15:30"
-    IncrementOnScrolling="True" />
-```
-
-### Pattern 4: Read-Only Display
-Show time value without allowing user edits:
-
-```xml
-<syncfusion:TimeSpanEdit 
-    Value="7.18:45:30"
-    IsReadOnly="True"
-    AllowNull="False" />
-```
-
-### Pattern 5: Null Value with Watermark
-Allow empty state with placeholder text:
-
-```xml
-<syncfusion:TimeSpanEdit 
-    AllowNull="True"
-    Value="{x:Null}"
-    NullString="Enter time duration..." />
+    Format="d 'days' h 'hours'" />
 ```
 
 ---
@@ -203,29 +137,12 @@ Allow empty state with placeholder text:
 
 ## Common Use Cases
 
-**Use Case 1: Time Duration Picker**
-Users need to input work duration, task time, or interval:
-- Use custom format with labels: `"d 'days' h 'hrs' m 'min'"`
-- Enable all interaction modes (buttons, wheel, keyboard)
-- Set reasonable Min/Max constraints
-
-**Use Case 2: Display-Only Duration**
-Show calculated time values without editing:
-- Set `IsReadOnly="True"`
-- Use clear format with labels
-- Hide UpDown buttons: `ShowArrowButtons="False"`
-
-**Use Case 3: Precise Time Entry**
-Users need exact control over hours/minutes:
-- Set `StepInterval` for coarse control (e.g., 15-min increments)
-- Enable keyboard navigation for field-by-field entry
-- Consider smaller step intervals for seconds
-
-**Use Case 4: Flexible Time Input**
-Users prefer multiple input methods:
-- Keep all interactions enabled (buttons, wheel, keyboard, drag)
-- Use logical step intervals
-- Provide visual feedback with custom colors
+| Scenario | Key Settings |
+|----------|--------------|
+| **Duration Input** | Enable buttons, wheel, keyboard; set Min/Max; use labels |
+| **Display Only** | `IsReadOnly="True"` `ShowArrowButtons="False"`; use clear format |
+| **Precise Control** | Set `StepInterval` (e.g., 15-min); field-by-field keyboard entry |
+| **Flexible Entry** | All interactions enabled; logical step intervals; visual feedback |
 
 ---
 

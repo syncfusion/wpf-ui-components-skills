@@ -29,118 +29,29 @@ Install-Package Syncfusion.Shared.WPF
 2. Add the `Syncfusion.Shared.WPF` assembly reference
 3. Import the Syncfusion WPF schema in your XAML
 
-## Adding via Designer
+## Adding ColorPickerPalette
 
-The easiest way to add ColorPickerPalette is through the Visual Studio designer:
+You can add ColorPickerPalette using the Visual Studio designer or XAML. Here's the XAML approach:
 
-1. Open your WPF Window in the designer
-2. Locate the toolbox and find the **Syncfusion Controls** section
-3. Drag **ColorPickerPalette** onto your window
-4. The `Syncfusion.Shared.WPF` assembly will be automatically added
-
-The designer creates a basic control:
+**1. Add the Syncfusion namespace:**
 ```xaml
-<syncfusion:ColorPickerPalette x:Name="colorPickerPalette" 
-                               Width="60" 
-                               Height="40" />
-```
-
-## Adding via XAML
-
-To manually add ColorPickerPalette in XAML:
-
-**Step 1: Add the Syncfusion namespace**
-```xaml
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
+<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
 </Window>
 ```
 
-**Step 2: Declare the control**
+**2. Add the control:**
 ```xaml
-<Grid>
+<StackPanel Margin="20">
+    <TextBlock Text="Select a Color:" FontSize="14" Margin="0,0,0,10"/>
     <syncfusion:ColorPickerPalette x:Name="colorPickerPalette" 
                                    Width="60" 
                                    Height="40" />
-</Grid>
+</StackPanel>
 ```
 
-**Complete XAML Example:**
-```xaml
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
-        x:Class="ColorPickerPaletteSample.MainWindow"
-        Title="ColorPickerPalette Sample" 
-        Height="350" 
-        Width="525">
-    <Grid>
-        <!-- ColorPickerPalette control -->
-        <StackPanel Margin="20">
-            <TextBlock Text="Select a Color:" FontSize="14" Margin="0,0,0,10"/>
-            <syncfusion:ColorPickerPalette x:Name="colorPickerPalette" 
-                                           Width="60" 
-                                           Height="40" />
-        </StackPanel>
-    </Grid>
-</Window>
-```
+**Via Designer:** Use Visual Studio designer to drag ColorPickerPalette from the Syncfusion Controls toolbox.
 
-## Adding via C#
-
-To create ColorPickerPalette programmatically in code-behind:
-
-**Step 1: Add using statement**
-```csharp
-using Syncfusion.Windows.Tools.Controls;
-```
-
-**Step 2: Create and add to window**
-```csharp
-public partial class MainWindow : Window {
-    public MainWindow() {
-        InitializeComponent();
-
-        // Creating an instance of ColorPickerPalette control
-        ColorPickerPalette colorPickerPalette = new ColorPickerPalette();
-        colorPickerPalette.Width = 60;
-        colorPickerPalette.Height = 40;
-
-        // Adding ColorPickerPalette as window content
-        this.Content = colorPickerPalette;
-    }
-}
-```
-
-**With StackPanel:**
-```csharp
-public partial class MainWindow : Window {
-    public MainWindow() {
-        InitializeComponent();
-
-        var stackPanel = new StackPanel { Margin = new Thickness(20) };
-
-        var label = new TextBlock 
-        { 
-            Text = "Select a Color:",
-            FontSize = 14,
-            Margin = new Thickness(0, 0, 0, 10)
-        };
-
-        var colorPickerPalette = new ColorPickerPalette 
-        { 
-            Width = 60,
-            Height = 40
-        };
-
-        stackPanel.Children.Add(label);
-        stackPanel.Children.Add(colorPickerPalette);
-
-        this.Content = stackPanel;
-    }
-}
-```
+**Via C#:** Use `ColorPickerPalette colorPickerPalette = new ColorPickerPalette();` and set properties programmatically. See [color-management.md](color-management.md) for code examples.
 
 ## Control Structure
 
@@ -156,70 +67,12 @@ The ColorPickerPalette consists of these key visual components:
 - **More Colors Button**: Opens extended color selection window
 - **No Color Button**: Resets selection to transparent
 
-## Accessing Colors Programmatically
+## Working with Colors
 
-### Setting Initial Color
-```xaml
-<!-- XAML -->
-<syncfusion:ColorPickerPalette Color="Red"
-                               Name="colorPickerPalette" 
-                               Width="60"
-                               Height="40">
-</syncfusion:ColorPickerPalette>
-```
-
-```csharp
-// C#
-ColorPickerPalette colorPickerPalette = new ColorPickerPalette();
-colorPickerPalette.Color = Colors.Red;
-colorPickerPalette.Width = 60;
-colorPickerPalette.Height = 40;
-```
-
-### Getting the Selected Color
-```csharp
-Color selectedColor = colorPickerPalette.Color;
-string colorName = colorPickerPalette.ColorName;
-```
-
-### Setting Brush Instead of Color
-```xaml
-<!-- XAML -->
-<syncfusion:ColorPickerPalette SelectedBrush="Yellow"
-                               Name="colorPickerPalette"/>
-```
-
-```csharp
-// C#
-colorPickerPalette.SelectedBrush = Brushes.Yellow;
-```
-
-### Setting Automatic (Default) Color
-The automatic color is the default color users can reset to by clicking the automatic color button:
-
-```xaml
-<syncfusion:ColorPickerPalette AutomaticColor="Green"
-                               AutomaticColorVisibility="Visible"
-                               Name="colorPickerPalette" 
-                               Width="60"
-                               Height="40">
-</syncfusion:ColorPickerPalette>
-```
-
-```csharp
-colorPickerPalette.AutomaticColor = Colors.Green;
-colorPickerPalette.AutomaticColorVisibility = Visibility.Visible;
-```
-
-### Setting Transparent Color
-```xaml
-<syncfusion:ColorPickerPalette Color="Transparent"
-                               Name="colorPickerPalette"/>
-```
-
-```csharp
-colorPickerPalette.Color = Colors.Transparent;
-```
+To set initial colors, get selected values, or work with brushes and transparency, see [color-management.md](color-management.md) for comprehensive examples including:
+- Setting initial color and getting selected values
+- Working with brushes vs. colors
+- Setting automatic (default) and transparent colors
 
 ## Applying Themes
 
@@ -278,53 +131,4 @@ Add these key-value pairs to your resource files:
 CultureInfo.CurrentUICulture = new CultureInfo("de-DE");
 ```
 
-## Common Patterns
-
-**Pattern: Basic Color Selection**
-```xaml
-<syncfusion:ColorPickerPalette x:Name="colorPickerPalette"
-                               GenerateThemeVariants="True"
-                               GenerateStandardVariants="True"
-                               Width="60"
-                               Height="40" />
-```
-
-**Pattern: Minimal Palette (Theme Only)**
-```xaml
-<syncfusion:ColorPickerPalette x:Name="colorPickerPalette"
-                               ThemePanelVisibility="Visible"
-                               StandardPanelVisibility="Collapsed"
-                               MoreColorOptionVisibility="Collapsed"
-                               Width="60"
-                               Height="40" />
-```
-
-**Pattern: Full Features Palette**
-```xaml
-<syncfusion:ColorPickerPalette x:Name="colorPickerPalette"
-                               Color="Blue"
-                               GenerateThemeVariants="True"
-                               GenerateStandardVariants="True"
-                               RecentlyUsedPanelVisibility="Visible"
-                               MoreColorOptionVisibility="Visible"
-                               NoColorVisibility="Visible"
-                               Width="60"
-                               Height="40" />
-```
-
-## Troubleshooting
-
-**Assembly Not Found**
-- Verify that `Syncfusion.Shared.WPF` is installed
-- Check project references for the assembly
-- Ensure Syncfusion NuGet is up to date
-
-**Control Not Appearing**
-- Confirm XAML namespace: `xmlns:syncfusion="http://schemas.syncfusion.com/wpf"`
-- Verify Width and Height are set
-- Check that parent container allows child elements
-
-**Color Not Changing**
-- Ensure `Color` property is being set before control loads
-- Verify `ColorName` property reflects the color you set
-- Check for binding conflicts with data context
+For additional patterns and troubleshooting, refer to the other reference guides.

@@ -21,21 +21,32 @@ After generating a Syncfusion license key, you must register it in your applicat
 
 ## General Registration Principles
 
-### Basic Registration Syntax
+### ⚠️ SECURITY ALERT: Secure Credential Handling
+
+**DO NOT hardcode license keys in your code.** License keys are secrets similar to passwords and API keys. They must be stored securely and never committed to version control.
+
+### Basic Registration Pattern (SECURE - Recommended)
 
 ```csharp
 using Syncfusion.Licensing;
 
-SyncfusionLicenseProvider.RegisterLicense("YOUR_LICENSE_KEY");
+// SECURE: Read from environment variable
+string licenseKey = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY")
+    ?? throw new InvalidOperationException(
+        "SYNCFUSION_LICENSE_KEY environment variable not set");
+
+SyncfusionLicenseProvider.RegisterLicense(licenseKey);
 ```
 
 ### Important Notes
 
-1. **Place between double quotes:** The license key must be a string literal
-2. **Reference Syncfusion.Licensing.dll:** Ensure this assembly is referenced
-3. **Call early:** Register before initializing any Syncfusion components
-4. **One-time registration:** Only need to call once per application startup
-5. **Offline validation:** No internet connection needed during execution
+1. **Never hardcode keys:** Do NOT place license keys as string literals in code
+2. **Use secure storage:** Environment variables, configuration files (.gitignore), or secrets managers
+3. **Reference Syncfusion.Licensing.dll:** Ensure this assembly is referenced
+4. **Call early:** Register before initializing any Syncfusion components
+5. **One-time registration:** Only need to call once per application startup
+6. **Offline validation:** No internet connection needed during execution
+7. **Don't commit secrets:** Add configuration files to .gitignore
 
 ### When to Register
 
@@ -64,13 +75,32 @@ namespace YourNamespace
     {
         public App()
         {
+            // SECURE: Read license key from environment variable
+            string licenseKey = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY");
+            
+            if (string.IsNullOrEmpty(licenseKey))
+            {
+                throw new InvalidOperationException(
+                    "SYNCFUSION_LICENSE_KEY environment variable not set. " +
+                    "Please set the environment variable before running the application.");
+            }
+            
             // Register Syncfusion license BEFORE InitializeComponent
-            SyncfusionLicenseProvider.RegisterLicense("YOUR_LICENSE_KEY");
+            SyncfusionLicenseProvider.RegisterLicense(licenseKey);
             
             InitializeComponent();
         }
     }
 }
+```
+
+**Setup Instructions:**
+```bash
+# Windows Command Prompt
+setx SYNCFUSION_LICENSE_KEY "your_actual_license_key_here"
+
+# Windows PowerShell
+$env:SYNCFUSION_LICENSE_KEY = "your_actual_license_key_here"
 ```
 
 **Visual Basic (App.xaml.vb):**
@@ -112,8 +142,18 @@ using Syncfusion.Licensing;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// SECURE: Read license key from configuration (environment variables or appsettings.json)
+var licenseKey = builder.Configuration["Syncfusion:LicenseKey"];
+
+if (string.IsNullOrEmpty(licenseKey))
+{
+    throw new InvalidOperationException(
+        "Syncfusion:LicenseKey not configured. " +
+        "Set SYNCFUSION_LICENSE_KEY environment variable or configure in appsettings.json");
+}
+
 // Register Syncfusion license at application startup
-SyncfusionLicenseProvider.RegisterLicense("YOUR_LICENSE_KEY");
+SyncfusionLicenseProvider.RegisterLicense(licenseKey);
 
 // Add services to the container
 builder.Services.AddRazorPages();
@@ -137,6 +177,16 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+```
+
+**Setup Instructions:**
+```bash
+# Option 1: Set environment variable
+set SYNCFUSION_LICENSE_KEY=your_license_key
+
+# Option 2: Configure in appsettings.json
+# appsettings.json: { "Syncfusion": { "LicenseKey": "your_key" } }
+# Add to .gitignore to prevent committing secrets
 ```
 
 ### Blazor WebAssembly
@@ -422,7 +472,7 @@ environment {
 }
 ```
 
-For detailed CI/CD validation setup including the LicenseKeyValidator utility, see `ci-license-validation.md`.
+For detailed CI/CD validation setup (programmatic validation, unit-test validation, or internally-hosted artifact patterns), see `ci-license-validation.md`. Do NOT download or execute unvetted external binaries in CI pipelines.
 
 ## Troubleshooting Registration
 
@@ -485,7 +535,7 @@ For detailed CI/CD validation setup including the LicenseKeyValidator utility, s
 
 ## Best Practices
 
-### 1. Centralized Registration
+### 1. Centralized Secure Registration
 
 Create a helper class for license registration:
 
@@ -499,6 +549,14 @@ public static class SyncfusionLicenseHelper
         if (!_isRegistered)
         {
             var licenseKey = GetLicenseKey();
+            
+            if (string.IsNullOrEmpty(licenseKey))
+            {
+                throw new InvalidOperationException(
+                    "License key not found. Set SYNCFUSION_LICENSE_KEY environment variable " +
+                    "or configure 'Syncfusion:LicenseKey' in configuration.");
+            }
+            
             SyncfusionLicenseProvider.RegisterLicense(licenseKey);
             _isRegistered = true;
         }
@@ -506,10 +564,9 @@ public static class SyncfusionLicenseHelper
 
     private static string GetLicenseKey()
     {
-        // Try environment variable first
+        // Priority: Environment variable > Configuration > User secrets
         var key = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY");
         
-        // Fall back to configuration
         if (string.IsNullOrEmpty(key))
         {
             key = ConfigurationManager.AppSettings["SyncfusionLicenseKey"];
@@ -522,67 +579,180 @@ public static class SyncfusionLicenseHelper
 // Usage in App.xaml.cs
 public App()
 {
-    SyncfusionLicenseHelper.RegisterLicense();
+    try
+    {
+        SyncfusionLicenseHelper.RegisterLicense();
+    }
+    catch (InvalidOperationException ex)
+    {
+        MessageBox.Show($"License registration failed: {ex.Message}");
+        Application.Current.Shutdown();
+    }
+    
     InitializeComponent();
 }
 ```
 
-### 2. Configuration-Based Keys
+### 2. Configuration File Method (with .gitignore)
 
-Store keys in configuration files:
+Store keys in configuration files, but EXCLUDE from version control:
 
+**appsettings.json:**
 ```json
-// appsettings.json
 {
   "Syncfusion": {
-    "LicenseKey": "YOUR_LICENSE_KEY"
+    "LicenseKey": "your_license_key_here"
   }
 }
 ```
 
+**.gitignore** (IMPORTANT - Prevent accidental commits):
+```
+appsettings.json
+appsettings.*.json
+!appsettings.Development.json  # Optional: if you want a template
+app.config
+web.config
+```
+
+**Program.cs:**
 ```csharp
-// Program.cs
 var licenseKey = builder.Configuration["Syncfusion:LicenseKey"];
+if (string.IsNullOrEmpty(licenseKey))
+{
+    throw new InvalidOperationException("Syncfusion license key not configured");
+}
 SyncfusionLicenseProvider.RegisterLicense(licenseKey);
 ```
 
-### 3. Environment-Specific Keys
+### 3. Environment Variables (Recommended for CI/CD)
 
-Use different keys for development, staging, and production:
+Use environment variables for production deployments:
 
-```json
-// appsettings.Development.json
-{
-  "Syncfusion": {
-    "LicenseKey": "DEV_LICENSE_KEY"
-  }
-}
-
-// appsettings.Production.json
-{
-  "Syncfusion": {
-    "LicenseKey": "PROD_LICENSE_KEY"
-  }
-}
-```
-
-### 4. Security Considerations
-
-❌ **Don't:**
-- Hardcode keys in source code committed to public repositories
-- Store keys in plain text in version control
-- Share keys publicly
-
-✅ **Do:**
-- Use environment variables
-- Use secret management systems (Azure Key Vault, AWS Secrets Manager)
-- Use user secrets during development
-- Add keys to .gitignore
-
-**Example using user secrets:**
+**Windows:**
 ```bash
-dotnet user-secrets set "Syncfusion:LicenseKey" "YOUR_LICENSE_KEY"
+setx SYNCFUSION_LICENSE_KEY "your_license_key"
 ```
+
+**Linux/macOS:**
+```bash
+export SYNCFUSION_LICENSE_KEY="your_license_key"
+```
+
+**Docker:**
+```dockerfile
+ENV SYNCFUSION_LICENSE_KEY="your_license_key"
+```
+
+**Application code:**
+```csharp
+var licenseKey = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY")
+    ?? throw new InvalidOperationException("SYNCFUSION_LICENSE_KEY not set");
+SyncfusionLicenseProvider.RegisterLicense(licenseKey);
+```
+
+### 4. User Secrets (Development Only)
+
+For local development in .NET projects:
+
+```bash
+# Initialize user secrets (one time)
+dotnet user-secrets init
+
+# Set the license key
+dotnet user-secrets set "Syncfusion:LicenseKey" "your_license_key"
+
+# View all secrets
+dotnet user-secrets list
+```
+
+**Program.cs (automatically loads user secrets in development):**
+```csharp
+var licenseKey = builder.Configuration["Syncfusion:LicenseKey"];
+```
+
+**Secrets stored at:**
+- Windows: `%APPDATA%\microsoft\UserSecrets\<user-secrets-id>\secrets.json`
+- Linux/macOS: `~/.microsoft/usersecrets/<user-secrets-id>/secrets.json`
+
+### 5. Azure Key Vault (Production - Recommended)
+
+For enterprise deployments on Azure:
+
+```csharp
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+var keyVaultUrl = "https://your-keyvault.vault.azure.net/";
+var client = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+
+try
+{
+    KeyVaultSecret secret = client.GetSecret("SyncfusionLicenseKey");
+    SyncfusionLicenseProvider.RegisterLicense(secret.Value);
+}
+catch (Exception ex)
+{
+    throw new InvalidOperationException(
+        "Failed to retrieve license key from Azure Key Vault", ex);
+}
+```
+
+**NuGet packages required:**
+```xml
+<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />
+<PackageReference Include="Azure.Identity" Version="1.13.0" />
+```
+
+### 6. AWS Secrets Manager (Production - Alternative)
+
+For enterprise deployments on AWS:
+
+```csharp
+using Amazon;
+using Amazon.SecretsManager;
+using Amazon.SecretsManager.Model;
+
+var client = new AmazonSecretsManagerClient(RegionEndpoint.USEast1);
+
+try
+{
+    var request = new GetSecretValueRequest { SecretId = "syncfusion/license-key" };
+    var response = await client.GetSecretValueAsync(request);
+    SyncfusionLicenseProvider.RegisterLicense(response.SecretString);
+}
+catch (Exception ex)
+{
+    throw new InvalidOperationException(
+        "Failed to retrieve license key from AWS Secrets Manager", ex);
+}
+```
+
+### 7. Security Considerations
+
+❌ **NEVER:**
+- Hardcode keys in source code
+- Store keys in plain text in version control
+- Share keys publicly or in screenshots
+- Log actual key values
+- Commit configuration files with keys
+
+✅ **ALWAYS:**
+- Use environment variables or secrets managers
+- Add secret files to .gitignore
+- Rotate keys periodically
+- Use principle of least privilege
+- Audit all key access
+- Use .gitignore to exclude config files:
+  ```
+  # Exclude files with potential secrets
+  *.config
+  appsettings.json
+  appsettings.*.json
+  secrets.json
+  .env
+  .env.local
+  ```
 
 ## Validation
 

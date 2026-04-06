@@ -106,6 +106,9 @@ Use this reference when you need to:
 ### Interactive Features
 📄 **Read:** [references/interactive-features.md](references/interactive-features.md)
 
+### Best Practices
+📄 **Read:** [references/best-practices.md](references/best-practices.md)
+
 Use this reference when you need to:
 - Configure scroll interval for value increments/decrements
 - Enable keyboard navigation with Up/Down arrow keys
@@ -123,8 +126,9 @@ Use this reference when you need to:
 
 ```xml
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    x:Class="PercentTextBoxSample.MainWindow">
     <Grid>
         <syncfusion:PercentTextBox x:Name="percentTextBox" 
                                    Width="150" 

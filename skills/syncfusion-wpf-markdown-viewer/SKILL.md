@@ -1,6 +1,6 @@
 ---
 name: syncfusion-wpf-markdown-viewer
-description: Implement Syncfusion WPF SfMarkdownViewer for rendering and displaying Markdown content in WPF applications. Use this when rendering Markdown text, loading Markdown from strings, files, or URLs, handling hyperlink clicks, or displaying Mermaid diagrams. Covers the Source property, HyperlinkClicked events, and MermaidBlockTemplate customization.
+description: Implement Syncfusion WPF SfMarkdownViewer for rendering and displaying Markdown content in WPF applications. Use this when rendering Markdown text, loading Markdown from strings or application-controlled local files, handling hyperlink clicks with URL validation, or displaying Mermaid diagrams with input sanitization. Covers the Source property, HyperlinkClicked events with allowlist-based navigation, and MermaidBlockTemplate customization with input validation. Always validate and sanitize Markdown content before assigning to Source, especially when the content originates from remote or user-supplied sources.
 metadata:
   author: "Syncfusion Inc"
   version: "33.1.44"
@@ -13,10 +13,12 @@ The `SfMarkdownViewer` renders Markdown content — headings, lists, links, imag
 ## When to Use This Skill
 
 - User needs to render or preview Markdown content in a WPF app
-- Loading Markdown from a string, local file, or remote URL
-- Displaying documentation, changelogs, help text, or README files
-- Intercepting or disabling hyperlink navigation from Markdown
-- Rendering Mermaid flowchart diagrams embedded in Markdown
+- Loading Markdown from a hard-coded string, application-bundled resource, or application-controlled local file
+- Displaying documentation, changelogs, or help text that originates from trusted, application-owned sources
+- Intercepting hyperlink navigation with URL validation and allowlisting
+- Rendering Mermaid flowchart diagrams with input length and type validation
+
+> ⚠️ **Out of scope:** Do not use this skill to load Markdown directly from arbitrary third-party URLs or unvalidated user input without fetching, validating, and sanitizing the content in application code first.
 
 ## Quick Start
 
@@ -55,22 +57,25 @@ this.Content = markdownViewer;
 ### Loading Content
 📄 **Read:** [references/loading-content.md](references/loading-content.md)
 - Loading from raw Markdown string
-- Loading from a local file path
-- Loading from a remote HTTP/HTTPS URL
+- Loading from a local application-controlled file path
+- Loading from a remote URL via application code (fetch → validate origin → check content-type → assign string)
 - XAML CDATA string source pattern
 - Decision guide: which source type to use
+- Security requirements for remote content loading
 
 ### Events
 📄 **Read:** [references/events.md](references/events.md)
 - HyperlinkClicked event
 - MarkdownHyperlinkClickedEventArgs (Url, Cancel)
-- Disabling hyperlink navigation (Cancel = true)
-- Retrieving the clicked URL for in-app routing
+- Cancel-by-default pattern — always cancel first, then selectively permit validated URLs
+- Allowlist-based in-app route validation for `app://` links
+- Blocking non-HTTPS external schemes
 
 ### Mermaid Diagrams
 📄 **Read:** [references/mermaid-diagrams.md](references/mermaid-diagrams.md)
 - MermaidBlockTemplate property
 - Embedding SfDiagram in a DataTemplate
+- Validating DataContext (Mermaid string) before rendering — length limit and type allowlist
 - FlowchartLayout configuration
 - LoadDiagramFromMermaid() usage
 - Required dependencies for Mermaid support
@@ -90,8 +95,18 @@ this.Content = markdownViewer;
 
 ## Common Use Cases
 
-- **In-app documentation:** Bind `Source` to a URL pointing to a GitHub raw README
-- **Release notes panel:** Load a local `.md` file and assign its text to `Source`
-- **Help viewer:** Render contextual Markdown help strings alongside your UI
-- **Diagram viewer:** Use `MermaidBlockTemplate` with `SfDiagram` to render flowcharts
-- **Controlled navigation:** Handle `HyperlinkClicked` to open links in an embedded browser or custom dialog
+- **In-app documentation:** Embed Markdown as a hard-coded string or application-bundled resource file; assign to `Source` directly
+- **Release notes panel:** Load a local `.md` file bundled with the application (not a path from user input) and assign its text to `Source`
+- **Remote documentation:** Fetch Markdown from an application-owned HTTPS endpoint in application code, validate the HTTP response origin and content-type, then assign the sanitized string to `Source` — never pass a third-party URL directly to `Source`
+- **Help viewer:** Render contextual Markdown help strings from trusted, application-controlled sources
+- **Diagram viewer:** Use `MermaidBlockTemplate` with `SfDiagram` to render flowcharts; validate the Mermaid `DataContext` string (length and type prefix) before calling `LoadDiagramFromMermaid()`
+- **Controlled navigation:** Handle `HyperlinkClicked` with cancel-by-default; validate `app://` routes against an explicit allowlist and only permit `https://` external links
+
+## Security Considerations
+
+| Risk | Mitigation |
+|---|---|
+| Remote URL loads untrusted third-party Markdown | Fetch content in app code; validate origin (allowlisted base URL) and content-type before assigning to `Source` |
+| Hyperlink in Markdown drives unintended navigation | Use cancel-by-default in `HyperlinkClicked`; validate `app://` routes against a fixed allowlist; only permit `https://` external links |
+| Mermaid block from untrusted Markdown drives diagram rendering | Validate `DataContext` string: check non-null, enforce length limit, allowlist diagram type prefixes before calling `LoadDiagramFromMermaid()` |
+| User-supplied URL passed to `Source` | Never accept URLs from user input or third-party data as-is; always validate origin in application code first |

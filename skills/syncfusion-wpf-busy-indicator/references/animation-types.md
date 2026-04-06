@@ -10,6 +10,8 @@ The `AnimationType` property allows you to select from a rich collection of pre-
 
 The control includes these animation types (partial list of most commonly used):
 
+
+### Setting Animation Type in XAML
 - **Ball** - Bouncing ball animation
 - **Battery** - Battery charging animation
 - **Box** - Rotating box animation
@@ -19,21 +21,38 @@ The control includes these animation types (partial list of most commonly used):
 - **Gear** - Rotating gear animation
 - **Globe** - Rotating globe animation
 - **Hurricane** - Spinning hurricane animation
-- **Movie Timer** - Film reel animation
+- **Message** - Film reel animation
 - **Print** - Printer animation
-- **Rain** - Falling rain drops
+- **Rainy** - Falling rain drops
 - **Rectangle** - Rotating rectangles
 - **RollingBall** - Rolling ball animation
 - **SingleCircle** - Single circular rotation
 - **Slider** - Sliding animation
-- **Snowflakes** - Falling snowflakes
+- **Snow** - Falling snowflakes
 - **Spin** - Classic spinner animation
-- **Sun** - Rotating sun animation
+- **Sunny** - Rotating sun animation
 - **Cupertino** - iOS-style spinner
 - **Fluent** - Fluent design animation
-- And many more...
-
-### Setting Animation Type in XAML
+- **BarChart** - Animated bar chart with rising bars
+- **Clock** - Rotating clock hands animation
+- **DoubleRing** - Concentric rings rotating in alternation
+- **DualRing** - Two-ring alternating rotation
+- **Ripple** - Expanding ripple effect
+- **DotCircle** - Dotted circular rotation
+- **Flower** - Petal-style rotating animation
+- **Liquid** - Fluid/liquid fill animation
+- **HorizontalPulsingBox** - Box pulsing horizontally
+- **Rotation** - Generic rotation animation
+- **SliceBox** - Box with animated sliced segments
+- **Drop** - Falling droplet animation
+- **Delete** - Trash/delete action animation
+- **GPS** - Location pin with pulsing ring
+- **Pen** - Pen-writing or stroke animation
+- **ArrowTrack** - Moving arrows along a track
+- **Temperature** - Thermometer/temperature rise animation
+- **Umbrella** - Umbrella with raindrop effect
+- **Windmill** - Windmill blade rotation
+- **SlicedCircle** - Segmented circular rotation
 
 ```xml
 <!-- Flight animation -->
@@ -166,7 +185,7 @@ This example creates a selection UI to preview different animations:
                 <ComboBoxItem Content="Ball"/>
                 <ComboBoxItem Content="ECG"/>
                 <ComboBoxItem Content="Globe"/>
-                <ComboBoxItem Content="Rain"/>
+                <ComboBoxItem Content="Rainy"/>
             </ComboBox>
         </StackPanel>
         
@@ -222,8 +241,8 @@ private void OnSpeedChanged(object sender, RoutedPropertyChangedEventArgs<double
 
 **Creative/Playful Applications:**
 - **Flight** - Dynamic, engaging
-- **Rain** - Atmospheric
-- **Snowflakes** - Seasonal, friendly
+- **Rainy** - Atmospheric
+- **Snow** - Seasonal, friendly
 
 **Technical/Industrial:**
 - **Gear** - Mechanical, processing
@@ -236,7 +255,7 @@ private void OnSpeedChanged(object sender, RoutedPropertyChangedEventArgs<double
 
 **Long Operations (> 10 seconds):**
 - Use normal or slower speeds (0.75 - 1.0)
-- Engaging animations (Flight, Globe, Rain)
+- Engaging animations (Flight, Globe, Rainy)
 
 ## Platform-Specific Notes
 
@@ -267,7 +286,7 @@ Different animations have different performance characteristics:
 - Ball, ECG, Rectangle
 
 **Complex (use sparingly):**
-- Flight, Rain, Snowflakes (particle-based)
+- Flight, Rainy, Snow (particle-based)
 
 ## Dynamic Animation Switching
 

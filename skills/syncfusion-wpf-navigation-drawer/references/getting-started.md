@@ -179,7 +179,7 @@ navigationDrawer.Items.Add(new NavigationItem()
     Header = "Inbox",
     Icon = new Path()
     {
-        Data = Geometry.Parse("M32.032381,16.445429 L25.410999,23..."),
+        Data = Geometry.Parse("M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     },
@@ -193,7 +193,7 @@ navigationDrawer.Items.Add(new NavigationItem()
     Header = "Sent mail",
     Icon = new Path()
     {
-        Data = Geometry.Parse("M42.128046,6.7269681 L18.53705..."),
+        Data = Geometry.Parse("M2,21L23,12L2,3v7l15,2L2,13V21z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     }
@@ -205,7 +205,7 @@ navigationDrawer.Items.Add(new NavigationItem()
     Header = "Drafts",
     Icon = new Path()
     {
-        Data = Geometry.Parse("M6.9999996,48.353 L19,48.353..."),
+        Data = Geometry.Parse("M3,3h18v14H3V3z M5,5v10h14V5H5z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     }
@@ -235,46 +235,46 @@ This example shows a full email-style navigation with nested items:
                                IsExpanded="True" 
                                IsSelected="True">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
         
         <!-- Sub-item: Primary -->
         <syncfusion:NavigationItem Header="Primary">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.5189972,7.3780194..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White" Stretch="Uniform"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <!-- Sub-item: Social -->
         <syncfusion:NavigationItem Header="Social">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M22.133972,14.194015..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="White" Stretch="Uniform"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <!-- Sub-item: Promotions -->
         <syncfusion:NavigationItem Header="Promotions">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.4614787,7.2521966..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M8,2 L14,14 L2,14 Z" Fill="White" Stretch="Uniform"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Important">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M25.085007,5.9780004..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Drafts">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M6.9999996,48.353..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M3,3h18v14H3V3z M5,5v10h14V5H5z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -286,25 +286,25 @@ This example shows a full email-style navigation with nested items:
     
     <syncfusion:NavigationItem Header="Starred">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M25.085007,5.9780004..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="All mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M12,32.999999..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Trash">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M17,12 L19,12..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Spam">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M33.671003,29.293001..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -327,3 +327,4 @@ This example shows a full email-style navigation with nested items:
 ## Sample Code
 
 View complete sample on GitHub: [Getting Started Sample](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Getting_Started)
+

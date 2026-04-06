@@ -98,7 +98,7 @@ Use this skill immediately when users need to:
 
 ### CI/CD License Validation
 📄 **Read:** [references/ci-license-validation.md](references/ci-license-validation.md)
-- LicenseKeyValidator utility setup and usage
+- CI/CD validation guidance (programmatic validation, unit-test validation, or internally-hosted artifacts). Do NOT download or execute unvetted external binaries in pipelines.
 - Azure Pipelines (YAML and Classic) integration
 - GitHub Actions integration
 - Jenkins pipeline integration
@@ -117,7 +117,11 @@ Use this skill immediately when users need to:
 
 ## Quick Start Example
 
-### WPF Application
+### ⚠️ SECURITY WARNING
+
+**DO NOT hardcode license keys in your code.** License keys are secrets and must be stored securely. See the **[SECURITY_ANALYSIS.md](references/SECURITY_ANALYSIS.md)** document for secure credential handling patterns.
+
+### WPF Application (Secure with Environment Variable)
 
 ```csharp
 // In App.xaml.cs
@@ -127,15 +131,29 @@ public partial class App : Application
 {
     public App()
     {
+        // SECURE: Read from environment variable
+        string licenseKey = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY")
+            ?? throw new InvalidOperationException(
+                "SYNCFUSION_LICENSE_KEY environment variable not set");
+        
         // Register Syncfusion license key BEFORE initializing any components
-        SyncfusionLicenseProvider.RegisterLicense("YOUR_LICENSE_KEY_HERE");
+        SyncfusionLicenseProvider.RegisterLicense(licenseKey);
         
         InitializeComponent();
     }
 }
 ```
 
-### Blazor Server
+**Set environment variable before running:**
+```bash
+# Windows Command Prompt
+setx SYNCFUSION_LICENSE_KEY "your_actual_license_key"
+
+# Windows PowerShell
+$env:SYNCFUSION_LICENSE_KEY = "your_actual_license_key"
+```
+
+### Blazor Server (Secure with Configuration)
 
 ```csharp
 // In Program.cs
@@ -143,21 +161,51 @@ using Syncfusion.Licensing;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// SECURE: Read from configuration (loaded from environment variables or appsettings.json)
+var licenseKey = builder.Configuration["Syncfusion:LicenseKey"]
+    ?? throw new InvalidOperationException(
+        "Syncfusion:LicenseKey not configured. " +
+        "Set SYNCFUSION_LICENSE_KEY environment variable or add to appsettings.json");
+
 // Register license key at application startup
-SyncfusionLicenseProvider.RegisterLicense("YOUR_LICENSE_KEY_HERE");
+SyncfusionLicenseProvider.RegisterLicense(licenseKey);
 
 // ... rest of your configuration
 ```
 
-### React/Angular/Vue
+**Environment Setup:**
+```bash
+# Set environment variable
+set SYNCFUSION_LICENSE_KEY=your_license_key
+
+# Or use user secrets in development
+dotnet user-secrets set "Syncfusion:LicenseKey" "your_license_key"
+```
+
+### React/Angular/Vue (Secure with Environment Variables)
 
 ```javascript
 // In your main entry point (e.g., index.js, main.ts)
 import { registerLicense } from '@syncfusion/ej2-base';
 
+// SECURE: Read from environment variable (via process.env or import.meta.env)
+const licenseKey = process.env.REACT_APP_SYNCFUSION_LICENSE_KEY;
+
+if (!licenseKey) {
+    console.error('REACT_APP_SYNCFUSION_LICENSE_KEY environment variable not set');
+    throw new Error('License key not configured');
+}
+
 // Register license key before rendering components
-registerLicense('YOUR_LICENSE_KEY_HERE');
+registerLicense(licenseKey);
 ```
+
+**Environment Setup (.env file):**
+```
+REACT_APP_SYNCFUSION_LICENSE_KEY=your_actual_license_key
+```
+
+**Important:** Add `.env` and `.env.local` to `.gitignore` to prevent accidental key commits.
 
 ## Common Licensing Scenarios
 
@@ -226,11 +274,15 @@ registerLicense('YOUR_LICENSE_KEY_HERE');
 
 1. **Register early**: Call `RegisterLicense()` before initializing any Syncfusion components
 2. **One registration per app**: Only need to register once at startup
-3. **Use string literal**: Place license key between double quotes in code
+3. **Use secure storage**: ✅ Environment variables, ✅ Configuration files, ✅ Secrets managers (Azure Key Vault, AWS Secrets Manager) | ❌ NOT hardcoded string literals
 4. **Version matching**: Ensure all Syncfusion packages use the same version
-5. **Environment variables**: Consider storing keys in environment variables or secure configuration
-6. **Don't commit keys**: Avoid committing license keys to public repositories
-7. **CI/CD validation**: Set up automated validation in build pipelines
+5. **Never hardcode keys**: Store keys in environment variables or secure configuration systems
+6. **Use .gitignore**: Exclude configuration files containing secrets from version control
+7. **CI/CD validation**: Use programmatic validation methods instead of external tool downloads
+8. **Rotate keys regularly**: Update license keys periodically and revoke old keys
+9. **Audit access**: Monitor and log all license key access and usage
+
+⚠️ **SECURITY ALERT:** See [SECURITY_ANALYSIS.md](SECURITY_ANALYSIS.md) for detailed guidance on secure credential handling and CI/CD validation patterns.
 
 ## Error Prevention Checklist
 

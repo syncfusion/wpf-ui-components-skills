@@ -63,29 +63,7 @@ SfSkinManager.SetVisualStyle(colorPicker, VisualStyles.Office2016White);
 
 ## Theme Examples
 
-### Light Theme (Office 2016 White)
-```xaml
-<Window shared:SfSkinManager.VisualStyle="Office2016White">
-    <!-- ColorPicker will use light colors -->
-    <syncfusion:ColorPicker/>
-</Window>
-```
-
-### Dark Theme (Visual Studio 2015 Dark)
-```xaml
-<Window shared:SfSkinManager.VisualStyle="VisualStudio2015Dark">
-    <!-- ColorPicker will use dark colors -->
-    <syncfusion:ColorPicker/>
-</Window>
-```
-
-### Material Design Theme
-```xaml
-<Window shared:SfSkinManager.VisualStyle="MaterialLight">
-    <!-- ColorPicker will use Material Design colors -->
-    <syncfusion:ColorPicker/>
-</Window>
-```
+Set the `SfSkinManager.VisualStyle` attribute on the Window to automatically apply the theme to all child controls, including ColorPicker. Light themes use light colors, dark themes use dark colors, and Material themes use Material Design styling.
 
 ## Creating Custom Themes with ThemeStudio
 
@@ -137,140 +115,21 @@ For comprehensive theming guides, refer to:
 
 ## Programmatic Theme Selection
 
-### Switching Themes at Runtime
-
-```csharp
-public class ThemeSwitcher
-{
-    private ColorPicker colorPicker;
-
-    public void ApplyTheme(string themeName)
-    {
-        VisualStyles selectedStyle = GetThemeStyle(themeName);
-        SfSkinManager.SetVisualStyle(colorPicker, selectedStyle);
-    }
-
-    private VisualStyles GetThemeStyle(string themeName)
-    {
-        return themeName switch
-        {
-            "Light" => VisualStyles.Office2016White,
-            "Dark" => VisualStyles.VisualStudio2015Dark,
-            "Material" => VisualStyles.MaterialLight,
-            "Office" => VisualStyles.Office2016Colorful,
-            _ => VisualStyles.Office2016Colorful
-        };
-    }
-}
-```
-
-### Theme Selection UI Pattern
-
-```csharp
-// XAML: ComboBox to select theme
-<ComboBox SelectionChanged="ThemeComboBox_SelectionChanged">
-    <ComboBoxItem Content="Office 2016 Colorful"/>
-    <ComboBoxItem Content="Office 2016 White"/>
-    <ComboBoxItem Content="Visual Studio 2015 Dark"/>
-    <ComboBoxItem Content="Material Light"/>
-</ComboBox>
-
-// C# Code-behind
-private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-{
-    string selectedTheme = ((ComboBoxItem)e.AddedItems[0]).Content.ToString();
-    
-    VisualStyles style = selectedTheme switch
-    {
-        "Office 2016 Colorful" => VisualStyles.Office2016Colorful,
-        "Office 2016 White" => VisualStyles.Office2016White,
-        "Visual Studio 2015 Dark" => VisualStyles.VisualStudio2015Dark,
-        "Material Light" => VisualStyles.MaterialLight,
-        _ => VisualStyles.Office2016Colorful
-    };
-    
-    SfSkinManager.SetVisualStyle(colorPicker, style);
-}
-```
+Switch themes at runtime using `SfSkinManager.SetVisualStyle()` and a theme selector (ComboBox or buttons). Map theme names to `VisualStyles` enum values to apply the selected theme. All child controls including ColorPicker automatically inherit the applied theme.
 
 ## Color Appearance Customization
 
-### Individual Color Property Customization
-
-While SfSkinManager applies themes, you can also customize specific appearance properties:
-
-```csharp
-// Customize ColorPicker appearance
-ColorPicker colorPicker = new ColorPicker();
-
-// Set initial color (affects visual appearance)
-colorPicker.Color = Colors.Blue;
-
-// Set initial brush
-colorPicker.Brush = new LinearGradientBrush(Colors.Blue, Colors.Cyan, 
-                                            new Point(0, 0), new Point(1, 0));
-
-// Control visibility of UI elements (affects appearance)
-colorPicker.IsColorPaletteVisible = true;
-colorPicker.IsAlphaVisible = true;
-colorPicker.EnableSolidToGradientSwitch = true;
-```
-
-### Gradient Brush Display for Theme Consistency
-
-```csharp
-// Extended display mode shows more detail (can use more theme colors)
-colorPicker.GradientBrushDisplayMode = 
-    Syncfusion.Windows.Tools.GradientBrushDisplayMode.Extended;
-```
+While themes apply global styling, you can customize specific properties: `Color` (initial selected color), `Brush` (initial gradient), `IsColorPaletteVisible`, `IsAlphaVisible`, `EnableSolidToGradientSwitch` (UI element visibility), and `GradientBrushDisplayMode` (Default or Extended for detail level). These properties affect visual appearance while respecting the applied theme.
 
 ## Theme Integration Best Practices
 
-### 1. Apply Theme Globally
-```xaml
-<!-- In App.xaml root Window -->
-<Application.Resources>
-    <ResourceDictionary>
-        <!-- Set default theme -->
-        <shared:SfSkinManager.VisualStyle>Office2016Colorful</shared:SfSkinManager.VisualStyle>
-    </ResourceDictionary>
-</Application.Resources>
-```
+**Apply Theme Globally** - Set the default theme in App.xaml or apply via `SfSkinManager.SetVisualStyle(window, theme)` to ensure all controls use consistent styling.
 
-### 2. Maintain Theme Consistency
-Ensure all Syncfusion controls in your application use the same theme:
-```csharp
-// Apply to multiple controls
-SfSkinManager.SetVisualStyle(window, VisualStyles.MaterialDark);
-// All child controls automatically inherit the theme
-```
+**Maintain Theme Consistency** - Apply the same theme to the Window or parent container so all child Syncfusion controls automatically inherit it.
 
-### 3. Test Theme Compatibility
-```csharp
-// Test ColorPicker with different themes
-var themes = new[]
-{
-    VisualStyles.Office2016Colorful,
-    VisualStyles.Office2016White,
-    VisualStyles.VisualStudio2015Dark,
-    VisualStyles.MaterialLight
-};
+**Test Theme Compatibility** - Verify ColorPicker appearance with different themes (Light, Dark, Material).
 
-foreach (var theme in themes)
-{
-    SfSkinManager.SetVisualStyle(colorPicker, theme);
-    // Verify appearance is correct
-}
-```
-
-### 4. High Contrast Support
-```csharp
-// For accessibility, consider high-contrast themes
-if (System.Windows.SystemParameters.HighContrast)
-{
-    SfSkinManager.SetVisualStyle(colorPicker, VisualStyles.Office2016Black);
-}
-```
+**High Contrast Support** - Check `System.Windows.SystemParameters.HighContrast` and apply a high-contrast theme (Office2016Black) for accessibility.
 
 ## Theme vs CustomColors
 

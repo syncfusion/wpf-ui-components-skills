@@ -97,169 +97,13 @@ Customize visual appearance and behavior:
 
 **Use this reference when:** Customizing splitter appearance, creating custom gripper designs, implementing preview styles, or matching application themes.
 
-## Quick Start Example
+## Quick Start
 
-### Basic Horizontal Splitter (Resizes Rows)
-
-```xml
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        
-        <!-- Top Panel -->
-        <Border Grid.Row="0" Background="LightBlue">
-            <TextBlock Text="Top Panel" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"/>
-        </Border>
-        
-        <!-- Grid Splitter -->
-        <syncfusion:SfGridSplitter Grid.Row="1"
-                                   HorizontalAlignment="Stretch"
-                                   Height="5"
-                                   Background="DarkGray"
-                                   ResizeBehavior="PreviousAndNext"/>
-        
-        <!-- Bottom Panel -->
-        <Border Grid.Row="2" Background="LightGreen">
-            <TextBlock Text="Bottom Panel" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"/>
-        </Border>
-    </Grid>
-</Window>
-```
-
-### Basic Vertical Splitter (Resizes Columns)
-
-```xml
-<Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="Auto" />
-        <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-    
-    <!-- Left Panel -->
-    <Border Grid.Column="0" Background="LightCoral">
-        <TextBlock Text="Left Panel" 
-                   VerticalAlignment="Center" 
-                   HorizontalAlignment="Center"/>
-    </Border>
-    
-    <!-- Grid Splitter -->
-    <syncfusion:SfGridSplitter Grid.Column="1"
-                               VerticalAlignment="Stretch"
-                               Width="5"
-                               Background="DarkGray"
-                               ResizeBehavior="PreviousAndNext"/>
-    
-    <!-- Right Panel -->
-    <Border Grid.Column="2" Background="LightYellow">
-        <TextBlock Text="Right Panel" 
-                   VerticalAlignment="Center" 
-                   HorizontalAlignment="Center"/>
-    </Border>
-</Grid>
-```
+For horizontal splitters: Create Grid with RowDefinitions (*, Auto, *), place SfGridSplitter in middle row with `Height="5"` and `ResizeBehavior="PreviousAndNext"`. For vertical splitters: Create ColumnDefinitions (*, Auto, *) and set Width instead. See [Getting Started](references/getting-started.md) for complete examples.
 
 ## Common Patterns
 
-### Pattern 1: Splitter with Collapse Buttons
-
-Enable interactive panel collapse/expand:
-
-```xml
-<syncfusion:SfGridSplitter Grid.Row="1"
-                           HorizontalAlignment="Stretch"
-                           Height="8"
-                           EnableCollapseButton="True"
-                           ResizeBehavior="PreviousAndNext"/>
-```
-
-**When to use:** Users need to temporarily hide panels to maximize workspace.
-
-### Pattern 2: Preview Mode for Deferred Resizing
-
-Show preview before applying resize:
-
-```xml
-<syncfusion:SfGridSplitter Grid.Row="1"
-                           HorizontalAlignment="Stretch"
-                           ShowsPreview="True"
-                           ResizeBehavior="PreviousAndNext"/>
-```
-
-**When to use:** Heavy layouts where real-time resizing may cause performance issues, or users need visual feedback before committing to resize.
-
-### Pattern 3: Programmatic Resizing
-
-Control splitter position via code:
-
-```csharp
-// Move splitter by 50 pixels
-gridSplitter.MoveSplitter(50);
-
-// Move splitter by -30 pixels (opposite direction)
-gridSplitter.MoveSplitter(-30);
-```
-
-**When to use:** Implementing preset layouts, restoring saved positions, or animating layout changes.
-
-### Pattern 4: Multi-Splitter Layout
-
-Create complex resizable layouts:
-
-```xml
-<Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition />
-        <RowDefinition Height="Auto" />
-        <RowDefinition />
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition />
-        <ColumnDefinition Width="Auto" />
-        <ColumnDefinition />
-    </Grid.ColumnDefinitions>
-    
-    <!-- Panels in different grid positions -->
-    <Border Grid.Row="0" Grid.Column="0" Background="LightBlue"/>
-    <Border Grid.Row="2" Grid.Column="0" Background="LightGreen"/>
-    <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Background="LightYellow"/>
-    
-    <!-- Horizontal Splitter -->
-    <syncfusion:SfGridSplitter Grid.Row="1" Grid.Column="0"
-                               HorizontalAlignment="Stretch"
-                               ResizeBehavior="PreviousAndNext"/>
-    
-    <!-- Vertical Splitter -->
-    <syncfusion:SfGridSplitter Grid.RowSpan="3" Grid.Column="1"
-                               VerticalAlignment="Stretch"
-                               ResizeBehavior="PreviousAndNext"/>
-</Grid>
-```
-
-**When to use:** Complex layouts with multiple independent resizable regions.
-
-### Pattern 5: Constrained Resizing with Increments
-
-Control resize granularity:
-
-```xml
-<syncfusion:SfGridSplitter DragIncrement="10"
-                           KeyboardIncrement="20"
-                           HorizontalAlignment="Stretch"
-                           ResizeBehavior="PreviousAndNext"/>
-```
-
-**When to use:** Layouts that need to snap to specific sizes (e.g., aligning with grid cells, maintaining aspect ratios).
+Key patterns include collapse buttons (EnableCollapseButton), preview mode (ShowsPreview), programmatic resizing (MoveSplitter), multi-splitter layouts, and constrained resizing with DragIncrement/KeyboardIncrement. See the reference files for complete implementation examples and when-to-use guidance.
 
 ## Key Properties
 
@@ -278,60 +122,11 @@ Control resize granularity:
 
 ## Common Use Cases
 
-### Use Case 1: Code Editor with Collapsible Side Panel
-**Scenario:** IDE-style layout with file tree, editor, and properties panel.
-
-**Solution:** Vertical splitters with collapse buttons for side panels, allowing users to maximize editor space.
-
-**Key Features:** EnableCollapseButton, custom button templates, programmatic restore.
-
----
-
-### Use Case 2: Data Explorer with Adjustable Views
-**Scenario:** Database tool with query editor and result grid requiring adjustable space.
-
-**Solution:** Horizontal splitter between query and results with preview mode.
-
-**Key Features:** ShowsPreview, ResizeBehavior, saved position restoration.
-
----
-
-### Use Case 3: Master-Detail View
-**Scenario:** List of items with detail panel that needs variable sizing.
-
-**Solution:** Vertical or horizontal splitter based on layout orientation.
-
-**Key Features:** Basic resize, DragIncrement for smooth resizing, saved preferences.
-
----
-
-### Use Case 4: Multi-Document Interface
-**Scenario:** Application with multiple resizable document views.
-
-**Solution:** Grid with multiple splitters creating adjustable panes.
-
-**Key Features:** Multiple splitters, merged cell support, complex layouts.
-
----
-
-### Use Case 5: Dashboard with Resizable Widgets
-**Scenario:** Analytics dashboard where users adjust widget sizes.
-
-**Solution:** Grid layout with splitters between widget containers.
-
-**Key Features:** DragIncrement for alignment, programmatic layouts, preset configurations.
-
-## Implementation Checklist
-
-Before implementing SfGridSplitter, ensure:
-
-- [ ] **Grid Structure:** Parent Grid with appropriate row/column definitions
-- [ ] **Splitter Placement:** Splitter in separate row (Height="Auto") or column (Width="Auto")
-- [ ] **Alignment:** HorizontalAlignment="Stretch" for rows, VerticalAlignment="Stretch" for columns
-- [ ] **Size:** Explicit Height for horizontal, Width for vertical splitters
-- [ ] **ResizeBehavior:** Set based on which panels should resize
-- [ ] **Assemblies:** Syncfusion.SfInput.WPF and Syncfusion.SfShared.WPF referenced
-- [ ] **Namespace:** xmlns:syncfusion="http://schemas.syncfusion.com/wpf" declared
+- **Code Editor:** IDE-style layouts with collapsible side panels using EnableCollapseButton and custom button templates.
+- **Data Explorer:** Database tools with adjustable query/result views using ShowsPreview and ResizeBehavior.
+- **Master-Detail:** List-detail interfaces with variable sizing using basic resize and DragIncrement.
+- **Multi-Document Interface:** Multiple resizable document panes using multiple splitters and merged cell support.
+- **Dashboard Widgets:** Analytics dashboards with adjustable widget containers using DragIncrement and preset configurations.
 
 ## Troubleshooting Quick Reference
 

@@ -2,16 +2,7 @@
 
 This guide covers creating custom mask patterns, input validation, and restriction techniques for SfMaskedEdit.
 
-## Table of Contents
-- [Mask Types](#mask-types)
-- [Mask Elements Reference](#mask-elements-reference)
-- [Allow Specific Values](#allow-specific-values)
-- [Restrict Specific Values](#restrict-specific-values)
-- [Basic Mask Examples](#basic-mask-examples)
-- [Input Validation Modes](#input-validation-modes)
-- [Validation Results](#validation-results)
-- [Error Indication](#error-indication)
-- [Prompt Character Configuration](#prompt-character-configuration)
+<!-- Table of contents removed for cross-environment compatibility; see section headings below -->
 
 ## Mask Types
 
@@ -260,29 +251,6 @@ sfMaskedEdit.Mask = @"(?!000)(?!666)\d{3}";
 ```
 **Accepts:** +1 455-345-6789  
 **Format:** +1 ###-###-####
-
-### Date and Time Patterns
-
-#### Time (24-hour format)
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Mask="(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
-    MaskType="RegEx"/>
-```
-**Accepts:** 00:00, 13:45, 23:59  
-**Format:** HH:MM (00-23:00-59)
-
-#### Date (MM/DD/YYYY)
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Mask="(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/\d{4}"
-    MaskType="RegEx"/>
-```
-**Accepts:** 01/15/2024, 12/31/2023  
-**Format:** MM/DD/YYYY with validation
-
 ### Product and ID Patterns
 
 #### Product Key (XXXXX-XXXXX-XXXXX)
@@ -321,16 +289,6 @@ sfMaskedEdit.Mask = @"(?!000)(?!666)\d{3}";
 **Accepts:** 12345678, 123456789012  
 **Length:** 8 to 12 digits
 
-#### Bank SWIFT Code
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Mask="[A-Z]{6}[0-9]{2}[A-Z]{3}"
-    MaskType="RegEx"/>
-```
-**Accepts:** ABCDEF12GHI  
-**Format:** 6 letters + 2 digits + 3 letters
-
 ### Technical Patterns
 
 #### Hexadecimal Number
@@ -342,16 +300,6 @@ sfMaskedEdit.Mask = @"(?!000)(?!666)\d{3}";
 ```
 **Accepts:** \x0A, \xFF, \x1  
 **Format:** \x followed by 1-2 hex digits
-
-#### Octal Number
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Mask="\\0[0-7]{1,3}"
-    MaskType="RegEx"/>
-```
-**Accepts:** \00, \077, \177  
-**Format:** \0 followed by 1-3 octal digits
 
 #### Hexadecimal Color Code
 

@@ -326,7 +326,9 @@ namespace RangeSliderEvents
 private void SfRangeSlider_RangeChanged(object sender, RangeChangedEventArgs e)
 {
     double minRangeSpan = 10;
-    double currentSpan = e.NewEndValue - e.NewStartValue;
+    var newValue = e.NewEndValue;
+    var oldValue =   e.NewStartValue;
+    double currentSpan =newValue - oldValue;
 
     if (currentSpan < minRangeSpan)
     {
@@ -410,7 +412,7 @@ namespace RangeSliderEvents
             InitializeComponent();
         }
 
-        private void SfRangeSlider_RangeStartChanged(object sender, RangeStartChangedEventArgs e)
+        private void SfRangeSlider_RangeStartChanged(object sender, RangeStartChagedEventArgs e)
         {
             var newStartValue = e.NewStartValue;
             var oldStartValue = e.OldStartValue;
@@ -473,7 +475,7 @@ namespace RangeSliderEvents
             this.Content = parentGrid;
         }
 
-        private void SfRangeSlider_RangeStartChanged(object sender, RangeStartChangedEventArgs e)
+        private void SfRangeSlider_RangeStartChanged(object sender, RangeStartChagedEventArgs e)
         {
             var newStartValue = e.NewStartValue;
             var oldStartValue = e.OldStartValue;
@@ -499,7 +501,7 @@ namespace RangeSliderEvents
 **Advanced Example - Start Value Constraints:**
 
 ```csharp
-private void SfRangeSlider_RangeStartChanged(object sender, RangeStartChangedEventArgs e)
+private void SfRangeSlider_RangeStartChanged(object sender, RangeStartChagedEventArgs e)
 {
     var slider = sender as SfRangeSlider;
     if (slider != null)
@@ -527,7 +529,7 @@ The `RangeEndChanged` event is triggered specifically when the `RangeEnd` proper
 
 ### RangeEndChanged Event Arguments
 
-The event handler receives a `RangeEndChangedEventArgs` parameter containing:
+The event handler receives a `RangeEndChagedEventArgs` parameter containing:
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -581,7 +583,7 @@ namespace RangeSliderEvents
             InitializeComponent();
         }
 
-        private void SfRangeSlider_RangeEndChanged(object sender, RangeEndChangedEventArgs e)
+        private void SfRangeSlider_RangeEndChanged(object sender, RangeEndChagedEventArgs e)
         {
             var newEndValue = e.NewEndValue;
             var oldEndValue = e.OldEndValue;
@@ -644,7 +646,7 @@ namespace RangeSliderEvents
             this.Content = parentGrid;
         }
 
-        private void SfRangeSlider_RangeEndChanged(object sender, RangeEndChangedEventArgs e)
+        private void SfRangeSlider_RangeEndChanged(object sender, RangeEndChagedEventArgs e)
         {
             var newEndValue = e.NewEndValue;
             var oldEndValue = e.OldEndValue;
@@ -670,7 +672,7 @@ namespace RangeSliderEvents
 **Advanced Example - End Value Constraints:**
 
 ```csharp
-private void SfRangeSlider_RangeEndChanged(object sender, RangeEndChangedEventArgs e)
+private void SfRangeSlider_RangeEndChanged(object sender, RangeEndChagedEventArgs e)
 {
     var slider = sender as SfRangeSlider;
     if (slider != null)
@@ -717,13 +719,13 @@ public partial class MainWindow : Window
         UpdateRangeDisplay(e.NewStartValue, e.NewEndValue);
     }
 
-    private void OnRangeStartChanged(object sender, RangeStartChangedEventArgs e)
+    private void OnRangeStartChanged(object sender, RangeStartChagedEventArgs e)
     {
         // Handle start-specific logic
         ValidateStartValue(e.NewStartValue);
     }
 
-    private void OnRangeEndChanged(object sender, RangeEndChangedEventArgs e)
+    private void OnRangeEndChanged(object sender, RangeEndChagedEventArgs e)
     {
         // Handle end-specific logic
         ValidateEndValue(e.NewEndValue);
@@ -970,7 +972,7 @@ private void OnRangeChanged(object sender, RangeChangedEventArgs e)
 Provide clear feedback for user actions:
 
 ```csharp
-private void OnRangeStartChanged(object sender, RangeStartChangedEventArgs e)
+private void OnRangeStartChanged(object sender, RangeStartChagedEventArgs e)
 {
     // Show tooltip with value
     startThumbTooltip.Content = $"{e.NewStartValue:F1}";

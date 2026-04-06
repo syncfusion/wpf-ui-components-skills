@@ -44,34 +44,11 @@ When user clicks decrement button:
 
 ### Step Examples
 
-**Percentage Stepper (1% increments):**
-```csharp
-updown.MinValue = 0;
-updown.MaxValue = 100;
-updown.Step = 1;
-updown.NumberDecimalDigits = 0;
-```
-
-**Price Stepper (cent increments):**
-```csharp
-updown.Step = 0.01;
-updown.NumberDecimalDigits = 2;
-```
-
-**Quantity in Dozens:**
-```csharp
-updown.Step = 12;
-updown.NumberDecimalDigits = 0;
-updown.MinValue = 12;
-```
-
-**Temperature (half-degree steps):**
-```csharp
-updown.Step = 0.5;
-updown.MinValue = -50;
-updown.MaxValue = 50;
-updown.NumberDecimalDigits = 1;
-```
+Configure `Step`, `NumberDecimalDigits`, and range appropriately for the use case:
+- **Percentage:** `Step=1`, `MinValue=0`, `MaxValue=100`, `NumberDecimalDigits=0`
+- **Price (cents):** `Step=0.01`, `NumberDecimalDigits=2`
+- **Quantity (dozens):** `Step=12`, `MinValue=12`, `NumberDecimalDigits=0`
+- **Temperature:** `Step=0.5`, `MinValue=-50`, `MaxValue=50`, `NumberDecimalDigits=1`
 
 ## Keyboard and Mouse Interactions
 
@@ -89,89 +66,13 @@ updown.NumberDecimalDigits = 1;
 - **Ctrl+Down**: Decrement to MinValue (or by large step)
 - **Type directly**: If AllowEdit = True
 
-### Enabling/Disabling Edit
+### Enabling/Disabling Edit & Mouse Wheel
 
-**Allow direct keyboard input:**
-```csharp
-updown.AllowEdit = true;  // Default
-// User can type: "42"
-```
-
-**Keyboard-only via spin buttons:**
-```csharp
-updown.AllowEdit = false;
-// User must use Up/Down arrows or mouse buttons
-```
-
-### Mouse Wheel Support
-
-The mouse wheel works when UpDown has keyboard focus:
-
-```csharp
-// Works automatically with UpDown
-updown.Focus();  // Give focus to enable mouse wheel
-
-// Mouse wheel scroll increments/decrements by Step
-```
-
-**Behavior:**
-- Mouse wheel forward: Add Step
-- Mouse wheel backward: Subtract Step
-- Value respects MinValue/MaxValue constraints
-
-### Example: Keyboard-Optimized UpDown
-
-```csharp
-public void SetupKeyboardOptimized()
-{
-    updown.Step = 1;
-    updown.AllowEdit = false;  // Keyboard buttons only
-    updown.MinValue = 0;
-    updown.MaxValue = 100;
-    
-    // User can now:
-    // - Click spin buttons
-    // - Press Up/Down arrows
-    // - Scroll mouse wheel
-    // Cannot directly type
-}
-```
+Set `AllowEdit="True"` (default) to allow direct keyboard typing, or `AllowEdit="False"` to restrict to spin buttons and arrow keys only. Mouse wheel works automatically when control has focus, incrementing/decrementing by Step value and respecting MinValue/MaxValue constraints. Arrow keys: Up/Down add/subtract Step; Ctrl+Up/Down jump to Max/Min.
 
 ## Animation Support
 
-### Animation in Value Changes
-
-The UpDown control can display smooth animations when values change via spin buttons.
-
-### Enabling Animation
-
-Animation is typically controlled through styling or by the theme applied:
-
-```csharp
-// Animation is enabled by default with most themes
-// Apply a theme that includes animation
-SfSkinManager.SetVisualStyle(updown, VisualStyles.MaterialLight);
-```
-
-### Animation Characteristics
-
-- **Duration**: Typically 300-500ms (theme-dependent)
-- **Easing**: Smooth easing function (theme-dependent)
-- **Trigger**: Occurs on spin button click
-- **Effect**: Value transitions smoothly rather than jumping
-
-### Disabling Animation
-
-To disable animations, apply a theme without animation or use custom styling:
-
-```csharp
-// Custom style without animations
-var noAnimStyle = new Style();
-noAnimStyle.Setters.Add(new Setter(FrameworkElement.HeightProperty, 25.0));
-
-// Or apply minimal theme
-SfSkinManager.SetVisualStyle(updown, VisualStyles.Office2019Colorful);
-```
+Smooth animations on value changes are typically controlled through styling or applied theme. Animation is enabled by default with most themes (Material, Fluent). Apply themes via `SfSkinManager.SetVisualStyle(updown, VisualStyles.MaterialLight)` to enable/customize animations. Animation characteristics (duration 300-500ms, easing function) are theme-dependent. To disable animations, apply a minimal theme like `Office2019Colorful` or use custom styling without animation storyboards.
 
 ## Culture-Specific Behaviors
 
@@ -239,218 +140,19 @@ ApplyCulture("de-DE");    // German - LTR
 ApplyCulture("ja-JP");    // Japanese - LTR
 ```
 
-## Complex Use Cases
+## Common Configuration Scenarios
 
-### Use Case 1: Financial Calculator Input
+**Financial Input:** Set `Step=0.01`, `NumberDecimalDigits=2`, `GroupSeperatorEnabled=true`, culture, right-align text. Apply negative styling with `EnableNegativeColors`.
 
-```csharp
-public void ConfigureFinancialInput()
-{
-    updown.MinValue = 0;
-    updown.MaxValue = 999999999;
-    updown.Step = 0.01;
-    updown.NumberDecimalDigits = 2;
-    updown.GroupSeperatorEnabled = true;
-    updown.Culture = new CultureInfo("en-US");
-    updown.TextAlignment = TextAlignment.Right;
-    
-    // Styling
-    updown.Background = Brushes.LightGray;
-    updown.Foreground = Brushes.Black;
-    updown.EnableNegativeColors = true;
-    updown.NegativeForeground = Brushes.Red;
-}
+**Age Validator:** Set `MinValue=0`, `MaxValue=150`, `Step=1`, `UseNullOption=true` with watermark. Validate in `ValueChanging` event to enforce business rules (e.g., 18+ check).
 
-// Result: Professional financial input field
-// Display: 1,234,567.89 (positive, formatted)
-// Display: -1,234,567.89 (negative, red text)
-```
+**Temperature Monitor:** Set `MinValue=-273` (absolute zero), `MaxValue=1000`, `Step=0.1`, `NumberDecimalDigits=1`. Apply color coding with `EnableNegativeColors` and `ApplyZeroColor`. Handle `ValueChanged` events to show warnings.
 
-### Use Case 2: Age Validator with Null Support
+**Percentage Input:** Set `MinValue=0`, `MaxValue=100`, `Step=1`, `NumberDecimalDigits=0`. Apply culture for localization and RTL support.
 
-```csharp
-public void ConfigureAgeInput()
-{
-    updown.MinValue = 0;
-    updown.MaxValue = 150;
-    updown.NumberDecimalDigits = 0;
-    updown.Step = 1;
-    updown.AllowEdit = true;
-    
-    // Null handling
-    updown.UseNullOption = true;
-    updown.NullValueText = "Not specified";
-    updown.Value = null;
-    
-    // Validation
-    updown.MinValidation = MinValidation.OnKeyPress;
-    updown.MaxValidation = MaxValidation.OnKeyPress;
-    updown.ValueChanging += (s, e) =>
-    {
-        if (e.NewValue != null && (double)e.NewValue < 18)
-        {
-            MessageBox.Show("Must be 18 or older");
-            e.Cancel = true;
-        }
-    };
-}
+**Time Duration:** Combine multiple UpDown controls (hours, minutes) with appropriate ranges and steps. Calculate `TimeSpan` from combined values via event handlers.
 
-// Result: Optional age field, 18+, watermark text
-```
-
-### Use Case 3: Temperature Monitor (Negative Values)
-
-```csharp
-public void ConfigureTemperatureMonitor()
-{
-    updown.MinValue = -273;  // Absolute zero
-    updown.MaxValue = 1000;
-    updown.Step = 0.1;
-    updown.NumberDecimalDigits = 1;
-    updown.AllowEdit = false;  // Read-only, spin-button only
-    
-    // Color coding
-    updown.Background = Brushes.LightBlue;
-    updown.Foreground = Brushes.DarkBlue;
-    updown.EnableNegativeColors = true;
-    updown.NegativeBackground = Brushes.LightCyan;
-    updown.NegativeForeground = Brushes.DarkCyan;
-    updown.ApplyZeroColor = true;
-    updown.ZeroColor = Brushes.Green;  // Freezing point
-    
-    // Event handlers
-    updown.ValueChanged += (d, e) =>
-    {
-        double temp = (double)e.NewValue;
-        if (temp > 100) warningLabel.Text = "Hot!";
-        else if (temp < 0) warningLabel.Text = "Frozen!";
-        else warningLabel.Text = "Normal";
-    };
-}
-
-// Result: Temperature display with visual feedback
-```
-
-### Use Case 4: Percentage with Localization
-
-```csharp
-public class LocalizedPercentageInput
-{
-    public void ConfigurePercentage(string culture)
-    {
-        updown.MinValue = 0;
-        updown.MaxValue = 100;
-        updown.Step = 1;
-        updown.NumberDecimalDigits = 0;
-        updown.Culture = new CultureInfo(culture);
-        updown.GroupSeperatorEnabled = true;
-        updown.TextAlignment = TextAlignment.Right;
-    }
-    
-    public void Demo()
-    {
-        var updown = new UpDown { Value = 75 };
-        
-        // English: 75
-        ConfigurePercentage("en-US");
-        
-        // German: 75 (format same for percentage)
-        ConfigurePercentage("de-DE");
-        
-        // Arabic: 75 (displayed RTL)
-        ConfigurePercentage("ar-SA");
-    }
-}
-
-// Result: 75% in any culture, properly formatted
-```
-
-### Use Case 5: Time Duration Input (Composite)
-
-```csharp
-public class TimeDurationInput
-{
-    public UpDown HoursUpDown { get; set; }
-    public UpDown MinutesUpDown { get; set; }
-    
-    public void ConfigureDurationInputs()
-    {
-        // Hours (0-23)
-        HoursUpDown.MinValue = 0;
-        HoursUpDown.MaxValue = 23;
-        HoursUpDown.Step = 1;
-        HoursUpDown.NumberDecimalDigits = 0;
-        
-        // Minutes (0-59)
-        MinutesUpDown.MinValue = 0;
-        MinutesUpDown.MaxValue = 59;
-        MinutesUpDown.Step = 15;  // 15-minute increments
-        MinutesUpDown.NumberDecimalDigits = 0;
-    }
-    
-    public TimeSpan GetDuration()
-    {
-        int hours = (int)(double)HoursUpDown.Value;
-        int minutes = (int)(double)MinutesUpDown.Value;
-        return new TimeSpan(hours, minutes, 0);
-    }
-    
-    public void SetDuration(TimeSpan duration)
-    {
-        HoursUpDown.Value = duration.Hours;
-        MinutesUpDown.Value = duration.Minutes;
-    }
-}
-
-// Usage:
-var input = new TimeDurationInput();
-input.ConfigureDurationInputs();
-input.SetDuration(new TimeSpan(2, 30, 0));  // 2 hours 30 minutes
-```
-
-### Use Case 6: Scoring System (Restricted Choices)
-
-```csharp
-public void ConfigureScoringSystem()
-{
-    updown.MinValue = 1;
-    updown.MaxValue = 5;
-    updown.Step = 1;
-    updown.NumberDecimalDigits = 0;
-    updown.AllowEdit = false;  // Buttons only
-    
-    // Color gradient: Red (1) to Green (5)
-    updown.ValueChanged += (d, e) =>
-    {
-        int score = (int)(double)e.NewValue;
-        switch (score)
-        {
-            case 1:
-                updown.Background = Brushes.Red;
-                updown.Foreground = Brushes.White;
-                break;
-            case 2:
-                updown.Background = Brushes.Orange;
-                updown.Foreground = Brushes.White;
-                break;
-            case 3:
-                updown.Background = Brushes.Yellow;
-                updown.Foreground = Brushes.Black;
-                break;
-            case 4:
-                updown.Background = Brushes.LightGreen;
-                updown.Foreground = Brushes.Black;
-                break;
-            case 5:
-                updown.Background = Brushes.Green;
-                updown.Foreground = Brushes.White;
-                break;
-        }
-    };
-}
-
-// Result: 1-5 star rating display with color feedback
-```
+**Scoring System:** Set `MinValue=1`, `MaxValue=5`, `AllowEdit=false` (buttons only). Apply dynamic styling via `ValueChanged` event to show color gradient (red to green) for ratings.
 
 ---
 

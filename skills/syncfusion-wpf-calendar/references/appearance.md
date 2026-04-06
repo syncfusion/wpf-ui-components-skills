@@ -414,27 +414,7 @@ private bool IsDarkModeEnabled()
 
 ### Pattern 4: Holiday Styling
 
-```csharp
-public void StyleHolidayDates()
-{
-    // Apply special styling to holidays
-    // Calendar object methods to identify holidays
-    
-    List<DateTime> holidays = new List<DateTime>
-    {
-        new DateTime(2024, 12, 25),  // Christmas
-        new DateTime(2024, 1, 1),    // New Year
-        new DateTime(2024, 7, 4)     // Independence Day
-    };
-    
-    foreach (DateTime holiday in holidays)
-    {
-        calendarEdit.BlackoutDates.Add(holiday);
-    }
-    
-    calendarEdit.MinMaxHidden = false;
-}
-```
+Use `BlackoutDates` and visual styling together to mark holidays. See [restrict-dates.md](restrict-dates.md) for blackout-date patterns and examples.
 
 ---
 

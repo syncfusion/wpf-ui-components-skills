@@ -2,6 +2,25 @@
 
 Maps control supports imagery layers that display map tiles from online providers like OpenStreetMap and Bing Maps. This provides real-world map backgrounds without needing shape files.
 
+## Security and Trust Model
+
+ImageryLayer renders raster image tiles (PNG/JPEG) only.
+No executable scripts, markup, or active content are processed.
+
+### Trusted Providers
+Only the following providers are recommended:
+- OpenStreetMap official tile servers
+- Microsoft Bing Maps
+- Azure Maps
+
+### Custom Tile Providers
+Custom tile URL templates SHOULD NOT be sourced from user input.
+Applications MUST restrict tile URLs to trusted, whitelisted domains.
+
+### Higher-Security Deployments
+For regulated environments, tile requests should be proxied
+through an application-controlled backend service.
+
 ## ImageryLayer Overview
 
 ImageryLayer displays raster map tiles from tile servers, offering:
@@ -131,7 +150,9 @@ Implement custom tile providers for specialized map sources.
 Some tile providers use URL templates:
 
 ```
-http://tile-server.com/{z}/{x}/{y}.png
+https://atlas.microsoft.com/map/tile?api-version=2024-04-01
+&tilesetId=microsoft.base.road
+&zoom={z}&x={x}&y={y}
 ```
 
 Where:
@@ -139,7 +160,40 @@ Where:
 - `{x}` - Tile X coordinate
 - `{y}` - Tile Y coordinate
 
-**Note:** Check provider's terms of service before using.
+### URL Validation Pattern
+
+```csharp
+private bool IsValidTileUrl(string url)
+{
+    // Only allow HTTPS
+    if (!url.StartsWith("https://"))
+        return false;
+    
+    // Must be a known trusted domain
+    var trustedDomains = new[] 
+    { 
+        "tiles.openstreetmap.org",
+        "your-trusted-provider.com"
+    };
+    
+    if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+        return false;
+    
+    return trustedDomains.Any(domain => uri.Host.EndsWith(domain, StringComparison.OrdinalIgnoreCase));
+}
+
+// Usage
+if (IsValidTileUrl(providerUrl))
+{
+    layer.UrlTemplate = providerUrl;
+}
+else
+{
+    throw new SecurityException("Invalid or untrusted tile provider URL");
+}
+```
+
+**Note:** Always verify provider's terms of service and compliance before using.
 
 ## Zoom Levels and Tile Loading
 
@@ -273,7 +327,8 @@ private void UseBingAerial_Checked(object sender, RoutedEventArgs e)
 
 ## Adding Azure Maps
 
-Azure Maps uses a URL template to load the tiles.
+Azure Maps uses a URL template to load the tiles. **Important:** Protect your subscription key using secure configuration management.
+
 ```xml
 <syncfusion:SfMap>
     <syncfusion:SfMap.Layers>
@@ -285,6 +340,8 @@ Azure Maps uses a URL template to load the tiles.
     </syncfusion:SfMap.Layers>
 </syncfusion:SfMap>
 ```
+
+**🔒 Security:** Store `subscription-key` in environment variables or secure configuration, never hardcode in source code.
 ```csharp
 SfMap map = new SfMap();
 ImageryLayer layer = new ImageryLayer();
@@ -326,6 +383,7 @@ this.Content = map
 ```
 ## Best Practices
 
+### Functional Best Practices
 1. **Internet connection** - Imagery layers require active internet connection
 2. **Caching** - Tiles are cached automatically; first load may be slow
 3. **Zoom limits** - Respect provider's zoom level limits
@@ -333,6 +391,19 @@ this.Content = map
 5. **Overlay transparency** - Use alpha channel colors (#80RRGGBB) for overlays
 6. **Terms of service** - Review and comply with provider's usage terms
 7. **Fallback** - Consider fallback for offline scenarios
+
+### ⚠️ Security Best Practices
+1. **HTTPS Only** - Never use HTTP for tile URLs; always enforce HTTPS
+2. **URL Whitelist** - Maintain a hardcoded list of approved tile providers; validate all URLs before use
+3. **API Key Protection** - Store Bing Maps and Azure Maps keys in secure configuration (environment variables, secrets management)
+4. **Input Validation** - Never accept tile provider URLs from user input without strict validation
+5. **Certificate Pinning** - Consider implementing certificate pinning for critical tile providers
+6. **Content Inspection** - Log and monitor tile provider requests for anomalies
+7. **Trusted Providers Only** - Use only well-established providers:
+   - ✅ OpenStreetMap (OSM) - Community-maintained, open-source
+   - ✅ Bing Maps (Microsoft) - Enterprise-grade with API key
+   - ✅ Azure Maps (Microsoft) - Enterprise-grade with subscription key
+   - ⚠️ Custom providers - Only if from a trusted internal/known source
 
 ## Troubleshooting
 

@@ -3,178 +3,98 @@
 ## Overview
 This guide covers the essential steps to set up and create your first WPF TileViewControl in a Visual Studio project.
 
-## Assembly Installation
+## Installation
 
-### Required Assembly
-To use TileViewControl in your WPF application, you need the following assembly:
-- **Syncfusion.Shared.WPF**
+**Required assembly:** `Syncfusion.Shared.WPF`
 
-### NuGet Installation
-Install the package via NuGet Package Manager:
+**Install via NuGet:**
 ```
 Install-Package Syncfusion.Shared.WPF
 ```
 
-## Adding TileViewControl via Designer
+## Adding TileViewControl
 
-The easiest way to add TileViewControl is through the Visual Studio designer:
-
-1. Open your WPF window in the designer view
-2. Locate **TileViewControl** in the Visual Studio Toolbox under Syncfusion components
-3. Drag and drop it onto your designer surface
-4. The required assembly (Syncfusion.Shared.WPF) is automatically added to your project
-
-The designer also provides a **SmartTag** feature to configure basic properties directly in design mode.
-
-## Adding TileViewControl via XAML
-
-For manual XAML setup:
-
-1. Create a new WPF project in Visual Studio
-2. Add **Syncfusion.Shared.WPF** assembly reference
-3. Import the Syncfusion schema in your XAML window:
+**Via XAML (recommended):**
+1. Add assembly reference
+2. Import schema: `xmlns:syncfusion="http://schemas.syncfusion.com/wpf"`
+3. Add control to Grid:
 
 ```xaml
-<Window x:Class="TileViewSample.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="TileView Sample" Height="450" Width="800">
-    
-    <Grid Name="grid">
-        <syncfusion:TileViewControl Name="tileViewControl"
-                                    Height="400"
-                                    Width="600"/>
+<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
+    <Grid>
+        <syncfusion:TileViewControl Name="tileViewControl" Height="400" Width="600"/>
     </Grid>
 </Window>
 ```
 
-## Adding TileViewControl via C#
+**Via Designer:**
+- Drag TileViewControl from Toolbox to designer surface
+- Assembly and schema automatically added
 
-To programmatically create a TileViewControl:
-
-1. Create a new WPF application
-2. Add **Syncfusion.Shared.WPF** assembly reference
-3. Add using statement and create the control:
-
+**Via C# (programmatic):**
 ```csharp
 using Syncfusion.Windows.Shared;
 
-public partial class MainWindow : Window
-{
-    public MainWindow()
-    {
-        InitializeComponent();
-        
-        // Create TileViewControl
-        TileViewControl tileViewControl = new TileViewControl();
-        tileViewControl.Height = 400;
-        tileViewControl.Width = 600;
-        
-        // Add to your Grid or Container
-        grid.Children.Add(tileViewControl);
-    }
-}
+TileViewControl tileViewControl = new TileViewControl { Height = 400, Width = 600 };
+grid.Children.Add(tileViewControl);
 ```
 
 ## Basic Configuration
 
-After adding TileViewControl, configure basic properties:
+**Configure control properties:**
+- `Height`, `Width` - Control size
+- `Margin` - Spacing around control
+- `Background`, `Foreground` - Colors
 
+**Add tiles with headers and content:**
 ```xaml
-<syncfusion:TileViewControl Name="tileViewControl"
-                            Height="400"
-                            Width="600"
-                            Margin="10"
-                            Background="White">
-    
-    <!-- TileViewItems will go here -->
-    
-</syncfusion:TileViewControl>
-```
-
-### Common Initial Properties
-- `Height`, `Width` - Set control size
-- `Margin` - Add spacing around the control
-- `Background` - Set background color
-- `Foreground` - Set text color
-
-## Creating Your First Tile
-
-Add basic tiles to your TileViewControl:
-
-```xaml
-<syncfusion:TileViewControl Name="tileViewControl">
-    
+<syncfusion:TileViewControl Height="400" Width="600" Margin="10" Background="White">
     <syncfusion:TileViewItem Header="Dashboard">
         <Grid Background="#F0F0F0">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
-                Dashboard Content
-            </TextBlock>
+            <TextBlock Text="Dashboard Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
     </syncfusion:TileViewItem>
     
     <syncfusion:TileViewItem Header="Settings">
-        <Grid Background="#F0F0F0">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
-                Settings Content
-            </TextBlock>
-        </Grid>
+        <TextBlock Text="Settings Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </syncfusion:TileViewItem>
-    
 </syncfusion:TileViewControl>
 ```
 
-### TileViewItem Properties
-- `Header` - Title displayed on the tile
-- `Content` - Main content area (can be any UIElement)
-- Default minimized size - Automatically calculated
+**TileViewItem properties:**
+- `Header` - Tile title/label
+- `Content` - Main display area (any UIElement)
+- Default minimized size - Auto-calculated
 
-## Minimal Working Example
-
-Here's a complete minimal example:
+## Minimal Example
 
 ```xaml
-<Window x:Class="TileViewApp.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="TileView Minimal Example" Height="500" Width="700">
-    
-    <Grid>
-        <syncfusion:TileViewControl>
-            <syncfusion:TileViewItem Header="Tile 1">
-                <TextBlock Text="Content 1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </syncfusion:TileViewItem>
-            <syncfusion:TileViewItem Header="Tile 2">
-                <TextBlock Text="Content 2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </syncfusion:TileViewItem>
-            <syncfusion:TileViewItem Header="Tile 3">
-                <TextBlock Text="Content 3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </syncfusion:TileViewItem>
-        </syncfusion:TileViewControl>
-    </Grid>
+<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf" Title="TileView" Height="500" Width="700">
+    <syncfusion:TileViewControl>
+        <syncfusion:TileViewItem Header="Tile 1">
+            <TextBlock Text="Content 1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </syncfusion:TileViewItem>
+        <syncfusion:TileViewItem Header="Tile 2">
+            <TextBlock Text="Content 2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </syncfusion:TileViewItem>
+        <syncfusion:TileViewItem Header="Tile 3">
+            <TextBlock Text="Content 3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </syncfusion:TileViewItem>
+    </syncfusion:TileViewControl>
 </Window>
 ```
 
 ## Next Steps
-- For customizing individual tiles, see **TileViewItem Features**
-- To enable drag-drop, see **Arrangement and Layout**
-- For styling tips, see **Appearance and Customization**
-- To bind data, see **Data Binding**
+
+- **TileViewItem Features:** Customize headers, maximize/minimize, close buttons
+- **Arrangement and Layout:** Enable drag-drop, matrix positioning
+- **Appearance and Customization:** Styling, themes, visual effects
+- **Data Binding:** Bind to collections, templates, MVVM patterns
 
 ## Troubleshooting
 
-**Assembly not found?**
-- Verify Syncfusion.Shared.WPF is installed via NuGet
-- Check project references in Solution Explorer
+**Assembly not found:** Verify `Syncfusion.Shared.WPF` installed via NuGet and project references updated.
 
-**Tiles not appearing?**
-- Ensure TileViewControl has `Height` and `Width` set
-- Check that TileViewItems contain content
-- Verify the Syncfusion schema is imported: `xmlns:syncfusion="http://schemas.syncfusion.com/wpf"`
+**Tiles not appearing:** Ensure TileViewControl has `Height` and `Width` set, TileViewItems have content, and schema imported correctly (`xmlns:syncfusion="http://schemas.syncfusion.com/wpf"`).
 
-**Designer not showing?**
-- Rebuild solution (Ctrl+Shift+B)
-- Close and reopen XAML designer
-- Check Visual Studio version compatibility
+**Designer issues:** Rebuild solution, close/reopen XAML designer, verify Visual Studio compatibility.

@@ -98,20 +98,7 @@ colorPicker.Color = Colors.Yellow;
 
 ### Control Visibility of Components
 
-Hide the alpha channel:
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="False"/>
-```
-
-Hide the color palette:
-```xaml
-<syncfusion:ColorPicker IsColorPaletteVisible="False"/>
-```
-
-Hide brush mode switching:
-```xaml
-<syncfusion:ColorPicker EnableSolidToGradientSwitch="False"/>
-```
+Set `IsAlphaVisible="False"` to hide the alpha channel, `IsColorPaletteVisible="False"` to hide the color palette, or `EnableSolidToGradientSwitch="False"` to hide brush mode switching buttons in XAML or C#.
 
 ### Set Dimensions
 ```csharp
@@ -121,45 +108,15 @@ colorPicker.Height = 350;
 
 ## Common Configuration Combinations
 
-### Minimal (Solid Colors Only)
-```xaml
-<syncfusion:ColorPicker IsColorPaletteVisible="True"
-                        IsAlphaVisible="False"
-                        EnableSolidToGradientSwitch="False"/>
-```
-Use this for simple solid color selection without gradients or transparency.
+**Minimal (Solid Colors Only)** - Set `IsColorPaletteVisible="True"`, `IsAlphaVisible="False"`, `EnableSolidToGradientSwitch="False"` for simple solid color selection.
 
-### Full-Featured
-```xaml
-<syncfusion:ColorPicker IsColorPaletteVisible="True"
-                        IsAlphaVisible="True"
-                        EnableSolidToGradientSwitch="True"/>
-```
-Use this for complete color and gradient selection with all options.
+**Full-Featured** - Set `IsColorPaletteVisible="True"`, `IsAlphaVisible="True"`, `EnableSolidToGradientSwitch="True"` for complete color and gradient selection.
 
-### Compact (No Palette)
-```xaml
-<syncfusion:ColorPicker IsColorPaletteVisible="False"
-                        Width="200"
-                        Height="150"/>
-```
-Use this for space-constrained UI layouts.
+**Compact (No Palette)** - Set `IsColorPaletteVisible="False"` and small dimensions (`Width="200"`, `Height="150"`) for space-constrained layouts.
 
 ## Verify Installation
 
-To verify the ColorPicker is working:
-
-1. Add a ColorPicker control to your window
-2. Run the application
-3. You should see a colored square area and controls below it
-4. Click on the colored area to change the color
-5. Verify you can adjust RGB, HSV, or Hex values
-6. If visible, verify the color palette dropdown works
-
-If the control doesn't appear, check:
-- Syncfusion.Shared.WPF assembly is added to project references
-- Correct schema URI is used: `http://schemas.syncfusion.com/wpf`
-- Build the project to ensure no compilation errors
+Add a ColorPicker control to your window and run the application. You should see a colored square and controls. Verify that clicking the color area changes the color and you can adjust RGB/HSV/Hex values. If not visible, ensure Syncfusion.Shared.WPF is in project references, the correct schema URI is used, and the project builds without errors.
 
 ## Next Steps
 

@@ -285,8 +285,8 @@ The `ToolTipDisplayMode` property determines when the tooltip should be displaye
 
 **Property:** `ToolTipDisplayMode`  
 **Type:** `ToolTipDisplayMode` enum  
-**Values:** `Always`, `OnThumbMove`, `Never`  
-**Default Value:** `OnThumbMove`
+**Values:** `Always`, `OnFocus`  
+**Default Value:** `OnFocus`
 
 ### Always Display
 
@@ -324,9 +324,9 @@ this.Content = parentGrid;
 
 **Use Case:** Best for dashboards or monitoring interfaces where the value should always be visible.
 
-### OnThumbMove Display
+### OnFocus Display
 
-When set to `OnThumbMove`, the tooltip appears only when the thumb is being dragged. This is the default behavior.
+When set to `OnFocus`, the tooltip appears only when the thumb is being dragged. This is the default behavior.
 
 **XAML Example:**
 
@@ -335,7 +335,7 @@ When set to `OnThumbMove`, the tooltip appears only when the thumb is being drag
     Width="300"
     Maximum="100"
     Minimum="0"
-    ToolTipDisplayMode="OnThumbMove"
+    ToolTipDisplayMode="OnFocus"
     ThumbToolTipPlacement="TopLeft"
     Value="50" />
 ```
@@ -349,7 +349,7 @@ SfRangeSlider rangeSlider = new SfRangeSlider()
     Width = 300,
     Maximum = 100,
     Minimum = 0,
-    ToolTipDisplayMode = ToolTipDisplayMode.OnThumbMove,
+    ToolTipDisplayMode = ToolTipDisplayMode.OnFocus,
     ThumbToolTipPlacement = ThumbToolTipPlacement.TopLeft,
     Value = 50
 };
@@ -360,39 +360,6 @@ this.Content = parentGrid;
 
 **Use Case:** Standard behavior for most interactive sliders, providing feedback during adjustment.
 
-### Never Display
-
-When set to `Never`, the tooltip will not be displayed at all.
-
-**XAML Example:**
-
-```xaml
-<editors:SfRangeSlider
-    Width="300"
-    Maximum="100"
-    Minimum="0"
-    ToolTipDisplayMode="Never"
-    Value="50" />
-```
-
-**C# Example:**
-
-```csharp
-Grid parentGrid = new Grid();
-SfRangeSlider rangeSlider = new SfRangeSlider()
-{
-    Width = 300,
-    Maximum = 100,
-    Minimum = 0,
-    ToolTipDisplayMode = ToolTipDisplayMode.Never,
-    Value = 50
-};
-
-parentGrid.Children.Add(rangeSlider);
-this.Content = parentGrid;
-```
-
-**Use Case:** When tooltips would be distracting or when the value is displayed elsewhere in the UI.
 
 ## ToolTip Style Customization
 
@@ -646,8 +613,7 @@ Choose tooltip placement based on UI layout:
 
 Choose display mode based on user needs:
 - `Always`: For monitoring/dashboard scenarios
-- `OnThumbMove`: For interactive adjustment scenarios
-- `Never`: When value is displayed elsewhere
+- `OnFocus`: For interactive adjustment scenarios
 
 ### 5. Styling Consistency
 
@@ -767,7 +733,7 @@ Ensure tooltip styling matches your application theme:
     Minimum="-20"
     ToolTipFormat="N1"
     ThumbToolTipPrecision="1"
-    ToolTipDisplayMode="OnThumbMove"
+    ToolTipDisplayMode="OnFocus"
     ThumbToolTipPlacement="TopLeft"
     ToolTipStyle="{StaticResource TemperatureToolTipStyle}"
     Value="22.5" />

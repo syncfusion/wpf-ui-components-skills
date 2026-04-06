@@ -246,12 +246,12 @@ public DateTime SelectedDate { get; set; } = DateTime.Now;
                          DropDownView="Calendar"
                          Pattern="ShortDate"
                          Name="dateTimeEdit">
-    <syncfusion:DateTimeEdit.DateTimeCalender>
+    <syncfusion:DateTimeEdit.DateTimeCalendar>
         <syncfusion:SfDateSelector SelectorItemWidth="80"
                                    SelectorItemHeight="80"
                                    ShowDoneButton="False"
                                    SelectedDateTime="{Binding SelectedDate, Mode=TwoWay}"/>
-    </syncfusion:DateTimeEdit.DateTimeCalender>
+    </syncfusion:DateTimeEdit.DateTimeCalendar>
 </syncfusion:DateTimeEdit>
 ```
 
@@ -276,7 +276,7 @@ Replace the default clock with a `SfTimeSelector`:
 </syncfusion:DateTimeEdit>
 ```
 
-> Use `DropDownView="Combined"` with both `DateTimeCalender` and `Clock` set for a full custom date+time selector.
+> Use `DropDownView="Combined"` with both `DateTimeCalendar` and `Clock` set for a full custom date+time selector.
 
 ---
 

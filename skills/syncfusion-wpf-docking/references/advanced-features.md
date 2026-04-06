@@ -280,76 +280,33 @@ private void Window_KeyDown(object sender, KeyEventArgs e)
 
 ## Keyboard Navigation
 
-### Navigation Modes
+DockingManager supports multiple keyboard navigation modes (set via `SwitchMode` property):
 
-DockingManager supports multiple keyboard navigation modes:
+| Mode | Behavior | Default Shortcut |
+|------|----------|------------------|
+| **Immediate** | Switch instantly on key press | Ctrl+Tab / Ctrl+Shift+Tab |
+| **List** | Show window list popup | Ctrl+Tab (hold to select) |
+| **QuickTabs** | VS-style tab switcher | Ctrl+Tab |
+| **VS2005** | Visual Studio 2005 navigation | - |
+| **VistaFlip** | Vista-style flip 3D | - |
 
 **XAML:**
 ```xml
-<syncfusion:DockingManager x:Name="dockManager"
-                          SwitchMode="Immediate">
-    <!-- SwitchMode options:
-         - Immediate: Switch on key press
-         - List: Show list of windows (Ctrl+Tab style)
-         - QuickTabs: VS-style quick tabs
-         - VS2005: Visual Studio 2005 navigation
-         - VistaFlip: Vista-style flip 3D -->
+<syncfusion:DockingManager x:Name="dockManager" SwitchMode="QuickTabs">
 </syncfusion:DockingManager>
 ```
 
 **C#:**
 ```csharp
-dockManager.SwitchMode = SwitchMode.Immediate;
-dockManager.SwitchMode = SwitchMode.List;
-dockManager.SwitchMode = SwitchMode.QuickTabs;
-dockManager.SwitchMode = SwitchMode.VS2005;
-dockManager.SwitchMode = SwitchMode.VistaFlip;
-```
-
-### Immediate Mode
-
-Switch windows instantly:
-
-- **Ctrl+Tab**: Next window
-- **Ctrl+Shift+Tab**: Previous window
-
-### List Mode
-
-Show window list popup:
-
-- **Ctrl+Tab**: Open list, navigate
-- **Release Ctrl**: Activate selected window
-
-### QuickTabs Mode
-
-Visual Studio-style tab switcher:
-
-- **Ctrl+Tab**: Forward through tabs
-- **Ctrl+Shift+Tab**: Backward through tabs
-- Visual indicator shows all tabs
-
-### Custom Keyboard Shortcuts
-
-**C#:**
-```csharp
+// Custom keyboard navigation for Ctrl+1-9 window activation
 private void Window_KeyDown(object sender, KeyEventArgs e)
 {
-    // Ctrl+1 through Ctrl+9: Activate window by index
-    if (Keyboard.Modifiers == ModifierKeys.Control && 
-        e.Key >= Key.D1 && e.Key <= Key.D9)
+    if (Keyboard.Modifiers == ModifierKeys.Control && e.Key >= Key.D1 && e.Key <= Key.D9)
     {
-        int index = e.Key - Key.D1;
-        ActivateWindowByIndex(index);
-        e.Handled = true;
-    }
-}
-
-private void ActivateWindowByIndex(int index)
-{
-    var windows = dockManager.Children.OfType<FrameworkElement>().ToList();
-    if (index < windows.Count)
-    {
-        dockManager.ActiveWindow = windows[index];
+        int index = (int)e.Key - (int)Key.D1;
+        var window = dockManager.Children.OfType<FrameworkElement>().Skip(index).FirstOrDefault();
+        if (window != null)
+            dockManager.ActiveWindow = window;
     }
 }
 ```
@@ -466,36 +423,20 @@ Control which dock hints are available per window:
 
 **XAML:**
 ```xml
-<!-- Allow all docking operations -->
-<ContentControl syncfusion:DockingManager.Header="Full Access"
-                syncfusion:DockingManager.State="Dock"
+<!-- All docking allowed -->
+<ContentControl syncfusion:DockingManager.Header="Unrestricted"
                 syncfusion:DockingManager.DockAbility="All" />
 
-<!-- Only allow docking to left/right -->
-<ContentControl syncfusion:DockingManager.Header="Horizontal Only"
-                syncfusion:DockingManager.State="Dock"
+<!-- Specific directions only -->
+<ContentControl syncfusion:DockingManager.Header="Horizontal"
                 syncfusion:DockingManager.DockAbility="Left, Right" />
 
-<!-- Allow document state only -->
-<ContentControl syncfusion:DockingManager.Header="Document Only"
-                syncfusion:DockingManager.State="Document"
-                syncfusion:DockingManager.DockAbility="DocumentAll" />
-
-<!-- No docking allowed -->
+<!-- No docking -->
 <ContentControl syncfusion:DockingManager.Header="Locked"
-                syncfusion:DockingManager.State="Dock"
                 syncfusion:DockingManager.DockAbility="None" />
 ```
 
-**DockAbility Values:**
-- `All`: All hints enabled
-- `DockLeft`, `DockRight`, `DockTop`, `DockBottom`, `DockTabbed`: Specific dock sides
-- `DockAll`: All dock hints (not document)
-- `DocumentLeft`, `DocumentRight`, `DocumentTop`, `DocumentBottom`, `DocumentTabbed`: Document sides
-- `DocumentAll`: All document hints
-- `Left`, `Right`, `Top`, `Bottom`, `Tabbed`: Both dock and document
-- `Horizontal`, `Vertical`: Directional hints
-- `None`: No hints
+**DockAbility Values:** `All`, `None`, `Left`, `Right`, `Top`, `Bottom`, `Tabbed`, `DockAll`, `DocumentAll`, `Horizontal`, `Vertical` (and combinations)
 
 ### Outer Dock Ability
 

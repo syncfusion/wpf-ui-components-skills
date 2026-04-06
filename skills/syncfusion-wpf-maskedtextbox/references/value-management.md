@@ -2,15 +2,7 @@
 
 This guide covers setting and retrieving values from SfMaskedEdit with different formatting options.
 
-## Table of Contents
-- [Setting the Value Property](#setting-the-value-property)
-- [Value Formatting Options](#value-formatting-options)
-- [ExcludePromptAndLiterals Format](#excludepromptandliterals-format)
-- [IncludeLiterals Format](#includeliterals-format)
-- [IncludePrompt Format](#includeprompt-format)
-- [IncludePromptAndLiterals Format](#includepromptandliterals-format)
-- [Value Change Notifications](#value-change-notifications)
-- [Clipboard Operations](#clipboard-operations)
+<!-- Table of contents removed for cross-environment compatibility; see section headings below -->
 
 ## Setting the Value Property
 
@@ -40,12 +32,7 @@ phoneInput.Mask = @"\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}";
 
 ### Setting Value After Initialization
 
-```csharp
-// Set value programmatically
-phoneInput.Value = "9876543210";
-
-// The control automatically reformats to: (987) 654-3210
-```
+Set the `Value` property programmatically to update the control; the control reformats the value according to the mask (see examples above).
 
 ### Data Binding in MVVM
 
@@ -470,165 +457,5 @@ private void ValidateForm(object sender, EventArgs e)
 ### Copy Formatted Value
 
 The clipboard behavior is affected by `ValueMaskFormat`:
-
+<!-- Advanced value-change and clipboard examples moved to value-management-advanced.md -->
 ```csharp
-// Copy with formatting
-phoneInput.ValueMaskFormat = MaskFormat.IncludeLiterals;
-phoneInput.Focus();
-phoneInput.SelectAll();
-ApplicationCommands.Copy.Execute(null, phoneInput);
-// Clipboard contains: "(455) 345-6789"
-
-// Copy without formatting
-phoneInput.ValueMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-phoneInput.SelectAll();
-ApplicationCommands.Copy.Execute(null, phoneInput);
-// Clipboard contains: "4553456789"
-```
-
-### Paste Operations
-
-```csharp
-// Paste phone number (with or without formatting)
-Clipboard.SetText("4553456789");
-phoneInput.Focus();
-ApplicationCommands.Paste.Execute(null, phoneInput);
-// Result: (455) 345-6789
-
-// Paste with literals (they're stripped automatically)
-Clipboard.SetText("(455) 345-6789");
-phoneInput.Focus();
-ApplicationCommands.Paste.Execute(null, phoneInput);
-// Result: (455) 345-6789 (correctly parsed)
-```
-
-### Custom Copy/Paste
-
-```csharp
-// Custom copy button
-private void CopyButton_Click(object sender, RoutedEventArgs e)
-{
-    if (!phoneInput.HasError && !string.IsNullOrWhiteSpace(phoneInput.Value))
-    {
-        Clipboard.SetText(phoneInput.Value);
-        MessageBox.Show("Phone number copied!");
-    }
-}
-
-// Custom paste button
-private void PasteButton_Click(object sender, RoutedEventArgs e)
-{
-    if (Clipboard.ContainsText())
-    {
-        string text = Clipboard.GetText();
-        phoneInput.Value = text;
-    }
-}
-```
-
-## Best Practices
-
-1. **Set ValueMaskFormat early:** Configure before accessing `Value` to avoid confusion
-2. **Use ExcludePromptAndLiterals for storage:** Clean data for databases and APIs
-3. **Use IncludeLiterals for display:** Show formatted values to users
-4. **Handle ValueChanged appropriately:** Consider ValidationMode when implementing event handlers
-5. **Check HasError before using Value:** Ensure data is valid before processing
-6. **Document format choice:** Comment why you chose a specific ValueMaskFormat
-7. **Test partial input:** Verify behavior when user hasn't completed input
-8. **Consider MVVM binding:** Use two-way binding for better architecture
-
-## Complete Example: Value Management
-
-```xml
-<Window x:Class="ValueManagementDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="Value Management Demo" Height="400" Width="500">
-    <StackPanel Margin="20">
-        <TextBlock Text="Enter Phone Number:" FontWeight="Bold"/>
-        <syncfusion:SfMaskedEdit 
-            x:Name="phoneInput"
-            Mask="\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}"
-            MaskType="RegEx"
-            PromptChar="_"
-            Width="200"
-            HorizontalAlignment="Left"
-            Margin="0,5,0,15"
-            ValueChanged="PhoneInput_ValueChanged"/>
-        
-        <TextBlock Text="Value Formats:" FontWeight="Bold" Margin="0,10,0,5"/>
-        
-        <StackPanel Orientation="Horizontal" Margin="0,5">
-            <TextBlock Text="ExcludePromptAndLiterals:" Width="200"/>
-            <TextBlock x:Name="excludeText" FontFamily="Consolas"/>
-        </StackPanel>
-        
-        <StackPanel Orientation="Horizontal" Margin="0,5">
-            <TextBlock Text="IncludeLiterals:" Width="200"/>
-            <TextBlock x:Name="includeLiteralsText" FontFamily="Consolas"/>
-        </StackPanel>
-        
-        <StackPanel Orientation="Horizontal" Margin="0,5">
-            <TextBlock Text="IncludePrompt:" Width="200"/>
-            <TextBlock x:Name="includePromptText" FontFamily="Consolas"/>
-        </StackPanel>
-        
-        <StackPanel Orientation="Horizontal" Margin="0,5">
-            <TextBlock Text="IncludePromptAndLiterals:" Width="200"/>
-            <TextBlock x:Name="includeAllText" FontFamily="Consolas"/>
-        </StackPanel>
-        
-        <Button Content="Get Values" Click="GetValues_Click" Width="100" 
-                HorizontalAlignment="Left" Margin="0,15,0,0"/>
-    </StackPanel>
-</Window>
-```
-
-```csharp
-using System;
-using System.Windows;
-using Syncfusion.Windows.Controls.Input;
-
-namespace ValueManagementDemo
-{
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
-        private void PhoneInput_ValueChanged(object sender, EventArgs e)
-        {
-            UpdateValueDisplays();
-        }
-
-        private void GetValues_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateValueDisplays();
-        }
-
-        private void UpdateValueDisplays()
-        {
-            // ExcludePromptAndLiterals
-            phoneInput.ValueMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            excludeText.Text = $"\"{phoneInput.Value}\"";
-
-            // IncludeLiterals
-            phoneInput.ValueMaskFormat = MaskFormat.IncludeLiterals;
-            includeLiteralsText.Text = $"\"{phoneInput.Value}\"";
-
-            // IncludePrompt
-            phoneInput.ValueMaskFormat = MaskFormat.IncludePrompt;
-            includePromptText.Text = $"\"{phoneInput.Value}\"";
-
-            // IncludePromptAndLiterals
-            phoneInput.ValueMaskFormat = MaskFormat.IncludePromptAndLiterals;
-            includeAllText.Text = $"\"{phoneInput.Value}\"";
-        }
-    }
-}
-```
-
-This example demonstrates all four `ValueMaskFormat` options in real-time as the user types.

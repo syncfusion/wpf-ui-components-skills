@@ -1,4 +1,4 @@
-# Customization and Theming
+﻿# Customization and Theming
 
 This guide covers customizing ToolBarAdv appearance through styling, themes, and visual properties.
 
@@ -9,7 +9,6 @@ This guide covers customizing ToolBarAdv appearance through styling, themes, and
 - [SfSkinManager Theme Application](#sfskinmanager-theme-application)
 - [ThemeStudio for Custom Themes](#themestudio-for-custom-themes)
 - [Built-in Theme Options](#built-in-theme-options)
-- [Best Practices](#best-practices)
 
 ## FloatingToolBarStyle
 
@@ -35,46 +34,6 @@ The `FloatingToolBarStyle` property customizes the appearance of floating toolba
 ```
 
 **Result:** When toolbar floats, window has light blue background with dark blue 2px border.
-
-### Advanced Floating Window Styling
-
-```xaml
-<syncfusion:ToolBarAdv ToolBarName="Styled Floating Toolbar">
-    <syncfusion:ToolBarAdv.FloatingToolBarStyle>
-        <Style TargetType="Window">
-            <!-- Background -->
-            <Setter Property="Background" Value="#F0F0F0"/>
-            
-            <!-- Border -->
-            <Setter Property="BorderBrush" Value="#0078D7"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            
-            <!-- Title bar customization -->
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            
-            <!-- Window behavior -->
-            <Setter Property="ResizeMode" Value="CanResize"/>
-            <Setter Property="SizeToContent" Value="WidthAndHeight"/>
-            <Setter Property="Topmost" Value="True"/>
-            
-            <!-- Shadow effect -->
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" 
-                                      BlurRadius="10" 
-                                      ShadowDepth="3" 
-                                      Opacity="0.5"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </syncfusion:ToolBarAdv.FloatingToolBarStyle>
-    
-    <Button Content="Tool 1"/>
-    <Button Content="Tool 2"/>
-</syncfusion:ToolBarAdv>
-```
 
 ### Setting in C#
 
@@ -213,52 +172,6 @@ Use ControlsResourceDictionary to apply styles to FrameworkElement controls with
     
     <Button Content="Save" Style="{StaticResource PrimaryButton}"/>
     <Button Content="Cancel" Style="{StaticResource SecondaryButton}"/>
-</syncfusion:ToolBarAdv>
-```
-
-### Hover and Pressed States
-
-```xaml
-<syncfusion:ToolBarAdv>
-    <syncfusion:ToolBarAdv.ControlsResourceDictionary>
-        <ResourceDictionary>
-            <Style TargetType="Button">
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="Gray"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="3">
-                                <ContentPresenter HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center"
-                                                  Margin="5,2"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <!-- Hover -->
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#E5F3FF"/>
-                                    <Setter Property="BorderBrush" Value="#0078D7"/>
-                                </Trigger>
-                                <!-- Pressed -->
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Background" Value="#0078D7"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
-    </syncfusion:ToolBarAdv.ControlsResourceDictionary>
-    
-    <Button Content="New"/>
-    <Button Content="Open"/>
-    <Button Content="Save"/>
 </syncfusion:ToolBarAdv>
 ```
 
@@ -404,180 +317,13 @@ Install-Package Syncfusion.Themes.FluentDark.WPF
 Install-Package Syncfusion.Themes.MaterialLight.WPF
 ```
 
-### Using Multiple Themes
-
-**Theme Selector:**
-
-```csharp
-public void ApplyTheme(string themeName)
-{
-    switch (themeName)
-    {
-        case "FluentLight":
-            SfSkinManager.SetTheme(this, new Theme("FluentLight"));
-            break;
-        case "FluentDark":
-            SfSkinManager.SetTheme(this, new Theme("FluentDark"));
-            break;
-        case "MaterialLight":
-            SfSkinManager.SetTheme(this, new Theme("MaterialLight"));
-            break;
-        case "MaterialDark":
-            SfSkinManager.SetTheme(this, new Theme("MaterialDark"));
-            break;
-        default:
-            SfSkinManager.SetTheme(this, new Theme("FluentLight"));
-            break;
-    }
-}
-```
-
-**Theme Switcher UI:**
-
-```xaml
-<syncfusion:ToolBarAdv ToolBarName="Settings">
-    <Label Content="Theme:"/>
-    <ComboBox Width="120" SelectionChanged="ThemeComboBox_SelectionChanged">
-        <ComboBoxItem Content="Fluent Light" IsSelected="True"/>
-        <ComboBoxItem Content="Fluent Dark"/>
-        <ComboBoxItem Content="Material Light"/>
-        <ComboBoxItem Content="Material Dark"/>
-    </ComboBox>
-</syncfusion:ToolBarAdv>
-```
-
-**Code-behind:**
-
-```csharp
-private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-{
-    ComboBox comboBox = sender as ComboBox;
-    string selectedTheme = (comboBox.SelectedItem as ComboBoxItem).Content.ToString();
-    
-    string themeName = selectedTheme.Replace(" ", "");
-    SfSkinManager.SetTheme(this, new Theme(themeName));
-}
-```
-
-## Complete Styling Example
-
-```xaml
-<Window x:Class="CustomToolBarStyling.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        xmlns:syncfusionskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-        Title="Custom Toolbar Styling" Height="500" Width="800">
-    
-    <!-- Apply global theme -->
-    <syncfusionskin:SfSkinManager.Theme>
-        <syncfusionskin:Theme ThemeName="FluentDark"/>
-    </syncfusionskin:SfSkinManager.Theme>
-    
-    <Window.Resources>
-        <!-- Custom floating style -->
-        <Style x:Key="CustomFloatingStyle" TargetType="Window">
-            <Setter Property="Background" Value="#2D2D30"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#007ACC"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="15" ShadowDepth="5" Opacity="0.7"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    
-    <syncfusion:ToolBarManager>
-        <syncfusion:ToolBarManager.TopToolBarTray>
-            <syncfusion:ToolBarTrayAdv>
-                <!-- Styled toolbar -->
-                <syncfusion:ToolBarAdv ToolBarName="File"
-                                       Foreground="White"
-                                       Background="#2D2D30"
-                                       FloatingToolBarStyle="{StaticResource CustomFloatingStyle}">
-                    
-                    <!-- Custom button styles -->
-                    <syncfusion:ToolBarAdv.ControlsResourceDictionary>
-                        <ResourceDictionary>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Padding" Value="10,5"/>
-                                <Setter Property="Margin" Value="2"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#3E3E40"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#007ACC"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ResourceDictionary>
-                    </syncfusion:ToolBarAdv.ControlsResourceDictionary>
-                    
-                    <Button Content="New"/>
-                    <Button Content="Open"/>
-                    <Button Content="Save"/>
-                </syncfusion:ToolBarAdv>
-            </syncfusion:ToolBarTrayAdv>
-        </syncfusion:ToolBarManager.TopToolBarTray>
-        
-        <syncfusion:ToolBarManager.Content>
-            <Grid Background="#1E1E1E">
-                <TextBox Background="#252526" 
-                         Foreground="White" 
-                         BorderBrush="#3F3F46"
-                         TextWrapping="Wrap" 
-                         AcceptsReturn="True"/>
-            </Grid>
-        </syncfusion:ToolBarManager.Content>
-    </syncfusion:ToolBarManager>
-</Window>
-```
-
-## Best Practices
-
-### Theme Consistency
-
-1. **Apply theme at Window level** for consistent appearance
-2. **Use SfSkinManager** for Syncfusion controls
-3. **Match custom styles** to selected theme colors
-
-### Performance
-
-1. **Define styles in Resources** rather than inline
-2. **Reuse ResourceDictionary** across toolbars
-3. **Avoid complex ControlTemplates** for toolbar buttons
-
-### Visual Hierarchy
-
-1. **Use Foreground** to indicate importance (red for delete, green for success)
-2. **Background variations** for different toolbar types
-3. **Border/Shadow effects** sparingly for floating toolbars
-
-### Accessibility
-
-1. **Maintain contrast ratio** (WCAG AA: 4.5:1 for text)
-2. **Test with high contrast themes**
-3. **Provide focus indicators** (keyboard navigation)
-
 ### Theme Switching
 
-```csharp
-// ✓ GOOD - Apply at window level
-SfSkinManager.SetTheme(this, new Theme("FluentDark"));
+Apply the theme at Window level so all Syncfusion controls inherit it automatically:
 
-// ✗ BAD - Individual control theming (inconsistent)
-SfSkinManager.SetTheme(toolBar1, new Theme("FluentLight"));
-SfSkinManager.SetTheme(toolBar2, new Theme("MaterialDark"));
+```csharp
+// Apply at window level — all ToolBarAdv controls inherit this
+SfSkinManager.SetTheme(this, new Theme("FluentDark"));
 ```
 
-## Related Topics
-
-- **Getting Started**: Basic toolbar setup → [getting-started.md](getting-started.md)
-- **Toolbar States**: FloatingToolBarStyle usage → [toolbar-states.md](toolbar-states.md)
-- **ToolBarManager**: Layout and positioning → [toolbar-manager.md](toolbar-manager.md)
+````

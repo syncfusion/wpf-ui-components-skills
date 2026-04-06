@@ -207,30 +207,15 @@ private void TabControl_NewButtonClick(object sender, EventArgs e)
 
 ## Key Properties
 
-| Property | Type | Purpose |
-|----------|------|---------|
-| `Items` | Collection | Collection of TabItemExt objects |
-| `SelectedItem` | TabItemExt | Currently selected tab item |
-| `TabStripPlacement` | Dock | Tab position (Top, Bottom, Left, Right) |
-| `CloseButtonType` | CloseButtonType | Close button display mode |
-| `IsNewButtonEnabled` | bool | Show/hide new tab button |
-| `ShowTabListContextMenu` | bool | Enable tab list navigation menu |
-| `ShowTabItemContextMenu` | bool | Enable built-in context menu |
-| `TabScrollButtonVisibility` | Visibility | Show/hide navigation scroll buttons |
+- `Items` — Collection of TabItemExt objects
+- `SelectedItem` — Currently selected tab
+- `TabStripPlacement` — Position (Top, Bottom, Left, Right)
+- `CloseButtonType` — Close button display mode
+- `IsNewButtonEnabled` — Show/hide new tab button
+- `ShowTabListContextMenu` — Tab list navigation menu
 
 ## Key Events
 
-| Event | Purpose |
-|-------|---------|
-| `SelectedItemChangedEvent` | Fires when selected tab changes |
-| `NewButtonClick` | Fires when new tab button is clicked |
-| `TabItemClosing` | Fires before tab item closes |
-| `TabItemClosed` | Fires after tab item closes |
-
-## Common Use Cases
-
-1. **Document Editor Interface** - Multiple open documents as tabs with close buttons
-2. **Settings Dashboard** - Different settings categories organized as tabs
-3. **Multi-View Application** - Switch between different data views or modules
-4. **Tool Palettes** - Different tool options grouped in tabs
-5. **Properties Panel** - Different property categories in collapsible tabs
+- `SelectedItemChangedEvent` — Tab selection changed
+- `TabItemClosing` — Before tab closes (can cancel)
+- `TabItemClosed` — After tab closes

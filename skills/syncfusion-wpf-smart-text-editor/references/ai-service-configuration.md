@@ -19,7 +19,6 @@ The WPF Smart Text Editor uses AI chat inference services to generate intelligen
 
 All built-in providers use the `IChatClient` interface from the `Microsoft.Extensions.AI` package, which is registered in your `App.xaml.cs` file using dependency injection. The Smart Components resolve the chat client automatically and use it for generating suggestions.
 
-**For custom AI providers** (Claude, DeepSeek, Gemini, Groq), see [custom-ai-services.md](custom-ai-services.md).
 
 ## Azure OpenAI Configuration
 
@@ -93,7 +92,7 @@ namespace YourAppNamespace
 }
 ```
 
-> Deploy an Azure OpenAI resource and model via the [Azure Portal](https://portal.azure.com) first. The `azureEndpoint`, `azureKey`, and `deploymentName` values are available in your resource's **Keys and Endpoint** blade.
+> Deploy an Azure OpenAI resource and model via the `Azure Portal` first. The `azureEndpoint`, `azureKey`, and `deploymentName` values are available in your resource's **Keys and Endpoint** blade.
 
 ## OpenAI Configuration
 
@@ -142,7 +141,7 @@ namespace YourAppNamespace
                 new OpenAIClientOptions
                 {
                     // Default OpenAI endpoint; include /v1 if your SDK expects it
-                    Endpoint = new Uri("https://api.openai.com/v1/")
+                    Endpoint =  new Uri("YOUR_API_KEY") // "https://api.openai.com/v1/"
                 }
             );
 
@@ -161,15 +160,15 @@ namespace YourAppNamespace
 }
 ```
 
-> Get your API key from [platform.openai.com/api-keys](https://platform.openai.com/api-keys). Recommended models: `gpt-4o-mini` (cost-efficient) or `gpt-4o` (higher quality).
+> Get your API key from `platform.openai.com/api-keys`. Recommended models: `gpt-4o-mini` (cost-efficient) or `gpt-4o` (higher quality).
 
 ## Ollama Configuration (Self-Hosted)
 
 Ollama allows you to run open-source language models locally on your machine. This is ideal for offline scenarios, data privacy, or avoiding cloud API costs.
 
 **Setup steps:**
-1. Download and install Ollama from [ollama.com](https://ollama.com)
-2. Pull a model: `ollama pull llama3` (or any model from [ollama.com/library](https://ollama.com/library))
+1. Download and install Ollama from `ollama.com`
+2. Pull a model: `ollama pull llama3` (or any model from `ollama.com/library`)
 3. Ollama runs at `http://localhost:11434` by default
 
 ### Install Required NuGet Packages
@@ -375,6 +374,5 @@ protected override void OnStartup(StartupEventArgs e)
 ---
 
 **Related Topics:**
-- Custom AI providers (Claude, DeepSeek, Gemini, Groq): [custom-ai-services.md](custom-ai-services.md)
 - Initial setup and installation: [getting-started.md](getting-started.md)
 - Customize suggestion appearance: [customization.md](customization.md)

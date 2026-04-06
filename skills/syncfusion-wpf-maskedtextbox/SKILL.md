@@ -4,7 +4,7 @@ description: Comprehensive guide for implementing Syncfusion WPF MaskedTextBox (
 metadata:
   author: "Syncfusion Inc"
   version: "33.1.44"
----
+
 
 # Implementing Syncfusion WPF MaskedTextBox (SfMaskedEdit)
 
@@ -48,7 +48,7 @@ Use this skill when you need to:
 - Handling ValueChanged events
 
 ### Mask Patterns and Input Restriction
-📄 **Read:** [references/mask-patterns-input-restriction.md](references/mask-patterns-input-restriction.md)
+📄 **Read:** [references/mask-patterns-input-restriction.md](references/mask-patterns-input-restriction.md), [references/mask-patterns-advanced.md](references/mask-patterns-advanced.md)
 - Mask element reference ([], \d, \w, {n}, +, *, ?, etc.)
 - Creating custom mask patterns
 - Allow/restrict specific values with (?=) and (?!)
@@ -58,7 +58,7 @@ Use this skill when you need to:
 - PromptChar and ShowPromptOnFocus configuration
 
 ### Value Management
-📄 **Read:** [references/value-management.md](references/value-management.md)
+📄 **Read:** [references/value-management.md](references/value-management.md), [references/value-management-advanced.md](references/value-management-advanced.md)
 - Setting and getting Value property
 - ValueMaskFormat options:
   - ExcludePromptAndLiterals
@@ -69,7 +69,7 @@ Use this skill when you need to:
 - Clipboard operations with formatted values
 
 ### Appearance and Customization
-📄 **Read:** [references/appearance-customization.md](references/appearance-customization.md)
+📄 **Read:** [references/appearance-customization.md](references/appearance-customization.md), [references/appearance-customization-themes.md](references/appearance-customization-themes.md)
 - Background, Foreground, and SelectionBrush
 - CaretBrush and BorderBrush customization
 - ErrorBorderBrush for validation feedback
@@ -123,111 +123,20 @@ public partial class MainWindow : Window
 
 ## Common Patterns
 
-### Pattern 1: Email Validation
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Mask="[A-Za-z0-9._%-]+@[A-Za-z0-9]+\.[A-Za-z]{2,3}"
-    MaskType="RegEx"
-    Watermark="Enter email address"
-    ErrorBorderBrush="Red"/>
-```
-
-### Pattern 2: Currency Input
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Mask="$ \d+\.\d{2}"
-    MaskType="RegEx"
-    Value="1234.56"
-    ValueMaskFormat="IncludeLiterals"/>
-```
-
-### Pattern 3: Date Input with Validation
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Mask="(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/\d{4}"
-    MaskType="RegEx"
-    ValidationMode="LostFocus"
-    PromptChar="X"
-    ShowPromptOnFocus="True"/>
-```
-
-### Pattern 4: Product Key
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Mask="[A-Z\d]{5}-[A-Z\d]{5}-[A-Z\d]{5}-[A-Z\d]{5}-[A-Z\d]{5}"
-    MaskType="RegEx"
-    ValueMaskFormat="ExcludePromptAndLiterals"/>
-```
-
-### Pattern 5: Get Value Without Formatting
-
-```csharp
-// Get only user-entered digits (no literals or prompts)
-sfMaskedEdit.ValueMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-string digitsOnly = sfMaskedEdit.Value; // "4553456789"
-
-// Get with formatting literals
-sfMaskedEdit.ValueMaskFormat = MaskFormat.IncludeLiterals;
-string formatted = sfMaskedEdit.Value; // "(455) 345-6789"
-```
+Key patterns include Email, Currency, Date, Product Key, and Value Formatting. See [Mask Patterns and Input Restriction](references/mask-patterns-input-restriction.md) for 25+ detailed pattern examples with complete XAML and code samples.
 
 ## Key Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **Mask** | string | Mask pattern (null = no mask) |
-| **MaskType** | MaskType | Simple or RegEx (default: Simple) |
-| **Value** | string | Current value with formatting based on ValueMaskFormat |
-| **ValueMaskFormat** | MaskFormat | Include/exclude prompts and literals |
-| **ValidationMode** | InputValidationMode | KeyPress or LostFocus (default: KeyPress) |
-| **HasError** | bool | True if validation failed (read-only) |
-| **PromptChar** | char | Character for missing input (default: '_') |
-| **ShowPromptOnFocus** | bool | Show prompts on focus vs while typing |
-| **ErrorBorderBrush** | Brush | Border color for validation errors (default: Red) |
-| **Watermark** | object | Text shown when empty |
-| **WatermarkTemplate** | DataTemplate | Custom template for watermark |
-
-## Common Mask Patterns
-
-| Use Case | Mask Pattern |
-|----------|--------------|
-| Positive/negative numbers | `-?\d+\.?\d*` |
-| Currency | `$ \d+\.\d{2}` |
-| Percent | `\d+\.\d{2}%` |
-| Email | `[A-Za-z0-9._%-]+@[A-Za-z0-9]+\.[A-Za-z]{2,3}` |
-| Phone (US) | `\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}` |
-| Credit Card | `\d{4} \d{4} \d{4} \d{4}` |
-| Time (24h) | `(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]` |
-| Zip Code | `\d{5}-\d{4}` |
-| Product Key | `[A-Z\d]{5}-[A-Z\d]{5}-[A-Z\d]{5}` |
-| Hexadecimal | `\\x[0-9A-Fa-f]{1,2}` |
+Essential properties include **Mask** (pattern), **MaskType** (Simple/RegEx), **Value** (formatted output), **ValueMaskFormat** (format control), **ValidationMode** (KeyPress/LostFocus), **HasError** (validation status), **PromptChar** (missing input indicator), **ErrorBorderBrush** (error feedback), and **Watermark** (placeholder text). See [Getting Started](references/getting-started.md) and [Mask Patterns](references/mask-patterns-input-restriction.md) for property details and 25+ mask pattern examples.
 
 ## Common Use Cases
 
-### Data Entry Forms
-Use SfMaskedEdit in forms requiring formatted input like contact information, financial data, or identification numbers. Reduces validation code and improves UX.
-
-### Phone Number Collection
-Implement consistent phone number formatting across your application with automatic formatting and validation.
-
-### Financial Applications
-Enforce currency, decimal, and percentage formats for accounting and financial data entry.
-
-### Product Registration
-Validate product keys, serial numbers, and license codes with custom patterns.
-
-### Date and Time Input
-Create custom date/time formats beyond standard DatePicker controls with RegEx validation.
-
-### International Support
-Use FlowDirection for RTL languages and customize masks for regional formats (dates, phone numbers).
-
-### Real-time Validation
-Validate input on each keystroke (KeyPress) or on field exit (LostFocus) based on UX requirements.
+- **Data Entry Forms:** Contact info, financial data, ID numbers with automatic formatting
+- **Phone/Finance:** Consistent formatting across app, currency/percent enforcement
+- **Product Registration:** Validate product keys and serial numbers
+- **Date/Time:** Custom formats beyond DatePicker with RegEx validation
+- **International:** RTL support via FlowDirection, regional date/phone formats
+- **Real-time Validation:** KeyPress for instant feedback or LostFocus for less intrusive
 
 ## Events
 

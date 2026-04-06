@@ -186,6 +186,7 @@ The **UserPhrases** property is a list of reusable statements that reflect your 
 
 ```xaml
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:smarttexteditor="clr-namespace:Syncfusion.UI.Xaml.SmartComponents;assembly=Syncfusion.SfSmartComponents.WPF">
 
@@ -193,10 +194,10 @@ The **UserPhrases** property is a list of reusable statements that reflect your 
         Placeholder="Type your reply..."
         UserRole="Support engineer responding to customer tickets">
         <smarttexteditor:SfSmartTextEditor.UserPhrases>
-            <x:String>Thanks for reaching out.</x:String>
-            <x:String>Please share a minimal reproducible sample.</x:String>
-            <x:String>We'll update you as soon as we have more details.</x:String>
-            <x:String>Let us know if you need further assistance.</x:String>
+            <sys:String>Thanks for reaching out.</sys:String>
+            <sys:String>Please share a minimal reproducible sample.</sys:String>
+            <sys:String>We'll update you as soon as we have more details.</sys:String>
+            <sys:String>Let us know if you need further assistance.</sys:String>
         </smarttexteditor:SfSmartTextEditor.UserPhrases>
     </smarttexteditor:SfSmartTextEditor>
 </Window>
@@ -277,7 +278,6 @@ namespace WpfApplication1
 
 **For other AI providers:**
 - See [ai-service-configuration.md](ai-service-configuration.md) for OpenAI and Ollama setup
-- See [custom-ai-services.md](custom-ai-services.md) for Claude, DeepSeek, Gemini, and Groq integration
 
 ## Step 7: Running the Application
 
@@ -305,4 +305,4 @@ namespace WpfApplication1
 **Next Steps:**
 - Configure suggestion display modes: [suggestion-display-modes.md](suggestion-display-modes.md)
 - Customize appearance and styling: [customization.md](customization.md)
-- Set up additional AI providers: [ai-service-configuration.md](ai-service-configuration.md) or [custom-ai-services.md](custom-ai-services.md)
+- Set up additional AI providers: [ai-service-configuration.md](ai-service-configuration.md)

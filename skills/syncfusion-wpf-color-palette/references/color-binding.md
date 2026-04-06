@@ -202,9 +202,66 @@ public class ColorViewModel : INotifyPropertyChanged
 
 ## Binding to TextBlock for Color Value Display
 
-Display the actual color value selected:
+Display the actual color value selected. Since `Color` is a struct and cannot be indexed via `StringFormat`, use code-behind or a MultiValueConverter:
+
+### Using Code-Behind
 
 ```xaml
+<StackPanel Margin="20">
+    <syncfusion:SfColorPalette 
+        x:Name="colorPalette"
+        Height="200"
+        Width="250"
+        Margin="0,0,0,15"
+        SelectedColorChanged="ColorPalette_SelectedColorChanged"/>
+    
+    <TextBlock Text="Color Details:" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+    
+    <!-- Display color's ARGB values via code-behind update -->
+    <TextBlock 
+        FontFamily="Courier New"
+        Background="LightGray"
+        Padding="5"
+        x:Name="colorDetailsText"/>
+</StackPanel>
+```
+
+```csharp
+private void ColorPalette_SelectedColorChanged(object sender, SelectedColorChangedEventArgs e)
+{
+    Color selectedColor = e.Color;
+    colorDetailsText.Text = $"A={selectedColor.A:X2} R={selectedColor.R:X2} G={selectedColor.G:X2} B={selectedColor.B:X2}";
+}
+```
+
+### Using MultiValueConverter (MVVM-friendly)
+
+Create a converter for multi-part color display:
+
+```csharp
+public class ColorToARGBStringConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is Color color)
+        {
+            return $"A={color.A:X2} R={color.R:X2} G={color.G:X2} B={color.B:X2}";
+        }
+        return "No color selected";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+```
+
+```xaml
+<Window.Resources>
+    <local:ColorToARGBStringConverter x:Key="ColorToARGBConverter"/>
+</Window.Resources>
+
 <StackPanel Margin="20">
     <syncfusion:SfColorPalette 
         x:Name="colorPalette"
@@ -214,12 +271,11 @@ Display the actual color value selected:
     
     <TextBlock Text="Color Details:" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
     
-    <!-- Display color's ARGB values -->
     <TextBlock 
         FontFamily="Courier New"
         Background="LightGray"
         Padding="5"
-        Text="{Binding ElementName=colorPalette, Path=SelectedColor, StringFormat='A={0:X2} R={0:X2} G={0:X2} B={0:X2}'}"/>
+        Text="{Binding ElementName=colorPalette, Path=SelectedColor, Converter={StaticResource ColorToARGBConverter}}"/>
 </StackPanel>
 ```
 

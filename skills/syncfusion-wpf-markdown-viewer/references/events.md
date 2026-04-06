@@ -58,25 +58,65 @@ private void MarkdownViewer_HyperlinkClicked(object sender, MarkdownHyperlinkCli
 
 ## In-App Navigation Pattern
 
+> ⚠️ **Security requirement:** Always validate and allowlist the URL before acting on it. Markdown content can originate from untrusted sources; a malicious `app://` link in rendered Markdown can trigger unintended in-app navigation if routes are not validated.
+
 Handle links that point to internal routes (e.g., `app://page/settings`) while allowing external links to open normally:
 
 ```csharp
+// Define an explicit allowlist of valid internal routes
+private static readonly HashSet<string> _allowedRoutes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+{
+    "settings", "help", "dashboard", "profile"
+};
+
 private void MarkdownViewer_HyperlinkClicked(object sender, MarkdownHyperlinkClickedEventArgs args)
 {
-    if (args.Url.StartsWith("app://"))
+    // Always cancel first — explicitly decide what to allow
+    args.Cancel = true;
+
+    if (args.Url.StartsWith("app://", StringComparison.OrdinalIgnoreCase))
     {
-        // Internal navigation — cancel default and handle in-app
-        args.Cancel = true;
-        string route = args.Url.Replace("app://", "");
-        NavigateTo(route);
+        // Extract and validate the route against the allowlist
+        string route = args.Url.Substring("app://".Length).Trim('/');
+
+        if (_allowedRoutes.Contains(route))
+        {
+            NavigateTo(route);
+        }
+        // If route is not in the allowlist, navigation is silently blocked (Cancel = true)
     }
-    // External links proceed normally (Cancel stays false)
+    else if (Uri.TryCreate(args.Url, UriKind.Absolute, out Uri uri)
+             && (uri.Scheme == Uri.UriSchemeHttps))
+    {
+        // Only allow HTTPS external links — block HTTP and other schemes
+        args.Cancel = false; // Permit safe external navigation
+    }
+    // All other schemes (http, ftp, file, javascript, etc.) remain blocked
 }
 
 private void NavigateTo(string route)
 {
-    // Your in-app navigation logic
+    // Your in-app navigation logic — route is already validated
 }
+```
+
+**What this pattern enforces:**
+- All navigation is cancelled by default; only explicitly allowed routes and HTTPS URLs are permitted
+- Internal `app://` routes are validated against a fixed allowlist — arbitrary routes from Markdown content cannot be acted on
+- HTTP and non-HTTPS external links are blocked to reduce phishing risk
+- Schemes like `javascript:`, `file:`, and `data:` are blocked implicitly
+
+**Do NOT do this:**
+```csharp
+// ❌ Never act on app:// routes without allowlist validation
+if (args.Url.StartsWith("app://"))
+{
+    string route = args.Url.Replace("app://", "");
+    NavigateTo(route); // Untrusted route from Markdown content
+}
+
+// ❌ Never allow all external links without scheme check
+args.Cancel = false; // Opens any URL including http:// and file://
 ```
 
 ---
@@ -84,5 +124,8 @@ private void NavigateTo(string route)
 ## Gotchas
 
 - **Default behavior opens OS browser** — if `Cancel` is not set to `true`, clicking a link opens the system default browser
-- **`Cancel` must be set synchronously** — set `args.Cancel = true` before the event handler returns; async patterns may not suppress navigation in time
+- **Cancel all by default** — set `args.Cancel = true` first, then selectively re-enable only trusted URLs; this is safer than cancelling only specific cases
+- **`Cancel` must be set synchronously** — set `args.Cancel` before the event handler returns; async patterns may not suppress navigation in time
+- **Validate `app://` routes against an allowlist** — the `Url` value comes directly from Markdown source text; treat it as untrusted input and never pass it to navigation logic without validation
+- **Block non-HTTPS schemes** — only permit `https://` for external links; block `http://`, `file://`, `javascript:`, and `data:` schemes explicitly
 - **Relative links** — the `Url` value is exactly what appears in the Markdown source; relative paths like `./page.md` are not resolved against a base URL automatically

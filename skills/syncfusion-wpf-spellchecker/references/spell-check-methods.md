@@ -182,8 +182,6 @@ spellChecker.EnableSpellCheck = true;
 </TextBox>
 ```
 
-![Context Menu Usage](../../../../../../../docs/gettingstarted-images/contextmenu.gif)
-
 ### Disabling Context Menu
 
 To disable context menu while keeping dialog available:
@@ -345,9 +343,3 @@ private void Window_KeyDown(object sender, KeyEventArgs e)
 - Check if custom dictionary is interfering
 - Consider using different dictionary format
 - Add custom words to improve accuracy
-
-## Next Steps
-
-- **Configure ignore options:** Read [ignore-options.md](ignore-options.md)
-- **Add language dictionaries:** Read [dictionary-support.md](dictionary-support.md)
-- **Handle events:** Read [customization.md](customization.md)

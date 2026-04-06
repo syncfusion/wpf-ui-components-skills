@@ -621,7 +621,7 @@ namespace RangeSliderExample
         TickPlacement="Outside"
         SnapsTo="Ticks"
         Value="22"
-        ShowToolTip="True" />
+         />
 </StackPanel>
 ```
 
@@ -639,7 +639,7 @@ namespace RangeSliderExample
         TickFrequency="100"
         TickPlacement="BottomRight"
         Value="250"
-        ShowToolTip="True" />
+         />
 </StackPanel>
 ```
 
@@ -656,7 +656,7 @@ namespace RangeSliderExample
         TickFrequency="20"
         TickPlacement="TopLeft"
         Value="60"
-        ShowToolTip="True" />
+         />
 </Grid>
 ```
 
@@ -673,7 +673,6 @@ SfRangeSlider verticalSlider = new SfRangeSlider
     TickFrequency = 20,
     TickPlacement = TickPlacement.TopLeft,
     Value = 60,
-    ShowToolTip = true
 };
 ```
 
@@ -690,7 +689,7 @@ SfRangeSlider verticalSlider = new SfRangeSlider
         TickFrequency="1"
         TickPlacement="None"
         Value="7"
-        ShowToolTip="True" />
+         />
 </StackPanel>
 ```
 
@@ -763,7 +762,7 @@ Vertical sliders:
 Always enable tooltips for better user feedback:
 ```xaml
 <editors:SfRangeSlider
-    ShowToolTip="True"
+    
     SnapsTo="Ticks"
     TickFrequency="10" />
 ```
@@ -785,7 +784,7 @@ Always enable tooltips for better user feedback:
     SnapsTo="StepValues"
     StepFrequency="5"
     Value="75"
-    ShowToolTip="True" />
+     />
 ```
 
 ### Scenario 2: Age Range Selection
@@ -801,7 +800,7 @@ Always enable tooltips for better user feedback:
     SnapsTo="StepValues"
     StepFrequency="1"
     Value="25"
-    ShowToolTip="True" />
+     />
 ```
 
 ### Scenario 3: Percentage Selection
@@ -818,7 +817,7 @@ Always enable tooltips for better user feedback:
     SnapsTo="StepValues"
     StepFrequency="5"
     Value="20"
-    ShowToolTip="True" />
+     />
 ```
 
 ### Scenario 4: Custom Numeric Range
@@ -833,7 +832,7 @@ Always enable tooltips for better user feedback:
     TickPlacement="Outside"
     SnapsTo="Ticks"
     Value="0"
-    ShowToolTip="True" />
+     />
 ```
 
 ### Scenario 5: Year Selection
@@ -849,7 +848,7 @@ Always enable tooltips for better user feedback:
     SnapsTo="StepValues"
     StepFrequency="1"
     Value="2000"
-    ShowToolTip="True" />
+     />
 ```
 
 ---

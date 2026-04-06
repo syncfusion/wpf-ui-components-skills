@@ -28,9 +28,9 @@ The TextInputLayout control allows you to add custom icons at both the leading (
 
 ```
 ┌─────────────────────────────────────────────────┐
-│  [L]  ┌─────────────────────────┐  [T]         │
-│  Out  │  [L]  Input View  [T]   │  Out         │
-│  side │   In                In  │  side        │
+│  [L]  ┌─────────────────────────┐  [T]          │
+│  Out  │  [L]  Input View  [T]   │  Out          │
+│  side │   In                In  │  side         │
 │       └─────────────────────────┘               │
 └─────────────────────────────────────────────────┘
 
@@ -66,7 +66,7 @@ The leading view appears on the left side (start edge) of the input view and is 
     <inputLayout:SfTextInputLayout.LeadingView>
         <Label
             FontFamily="/Assets/Sync FontIcons.ttf#Sync FontIcons"
-            Text="&#x1F5D3;">
+            Content="&#x1F5D3;">
         </Label>
     </inputLayout:SfTextInputLayout.LeadingView>
 </inputLayout:SfTextInputLayout>
@@ -77,7 +77,7 @@ The leading view appears on the left side (start edge) of the input view and is 
 var inputLayout = new SfTextInputLayout();
 inputLayout.Hint = "Birth date";
 inputLayout.LeadingViewPosition = ViewPosition.Inside;
-inputLayout.LeadingView = new Label() { Text = "\U0001F5D3" }; // Calendar icon
+inputLayout.LeadingView = new Label() { Content = "\U0001F5D3" }; // Calendar icon
 inputLayout.InputView = new TextBox();
 ```
 
@@ -120,7 +120,7 @@ The `LeadingViewPosition` property controls where the icon appears relative to t
     LeadingViewPosition="Inside">
     <TextBox />
     <inputLayout:SfTextInputLayout.LeadingView>
-        <Label Text="🔍" FontSize="18" VerticalAlignment="Center"/>
+        <Label Content="🔍" FontSize="18" VerticalAlignment="Center"/>
     </inputLayout:SfTextInputLayout.LeadingView>
 </inputLayout:SfTextInputLayout>
 
@@ -130,7 +130,7 @@ The `LeadingViewPosition` property controls where the icon appears relative to t
     LeadingViewPosition="Outside">
     <TextBox />
     <inputLayout:SfTextInputLayout.LeadingView>
-        <Label Text="$" FontSize="16" FontWeight="Bold" 
+        <Label Content="$" FontSize="16" FontWeight="Bold" 
                VerticalAlignment="Center"/>
     </inputLayout:SfTextInputLayout.LeadingView>
 </inputLayout:SfTextInputLayout>
@@ -147,7 +147,7 @@ The `LeadingViewPosition` property controls where the icon appears relative to t
     LeadingViewPosition="Inside">
     <TextBox />
     <inputLayout:SfTextInputLayout.LeadingView>
-        <Label Text="🔍" FontSize="18" Foreground="Gray"/>
+        <Label Content="🔍" FontSize="18" Foreground="Gray"/>
     </inputLayout:SfTextInputLayout.LeadingView>
 </inputLayout:SfTextInputLayout>
 ```
@@ -159,7 +159,7 @@ userInputLayout.Hint = "Username";
 userInputLayout.LeadingViewPosition = ViewPosition.Inside;
 userInputLayout.LeadingView = new Label() 
 { 
-    Text = "👤",
+    Content = "👤",
     FontSize = 18,
     VerticalAlignment = VerticalAlignment.Center
 };
@@ -173,7 +173,7 @@ userInputLayout.InputView = new TextBox();
     LeadingViewPosition="Outside">
     <TextBox />
     <inputLayout:SfTextInputLayout.LeadingView>
-        <Label Text="$" FontSize="20" FontWeight="Bold" 
+        <Label Content="$" FontSize="20" FontWeight="Bold" 
                VerticalAlignment="Center" Foreground="#2E7D32"/>
     </inputLayout:SfTextInputLayout.LeadingView>
 </inputLayout:SfTextInputLayout>
@@ -186,7 +186,7 @@ userInputLayout.InputView = new TextBox();
     LeadingViewPosition="Inside">
     <TextBox />
     <inputLayout:SfTextInputLayout.LeadingView>
-        <Label Text="+1" FontSize="14" Foreground="Gray"
+        <Label Content="+1" FontSize="14" Foreground="Gray"
                VerticalAlignment="Center" Margin="8,0,0,0"/>
     </inputLayout:SfTextInputLayout.LeadingView>
 </inputLayout:SfTextInputLayout>
@@ -213,7 +213,7 @@ The trailing view appears on the right side (end edge) of the input view and is 
     <inputLayout:SfTextInputLayout.TrailingView>
         <Label
             FontFamily="/Assets/Sync FontIcons.ttf#Sync FontIcons"
-            Text="&#x1F5D3;">
+            Content="&#x1F5D3;">
         </Label>
     </inputLayout:SfTextInputLayout.TrailingView>
 </inputLayout:SfTextInputLayout>
@@ -224,7 +224,7 @@ The trailing view appears on the right side (end edge) of the input view and is 
 var inputLayout = new SfTextInputLayout();
 inputLayout.Hint = "Birth date";
 inputLayout.TrailingViewPosition = ViewPosition.Outside;
-inputLayout.TrailingView = new Label() { Text = "\U0001F5D3" }; // Calendar icon
+inputLayout.TrailingView = new Label() { Content = "\U0001F5D3" }; // Calendar icon
 inputLayout.InputView = new TextBox();
 ```
 
@@ -338,7 +338,7 @@ private void ShowValidationIcon(SfTextInputLayout layout, bool isValid)
 {
     var icon = new Label
     {
-        Text = isValid ? "✓" : "✗",
+        Content = isValid ? "✓" : "✗",
         Foreground = new SolidColorBrush(isValid ? Colors.Green : Colors.Red),
         FontSize = 18,
         VerticalAlignment = VerticalAlignment.Center
@@ -799,7 +799,7 @@ public static UIElement GetInputViewForScenario(InputScenario scenario)
 ```xaml
 <!-- Good: Includes accessible label -->
 <inputLayout:SfTextInputLayout.LeadingView>
-    <Label Text="🔍" 
+    <Label Content="🔍" 
            AutomationProperties.Name="Search icon"
            FontSize="18"/>
 </inputLayout:SfTextInputLayout.LeadingView>
@@ -851,17 +851,17 @@ public void UpdateValidationIcon(SfTextInputLayout layout, ValidationState state
     switch (state)
     {
         case ValidationState.Valid:
-            icon.Text = "✓";
+            icon.Content = "✓";
             icon.Foreground = Brushes.Green;
             layout.HasError = false;
             break;
         case ValidationState.Invalid:
-            icon.Text = "✗";
+            icon.Content = "✗";
             icon.Foreground = Brushes.Red;
             layout.HasError = true;
             break;
         case ValidationState.Pending:
-            icon.Text = "⏳";
+            icon.Content = "⏳";
             icon.Foreground = Brushes.Orange;
             layout.HasError = false;
             break;
@@ -887,7 +887,7 @@ public void UpdateValidationIcon(SfTextInputLayout layout, ValidationState state
         Margin="0,0,0,16">
         <TextBox />
         <inputLayout:SfTextInputLayout.LeadingView>
-            <Label Text="👤" FontSize="18" Foreground="Gray"/>
+            <Label Content="👤" FontSize="18" Foreground="Gray"/>
         </inputLayout:SfTextInputLayout.LeadingView>
     </inputLayout:SfTextInputLayout>
     
@@ -900,7 +900,7 @@ public void UpdateValidationIcon(SfTextInputLayout layout, ValidationState state
         TrailingViewPosition="Inside">
         <PasswordBox x:Name="passwordBox"/>
         <inputLayout:SfTextInputLayout.LeadingView>
-            <Label Text="🔒" FontSize="18" Foreground="Gray"/>
+            <Label Content="🔒" FontSize="18" Foreground="Gray"/>
         </inputLayout:SfTextInputLayout.LeadingView>
         <inputLayout:SfTextInputLayout.TrailingView>
             <Button Content="👁" 
@@ -925,7 +925,7 @@ public void UpdateValidationIcon(SfTextInputLayout layout, ValidationState state
         AutoCompleteMode="SuggestAppend"
         AutoCompleteSource="{Binding Countries}"/>
     <inputLayout:SfTextInputLayout.LeadingView>
-        <Label Text="🔍" FontSize="18" Foreground="#666"/>
+        <Label Content="🔍" FontSize="18" Foreground="#666"/>
     </inputLayout:SfTextInputLayout.LeadingView>
     <inputLayout:SfTextInputLayout.TrailingView>
         <Button Content="✖" 
@@ -965,7 +965,7 @@ public void UpdateValidationIcon(SfTextInputLayout layout, ValidationState state
     LeadingViewPosition="Outside">
     <TextBox />
     <inputLayout:SfTextInputLayout.LeadingView>
-        <Label Text="$" 
+        <Label Content="$" 
                FontSize="20" 
                FontWeight="Bold"
                Foreground="#2E7D32"

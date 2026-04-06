@@ -346,6 +346,7 @@ public class MyViewModel : INotifyPropertyChanged
 <!-- XAML -->
 <syncfusion:RibbonGallery Label="Styles"
                           ItemsSource="{Binding GalleryItems}" />
+```
 
 ### Binding Complex Objects
 

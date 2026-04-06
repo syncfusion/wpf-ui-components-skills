@@ -50,326 +50,36 @@ colorPicker.IsColorPaletteVisible = false;
 
 ## Gradient Brush Display Modes
 
-The gradient brush display mode controls how gradient colors are visually represented in the ColorPicker interface.
+Set `GradientBrushDisplayMode` to control gradient preview appearance:
 
-### Default Display Mode
-```xaml
-<syncfusion:ColorPicker GradientBrushDisplayMode="Default"/>
-```
+| Mode | Size | Use Case |
+|------|------|----------|
+| Default | Compact | Space-constrained dialogs; minimal UI footprint |
+| Extended | Large | Dedicated color panels; detailed gradient control |
 
-```csharp
-colorPicker.GradientBrushDisplayMode = Syncfusion.Windows.Tools.GradientBrushDisplayMode.Default;
-```
-
-The Default mode shows a compact representation of the gradient.
-
-### Extended Display Mode
-```xaml
-<syncfusion:ColorPicker GradientBrushDisplayMode="Extended"/>
-```
-
-```csharp
-colorPicker.GradientBrushDisplayMode = Syncfusion.Windows.Tools.GradientBrushDisplayMode.Extended;
-```
-
-The Extended mode shows a more detailed, larger representation of the gradient with additional editing controls.
-
-### Mode Comparison
-
-| Feature | Default | Extended |
-|---------|---------|----------|
-| Gradient Preview Size | Compact | Large |
-| Visual Clarity | Standard | Enhanced |
-| UI Space Usage | Minimal | More |
-| Best For | Compact layouts | Feature-rich interfaces |
-
-### Choosing a Display Mode
-
-**Use Default when:**
-```xaml
-<!-- Space-constrained dialogs or panels -->
-<syncfusion:ColorPicker GradientBrushDisplayMode="Default" Width="200" Height="150"/>
-```
-
-**Use Extended when:**
-```xaml
-<!-- Dedicated color editing panels -->
-<syncfusion:ColorPicker GradientBrushDisplayMode="Extended" Width="400" Height="500"/>
-```
+Set in XAML: `GradientBrushDisplayMode="Default"` or `GradientBrushDisplayMode="Extended"`. In C#: `colorPicker.GradientBrushDisplayMode = GradientBrushDisplayMode.Default;`
 
 ## Inverted Color Calculation
 
-The inverted color feature calculates a contrasting color (the inverse) of the selected color. This is useful for automatically determining complementary text colors or accent colors.
-
-### Getting the Inverted Color
-
-Note: The inverted color property is available in the `ColorEdit` control (a related component), not directly in `ColorPicker`. If using `ColorEdit`:
-
-```xaml
-<syncfusion:ColorEdit x:Name="colorEdit"   />
-<TextBlock Text="Sample Text" 
-           Background="{Binding ElementName=colorEdit, Path=Brush, UpdateSourceTrigger=PropertyChanged}"
-           Foreground="{Binding ElementName=colorEdit, Path=InvertColor, UpdateSourceTrigger=PropertyChanged}"/>
-```
-
-In C#:
-```csharp
-ColorEdit colorEdit = new ColorEdit();
-
-// Get background brush and inverted foreground color
-Brush bgBrush = colorEdit.Brush;
-Color fgColor = colorEdit.InvertColor;
-```
-
-### Practical Use Case: Auto-Contrasting Text
-
-```xaml
-<Grid>
-    <syncfusion:ColorEdit x:Name="colorEdit" Width="300" Height="200"/>
-    
-    <!-- Text that automatically contrasts with selected background -->
-    <TextBlock Text="This text contrasts with the background"
-               TextAlignment="Center"
-               FontSize="16"
-               Background="{Binding ElementName=colorEdit, Path=Brush, UpdateSourceTrigger=PropertyChanged}"
-               Foreground="{Binding ElementName=colorEdit, Path=InvertColor, UpdateSourceTrigger=PropertyChanged}"
-               VerticalAlignment="Center"
-               Padding="10"/>
-</Grid>
-```
-
-### Invert Color Algorithm
-
-The invert color calculation uses the RGB color space to create a contrasting color suitable for text or UI elements that need to stand out against the selected background.
-
-Formula (approximate):
-- Inverted R = 255 - Original R
-- Inverted G = 255 - Original G
-- Inverted B = 255 - Original B
-
-This creates a color with maximum contrast in the opposite direction of the color spectrum.
-
-## ScRGB Color Support
-
-ScRGB (Scene referred RGB) is an extended color space that supports colors outside the standard sRGB gamut, enabling more accurate color representation for advanced graphics applications.
-
-### Enable ScRGB Color Support
-
-Note: ScRGB is available in the `ColorEdit` control.
-
-```xaml
-<syncfusion:ColorEdit IsScRGBColor="True"/>
-```
-
-```csharp
-colorEdit.IsScRGBColor = true;
-```
-
-### ScRGB vs Standard RGB
-
-| Aspect | Standard RGB | ScRGB |
-|--------|--------------|-------|
-| Color Space | sRGB (8-bit per channel) | Extended color space |
-| Value Range | 0-255 | 0-255+ (can exceed standard range) |
-| Use Case | General purpose UI colors | Professional graphics, color-accurate work |
-| Precision | Standard | Higher color fidelity |
-
-### When to Use ScRGB
-
-**Enable ScRGB when:**
-- Working with professional graphics or publishing applications
-- Color accuracy is critical
-- Supporting wide color gamuts (e.g., Adobe RGB)
-
-**Use standard RGB (default) when:**
-- Building typical business applications
-- Working with standard web colors
-- Color precision requirements are standard
-
-### ScRGB Implementation
-
-```csharp
-ColorEdit colorEdit = new ColorEdit();
-colorEdit.IsScRGBColor = true;
-
-// Now ColorEdit supports extended color values
-Color extendedColor = colorEdit.Color;
-```
+**Note:** Inverted color and ScRGB color support are features of the `ColorEdit` control (related component), not `ColorPicker`. These advanced features are available in `ColorEdit`:
+- **Inverted Color:** Access via `colorEdit.InvertColor` property for auto-contrasting text colors
+- **ScRGB Support:** Set `colorEdit.IsScRGBColor = true` for extended color gamut (professional graphics applications)
 
 ## Alpha Channel Control
 
-The alpha channel controls the transparency of selected colors. You can show or hide alpha controls based on your application's needs.
-
-### Show Alpha Controls (Default)
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="True"/>
-```
-
-```csharp
-colorPicker.IsAlphaVisible = true;
-```
-
-When visible, users see:
-- An alpha slider (typically horizontal)
-- An "A" value input field (0-255)
-- An opacity label or indicator
-
-### Hide Alpha Controls
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="False"/>
-```
-
-```csharp
-colorPicker.IsAlphaVisible = false;
-```
-
-All selected colors are automatically fully opaque (alpha = 255).
-
-### Alpha Control Use Cases
-
-**Show alpha when:**
-```xaml
-<!-- Image editing, design tools -->
-<syncfusion:ColorPicker IsAlphaVisible="True"/>
-```
-
-**Hide alpha when:**
-```xaml
-<!-- UI theming, solid color selection -->
-<syncfusion:ColorPicker IsAlphaVisible="False"/>
-```
-
-### Programmatic Alpha Control
-
-```csharp
-// Enable/disable alpha based on context
-if (isImageEditor)
-{
-    colorPicker.IsAlphaVisible = true;
-}
-else
-{
-    colorPicker.IsAlphaVisible = false;
-}
-
-// Retrieve alpha value
-if (colorPicker.IsAlphaVisible)
-{
-    Color selectedColor = colorPicker.Color;
-    byte alpha = selectedColor.A;  // 0-255
-    double opacity = alpha / 255.0;  // 0.0-1.0
-}
-```
+Use `IsAlphaVisible="True"` to show opacity controls or `IsAlphaVisible="False"` to hide them. Enable when users need transparency control (image editing); disable for solid colors only. See [solid-gradient-colors.md](solid-gradient-colors.md#managing-opacity-alpha-channel) for comprehensive examples.
 
 ## Restricting Brush Mode Transitions
 
-By default, users can switch between Solid, Linear Gradient, and Radial Gradient modes using buttons in the ColorPicker interface.
+Use `EnableSolidToGradientSwitch` to allow or prevent mode switching:
+- `EnableSolidToGradientSwitch="True"` (default): Shows mode buttons; users can switch between solid and gradient
+- `EnableSolidToGradientSwitch="False"`: Hides mode buttons; locks to current mode only
 
-### Allow Mode Switching (Default)
-```xaml
-<syncfusion:ColorPicker EnableSolidToGradientSwitch="True"/>
-```
-
-```csharp
-colorPicker.EnableSolidToGradientSwitch = true;
-```
-
-Buttons for Solid, Linear, and Gradient modes are visible at the bottom-right of the ColorPicker.
-
-### Disable Mode Switching
-```xaml
-<syncfusion:ColorPicker EnableSolidToGradientSwitch="False"/>
-```
-
-```csharp
-colorPicker.EnableSolidToGradientSwitch = false;
-```
-
-The mode-switching buttons are hidden. Users can only work with the current mode.
-
-### Mode Transition Use Cases
-
-**Allow transitions when:**
-```xaml
-<!-- Full-featured color picker -->
-<syncfusion:ColorPicker EnableSolidToGradientSwitch="True"/>
-```
-
-**Disable transitions when:**
-```xaml
-<!-- Simple solid color picker -->
-<syncfusion:ColorPicker EnableSolidToGradientSwitch="False" Color="Blue"/>
-
-<!-- Gradient-only picker (set Brush to gradient) -->
-<syncfusion:ColorPicker EnableSolidToGradientSwitch="False">
-    <syncfusion:ColorPicker.Brush>
-        <LinearGradientBrush>
-            <GradientStop Color="Red" Offset="0.0"/>
-            <GradientStop Color="Blue" Offset="1.0"/>
-        </LinearGradientBrush>
-    </syncfusion:ColorPicker.Brush>
-</syncfusion:ColorPicker>
-```
-
-### Practical Pattern: Context-Based Restrictions
-
-```csharp
-public void ConfigureColorPickerByMode(ColorPicker picker, ColorSelectionMode mode)
-{
-    switch (mode)
-    {
-        case ColorSelectionMode.SolidOnly:
-            picker.EnableSolidToGradientSwitch = false;
-            picker.Color = Colors.Black;
-            break;
-
-        case ColorSelectionMode.GradientOnly:
-            picker.EnableSolidToGradientSwitch = false;
-            picker.Brush = new LinearGradientBrush(Colors.Black, Colors.White, 
-                                                    new Point(0, 0), new Point(1, 0));
-            break;
-
-        case ColorSelectionMode.Both:
-            picker.EnableSolidToGradientSwitch = true;
-            break;
-    }
-}
-
-public enum ColorSelectionMode
-{
-    SolidOnly,
-    GradientOnly,
-    Both
-}
-```
+**Use cases:** Enable for full-featured pickers, disable for solid-color-only or gradient-only applications. In code, set based on user context or feature availability.
 
 ## Combining Customization Options
 
-### Example 1: Simple Solid Color Picker
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="False"
-                        IsColorPaletteVisible="True"
-                        EnableSolidToGradientSwitch="False"
-                        Width="250"
-                        Height="120"/>
-```
-
-### Example 2: Professional Gradient Editor
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="True"
-                        IsColorPaletteVisible="False"
-                        EnableSolidToGradientSwitch="True"
-                        GradientBrushDisplayMode="Extended"
-                        Width="400"
-                        Height="450"/>
-```
-
-### Example 3: Compact with Limited Options
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="False"
-                        IsColorPaletteVisible="True"
-                        EnableSolidToGradientSwitch="False"
-                        GradientBrushDisplayMode="Default"
-                        Width="180"
-                        Height="100"/>
-```
+Combine multiple properties to achieve specific configurations:
+- **Solid color only:** `EnableSolidToGradientSwitch="False"` + `IsAlphaVisible="False"`
+- **Professional gradient editor:** `EnableSolidToGradientSwitch="True"` + `GradientBrushDisplayMode="Extended"` + `IsAlphaVisible="True"`
+- **Compact picker:** Use Default display mode with `Width="180" Height="100"`

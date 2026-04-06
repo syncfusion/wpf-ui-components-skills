@@ -134,7 +134,15 @@ DockingManager.SetCanFloat(window, false);
 
 ## AutoHidden State
 
-Windows collapse to the container edge and expand on hover/click.
+Windows collapse to the container edge and expand on hover/click, similar to Visual Studio's auto-hide panels. This state saves screen space while keeping frequently accessed tools within quick reach.
+
+**Key Features:**
+- Saves screen space by collapsing to edge tabs
+- Quick access on hover or click
+- Customizable animation (fade, scale, slide)
+- Per-edge panel placement
+- Scrollable side panels for many tabs
+- Drag and reposition between edges
 
 ### Basic AutoHidden Configuration
 
@@ -177,9 +185,27 @@ Specify which edge the collapsed window appears on:
 </syncfusion:DockingManager>
 ```
 
+### Target-Based Auto-Hide Positioning
+
+Auto-hidden windows can inherit the side from their target docked window:
+
+```xaml
+<syncfusion:DockingManager>
+    <!-- Target window docked on left -->
+    <ContentControl x:Name="SolutionExplorer"
+                    syncfusion:DockingManager.Header="Solution Explorer"
+                    syncfusion:DockingManager.SideInDockedMode="Left"/>
+    
+    <!-- This window auto-hides on left (inherited from target) -->
+    <ContentControl syncfusion:DockingManager.Header="Output"
+                    syncfusion:DockingManager.State="AutoHidden"
+                    syncfusion:DockingManager.TargetNameInDockedMode="SolutionExplorer"/>
+</syncfusion:DockingManager>
+```
+
 ### Animation Modes
 
-Control how auto-hidden windows animate:
+Control how auto-hidden windows animate when expanding/collapsing:
 
 ```xaml
 <!-- Fade animation -->
@@ -192,33 +218,160 @@ Control how auto-hidden windows animate:
     <ContentControl syncfusion:DockingManager.State="AutoHidden"/>
 </syncfusion:DockingManager>
 
-<!-- Slide animation -->
+<!-- Slide animation (default) -->
 <syncfusion:DockingManager AutoHideAnimationMode="Slide">
     <ContentControl syncfusion:DockingManager.State="AutoHidden"/>
 </syncfusion:DockingManager>
 ```
 
-### Controlling AutoHide Ability
+```csharp
+dockingManager.AutoHideAnimationMode = AutoHideAnimationMode.Fade;
+```
 
-Disable auto-hide functionality for specific windows:
+### Animation Duration
+
+Control expansion/collapse speed:
 
 ```xaml
+<ContentControl syncfusion:DockingManager.Header="Toolbox"
+                syncfusion:DockingManager.State="AutoHidden"
+                syncfusion:DockingManager.AnimationDelay="200"/>
+```
+
+```csharp
+DockingManager.SetAnimationDelay(toolbox, new Duration(TimeSpan.FromMilliseconds(200)));
+```
+
+### Mouse-Over Behavior
+
+#### Hover Expansion (Default)
+
+```xaml
+<!-- Expand on hover (default) -->
+<syncfusion:DockingManager IsAnimationEnabledOnMouseOver="True">
+    <ContentControl syncfusion:DockingManager.State="AutoHidden"/>
+</syncfusion:DockingManager>
+```
+
+#### Click-Only Expansion
+
+```xaml
+<!-- Require click to expand -->
+<syncfusion:DockingManager IsAnimationEnabledOnMouseOver="False">
+    <ContentControl syncfusion:DockingManager.State="AutoHidden"/>
+</syncfusion:DockingManager>
+```
+
+#### Visual Studio 2013 Behavior
+
+Click to open, click again to close:
+
+```xaml
+<syncfusion:DockingManager IsAnimationEnabledOnMouseOver="False"
+                           IsVS2013SidePanelEnable="True">
+```
+
+### Side Panel Customization
+
+#### Side Panel Appearance
+
+```xaml
+<syncfusion:DockingManager SidePanelBackground="LightGray"
+                           SidePanelBorderBrush="DarkGray"
+                           SidePanelBorderThickness="2"
+                           SidePanelSize="40">
+```
+
+```csharp
+dockingManager.SidePanelBackground = new SolidColorBrush(Colors.LightGray);
+dockingManager.SidePanelSize = 40;
+```
+
+#### Per-Tab Customization
+
+```xaml
+<ContentControl syncfusion:DockingManager.Header="Toolbox"
+                syncfusion:DockingManager.State="AutoHidden"
+                syncfusion:DockingManager.SideTabItemBackground="Blue"
+                syncfusion:DockingManager.SideTabItemForeground="White"/>
+```
+
+#### Scrollable Side Panel
+
+Enable scrolling when tabs exceed panel width:
+
+```xaml
+<syncfusion:DockingManager EnableScrollableSidePanel="True">
+    <ContentControl syncfusion:DockingManager.State="AutoHidden"
+                    syncfusion:DockingManager.Header="Tab 1"/>
+    <!-- Many more tabs... -->
+</syncfusion:DockingManager>
+```
+
+### Auto-Hide Grouping Modes
+
+Control whether individual tabs or entire groups auto-hide:
+
+```xaml
+<!-- Only active tab auto-hides -->
+<syncfusion:DockingManager AutoHideTabsMode="AutoHideActive">
+</syncfusion:DockingManager>
+
+<!-- All tabs in group auto-hide (default) -->
+<syncfusion:DockingManager AutoHideTabsMode="AutoHideGroup">
+</syncfusion:DockingManager>
+```
+
+### Controlling AutoHide Ability
+
+#### Per-Window Control
+
+```xaml
+<!-- Prevent auto-hide for this window -->
 <ContentControl syncfusion:DockingManager.Header="No AutoHide"
                 syncfusion:DockingManager.CanAutoHide="False"/>
+
+<!-- Allow auto-hide (default) -->
+<ContentControl syncfusion:DockingManager.Header="Can AutoHide"
+                syncfusion:DockingManager.CanAutoHide="True"/>
 ```
 
 ```csharp
 DockingManager.SetCanAutoHide(window, false);
 ```
 
-Globally disable auto-hide pin button:
+#### Global Control
 
 ```xaml
+<!-- Hide pin button for all windows -->
 <syncfusion:DockingManager AutoHideVisibility="False">
 ```
 
+#### Dragging Auto-Hidden Windows
+
+```xaml
+<!-- Allow dragging between edges -->
+<ContentControl syncfusion:DockingManager.Header="Draggable"
+                syncfusion:DockingManager.State="AutoHidden"
+                syncfusion:DockingManager.CanDragAutoHidden="True"/>
+
+<!-- Prevent dragging -->
+<ContentControl syncfusion:DockingManager.Header="Fixed"
+                syncfusion:DockingManager.State="AutoHidden"
+                syncfusion:DockingManager.CanDragAutoHidden="False"/>
+```
+
+### Programmatic Operations
+
 ```csharp
-dockingManager.AutoHideVisibility = false;
+// Auto-hide all currently docked windows
+dockingManager.AutoHideAllDockWindow();
+
+// Convert all auto-hidden windows back to docked
+dockingManager.UnPinAllAutoHide();
+
+// Get auto-hidden window height
+double height = DockingManager.GetAutoHideHeight(toolbox);
 ```
 
 ## Document State
@@ -415,52 +568,16 @@ dockingManager.DockStateChanging += (sender, e) =>
 
 ## Common State Patterns
 
-### IDE Layout (Visual Studio-style)
-
+**IDE Layout (Visual Studio-style):**
 ```xaml
 <syncfusion:DockingManager UseDocumentContainer="True">
-    <!-- Tool windows docked on sides -->
-    <ContentControl syncfusion:DockingManager.Header="Solution Explorer"
-                    syncfusion:DockingManager.SideInDockedMode="Right"/>
-    
-    <!-- Infrequent tools auto-hidden -->
-    <ContentControl syncfusion:DockingManager.Header="Toolbox"
-                    syncfusion:DockingManager.State="AutoHidden"
-                    syncfusion:DockingManager.SideInDockedMode="Left"/>
-    
-    <!-- Main content as documents -->
-    <ContentControl syncfusion:DockingManager.Header="MainWindow.xaml"
-                    syncfusion:DockingManager.State="Document"/>
+    <ContentControl Header="Solution Explorer" SideInDockedMode="Right"/>
+    <ContentControl Header="Toolbox" State="AutoHidden" SideInDockedMode="Left"/>
+    <ContentControl Header="Document" State="Document"/>
 </syncfusion:DockingManager>
 ```
 
-### Dashboard with Detachable Panels
-
-```xaml
-<syncfusion:DockingManager UseNativeFloatWindow="True">
-    <!-- Primary panels docked -->
-    <ContentControl syncfusion:DockingManager.Header="Chart"
-                    syncfusion:DockingManager.SideInDockedMode="Left"/>
-    
-    <!-- Secondary panel can float for dual monitors -->
-    <ContentControl syncfusion:DockingManager.Header="Data Grid"
-                    syncfusion:DockingManager.State="Float"
-                    syncfusion:DockingManager.CanAutoHide="False"/>
-</syncfusion:DockingManager>
-```
-
-### Fixed Layout (No User Changes)
-
-```xaml
-<syncfusion:DockingManager>
-    <!-- Lock windows in place -->
-    <ContentControl syncfusion:DockingManager.Header="Fixed Left"
-                    syncfusion:DockingManager.SideInDockedMode="Left"
-                    syncfusion:DockingManager.CanFloat="False"
-                    syncfusion:DockingManager.CanAutoHide="False"
-                    syncfusion:DockingManager.CanClose="False"/>
-</syncfusion:DockingManager>
-```
+Other patterns: Dashboard with floating panels (use `State="Float"`), fixed layouts (disable `CanFloat`, `CanAutoHide`, `CanClose`), dual-monitor setups (enable `UseNativeFloatWindow="True"`).
 
 ## Troubleshooting
 

@@ -2,186 +2,27 @@
 
 ## Setting Foreground Color
 
-Change the text color of the time picker and time selector items:
-
-### Control Foreground
-
-```xaml
-<syncfusion:SfTimePicker Foreground="Red"
-                         Name="timePicker"
-                         Width="200"/>
-```
-
-### Time Selector Item Colors
-
-```xaml
-<syncfusion:SfTimePicker Name="timePicker" Width="200">
-    <syncfusion:SfTimePicker.SelectorStyle>
-        <Style TargetType="syncfusion:SfTimeSelector">
-            <!-- Color of unselected items -->
-            <Setter Property="Foreground" Value="Blue"/>
-            <!-- Color of selected/highlighted item -->
-            <Setter Property="SelectedForeground" Value="Yellow"/>
-        </Style>
-    </syncfusion:SfTimePicker.SelectorStyle>
-</syncfusion:SfTimePicker>
-```
-
-### Combined Example
-
-```csharp
-SfTimePicker timePicker = new SfTimePicker();
-timePicker.Foreground = new SolidColorBrush(Colors.DarkRed);
-timePicker.Width = 200;
-```
+Change text color using `Foreground` property (control text) and customize selector item colors via `SelectorStyle` with `Foreground` (unselected items) and `SelectedForeground` (highlighted items) setters.
 
 ## Setting Background Color
 
-Change the background color of the time picker and time selector:
+Set `Background` property for control background. Customize selector background via `SelectorStyle` → `Background` setter. Use `AccentBrush` property to set the highlight color for selected time values (e.g., `AccentBrush="Green"`).
 
-### Control Background
+## Color Customization
 
-```xaml
-<syncfusion:SfTimePicker Background="Red"
-                         Name="timePicker"
-                         Width="200"/>
-```
-
-### Time Selector Background
-
-```xaml
-<syncfusion:SfTimePicker AccentBrush="Green"
-                         Name="timePicker"
-                         Width="200">
-    <syncfusion:SfTimePicker.SelectorStyle>
-        <Style TargetType="syncfusion:SfTimeSelector">
-            <Setter Property="Background" Value="Blue"/>
-        </Style>
-    </syncfusion:SfTimePicker.SelectorStyle>
-</syncfusion:SfTimePicker>
-```
-
-### AccentBrush Property
-
-The **AccentBrush** property sets the highlight color for selected time values:
-
-```xaml
-<syncfusion:SfTimePicker AccentBrush="Green" 
-                         Name="timePicker"/>
-```
-
-```csharp
-SfTimePicker timePicker = new SfTimePicker();
-timePicker.AccentBrush = new SolidColorBrush(Colors.LimeGreen);
-```
-
-## Color Customization Example
-
-Complete styling example with custom colors:
-
-```xaml
-<syncfusion:SfTimePicker Foreground="White"
-                         Background="DarkBlue"
-                         AccentBrush="Gold"
-                         Name="styledPicker"
-                         Width="200">
-    <syncfusion:SfTimePicker.SelectorStyle>
-        <Style TargetType="syncfusion:SfTimeSelector">
-            <Setter Property="Foreground" Value="LightGray"/>
-            <Setter Property="SelectedForeground" Value="Gold"/>
-            <Setter Property="Background" Value="DarkSlateGray"/>
-        </Style>
-    </syncfusion:SfTimePicker.SelectorStyle>
-</syncfusion:SfTimePicker>
-```
+Combine `Foreground`, `Background`, and `AccentBrush` properties with `SelectorStyle` to create comprehensive color schemes. Selector style setters: `Foreground` (unselected), `SelectedForeground` (highlighted), `Background` (selector background).
 
 ## Flow Direction (RTL Support)
 
-Support right-to-left languages by setting the **FlowDirection** property:
-
-### Default (Left-to-Right)
-
-```xaml
-<syncfusion:SfTimePicker FlowDirection="LeftToRight" 
-                         Name="timePicker"/>
-```
-
-### Right-to-Left Layout
-
-```xaml
-<syncfusion:SfTimePicker FlowDirection="RightToLeft" 
-                         Name="timePicker"/>
-```
-
-```csharp
-SfTimePicker timePicker = new SfTimePicker();
-timePicker.FlowDirection = FlowDirection.RightToLeft;
-```
-
-### RTL Example with Arabic Watermark
-
-```xaml
-<syncfusion:SfTimePicker FlowDirection="RightToLeft"
-                         AllowNull="True"
-                         Value="{x:Null}"
-                         Watermark="اختر الوقت"
-                         Name="arabicTimePicker"/>
-```
+Set `FlowDirection="LeftToRight"` (default) or `FlowDirection="RightToLeft"` to support right-to-left languages. For RTL cultures, combine with `AllowNull="True"` and Arabic/RTL `Watermark` text. RTL automatically reverses layout, text alignment, and selector direction.
 
 ## Editing Modes
 
-Control how users interact with the time picker:
+Control user interaction by combining `AllowInlineEditing` and `ShowDropDownButton`:
 
-### Mode 1: Free Editing (Default)
-
-Allow users to directly type time values:
-
-```xaml
-<syncfusion:SfTimePicker AllowInlineEditing="True"
-                         ShowDropDownButton="True"
-                         FormatString="HH:mm"
-                         Value="03:00"
-                         Name="timePicker"/>
-```
-
-**Behavior:**
-- Users can type directly into the control
-- Validation occurs on Enter or focus loss
-- Dropdown button available for selection
-
-### Mode 2: Selection-Based Editing
-
-Restrict editing to dropdown selection only:
-
-```xaml
-<syncfusion:SfTimePicker AllowInlineEditing="False"
-                         ShowDropDownButton="True"
-                         FormatString="HH:mm"
-                         Value="03:00"
-                         Name="timePicker"/>
-```
-
-**Behavior:**
-- Users cannot type; must use dropdown
-- Hour and minute values selected via picker
-- More structured, less error-prone
-
-### Mode 3: Read-Only (Display Only)
-
-Show time but prevent any editing:
-
-```xaml
-<syncfusion:SfTimePicker AllowInlineEditing="False"
-                         ShowDropDownButton="False"
-                         FormatString="HH:mm"
-                         Value="03:00"
-                         Name="timePicker"/>
-```
-
-**Behavior:**
-- No dropdown button visible
-- No editing possible
-- Display-only mode for read-only scenarios
+- **Free Editing (default):** `AllowInlineEditing="True"`, `ShowDropDownButton="True"` → Users type or use dropdown
+- **Selection-Only:** `AllowInlineEditing="False"`, `ShowDropDownButton="True"` → Dropdown only, no typing
+- **Read-Only:** `AllowInlineEditing="False"`, `ShowDropDownButton="False"` → Display only, no editing
 
 ### Editing Mode Truth Table
 
@@ -194,122 +35,21 @@ Show time but prevent any editing:
 
 ## Theme Application
 
-SfTimePicker supports built-in themes via **SfSkinManager**:
+Apply built-in themes via `SfSkinManager`. Available themes: MaterialLight, MaterialDark, Office2019Blue, Office2019Black, Office2019Colourful, HighContrastBlack, HighContrastWhite, Fluent, FluentDark.
 
-### Available Themes
-
-- MaterialLight
-- MaterialDark
-- Office2019Blue
-- Office2019Black
-- Office2019Colourful
-- HighContrastBlack
-- HighContrastWhite
-- Fluent
-- FluentDark
-
-### Applying Theme to Single Control
-
-```xaml
-<syncfusion:SfTimePicker syncfusion:SfSkinManager.VisualStyle="MaterialLight"
-                         Name="timePicker"/>
-```
-
-### Applying Theme to Entire Application
-
-```xaml
-<Application x:Class="TimePickerApp.App"
-             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-             syncfusion:SfSkinManager.VisualStyle="MaterialDark">
-    <Application.Resources>
-    </Application.Resources>
-</Application>
-```
-
-### Switching Themes Dynamically
-
-```csharp
-using Syncfusion.Windows.Shared;
-
-// Change theme at runtime
-SfSkinManager.SetVisualStyle(timePicker, VisualStyles.MaterialDark);
-```
+**Apply to single control** in XAML: `syncfusion:SfSkinManager.VisualStyle="MaterialLight"`. **Apply to entire app** in App.xaml: Set `SfSkinManager.VisualStyle` on `<Application>`. **Switch dynamically** in C#: `SfSkinManager.SetVisualStyle(timePicker, VisualStyles.MaterialDark);`
 
 ## Common Styling Patterns
 
-### Pattern 1: Business Professional
+**Business Professional:** Black foreground, white background, blue accent (`AccentBrush="#0078D4"`), dropdown-only editing, Fluent theme.
 
-```xaml
-<syncfusion:SfTimePicker Foreground="Black"
-                         Background="White"
-                         AccentBrush="#0078D4"
-                         AllowInlineEditing="False"
-                         ShowDropDownButton="True"
-                         syncfusion:SfSkinManager.VisualStyle="Fluent"
-                         Width="150"
-                         Name="professional"/>
-```
+**Dark Modern:** White foreground, dark background (`#2D2D2D`), cyan accent (`#00D9FF`), FluentDark theme, customize selector colors via `SelectorStyle`.
 
-### Pattern 2: Dark Modern
+**High Contrast Accessibility:** Use `HighContrastBlack` or `HighContrastWhite` theme with white foreground and black background for maximum contrast.
 
-```xaml
-<syncfusion:SfTimePicker Foreground="White"
-                         Background="#2D2D2D"
-                         AccentBrush="#00D9FF"
-                         syncfusion:SfSkinManager.VisualStyle="FluentDark"
-                         Width="150"
-                         Name="darkModern">
-    <syncfusion:SfTimePicker.SelectorStyle>
-        <Style TargetType="syncfusion:SfTimeSelector">
-            <Setter Property="Foreground" Value="#CCCCCC"/>
-            <Setter Property="SelectedForeground" Value="White"/>
-            <Setter Property="Background" Value="#1E1E1E"/>
-        </Style>
-    </syncfusion:SfTimePicker.SelectorStyle>
-</syncfusion:SfTimePicker>
-```
+**Minimal/Clean:** Transparent background, gray foreground, `BorderThickness="0"` for borderless appearance.
 
-### Pattern 3: High Contrast Accessibility
-
-```xaml
-<syncfusion:SfTimePicker syncfusion:SfSkinManager.VisualStyle="HighContrastBlack"
-                         Foreground="White"
-                         Background="Black"
-                         Width="150"
-                         Name="accessible"/>
-```
-
-### Pattern 4: Minimal/Clean
-
-```xaml
-<syncfusion:SfTimePicker Background="Transparent"
-                         Foreground="DarkGray"
-                         AllowInlineEditing="True"
-                         ShowDropDownButton="True"
-                         BorderThickness="0"
-                         Width="150"
-                         Name="minimal"/>
-```
-
-### Pattern 5: Material Design
-
-```xaml
-<syncfusion:SfTimePicker Foreground="#424242"
-                         Background="White"
-                         AccentBrush="#2196F3"
-                         SelectorItemHeight="50"
-                         SelectorItemWidth="50"
-                         syncfusion:SfSkinManager.VisualStyle="MaterialLight"
-                         Width="150"
-                         Name="material">
-    <syncfusion:SfTimePicker.SelectorStyle>
-        <Style TargetType="syncfusion:SfTimeSelector">
-            <Setter Property="Foreground" Value="#757575"/>
-            <Setter Property="SelectedForeground" Value="#2196F3"/>
-        </Style>
-    </syncfusion:SfTimePicker.SelectorStyle>
-</syncfusion:SfTimePicker>
-```
+**Material Design:** Use `MaterialLight` theme with Material colors (`#2196F3` blue accent, `#424242` foreground), increased selector item size (50x50).
 
 ## Custom Theme (Theme Studio)
 

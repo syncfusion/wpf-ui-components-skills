@@ -61,120 +61,24 @@ Reference theme resources directly:
 
 ## Button Templates
 
-### Close Button Template
+Customize button templates for window chrome (close, minimize, maximize, pin, menu). All follow the same pattern:
 
-Customize the close button appearance:
+**Available Templates:** `CloseButtonTemplate`, `MinimizeButtonTemplate`, `MaximizeButtonTemplate`, `RestoreButtonTemplate`, `AwlButtonTemplate` (pin), `MenuButtonTemplate`
 
-**XAML:**
+**Example - Close Button with Custom Icon:**
 ```xml
 <syncfusion:DockingManager x:Name="dockManager">
     <syncfusion:DockingManager.CloseButtonTemplate>
         <DataTemplate>
-            <Button Width="16" Height="16" 
-                    Background="Transparent"
-                    BorderThickness="0">
-                <Path Data="M0,0 L8,8 M8,0 L0,8" 
-                      Stroke="Red" 
-                      StrokeThickness="2"/>
+            <Button Width="16" Height="16" ToolTip="Close">
+                <Path Data="M0,0 L8,8 M8,0 L0,8" Stroke="Red" StrokeThickness="2"/>
             </Button>
         </DataTemplate>
     </syncfusion:DockingManager.CloseButtonTemplate>
 </syncfusion:DockingManager>
 ```
 
-**Custom Close Button with Icon:**
-```xml
-<syncfusion:DockingManager.CloseButtonTemplate>
-    <DataTemplate>
-        <Button Width="20" Height="20" 
-                Padding="2"
-                ToolTip="Close">
-            <Image Source="/Images/close_icon.png" />
-        </Button>
-    </DataTemplate>
-</syncfusion:DockingManager.CloseButtonTemplate>
-```
-
-### Pin Button Template
-
-Customize auto-hide pin button:
-
-**XAML:**
-```xml
-<syncfusion:DockingManager.AwlButtonTemplate>
-    <DataTemplate>
-        <ToggleButton Width="18" Height="18"
-                      IsChecked="{Binding IsAutoHidden, RelativeSource={RelativeSource AncestorType=syncfusion:DockingManager}}">
-            <Path Data="M4,0 L8,4 L4,8 Z" Fill="Blue" />
-        </ToggleButton>
-    </DataTemplate>
-</syncfusion:DockingManager.AwlButtonTemplate>
-```
-
-### Minimize Button Template
-
-**XAML:**
-```xml
-<syncfusion:DockingManager.MinimizeButtonTemplate>
-    <DataTemplate>
-        <Button Width="18" Height="18" ToolTip="Minimize">
-            <Rectangle Width="10" Height="2" Fill="{DynamicResource SyncfusionForeground}" />
-        </Button>
-    </DataTemplate>
-</syncfusion:DockingManager.MinimizeButtonTemplate>
-```
-
-### Maximize/Restore Button Templates
-
-**Maximize:**
-```xml
-<syncfusion:DockingManager.MaximizeButtonTemplate>
-    <DataTemplate>
-        <Button Width="18" Height="18" ToolTip="Maximize">
-            <Rectangle Width="10" Height="10" 
-                       Stroke="{DynamicResource SyncfusionForeground}"
-                       StrokeThickness="2" />
-        </Button>
-    </DataTemplate>
-</syncfusion:DockingManager.MaximizeButtonTemplate>
-```
-
-**Restore:**
-```xml
-<syncfusion:DockingManager.RestoreButtonTemplate>
-    <DataTemplate>
-        <Button Width="18" Height="18" ToolTip="Restore">
-            <Grid>
-                <Rectangle Width="8" Height="8" 
-                           Margin="2,0,0,2"
-                           Stroke="{DynamicResource SyncfusionForeground}"
-                           StrokeThickness="1.5" />
-                <Rectangle Width="8" Height="8" 
-                           Margin="0,2,2,0"
-                           Stroke="{DynamicResource SyncfusionForeground}"
-                           StrokeThickness="1.5" />
-            </Grid>
-        </Button>
-    </DataTemplate>
-</syncfusion:DockingManager.RestoreButtonTemplate>
-```
-
-### Menu Button Template
-
-Customize the context menu dropdown button:
-
-**XAML:**
-```xml
-<syncfusion:DockingManager.MenuButtonTemplate>
-    <DataTemplate>
-        <Button Width="18" Height="18" ToolTip="Options">
-            <Path Data="M2,5 L6,5 M2,8 L6,8 M2,11 L6,11" 
-                  Stroke="{DynamicResource SyncfusionForeground}" 
-                  StrokeThickness="1.5" />
-        </Button>
-    </DataTemplate>
-</syncfusion:DockingManager.MenuButtonTemplate>
-```
+Apply the same pattern to other templates by changing the property name (`MinimizeButtonTemplate`, etc.) and adjusting the SVG Path data or content accordingly.
 
 ## Header Customization
 
@@ -218,63 +122,23 @@ Apply unique style to specific window:
 </ContentControl>
 ```
 
-### Header with Icons
+### Advanced Header Content
 
-Add icons to headers:
+Headers can contain complex content:
 
-**XAML:**
+**XAML (with icons and animations):**
 ```xml
-<ContentControl syncfusion:DockingManager.State="Dock"
-                syncfusion:DockingManager.SideInDockedMode="Left">
+<ContentControl syncfusion:DockingManager.State="Dock">
     <syncfusion:DockingManager.Header>
         <StackPanel Orientation="Horizontal">
-            <Image Source="/Images/solution_explorer.png" 
-                   Width="16" Height="16" 
-                   Margin="0,0,5,0" />
-            <TextBlock Text="Solution Explorer" 
-                       VerticalAlignment="Center" />
+            <Image Source="/Images/icon.png" Width="16" Height="16" Margin="0,0,5,0" />
+            <TextBlock Text="Panel Title" VerticalAlignment="Center" />
         </StackPanel>
     </syncfusion:DockingManager.Header>
 </ContentControl>
 ```
 
-### Animated Headers
-
-Add visual effects to headers:
-
-**XAML:**
-```xml
-<ContentControl syncfusion:DockingManager.Header="Animated"
-                syncfusion:DockingManager.State="Dock">
-    <syncfusion:DockingManager.HeaderStyle>
-        <Style TargetType="ContentPresenter">
-            <Setter Property="Background" Value="#3F3F46" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="(ContentPresenter.Background).(SolidColorBrush.Color)"
-                                              To="#007ACC" 
-                                              Duration="0:0:0.2" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="(ContentPresenter.Background).(SolidColorBrush.Color)"
-                                              To="#3F3F46" 
-                                              Duration="0:0:0.2" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </syncfusion:DockingManager.HeaderStyle>
-</ContentControl>
-```
+Use triggers and storyboards in `HeaderStyle` for hover effects or animations.
 
 ## Context Menu Styling
 
@@ -319,9 +183,7 @@ Customize appearance of context menus:
 
 ## Float Window Styling
 
-### Float Window Style
-
-Customize floating window appearance:
+Customize floating window appearance and title bars:
 
 **XAML:**
 ```xml
@@ -334,28 +196,11 @@ Customize floating window appearance:
     </Style>
 </Window.Resources>
 
-<syncfusion:DockingManager x:Name="dockManager"
-                          FloatWindowStyle="{StaticResource CustomFloatWindowStyle}">
+<syncfusion:DockingManager FloatWindowStyle="{StaticResource CustomFloatWindowStyle}">
 </syncfusion:DockingManager>
 ```
 
-### Float Window Title Bar
-
-Customize title bar of float windows:
-
-**XAML:**
-```xml
-<Style x:Key="FloatWindowTitleStyle" TargetType="ContentPresenter">
-    <Setter Property="Background" Value="#2D2D30" />
-    <Setter Property="Foreground" Value="White" />
-    <Setter Property="FontSize" Value="12" />
-    <Setter Property="FontWeight" Value="Normal" />
-    <Setter Property="Padding" Value="8,4" />
-</Style>
-
-<syncfusion:DockingManager FloatWindowTitleStyle="{StaticResource FloatWindowTitleStyle}">
-</syncfusion:DockingManager>
-```
+Similarly customize `FloatWindowTitleStyle` for title bar appearance.
 
 ## Drag Provider Customization
 

@@ -30,13 +30,13 @@ The `NavigationItem` class provides a rich set of properties for creating naviga
 <syncfusion:SfNavigationDrawer DisplayMode="Expanded">
     <syncfusion:NavigationItem Header="Inbox" IsSelected="True">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="Blue" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="Blue" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -50,26 +50,26 @@ The `NavigationItem` class provides a rich set of properties for creating naviga
 
 ```xaml
 <syncfusion:NavigationItem Header="Inbox" IsExpanded="True" IsSelected="True">
-    <syncfusion:NavigationItem.Icon>
-        <Path Data="M32.032381,16.445429..." Fill="White" Stretch="Uniform"/>
-    </syncfusion:NavigationItem.Icon>
+        <syncfusion:NavigationItem.Icon>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="Yellow" Stretch="Uniform"/>
+        </syncfusion:NavigationItem.Icon>
     
     <!-- Sub-items -->
     <syncfusion:NavigationItem Header="Primary">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M9.5189972,7.3780194..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="Yellow" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Social">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M22.133972,14.194015..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="Yellow" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Promotions">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M9.4614787,7.2521966..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M8,2 L14,14 L2,14 Z" Fill="Yellow" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
 </syncfusion:NavigationItem>
@@ -123,7 +123,7 @@ The Navigation Drawer supports four item types:
 ```xaml
 <syncfusion:NavigationItem Header="Inbox" ItemType="Tab">
     <syncfusion:NavigationItem.Icon>
-        <Path Data="M32.032381,16.445429..." Fill="White"/>
+        <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
     </syncfusion:NavigationItem.Icon>
 </syncfusion:NavigationItem>
 ```
@@ -136,7 +136,7 @@ The Navigation Drawer supports four item types:
 ```xaml
 <syncfusion:NavigationItem Header="Refresh" ItemType="Button">
     <syncfusion:NavigationItem.Icon>
-        <Path Data="M13.999999,3.9500002..." Fill="White"/>
+        <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
     </syncfusion:NavigationItem.Icon>
 </syncfusion:NavigationItem>
 ```
@@ -167,19 +167,19 @@ The Navigation Drawer supports four item types:
     <!-- Tab items -->
     <syncfusion:NavigationItem Header="Inbox" IsSelected="True">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Drafts">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M6.9999996,48.353..." Fill="White"/>
+            <Path Data="M3,3h18v14H3V3z M5,5v10h14V5H5z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -191,13 +191,13 @@ The Navigation Drawer supports four item types:
     
     <syncfusion:NavigationItem Header="Starred">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M25.085007,5.9780004..." Fill="White"/>
+            <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Trash">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M17,12 L19,12..." Fill="White"/>
+            <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -205,7 +205,7 @@ The Navigation Drawer supports four item types:
     <syncfusion:SfNavigationDrawer.FooterItems>
         <syncfusion:NavigationItem Header="Settings" ItemType="Button">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M13.999999,3.9500002..." Fill="White"/>
+                <Path Data="M3,6h18v2H3V6z M6,8v12c0,1.1 0.9,2 2,2h8c1.1,0 2-0.9 2-2V8H6z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:SfNavigationDrawer.FooterItems>
@@ -246,7 +246,7 @@ public class ViewModel
             Title = "Explore",
             Icon = new Path()
             {
-                Data = Geometry.Parse("M6.0033803,5.705333..."),
+                Data = Geometry.Parse("M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z"),
                 Fill = Brushes.White,
                 Stretch = Stretch.Uniform
             }
@@ -257,7 +257,7 @@ public class ViewModel
             Title = "My music",
             Icon = new Path()
             {
-                Data = Geometry.Parse("M2.5,10.701 C1.6729736..."),
+                Data = Geometry.Parse("M12,3v10.55A4,4 0 1,0 14,17V7h4V3H12z"),
                 Fill = Brushes.White,
                 Stretch = Stretch.Uniform
             }
@@ -268,7 +268,7 @@ public class ViewModel
             Title = "Recommended",
             Icon = new Path()
             {
-                Data = Geometry.Parse("M11.5,10 C11.224,10..."),
+                Data = Geometry.Parse("M2,21h4V9H2v12z M22,11c0-1.1-0.9-2-2-2h-6l1-4l-6,0v10c0,1.1,0.9,2,2,2h7c1.1,0,2-0.9,2-2v-4z"),
                 Fill = Brushes.White,
                 Stretch = Stretch.Uniform
             }
@@ -350,7 +350,7 @@ public class ViewModel
             Title = "Inbox",
             Icon = new Path()
             {
-                Data = Geometry.Parse("M32.032381,16.445429..."),
+                Data = Geometry.Parse("M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"),
                 Fill = Brushes.White,
                 Stretch = Stretch.Uniform
             },
@@ -362,7 +362,7 @@ public class ViewModel
             Title = "Sent mail",
             Icon = new Path()
             {
-                Data = Geometry.Parse("M42.128046,6.7269681..."),
+                Data = Geometry.Parse("M2,21L23,12L2,3v7l15,2L2,13V21z"),
                 Fill = Brushes.White,
                 Stretch = Stretch.Uniform
             }
@@ -521,19 +521,19 @@ Control the horizontal spacing of sub-items using `IndentationWidth`.
                                IndentationWidth="40">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
         
         <!-- Sub-items indented by 40 pixels -->
         <syncfusion:NavigationItem Header="Primary">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.5189972,7.3780194..." Fill="White"/>
+                <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="Social">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M22.133972,14.194015..." Fill="White"/>
+                <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:NavigationItem>
@@ -553,19 +553,19 @@ In Compact and Expanded modes, sub-items appear in a popup when the parent item 
 <syncfusion:SfNavigationDrawer DisplayMode="Compact">
     <syncfusion:NavigationItem Header="Important">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M25.085007,5.9780004..." Fill="White"/>
+            <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White"/>
         </syncfusion:NavigationItem.Icon>
         
         <!-- These appear in popup when drawer is compact -->
         <syncfusion:NavigationItem Header="Work">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M16.151009,4.5999908..." Fill="White"/>
+                <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="Personal">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M12.200012,21.899996..." Fill="White"/>
+                <Path Data="M12,3v10.55A4,4 0 1,0 14,17V7h4V3H12z" Fill="White"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:NavigationItem>
@@ -582,3 +582,4 @@ In Compact and Expanded modes, sub-items appear in a popup when the parent item 
 View complete samples on GitHub:
 - [Populating with Items](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Populating_With_Items)
 - [Hierarchical Data Binding](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Hierarchical_Data_Binding)
+

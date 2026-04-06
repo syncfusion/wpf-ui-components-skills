@@ -1,34 +1,10 @@
 # TileViewItem Features
 
-## Table of Contents
-- [Overview](#overview)
-- [TileViewItem Structure](#tileviewitem-structure)
-- [Header Customization](#header-customization)
-- [Closable Items](#closable-items)
-- [Maximizable Items](#maximizable-items)
-- [Minimizable Items](#minimizable-items)
-- [Item States and Events](#item-states-and-events)
-- [Content Customization](#content-customization)
-
 ## Overview
 
-[TileViewItem](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shared.TileViewItem.html) is the fundamental container within a TileViewControl. Each tile represents a visual unit that can display content, be rearranged, maximized, minimized, and closed. Understanding TileViewItem properties is essential for creating interactive tile layouts.
+[TileViewItem](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shared.TileViewItem.html) is the fundamental container within a TileViewControl. Each tile represents a visual unit that can display content, be rearranged, maximized, minimized, and closed.
 
-## TileViewItem Structure
-
-A TileViewItem consists of two main areas:
-
-```
-┌─────────────────────────┐
-│ Header (Title Bar)      │  ← Customizable header with optional buttons
-├─────────────────────────┤
-│                         │
-│   Content Area          │  ← Main content display area
-│                         │
-└─────────────────────────┘
-```
-
-### Basic Structure
+A TileViewItem consists of a header (title bar) and content area:
 
 ```xaml
 <syncfusion:TileViewItem Header="Tile Title">
@@ -38,55 +14,37 @@ A TileViewItem consists of two main areas:
 </syncfusion:TileViewItem>
 ```
 
-## Header Customization
+## Headers
 
-The header is the title bar of each tile. You can customize it extensively.
+Customize headers with text, icons, and rich content.
 
-### Simple Text Header
-
+**Simple text header:**
 ```xaml
 <syncfusion:TileViewItem Header="My Tile Title">
     <TextBlock Text="Tile Content"/>
 </syncfusion:TileViewItem>
 ```
 
-### Complex Header with Template
-
-For richer header content, use a `HeaderTemplate`:
-
+**Header with icon and dynamic content:**
 ```xaml
 <syncfusion:TileViewItem>
     <syncfusion:TileViewItem.Header>
-        <StackPanel Orientation="Horizontal">
-            <Image Source="icon.png" Width="16" Height="16" Margin="5,0"/>
-            <TextBlock Text="Dashboard" VerticalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Background="#0078D4" Padding="8">
+            <Image Source="icon.png" Width="20" Height="20" Margin="0,0,8,0"/>
+            <TextBlock Text="Dashboard" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
         </StackPanel>
     </syncfusion:TileViewItem.Header>
-    
     <Grid>
         <TextBlock Text="Dashboard Content"/>
     </Grid>
 </syncfusion:TileViewItem>
 ```
 
-### Header Styling
+## Closable Tiles
 
-Customize header appearance with properties:
+Enable users to close tiles by setting `CanClose="True"`. A close button appears in the header.
 
-```xaml
-<syncfusion:TileViewItem Header="Styled Header"
-                         Foreground="White"
-                         Background="#0078D4">
-    <TextBlock Text="Content"/>
-</syncfusion:TileViewItem>
-```
-
-## Closable Items
-
-Allow users to close/remove tiles by clicking a close button.
-
-### Basic Closable Tile
-
+**Enable and handle close:**
 ```xaml
 <syncfusion:TileViewItem Header="Closable Tile"
                          CanClose="True"
@@ -95,170 +53,82 @@ Allow users to close/remove tiles by clicking a close button.
 </syncfusion:TileViewItem>
 ```
 
-### Handle Close Event
-
+**Code-behind close handler:**
 ```csharp
 private void OnTileClose(object sender, RoutedEventArgs e)
 {
-    // Handle tile close
     var tileItem = sender as TileViewItem;
     tileViewControl.Items.Remove(tileItem);
 }
 ```
 
-### Close Button Styling
-
-When `CanClose="True"`, a close button appears in the header. The button's appearance respects the header styling.
-
-### Programmatic Close
-
+**Programmatic close:**
 ```csharp
-// Remove a tile from the control
+// Remove a tile
 tileViewControl.Items.Remove(tileItem);
 
-// Or close it via the Close event
+// Or trigger close event
 TileViewItem tile = (TileViewItem)tileViewControl.Items[0];
 tile.RaiseEvent(new RoutedEventArgs(TileViewItem.CloseEvent, tile));
 ```
 
-## Maximizable Items
+## Tile States (Maximize/Minimize)
 
-Allow tiles to expand to fill the available space.
+Tiles support maximize and minimize operations with automatic animations.
 
-### Enable Maximize
-
+**Enable both states:**
 ```xaml
-<syncfusion:TileViewItem Header="Expandable Tile"
+<syncfusion:TileViewItem Header="Multi-State Tile"
                          CanMaximize="True"
+                         CanMinimize="True"
                          MaximizedHeight="400"
-                         MaximizedWidth="600">
+                         MaximizedWidth="600"
+                         MinimizedHeight="100"
+                         MinimizedWidth="100">
     <Grid>
-        <TextBlock Text="This tile can be maximized"/>
+        <TextBlock Text="This tile supports all operations"/>
     </Grid>
 </syncfusion:TileViewItem>
 ```
 
-### Properties
+**State properties and methods:**
 
 | Property | Purpose |
 |----------|---------|
 | `CanMaximize` | Enable/disable maximize functionality |
-| `MaximizedHeight` | Height when maximized (in pixels or auto) |
-| `MaximizedWidth` | Width when maximized (in pixels or auto) |
-| `IsMaximized` | Current maximization state |
-
-### Programmatic Maximize
-
-```csharp
-// Maximize a tile
-TileViewItem tile = (TileViewItem)tileViewControl.Items[0];
-tile.IsMaximized = true;
-
-// Restore to minimized
-tile.IsMaximized = false;
-```
-
-### Maximize with Animation
-
-Tiles automatically animate when transitioning between states when maximized/minimized.
-
-```xaml
-<syncfusion:TileViewItem Header="Animated"
-                         CanMaximize="True"
-                         MaximizedHeight="500"
-                         MaximizedWidth="700">
-    <!-- Content automatically animates during state change -->
-</syncfusion:TileViewItem>
-```
-
-## Minimizable Items
-
-Allow tiles to collapse to a smaller size.
-
-### Enable Minimize
-
-```xaml
-<syncfusion:TileViewItem Header="Collapsible Tile"
-                         CanMinimize="True"
-                         MinimizedHeight="100"
-                         MinimizedWidth="100">
-    <Grid>
-        <TextBlock Text="This tile can be minimized"/>
-    </Grid>
-</syncfusion:TileViewItem>
-```
-
-### Properties
-
-| Property | Purpose |
-|----------|---------|
 | `CanMinimize` | Enable/disable minimize functionality |
-| `MinimizedHeight` | Height when minimized (in pixels) |
-| `MinimizedWidth` | Width when minimized (in pixels) |
-| `IsMinimized` | Current minimization state |
+| `MaximizedHeight` | Height when maximized (pixels or auto) |
+| `MaximizedWidth` | Width when maximized (pixels or auto) |
+| `MinimizedHeight` | Height when minimized (pixels) |
+| `MinimizedWidth` | Width when minimized (pixels) |
+| `IsMaximized` | Current maximization state (read/write) |
+| `IsMinimized` | Current minimization state (read/write) |
 
-### Programmatic Minimize
-
+**Programmatic state control:**
 ```csharp
-// Minimize a tile
+// Check and change state
 TileViewItem tile = (TileViewItem)tileViewControl.Items[0];
-tile.IsMinimized = true;
-
-// Expand back
-tile.IsMinimized = false;
-```
-
-## Item States and Events
-
-### State Management
-
-```xaml
-<syncfusion:TileViewItem x:Name="flexTile"
-                         Header="Multi-State Tile"
-                         CanMaximize="True"
-                         CanMinimize="True"
-                         CanClose="True">
-    <TextBlock Text="This tile supports all operations"/>
-</syncfusion:TileViewItem>
-```
-
-### Monitoring State Changes
-
-```csharp
-// Check current state
-bool isMaximized = flexTile.IsMaximized;
-bool isMinimized = flexTile.IsMinimized;
+bool isMaximized = tile.IsMaximized;
+tile.IsMaximized = true;  // Maximize
+tile.IsMinimized = true;  // Minimize
 
 // React to state changes
-flexTile.MaximizeChanged += (s, e) => 
-{
-    if (flexTile.IsMaximized)
-    {
-        // Handle maximize
-    }
-};
-
-flexTile.MinimizeChanged += (s, e) => 
-{
-    if (flexTile.IsMinimized)
-    {
-        // Handle minimize
-    }
-};
+tile.MaximizeChanged += (s, e) => { /* Handle maximize */ };
+tile.MinimizeChanged += (s, e) => { /* Handle minimize */ };
 ```
 
-## Content Customization
+## Content
 
-### Simple Text Content
+Display content ranging from simple text to complex data-bound layouts.
 
+**Simple text content:**
 ```xaml
 <syncfusion:TileViewItem Header="Simple">
     <TextBlock Text="Simple text content"/>
 </syncfusion:TileViewItem>
 ```
 
-### Rich UI Content
-
+**Rich UI with controls:**
 ```xaml
 <syncfusion:TileViewItem Header="Dashboard">
     <Grid Background="White">
@@ -271,12 +141,9 @@ flexTile.MinimizeChanged += (s, e) =>
 </syncfusion:TileViewItem>
 ```
 
-### Data Templating
-
-Use templates to bind content to data:
-
+**Data-bound content using templates:**
 ```xaml
-<syncfusion:TileViewItem>
+<syncfusion:TileViewItem Header="Data Tile">
     <syncfusion:TileViewItem.ContentTemplate>
         <DataTemplate>
             <StackPanel>
@@ -291,13 +158,13 @@ Use templates to bind content to data:
 ## Complete Example
 
 ```xaml
-<syncfusion:TileViewControl>
+<syncfusion:TileViewControl AllowDragDrop="True">
     <!-- Simple static tile -->
     <syncfusion:TileViewItem Header="Dashboard">
         <TextBlock Text="Dashboard Content"/>
     </syncfusion:TileViewItem>
     
-    <!-- Expandable tile with close button -->
+    <!-- Tile with all features combined -->
     <syncfusion:TileViewItem Header="Settings"
                              CanMaximize="True"
                              CanMinimize="True"
@@ -322,31 +189,9 @@ Use templates to bind content to data:
                 <TextBlock Text="Reports" Margin="5,0"/>
             </StackPanel>
         </syncfusion:TileViewItem.Header>
-        
         <TextBlock Text="Reports Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </syncfusion:TileViewItem>
 </syncfusion:TileViewControl>
 ```
 
-## Combining Features
-
-You can combine multiple features on a single tile:
-
-```xaml
-<syncfusion:TileViewItem Header="Advanced Tile"
-                         CanMaximize="True"
-                         CanMinimize="True"
-                         CanClose="True"
-                         MaximizedHeight="500"
-                         MaximizedWidth="700"
-                         MinimizedHeight="120"
-                         MinimizedWidth="150"
-                         Foreground="White"
-                         Background="#2196F3">
-    <Grid>
-        <!-- Feature-rich content -->
-    </Grid>
-</syncfusion:TileViewItem>
-```
-
-All features work seamlessly together, allowing comprehensive tile customization.
+All features work seamlessly together to create interactive, customizable tile layouts.

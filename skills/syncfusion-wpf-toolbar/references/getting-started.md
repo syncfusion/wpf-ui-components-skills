@@ -219,119 +219,28 @@ ToolBarTrayAdv (Container)
 
 ## Icon Templates with Path Data
 
-For scalable vector icons, use IconTemplate:
+For scalable vector icons, use `Path` with `Fill` inside button content:
 
 ```xaml
 <syncfusion:ToolBarAdv>
     <Button Width="22" Height="22" ToolTip="New">
-        <Button.Content>
-            <Path Data="M1,1 L9,1 L9,9 L1,9 Z" 
-                  Fill="Black" 
-                  Stretch="Uniform"
-                  Width="16" 
-                  Height="16"/>
-        </Button.Content>
+        <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+              Fill="Black" Stretch="Uniform" Width="16" Height="16"/>
     </Button>
 </syncfusion:ToolBarAdv>
 ```
 
-### Using Resources for Reusable Icons
+## Themes
 
-**Define in Resources:**
-
-```xaml
-<Window.Resources>
-    <PathGeometry x:Key="NewIcon">
-        M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
-    </PathGeometry>
-    
-    <PathGeometry x:Key="SaveIcon">
-        M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z
-    </PathGeometry>
-</Window.Resources>
-```
-
-**Use in Buttons:**
-
-```xaml
-<syncfusion:ToolBarAdv>
-    <Button Width="22" Height="22" ToolTip="New">
-        <Path Data="{StaticResource NewIcon}" 
-              Fill="Black" 
-              Stretch="Uniform"
-              Width="16" 
-              Height="16"/>
-    </Button>
-    
-    <Button Width="22" Height="22" ToolTip="Save">
-        <Path Data="{StaticResource SaveIcon}" 
-              Fill="Black" 
-              Stretch="Uniform"
-              Width="16" 
-              Height="16"/>
-    </Button>
-</syncfusion:ToolBarAdv>
-```
-
-## CSS Imports and Themes
-
-### Basic Styling
-
-ToolBarAdv automatically inherits system theme by default. For custom appearance:
-
-```xaml
-<syncfusion:ToolBarAdv Background="LightGray" Foreground="Black">
-    <!-- Items -->
-</syncfusion:ToolBarAdv>
-```
-
-### Theme Integration
-
-For consistent theming, use SfSkinManager (see [customization-theming.md](customization-theming.md)):
+Apply a Syncfusion theme using `SfSkinManager` — see [customization-theming.md](customization-theming.md) for all options:
 
 ```csharp
 SfSkinManager.SetTheme(this, new Theme("FluentLight"));
 ```
 
-## Click Handlers and Events
+## Commands (MVVM)
 
-### XAML with Event Handlers
-
-```xaml
-<syncfusion:ToolBarAdv>
-    <Button Click="NewButton_Click" ToolTip="New">
-        <Image Source="Images/NewDocumentHS.png" Width="16" Height="16"/>
-    </Button>
-    
-    <Button Click="OpenButton_Click" ToolTip="Open">
-        <Image Source="Images/openHS.png" Width="16" Height="16"/>
-    </Button>
-</syncfusion:ToolBarAdv>
-```
-
-**Code-behind:**
-
-```csharp
-private void NewButton_Click(object sender, RoutedEventArgs e)
-{
-    // Create new document
-    MessageBox.Show("Creating new document...");
-}
-
-private void OpenButton_Click(object sender, RoutedEventArgs e)
-{
-    // Open document dialog
-    Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-    dialog.Filter = "All Files (*.*)|*.*";
-    if (dialog.ShowDialog() == true)
-    {
-        // Load document
-        string fileName = dialog.FileName;
-    }
-}
-```
-
-### Commands (MVVM Pattern)
+Bind toolbar buttons to ViewModel commands:
 
 ```xaml
 <Window.DataContext>
@@ -342,83 +251,5 @@ private void OpenButton_Click(object sender, RoutedEventArgs e)
     <Button Command="{Binding NewCommand}" ToolTip="New">
         <Image Source="Images/NewDocumentHS.png" Width="16" Height="16"/>
     </Button>
-    
-    <Button Command="{Binding OpenCommand}" ToolTip="Open">
-        <Image Source="Images/openHS.png" Width="16" Height="16"/>
-    </Button>
 </syncfusion:ToolBarAdv>
 ```
-
-**ViewModel:**
-
-```csharp
-public class MainViewModel : INotifyPropertyChanged
-{
-    public ICommand NewCommand { get; }
-    public ICommand OpenCommand { get; }
-
-    public MainViewModel()
-    {
-        NewCommand = new RelayCommand(ExecuteNew);
-        OpenCommand = new RelayCommand(ExecuteOpen);
-    }
-
-    private void ExecuteNew()
-    {
-        // Create new document logic
-    }
-
-    private void ExecuteOpen()
-    {
-        // Open document logic
-    }
-}
-```
-
-## Complete Working Example
-
-```xaml
-<Window x:Class="ToolBarDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="ToolBarAdv Demo" Height="450" Width="800">
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <!-- Toolbar -->
-        <syncfusion:ToolBarTrayAdv Grid.Row="0">
-            <syncfusion:ToolBarAdv ToolBarName="Standard" Height="40">
-                <Button Width="22" Height="22" ToolTip="New" Click="New_Click">
-                    <Image Source="Images/NewDocumentHS.png" Width="16" Height="16"/>
-                </Button>
-                <Button Width="22" Height="22" ToolTip="Open" Click="Open_Click">
-                    <Image Source="Images/openHS.png" Width="16" Height="16"/>
-                </Button>
-                <syncfusion:ToolBarItemSeparator />
-                <Button Width="22" Height="22" ToolTip="Save" Click="Save_Click">
-                    <Image Source="Images/saveHS.png" Width="16" Height="16"/>
-                </Button>
-            </syncfusion:ToolBarAdv>
-        </syncfusion:ToolBarTrayAdv>
-        
-        <!-- Content Area -->
-        <TextBox Grid.Row="1" 
-                 AcceptsReturn="True" 
-                 TextWrapping="Wrap"
-                 VerticalScrollBarVisibility="Auto"/>
-    </Grid>
-</Window>
-```
-
-## Next Steps
-
-- **Positioning and Layout**: Learn about Band and BandIndex properties → [positioning-and-layout.md](positioning-and-layout.md)
-- **Add/Remove Buttons**: Enable user customization → [add-remove-buttons.md](add-remove-buttons.md)
-- **Toolbar States**: Implement floating and docked states → [toolbar-states.md](toolbar-states.md)
-- **ToolBarManager**: Organize toolbars at multiple positions → [toolbar-manager.md](toolbar-manager.md)
-- **Customization**: Apply themes and styling → [customization-theming.md](customization-theming.md)

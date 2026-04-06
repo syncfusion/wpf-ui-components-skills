@@ -138,6 +138,8 @@ When binding commands inside a `DataTemplate`, use `x:Reference` to reach the pa
 
 ## Full MVVM Example
 
+> **Note on DelegateCommand:** The `DelegateCommand<T>` class is **not** part of `Syncfusion.Windows.Shared`. You must either implement it yourself (see the full implementation in `command-binding.md`), or use a third-party MVVM framework's equivalent (e.g., `RelayCommand`, `AsyncCommand`).
+
 **Model:**
 ```csharp
 public class Country

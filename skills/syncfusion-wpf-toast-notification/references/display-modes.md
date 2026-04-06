@@ -7,7 +7,6 @@
 - [Screen Mode](#screen-mode)
 - [Mode Comparison](#mode-comparison)
 - [Choosing the Right Mode](#choosing-the-right-mode)
-- [Edge Cases and Troubleshooting](#edge-cases-and-troubleshooting)
 
 ## Overview
 
@@ -27,49 +26,15 @@ Default mode uses the native Windows operating system toast notification system.
 
 ### Application Startup Configuration
 
-**CRITICAL:** Default mode requires initialization at application startup using `WindowsToastBootstrapper`.
-
-#### Step 1: Configure App.xaml
-
-Add the `Startup` event handler in your `App.xaml`:
-
-```xml
-<Application x:Class="ToastDemo.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml"
-             Startup="Application_Startup">
-    <Application.Resources>
-    </Application.Resources>
-</Application>
-```
-
-#### Step 2: Initialize in App.xaml.cs
-
-Import the namespace and initialize the bootstrapper in the `Application_Startup` event:
+Initialize `WindowsToastBootstrapper` in App.xaml.cs Application_Startup:
 
 ```csharp
-using System.Windows;
-using Syncfusion.UI.Xaml.SfToastNotification;
-
-namespace ToastDemo
+private void Application_Startup(object sender, StartupEventArgs e)
 {
-    public partial class App : Application
-    {
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            // Initialize the Toast Notification bootstrapper
-            WindowsToastBootstrapper.RemoveShortcutOnUnload = true;
-            WindowsToastBootstrapper.Initialize("ToastDemo.App", "ToastDemo");
-        }
-    }
+    WindowsToastBootstrapper.RemoveShortcutOnUnload = true;
+    WindowsToastBootstrapper.Initialize("AppId", "DisplayName");  // Unique ID and display name
 }
 ```
-
-**Parameters Explained:**
-- **First parameter:** Application ID (unique identifier for your app)
-- **Second parameter:** Display name (shown in Windows notification settings)
-- **RemoveShortcutOnUnload:** When `true`, removes the app shortcut when app closes
 
 ### Using Default Mode
 
@@ -85,24 +50,9 @@ SfToastNotification.Show(this, new ToastOptions
 
 ### Default Mode Characteristics
 
-**Advantages:**
-- Integrates with Windows notification center
-- Persists in Action Center even after auto-dismiss
-- System-wide visibility (visible even when app is minimized)
-- Familiar user experience (consistent with OS)
-- Can trigger even when app is not in focus
+**Advantages:** OS integration, persists in Action Center, visible when minimized, system-level visibility.
 
-**Limitations:**
-- ⚠️ **NO customization supported**
-- No control over appearance (colors, styles, variants)
-- No custom animations
-- No custom placement
-- Limited action button support
-- Only Title and Message properties work (Header is ignored)
-
-**System Requirements:**
-- Windows 10 or higher
-- Application must be installed or have a Start Menu shortcut
+**Limitations:** No customization (colors, animations, placement). Only Title and Message supported. Requires Windows 10+.
 
 ### Native Mode Action Buttons (Limited)
 
@@ -143,26 +93,7 @@ SfToastNotification.Show(this, new ToastOptions
 
 ### Window Mode Characteristics
 
-**Advantages:**
-- Full customization support (severity, variants, colors)
-- Stays within application context
-- No system-level permissions needed
-- Complete control over appearance and behavior
-- Supports all template customizations
-
-**Behavior:**
-- Toast only visible when window is visible
-- Constrained to window boundaries
-- Respects window activation state
-- Ideal for application-specific feedback
-- Doesn't appear in Windows Action Center
-
-**When to Use:**
-- Application-specific status updates
-- Form validation messages
-- Context-aware notifications
-- When you need full customization
-- When notifications should stay within app context
+**Best for:** Application-specific feedback with full customization (severity, variants, colors, animations). Constrained to window boundaries. Ideal for form validation and context-aware notifications.
 
 ### Window Mode with Full Customization
 
@@ -203,26 +134,7 @@ SfToastNotification.Show(this, new ToastOptions
 
 ### Screen Mode Characteristics
 
-**Advantages:**
-- Global screen-level display
-- Visible regardless of window state (minimized, background)
-- Full customization capabilities
-- Application-wide notifications
-- Best for important events
-
-**Behavior:**
-- Appears as overlay on screen
-- Not constrained by window boundaries
-- Visible even when app is minimized
-- Stays on top of other windows
-- Supports all customization options
-
-**When to Use:**
-- Critical application-wide events
-- Background task completions
-- System-level app notifications
-- Important alerts requiring immediate attention
-- When notifications should be visible even if app is not focused
+**Best for:** Critical application-wide events visible even when app is minimized. Supports full customization. Use for background task completions and important alerts requiring immediate attention.
 
 ### Screen Mode with Custom Styling
 
@@ -269,148 +181,10 @@ SfToastNotification.Show(this, new ToastOptions
 
 ## Choosing the Right Mode
 
-### Use Default Mode When:
-- You want **native OS integration**
-- Notifications should appear in **Windows Action Center**
-- App should send notifications even when **minimized or closed**
-- You need **system-level notifications**
-- Customization is not important
-- Example: Email client notifying about new messages
+| Requirement | Mode |
+|---|---|
+| Native OS integration + persistent | **Default** (Windows 10+) |
+| Context-specific + fully customized | **Window** (constrained to window) |
+| Application-wide + visible when minimized | **Screen** (global overlay) |
 
-### Use Window Mode When:
-- Notifications are **context-specific** to the window
-- You need **full visual customization**
-- Toasts should **stay within application boundaries**
-- Application is always in focus when notifications appear
-- Example: Form validation errors, in-app status updates
-
-### Use Screen Mode When:
-- Notifications are **application-wide but not system-level**
-- You need toasts visible **even when window is minimized**
-- **Full customization** is required
-- Important events need immediate attention
-- Example: Background task completion, critical alerts
-
-### Decision Flow
-
-```
-Need native OS integration?
-├─ YES → Use Default Mode
-└─ NO → Need visible when minimized?
-    ├─ YES → Use Screen Mode
-    └─ NO → Use Window Mode
-```
-
----
-
-## Edge Cases and Troubleshooting
-
-### Issue: Default Mode Toast Not Appearing
-
-**Cause:** WindowsToastBootstrapper not initialized.
-
-**Solution:**
-```csharp
-// Ensure bootstrapper is initialized in App.xaml.cs
-private void Application_Startup(object sender, StartupEventArgs e)
-{
-    WindowsToastBootstrapper.RemoveShortcutOnUnload = true;
-    WindowsToastBootstrapper.Initialize("YourApp.Id", "YourAppName");
-}
-```
-
-### Issue: Default Mode Customization Not Working
-
-**Problem:** User tries to set Severity, Variant, or AccentBrush in Default mode.
-
-**Solution:** These properties are not supported in Default mode. Switch to Window or Screen mode:
-
-```csharp
-// WRONG: Customization in Default mode (ignored)
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Test",
-    Mode = ToastMode.Default,
-    Severity = ToastSeverity.Success,  // ❌ Ignored
-    Variant = ToastVariant.Filled      // ❌ Ignored
-});
-
-// CORRECT: Use Screen or Window mode for customization
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Test",
-    Mode = ToastMode.Screen,           // ✅ Screen mode
-    Severity = ToastSeverity.Success,  // ✅ Applied
-    Variant = ToastVariant.Filled      // ✅ Applied
-});
-```
-
-### Issue: Window Mode Toast Hidden Behind Other Windows
-
-**Problem:** Toast not visible when window is minimized or behind other windows.
-
-**Solution:** Use Screen mode instead:
-
-```csharp
-// Switch from Window to Screen mode
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Important",
-    Message = "This needs to be visible even when app is in background.",
-    Mode = ToastMode.Screen  // Use Screen instead of Window
-});
-```
-
-### Issue: Screen Mode Toast Overlapping
-
-**Problem:** Multiple Screen mode toasts overlap in the same position.
-
-**Solution:** Use different placements or close previous toasts:
-
-```csharp
-// Option 1: Use different placement
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Notification 1",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.TopRight
-});
-
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Notification 2",
-    Mode = ToastMode.Screen,
-    Placement = ToastPlacement.BottomRight  // Different position
-});
-
-// Option 2: Close previous before showing new
-SfToastNotification.CloseAll();
-SfToastNotification.Show(this, new ToastOptions
-{
-    Title = "Latest Notification",
-    Mode = ToastMode.Screen
-});
-```
-
-## Best Practices by Mode
-
-### Default Mode Best Practices
-1. Always initialize WindowsToastBootstrapper at app startup
-2. Keep Title and Message concise (limited space)
-3. Don't rely on advanced customization
-4. Test on Windows 10+ only
-5. Use for system-level, persistent notifications
-
-### Window Mode Best Practices
-1. Ensure window is visible and active
-2. Use for context-specific feedback
-3. Take advantage of full customization
-4. Position appropriately within window (avoid corners if content is there)
-5. Consider user's current focus area
-
-### Screen Mode Best Practices
-1. Use sparingly (can be intrusive)
-2. Reserve for important, time-sensitive notifications
-3. Choose appropriate placement (avoid blocking critical screen areas)
-4. Customize appearance for better visibility
-5. Provide clear actions or auto-close timing
+**Best Practices:** Default Mode requires WindowsToastBootstrapper initialization. Window Mode best for form validation. Screen Mode best for critical, time-sensitive notifications—use sparingly.

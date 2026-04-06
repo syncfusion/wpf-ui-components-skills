@@ -97,83 +97,24 @@ colorPicker.Brush = linearGradient;
 
 ### Common Gradient Directions
 
-**Left to Right:**
-```csharp
-linearGradient.StartPoint = new Point(0, 0);
-linearGradient.EndPoint = new Point(1, 0);
-```
+Set `StartPoint` and `EndPoint` properties to control gradient direction:
 
-**Top to Bottom:**
-```csharp
-linearGradient.StartPoint = new Point(0, 0);
-linearGradient.EndPoint = new Point(0, 1);
-```
+| Direction | StartPoint | EndPoint | Use Case |
+|-----------|-----------|----------|----------|
+| Left to Right | (0, 0) | (1, 0) | Horizontal fade |
+| Top to Bottom | (0, 0) | (0, 1) | Vertical fade |
+| Diagonal (↘) | (0, 0) | (1, 1) | Corner-to-corner |
+| Diagonal (↙) | (1, 0) | (0, 1) | Reverse diagonal |
 
-**Diagonal (Top-Left to Bottom-Right):**
-```csharp
-linearGradient.StartPoint = new Point(0, 0);
-linearGradient.EndPoint = new Point(1, 1);
-```
-
-**Diagonal (Top-Right to Bottom-Left):**
-```csharp
-linearGradient.StartPoint = new Point(1, 0);
-linearGradient.EndPoint = new Point(0, 1);
-```
-
-### Adding More Gradient Stops
-```csharp
-LinearGradientBrush gradient = new LinearGradientBrush();
-gradient.StartPoint = new Point(0, 0);
-gradient.EndPoint = new Point(1, 0);
-
-// Add 5 color stops for smooth transition
-gradient.GradientStops.Add(new GradientStop(Colors.Red, 0.0));
-gradient.GradientStops.Add(new GradientStop(Colors.Yellow, 0.25));
-gradient.GradientStops.Add(new GradientStop(Colors.Green, 0.5));
-gradient.GradientStops.Add(new GradientStop(Colors.Blue, 0.75));
-gradient.GradientStops.Add(new GradientStop(Colors.Purple, 1.0));
-
-colorPicker.Brush = gradient;
-```
+Add multiple `GradientStop` entries to the `GradientStops` collection for smooth color transitions. Use offset values from 0.0 (start) to 1.0 (end) to position each color stop.
 
 ## Working with Radial Gradients
 
 Radial gradients blend colors outward from a center point in a circular pattern. Use `RadialGradientBrush` with the `Brush` property.
 
-### Creating a Radial Gradient in XAML
-```xaml
-<syncfusion:ColorPicker x:Name="colorPicker" Width="200">
-    <syncfusion:ColorPicker.Brush>
-        <RadialGradientBrush GradientOrigin="0.5,0.5" 
-                             Center="0.5,0.5" 
-                             RadiusX="0.5" 
-                             RadiusY="0.5">
-            <GradientStop Color="Yellow" Offset="0" />
-            <GradientStop Color="Red" Offset="0.25" />
-            <GradientStop Color="Blue" Offset="0.75" />
-            <GradientStop Color="LimeGreen" Offset="1" />
-        </RadialGradientBrush>
-    </syncfusion:ColorPicker.Brush>
-</syncfusion:ColorPicker>
-```
+### Creating a Radial Gradient
 
-### Creating a Radial Gradient in C#
-```csharp
-RadialGradientBrush radialGradient = new RadialGradientBrush();
-radialGradient.GradientOrigin = new Point(0.5, 0.5);
-radialGradient.Center = new Point(0.5, 0.5);
-radialGradient.RadiusX = 0.5;
-radialGradient.RadiusY = 0.5;
-
-radialGradient.GradientStops.Add(new GradientStop(Colors.Yellow, 0.0));
-radialGradient.GradientStops.Add(new GradientStop(Colors.Red, 0.25));
-radialGradient.GradientStops.Add(new GradientStop(Colors.Blue, 0.75));
-radialGradient.GradientStops.Add(new GradientStop(Colors.LimeGreen, 1.0));
-
-ColorPicker colorPicker = new ColorPicker();
-colorPicker.Brush = radialGradient;
-```
+In XAML, use `RadialGradientBrush` with `GradientOrigin`, `Center`, `RadiusX`, and `RadiusY`. In C#, create a `RadialGradientBrush` object, set properties, populate `GradientStops` collection, and assign to `colorPicker.Brush`.
 
 ### Understanding Radial Gradient Properties
 
@@ -185,102 +126,19 @@ colorPicker.Brush = radialGradient;
 
 ### Oval vs Circular Radial Gradients
 
-**Circular (equal radius):**
-```csharp
-radialGradient.RadiusX = 0.5;
-radialGradient.RadiusY = 0.5;
-```
-
-**Oval (different radii):**
-```csharp
-radialGradient.RadiusX = 0.7;  // Wider horizontally
-radialGradient.RadiusY = 0.3;  // Narrower vertically
-```
+Set `RadiusX` and `RadiusY` equal for circular gradients (e.g., 0.5, 0.5). Set unequal for oval gradients (e.g., 0.7, 0.3).
 
 ### Offset Gradient Origin
-```csharp
-// Gradient originates from top-left corner
-radialGradient.GradientOrigin = new Point(0, 0);
-radialGradient.Center = new Point(0, 0);
 
-// Gradient originates from center but displays from offset point
-radialGradient.GradientOrigin = new Point(0.7, 0.3);
-radialGradient.Center = new Point(0.5, 0.5);
-```
+Set `GradientOrigin` and `Center` properties to control where gradient starts and ends. Equal values center the gradient; offset values create directional effects.
 
 ## Runtime Color Editing
 
-ColorPicker allows users to edit colors interactively at runtime through:
-
-1. **Picker Region** - Click and drag to select hue and saturation
-2. **Hue Slider** - Drag the vertical slider to change hue
-3. **Value Editors** - Directly input RGB, HSV, or Hex values
-4. **Alpha Slider** - Adjust opacity (if visible)
-
-### Enabling Runtime Editing
-By default, runtime editing is enabled. Simply display the ColorPicker and users can:
-- Drag within the color picker region to select hue and saturation
-- Drag the hue slider to change the hue value
-- Edit RGB, HSV, or Hex input fields directly
-- Type decimal values (0-255 for RGB, 0-360 for H, 0-100 for S/V)
-
-### Retrieving Runtime Changes
-```csharp
-ColorPicker colorPicker = new ColorPicker();
-
-// Subscribe to color changes
-colorPicker.ColorChanged += (d, e) =>
-{
-    Color newColor = (Color)e.NewValue;
-    UpdateUI(newColor);
-};
-
-// Retrieve current color anytime
-Color current = colorPicker.Color;
-```
-
-### Programmatic Color Updates
-```csharp
-// Update color from code (triggers ColorChanged)
-colorPicker.Color = Colors.BlueViolet;
-
-// Update brush from code (triggers SelectedBrushChanged)
-colorPicker.Brush = new SolidColorBrush(Colors.Orange);
-```
+ColorPicker enables interactive editing through picker region (hue/saturation), hue slider, and value editors (RGB/HSV/Hex input). Runtime editing is enabled by default. Subscribe to `ColorChanged` event to track changes: `colorPicker.ColorChanged += (d, e) => { ... }`. Update color programmatically: `colorPicker.Color = Colors.Red;` (triggers event).
 
 ## Managing Opacity (Alpha Channel)
 
-The alpha channel controls color transparency (0 = fully transparent, 255 = fully opaque).
-
-### Show Alpha Controls (Default)
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="True"/>
-```
-Users can adjust alpha via the alpha slider and A (alpha) input field.
-
-### Hide Alpha Controls
-```xaml
-<syncfusion:ColorPicker IsAlphaVisible="False"/>
-```
-Use this when you only need opaque colors. Colors are automatically fully opaque.
-
-### Creating Semi-Transparent Colors in C#
-```csharp
-// Create a color with 50% opacity
-Color semiTransparent = Color.FromArgb(128, 255, 0, 0);  // Semi-transparent red
-colorPicker.Color = semiTransparent;
-
-// Create fully opaque color
-Color opaque = Color.FromArgb(255, 0, 255, 0);  // Fully opaque green
-```
-
-### Retrieving Alpha Value
-```csharp
-Color selectedColor = colorPicker.Color;
-byte alphaValue = selectedColor.A;  // 0-255
-double opacity = alphaValue / 255.0;  // 0.0-1.0
-MessageBox.Show($"Opacity: {opacity:P}");  // Display as percentage
-```
+The alpha channel (A value) controls transparency: 0 = fully transparent, 255 = fully opaque. Show controls with `IsAlphaVisible="True"` (default). Hide with `IsAlphaVisible="False"` for opaque-only colors. Create semi-transparent colors: `Color.FromArgb(128, 255, 0, 0)` for 50% red. Retrieve alpha: `byte alpha = selectedColor.A; double opacity = alpha / 255.0;`
 
 ## Switching Between Solid and Gradient Modes
 
@@ -298,42 +156,5 @@ Users see buttons at the bottom-right to switch between Solid, Linear, and Gradi
 ```
 Use this to restrict users to the current mode (typically solid color selection).
 
-### Programmatically Switch Modes (in ColorPicker or ColorEdit)
-Unfortunately, there's no direct property to set the mode programmatically. Instead:
-1. Set the `Color` property to switch to solid mode
-2. Set the `Brush` property to a `LinearGradientBrush` for linear mode
-3. Set the `Brush` property to a `RadialGradientBrush` for radial mode
-
-```csharp
-// Switch to solid mode
-colorPicker.Color = Colors.Red;
-
-// Switch to linear gradient mode
-LinearGradientBrush linearGrad = new LinearGradientBrush();
-linearGrad.GradientStops.Add(new GradientStop(Colors.Red, 0.0));
-linearGrad.GradientStops.Add(new GradientStop(Colors.Blue, 1.0));
-colorPicker.Brush = linearGrad;
-
-// Switch to radial gradient mode
-RadialGradientBrush radialGrad = new RadialGradientBrush();
-radialGrad.GradientStops.Add(new GradientStop(Colors.Yellow, 0.0));
-radialGrad.GradientStops.Add(new GradientStop(Colors.Purple, 1.0));
-colorPicker.Brush = radialGrad;
-```
-
-### Common Pattern: Toggle Between Solid and Gradient
-```csharp
-bool useSolidColor = true;
-
-if (useSolidColor)
-{
-    colorPicker.Color = Colors.Blue;
-}
-else
-{
-    LinearGradientBrush gradient = new LinearGradientBrush();
-    gradient.GradientStops.Add(new GradientStop(Colors.Blue, 0.0));
-    gradient.GradientStops.Add(new GradientStop(Colors.Cyan, 1.0));
-    colorPicker.Brush = gradient;
-}
-```
+### Programmatically Switch Modes
+Set `Color` property to switch to solid mode: `colorPicker.Color = Colors.Red;`. Set `Brush` property to switch to gradient mode: assign `LinearGradientBrush` or `RadialGradientBrush` to `colorPicker.Brush`.

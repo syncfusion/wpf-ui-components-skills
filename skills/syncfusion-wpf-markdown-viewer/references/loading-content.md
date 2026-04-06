@@ -10,9 +10,12 @@ Where is the Markdown content?
       Use: markdownViewer.Source = markdownString;
   → Local file on disk
       Use: markdownViewer.Source = File.ReadAllText(filePath);
-  → Remote URL (GitHub, web server, API)
-      Use: markdownViewer.Source = "https://...";
+  → Remote URL — ONLY use application-controlled, trusted endpoints.
+      Fetch the content yourself, validate/sanitize it, then assign the string:
+      Use: markdownViewer.Source = await FetchAndSanitizeAsync("https://your-own-domain/content.md");
 ```
+
+> ⚠️ **Security note:** Never bind `Source` directly to a user-supplied or third-party URL. Always fetch remote content via application code, validate the origin, and sanitize the Markdown string before assigning it to `Source`. Rendering untrusted remote Markdown can expose the app to prompt injection via malicious link targets or embedded directives.
 
 ---
 
@@ -109,33 +112,72 @@ public ViewModel()
 
 ---
 
-## Loading from a URL
+## Loading from a Remote URL (Application-Controlled Endpoints Only)
 
-Assign an HTTP or HTTPS URL string directly to `Source`. The control fetches and renders the remote Markdown:
+> ⚠️ **Security requirement:** Do **not** pass third-party or user-supplied URLs directly to `Source`. Fetch content yourself over HTTPS from an application-owned endpoint, validate the HTTP response, and assign the sanitized string to `Source`.
 
-**XAML:**
-```xaml
-<markdown:SfMarkdownViewer
-    Source="https://raw.githubusercontent.com/SyncfusionExamples/wpf-tabsplitter-example/refs/heads/master/README.md" />
-```
+**Safe pattern — fetch, validate, then assign:**
 
-**C#:**
 ```csharp
 public partial class MainWindow : Window
 {
+    private static readonly HttpClient _httpClient = new HttpClient();
+
+    // Only allow URLs from your own trusted domain
+    private static readonly Uri _allowedBase = new Uri("https://docs.your-app.com/");
+
     public MainWindow()
     {
         InitializeComponent();
-        SfMarkdownViewer markdownViewer = new SfMarkdownViewer();
-        markdownViewer.Source = "https://raw.githubusercontent.com/SyncfusionExamples/wpf-tabsplitter-example/refs/heads/master/README.md";
-        this.Content = markdownViewer;
+        LoadDocumentationAsync();
+    }
+
+    private async void LoadDocumentationAsync()
+    {
+        try
+        {
+            var targetUri = new Uri(_allowedBase, "release-notes.md");
+
+            // Enforce origin — reject anything outside the allowed base
+            if (!targetUri.AbsoluteUri.StartsWith(_allowedBase.AbsoluteUri, StringComparison.Ordinal))
+                throw new InvalidOperationException("URL is outside the allowed origin.");
+
+            var response = await _httpClient.GetAsync(targetUri);
+            response.EnsureSuccessStatusCode();
+
+            // Verify content type is plain text / markdown — reject HTML etc.
+            var mediaType = response.Content.Headers.ContentType?.MediaType ?? "";
+            if (!mediaType.StartsWith("text/", StringComparison.OrdinalIgnoreCase))
+                throw new InvalidOperationException($"Unexpected content type: {mediaType}");
+
+            string markdownContent = await response.Content.ReadAsStringAsync();
+
+            SfMarkdownViewer markdownViewer = new SfMarkdownViewer();
+            markdownViewer.Source = markdownContent;
+            this.Content = markdownViewer;
+        }
+        catch (Exception ex)
+        {
+            // Handle fetch or validation failure — show fallback content
+            MessageBox.Show($"Failed to load documentation: {ex.Message}");
+        }
     }
 }
 ```
 
-**Common URL sources:**
-- GitHub raw content: `https://raw.githubusercontent.com/{user}/{repo}/refs/heads/main/README.md`
-- Any publicly accessible `.md` file URL
+**What this pattern enforces:**
+- URL is constructed from an application-owned base — never from user input or third-party data
+- HTTP response content-type is validated before rendering
+- Any fetch or validation failure falls back safely
+
+**Do NOT do this:**
+```csharp
+// ❌ Never bind Source directly to a remote URL — content is untrusted
+markdownViewer.Source = userProvidedUrl;
+
+// ❌ Never use arbitrary third-party URLs directly
+markdownViewer.Source = "https://raw.githubusercontent.com/some-user/some-repo/main/README.md";
+```
 
 ---
 
@@ -143,6 +185,7 @@ public partial class MainWindow : Window
 
 - **`Source` auto-detects type** — the control determines whether the value is a Markdown string, a file path, or a URL automatically; no separate property is needed
 - **File reading is your responsibility** — for local files, call `File.ReadAllText()` before assigning; the control does not read files from paths directly
-- **URL loading is async** — remote URL loading happens asynchronously; the control renders as soon as the content arrives; no additional await needed
+- **Fetch remote content in application code** — do not rely on the control's built-in URL fetching for production use; fetch content yourself so you can validate origin and content type before rendering
+- **Never use third-party or user-supplied URLs** — always load from application-controlled, allowlisted endpoints; treat all remote Markdown as potentially untrusted until sanitized
 - **Encoding** — use `File.ReadAllText(path, Encoding.UTF8)` if your Markdown files contain non-ASCII characters to avoid garbled output
 - **XAML CDATA requires `xml:space="preserve"`** — omitting it collapses whitespace and breaks Markdown structure

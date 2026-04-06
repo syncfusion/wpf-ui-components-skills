@@ -121,19 +121,19 @@ The **Compact** mode displays a narrow sidebar showing only icons. When toggled 
                                ExpandedModeWidth="320">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Drafts">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M6.9999996,48.353..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M3,3h18v14H3V3z M5,5v10h14V5H5z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -157,7 +157,7 @@ navigationDrawer.Items.Add(new NavigationItem()
     Header = "Inbox",
     Icon = new Path()
     {
-        Data = Geometry.Parse("M32.032381,16.445429..."),
+        Data = Geometry.Parse("M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     }
@@ -168,7 +168,7 @@ navigationDrawer.Items.Add(new NavigationItem()
     Header = "Sent mail",
     Icon = new Path()
     {
-        Data = Geometry.Parse("M42.128046,6.7269681..."),
+        Data = Geometry.Parse("M2,21L23,12L2,3v7l15,2L2,13V21z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     }
@@ -189,19 +189,19 @@ this.Content = navigationDrawer;
 <syncfusion:SfNavigationDrawer DisplayMode="Compact">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
         
         <!-- Sub-items appear in popup when compact -->
         <syncfusion:NavigationItem Header="Primary">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.5189972,7.3780194..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White" Stretch="Uniform"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="Social">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M22.133972,14.194015..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="White" Stretch="Uniform"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:NavigationItem>
@@ -233,38 +233,38 @@ The **Expanded** mode displays a full-width sidebar that is always visible, push
                                ExpandedModeWidth="320">
     <syncfusion:NavigationItem Header="Inbox" IsExpanded="True" IsSelected="True">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
         
         <!-- Sub-items shown inline when expanded -->
         <syncfusion:NavigationItem Header="Primary">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.5189972,7.3780194..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White" Stretch="Uniform"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="Social">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M22.133972,14.194015..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z" Fill="White" Stretch="Uniform"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         
         <syncfusion:NavigationItem Header="Promotions">
             <syncfusion:NavigationItem.Icon>
-                <Path Data="M9.4614787,7.2521966..." Fill="White" Stretch="Uniform"/>
+                <Path Data="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z" Fill="White" Stretch="Uniform"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Drafts">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M6.9999996,48.353..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M3,3h18v14H3V3z M5,5v10h14V5H5z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -289,7 +289,7 @@ navigationSubItems.Add(new NavigationItem()
     Header = "Primary",
     Icon = new Path()
     {
-        Data = Geometry.Parse("M9.5189972,7.3780194..."),
+        Data = Geometry.Parse("M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     }
@@ -300,7 +300,7 @@ navigationSubItems.Add(new NavigationItem()
     Header = "Social",
     Icon = new Path()
     {
-        Data = Geometry.Parse("M22.133972,14.194015..."),
+        Data = Geometry.Parse("M12,2l3,7l7,1l-5,5l1,7l-6-4l-6,4l1-7l-5-5l7-1z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     }
@@ -311,7 +311,7 @@ navigationDrawer.Items.Add(new NavigationItem()
     Header = "Inbox",
     Icon = new Path()
     {
-        Data = Geometry.Parse("M32.032381,16.445429..."),
+        Data = Geometry.Parse("M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"),
         Fill = Brushes.White,
         Stretch = Stretch.Uniform
     },
@@ -372,19 +372,19 @@ navigationDrawer.ExpandedModeThresholdWidth = 700;
                                ExpandedModeWidth="320">
     <syncfusion:NavigationItem Header="Inbox">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M32.032381,16.445429..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M20,4H4c-1.1,0-2,0.9-2,2v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Sent mail">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M42.128046,6.7269681..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M2,21L23,12L2,3v7l15,2L2,13V21z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
     <syncfusion:NavigationItem Header="Drafts">
         <syncfusion:NavigationItem.Icon>
-            <Path Data="M6.9999996,48.353..." Fill="White" Stretch="Uniform"/>
+            <Path Data="M3,3h18v14H3V3z M5,5v10h14V5H5z" Fill="White" Stretch="Uniform"/>
         </syncfusion:NavigationItem.Icon>
     </syncfusion:NavigationItem>
     
@@ -461,3 +461,4 @@ Sets the window width threshold for auto mode switching.
 View complete samples on GitHub:
 - [Display Mode Sample](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Display_Mode)
 - [Custom View Sample](https://github.com/SyncfusionExamples/wpf-sfnavigationdrawer-samples/tree/main/Custom_View)
+

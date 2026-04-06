@@ -2,15 +2,7 @@
 
 This guide covers visual customization options for SfMaskedEdit including colors, borders, watermarks, and theming.
 
-## Table of Contents
-- [Background Customization](#background-customization)
-- [Foreground Customization](#foreground-customization)
-- [Border Customization](#border-customization)
-- [Error Indication](#error-indication)
-- [Flow Direction (RTL Support)](#flow-direction-rtl-support)
-- [Watermark Configuration](#watermark-configuration)
-- [Custom Watermark Template](#custom-watermark-template)
-- [Theme Integration](#theme-integration)
+<!-- Table of contents removed for cross-environment compatibility; see section headings below -->
 
 ## Background Customization
 
@@ -401,242 +393,24 @@ Watermark is hidden when:
 </syncfusion:SfMaskedEdit>
 ```
 
-### Watermark with Icon
+### Watermark with Icon (compact)
+
+Use a simple watermark template with an icon and text. Keep templates concise to reduce maintenance overhead.
 
 ```xml
-<syncfusion:SfMaskedEdit 
-    Watermark="Enter phone number"
-    Mask="\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}"
-    MaskType="RegEx"
-    Width="250">
+<syncfusion:SfMaskedEdit Watermark="Enter phone number"
+                         Mask="\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}"
+                         MaskType="RegEx" Width="250">
     <syncfusion:SfMaskedEdit.WatermarkTemplate>
         <DataTemplate>
             <StackPanel Orientation="Horizontal">
-                <Path Data="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"
-                      Fill="Gray" 
-                      Width="14" 
-                      Height="14"
-                      Stretch="Uniform"
-                      Margin="0,0,5,0"/>
-                <TextBlock 
-                    Text="{Binding}" 
-                    Foreground="Gray"
-                    FontStyle="Italic"
-                    VerticalAlignment="Center"/>
+                <TextBlock Text="📞" Margin="0,0,6,0"/>
+                <TextBlock Text="{Binding}" Foreground="Gray"/>
             </StackPanel>
         </DataTemplate>
     </syncfusion:SfMaskedEdit.WatermarkTemplate>
 </syncfusion:SfMaskedEdit>
 ```
 
-### Animated Watermark
-
-```xml
-<syncfusion:SfMaskedEdit 
-    Watermark="Click to enter..."
-    Mask="\d+"
-    MaskType="RegEx">
-    <syncfusion:SfMaskedEdit.WatermarkTemplate>
-        <DataTemplate>
-            <TextBlock Text="{Binding}" Foreground="Orange">
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard RepeatBehavior="Forever">
-                                <DoubleAnimation 
-                                    Storyboard.TargetProperty="Opacity"
-                                    From="1.0" To="0.3" Duration="0:0:1" 
-                                    AutoReverse="True"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
-        </DataTemplate>
-    </syncfusion:SfMaskedEdit.WatermarkTemplate>
-</syncfusion:SfMaskedEdit>
-```
-
 ## Theme Integration
-
-### Using SfSkinManager
-
-Apply Syncfusion themes to SfMaskedEdit:
-
-```csharp
-using Syncfusion.SfSkinManager;
-using Syncfusion.Themes.MaterialLight.WPF;
-
-// In Window or control code-behind
-SfSkinManager.SetTheme(this, new Theme("MaterialLight"));
-```
-
-```xml
-<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        syncfusion:SfSkinManager.Theme="{syncfusion:SkinManagerExtension ThemeName=MaterialLight}">
-    <StackPanel>
-        <syncfusion:SfMaskedEdit 
-            Mask="\d+"
-            MaskType="RegEx"/>
-    </StackPanel>
-</Window>
-```
-
-### Available Themes
-
-- **MaterialLight** / **MaterialDark**
-- **FluentLight** / **FluentDark**
-- **Office2019Colorful** / **Office2019Black** / **Office2019White**
-- **Office2016Colorful** / **Office2016White** / **Office2016DarkGray**
-- **VisualStudio2015**
-- **VisualStudio2013**
-
-### Theme Installation
-
-Install theme NuGet packages:
-
-```powershell
-Install-Package Syncfusion.Themes.MaterialLight.WPF
-```
-
-### Example: Themed Application
-
-```xml
-<Window x:Class="ThemedApp.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        syncfusion:SfSkinManager.Theme="{syncfusion:SkinManagerExtension ThemeName=MaterialLight}"
-        Title="Themed Masked Edit" Height="300" Width="400">
-    <StackPanel Margin="20">
-        <TextBlock Text="Material Light Theme" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
-        
-        <syncfusion:SfMaskedEdit 
-            Mask="\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}"
-            MaskType="RegEx"
-            Watermark="Phone number"
-            Margin="0,0,0,10"/>
-        
-        <syncfusion:SfMaskedEdit 
-            Mask="[A-Za-z0-9._%-]+@[A-Za-z0-9]+\.[A-Za-z]{2,3}"
-            MaskType="RegEx"
-            Watermark="Email address"
-            Margin="0,0,0,10"/>
-        
-        <syncfusion:SfMaskedEdit 
-            Mask="$ \d+\.\d{2}"
-            MaskType="RegEx"
-            Watermark="Amount"/>
-    </StackPanel>
-</Window>
-```
-
-### Runtime Theme Switching
-
-```xml
-<Window x:Name="mainWindow">
-    <StackPanel>
-        <ComboBox x:Name="themeCombo" 
-                  SelectionChanged="ThemeCombo_SelectionChanged"
-                  Width="150"
-                  HorizontalAlignment="Left"
-                  Margin="20">
-            <ComboBoxItem Content="MaterialLight" IsSelected="True"/>
-            <ComboBoxItem Content="MaterialDark"/>
-            <ComboBoxItem Content="FluentLight"/>
-            <ComboBoxItem Content="FluentDark"/>
-        </ComboBox>
-        
-        <syncfusion:SfMaskedEdit 
-            Mask="\d+"
-            MaskType="RegEx"
-            Margin="20"/>
-    </StackPanel>
-</Window>
-```
-
-```csharp
-private void ThemeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-{
-    string themeName = (themeCombo.SelectedItem as ComboBoxItem).Content.ToString();
-    SfSkinManager.SetTheme(mainWindow, new Theme(themeName));
-}
-```
-
-## Complete Styling Example
-
-```xml
-<Window x:Class="CustomStyleDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="Custom Styling Demo" Height="450" Width="500">
-    <Window.Resources>
-        <!-- Define reusable style -->
-        <Style x:Key="ModernMaskedEditStyle" TargetType="syncfusion:SfMaskedEdit">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="#333333"/>
-            <Setter Property="BorderBrush" Value="#CCCCCC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CaretBrush" Value="DodgerBlue"/>
-            <Setter Property="SelectionBrush" Value="LightSkyBlue"/>
-            <Setter Property="ErrorBorderBrush" Value="#E74C3C"/>
-            <Setter Property="Height" Value="35"/>
-            <Setter Property="Padding" Value="8,0"/>
-            <Style.Triggers>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="BorderBrush" Value="DodgerBlue"/>
-                    <Setter Property="BorderThickness" Value="2"/>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="#999999"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
-    
-    <StackPanel Margin="30">
-        <TextBlock Text="Modern Form" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
-        
-        <TextBlock Text="Phone Number" Margin="0,0,0,5"/>
-        <syncfusion:SfMaskedEdit 
-            Style="{StaticResource ModernMaskedEditStyle}"
-            Mask="\([0-9]\d{2}\) [0-9]\d{2}-[0-9]\d{3}"
-            MaskType="RegEx"
-            Watermark="(___) ___-____"
-            Margin="0,0,0,15"/>
-        
-        <TextBlock Text="Email Address" Margin="0,0,0,5"/>
-        <syncfusion:SfMaskedEdit 
-            Style="{StaticResource ModernMaskedEditStyle}"
-            Mask="[A-Za-z0-9._%-]+@[A-Za-z0-9]+\.[A-Za-z]{2,3}"
-            MaskType="RegEx"
-            Watermark="example@domain.com"
-            Margin="0,0,0,15"/>
-        
-        <TextBlock Text="Credit Card" Margin="0,0,0,5"/>
-        <syncfusion:SfMaskedEdit 
-            Style="{StaticResource ModernMaskedEditStyle}"
-            Mask="\d{4} \d{4} \d{4} \d{4}"
-            MaskType="RegEx"
-            Watermark="____ ____ ____ ____"
-            Margin="0,0,0,15"/>
-        
-        <Button Content="Submit" Width="100" Height="35" 
-                Background="DodgerBlue" Foreground="White"
-                BorderThickness="0"
-                HorizontalAlignment="Left"/>
-    </StackPanel>
-</Window>
-```
-
-## Best Practices
-
-1. **Consistent styling:** Use styles or themes for uniform appearance across your application
-2. **Accessibility:** Ensure sufficient color contrast between text and background
-3. **Error visibility:** Make error states clearly distinguishable (color + border)
-4. **Watermark clarity:** Use watermarks that clearly indicate expected input format
-5. **RTL support:** Test with FlowDirection="RightToLeft" for international applications
-6. **Theme integration:** Leverage Syncfusion themes for professional, consistent UI
-7. **Focus indicators:** Ensure focused controls are visually distinct
-8. **Test in different themes:** Verify appearance in light and dark themes
+<!-- Theme and full styling sections moved to appearance-customization-themes.md -->

@@ -28,7 +28,7 @@ using Syncfusion.Windows.Controls.Navigation;
 The simplest way to create a radial menu is in XAML by adding `SfRadialMenu` with `SfRadialMenuItem` children:
 
 ```xaml
-<Page xmlns:navigation="clr-namespace:Syncfusion.Windows.Controls.Navigation;assembly=Syncfusion.SfRadialMenu.Wpf">
+<Window xmlns:navigation="clr-namespace:Syncfusion.Windows.Controls.Navigation;assembly=Syncfusion.SfRadialMenu.Wpf">
     <Grid>
         <navigation:SfRadialMenu>
             <navigation:SfRadialMenuItem Header="Bold"/>
@@ -37,7 +37,7 @@ The simplest way to create a radial menu is in XAML by adding `SfRadialMenu` wit
             <navigation:SfRadialMenuItem Header="Paste"/>
         </navigation:SfRadialMenu>
     </Grid>
-</Page>
+</Window>
 ```
 
 ### Code-Behind Implementation
@@ -233,7 +233,7 @@ radialMenu.Navigating += RadialMenu_Navigating;
 private void RadialMenu_Navigating(object sender, NavigatingEventArgs e)
 {
     // Access the item being navigated into
-    SfRadialMenuItem targetItem = e.Item as SfRadialMenuItem;
+    SfRadialMenuItem targetItem = e.TargetMenuItem as SfRadialMenuItem;
     string header = targetItem?.Header?.ToString();
     
     MessageBox.Show($"Navigating to: {header}");
@@ -247,10 +247,10 @@ private void RadialMenu_Navigating(object sender, NavigatingEventArgs e)
 ```csharp
 private void RadialMenu_Navigating(object sender, NavigatingEventArgs e)
 {
-    SfRadialMenuItem targetItem = e.Item as SfRadialMenuItem;
+    SfRadialMenuItem targetItem = sender as SfRadialMenuItem;
     
     // Prevent navigation to certain items based on condition
-    if (targetItem?.Header?.ToString() == "Restricted Item" && !userHasPermission)
+    if (targetItem?.Header?.ToString() == "Restricted Item")
     {
         e.Cancel = true;
         MessageBox.Show("You don't have permission to access this menu.");

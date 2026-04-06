@@ -413,9 +413,3 @@ spellChecker.IgnoreMixedCaseWords = true;
 // Be more selective
 spellChecker.IgnoreAlphaNumericWords = false; // May be too broad
 ```
-
-## Next Steps
-
-- **Add custom dictionaries:** Read [dictionary-support.md](dictionary-support.md)
-- **Learn spell check methods:** Read [spell-check-methods.md](spell-check-methods.md)
-- **Customize events:** Read [customization.md](customization.md)

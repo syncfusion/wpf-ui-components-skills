@@ -309,39 +309,6 @@ Ensure enough space for typing:
                         Height="30" Width="250"/>
 ```
 
-### Pattern 2: Multi-Tag Selector with AutoComplete
-
-```xml
-<syncfusion:ComboBoxAdv IsEditable="True"
-                        AutoCompleteMode="Suggest"
-                        AllowMultiSelect="True"
-                        EnableToken="True"
-                        ItemsSource="{Binding Tags}"
-                        DisplayMemberPath="TagName"
-                        DefaultText="Type to add tags..."
-                        Height="Auto" Width="300"/>
-```
-
-### Pattern 3: Country Selector with Code Display
-
-```xml
-<syncfusion:ComboBoxAdv IsEditable="True"
-                        AutoCompleteMode="Suggest"
-                        ItemsSource="{Binding Countries}"
-                        DefaultText="Select or type country...">
-    <syncfusion:ComboBoxAdv.ItemTemplate>
-        <DataTemplate>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Code}" 
-                           FontWeight="Bold" 
-                           Width="40"/>
-                <TextBlock Text="{Binding Name}"/>
-            </StackPanel>
-        </DataTemplate>
-    </syncfusion:ComboBoxAdv.ItemTemplate>
-</syncfusion:ComboBoxAdv>
-```
-
 ## Troubleshooting
 
 ### Issue: AutoComplete Not Working

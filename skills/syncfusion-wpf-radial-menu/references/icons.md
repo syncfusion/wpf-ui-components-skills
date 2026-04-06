@@ -65,11 +65,9 @@ For vector graphics, use `Path` with geometry data:
 ```xaml
 <navigation:SfRadialMenu IsOpen="True">
     <navigation:SfRadialMenu.Icon>
-        <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
-              Fill="DodgerBlue"
-              Width="24"
-              Height="24"
-              Stretch="Uniform"/>
+        <Image Source="ms-appx:///Assets/text.png" Width="20"  
+
+ 	 	 	                Stretch="Uniform"/>
     </navigation:SfRadialMenu.Icon>
     
     <navigation:SfRadialMenuItem Header="Option 1"/>
@@ -208,58 +206,6 @@ radialMenu.Items.Add(copy);
 radialMenu.Items.Add(paste);
 ```
 
-### Menu Item Icons with Path Geometry
-
-```xaml
-<navigation:SfRadialMenu IsOpen="True">
-    <navigation:SfRadialMenuItem Header="Save">
-        <navigation:SfRadialMenuItem.Icon>
-            <Path Data="M17,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
-                  Fill="Green"
-                  Width="16"
-                  Height="16"
-                  Stretch="Uniform"/>
-        </navigation:SfRadialMenuItem.Icon>
-    </navigation:SfRadialMenuItem>
-    
-    <navigation:SfRadialMenuItem Header="Delete">
-        <navigation:SfRadialMenuItem.Icon>
-            <Path Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
-                  Fill="Red"
-                  Width="16"
-                  Height="16"
-                  Stretch="Uniform"/>
-        </navigation:SfRadialMenuItem.Icon>
-    </navigation:SfRadialMenuItem>
-</navigation:SfRadialMenu>
-```
-
-### Menu Item Icons with Icon Fonts
-
-```xaml
-<navigation:SfRadialMenu IsOpen="True">
-    <navigation:SfRadialMenuItem Header="Settings">
-        <navigation:SfRadialMenuItem.Icon>
-            <TextBlock Text="&#xE713;" 
-                      FontFamily="Segoe MDL2 Assets"
-                      FontSize="16"
-                      Foreground="Gray"/>
-        </navigation:SfRadialMenuItem.Icon>
-    </navigation:SfRadialMenuItem>
-    
-    <navigation:SfRadialMenuItem Header="Share">
-        <navigation:SfRadialMenuItem.Icon>
-            <TextBlock Text="&#xE72D;" 
-                      FontFamily="Segoe MDL2 Assets"
-                      FontSize="16"
-                      Foreground="Blue"/>
-        </navigation:SfRadialMenuItem.Icon>
-    </navigation:SfRadialMenuItem>
-</navigation:SfRadialMenu>
-```
-
----
-
 ## Icons with Data Binding
 
 When using `ItemsSource` binding, configure icons through the business model and `ItemTemplate`.
@@ -364,42 +310,11 @@ public class MenuViewModel
 </navigation:SfRadialMenuItem>
 ```
 
-### Responsive Size Icons
-
-```xaml
-<navigation:SfRadialMenuItem Header="Print">
-    <navigation:SfRadialMenuItem.Icon>
-        <Viewbox Width="20" Height="20">
-            <Path Data="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"
-                  Fill="Black"/>
-        </Viewbox>
-    </navigation:SfRadialMenuItem.Icon>
-</navigation:SfRadialMenuItem>
-```
-
----
 
 ## Advanced Icon Patterns
 
-### Pattern 1: Icon with Badge
 
-Add notification badges to icons:
-
-```xaml
-<navigation:SfRadialMenuItem Header="Messages">
-    <navigation:SfRadialMenuItem.Icon>
-        <Grid Width="20" Height="20">
-            <Image Source="/Assets/message.png" Stretch="Uniform"/>
-            <Ellipse Width="8" Height="8" 
-                    Fill="Red" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Top"/>
-        </Grid>
-    </navigation:SfRadialMenuItem.Icon>
-</navigation:SfRadialMenuItem>
-```
-
-### Pattern 2: Conditional Icon Display
+### Pattern 1: Conditional Icon Display
 
 Use data binding with converters to show different icons based on state:
 
@@ -431,7 +346,7 @@ public class BoolToIconConverter : IValueConverter
 }
 ```
 
-### Pattern 3: Animated Icons
+### Pattern 2: Animated Icons
 
 Add subtle animations to icons:
 

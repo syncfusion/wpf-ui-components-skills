@@ -101,84 +101,6 @@ The **Syncfusion WPF Smart Text Editor** is a multiline input control that uses 
 
 **When to read:** Configuring Azure OpenAI, OpenAI, or Ollama for AI-powered suggestions. Use this for official/built-in AI provider setup.
 
-### Custom AI Service Integration
-📄 **Read:** [references/custom-ai-services.md](references/custom-ai-services.md)
-- `IChatInferenceService` interface and when to use it
-- Claude AI — request/response models, service class, registration
-- DeepSeek — chat completions integration and registration
-- Gemini — Google AI Studio setup, safety settings, registration
-- Groq — low-latency OpenAI-compatible endpoint, registration
-- No need to call `ConfigureSyncfusionAIServices()` when using custom services
-- Choosing the right custom provider
-- Troubleshooting custom AI implementations
-
-**When to read:** Integrating custom AI services, implementing Claude/DeepSeek/Gemini/Groq, or creating a custom IChatInferenceService adapter.
-
-## Quick Start Example
-
-Here's a minimal example to get started with the Smart Text Editor:
-
-### 1. Install NuGet Package
-
-```powershell
-Install-Package Syncfusion.SfSmartComponents.WPF
-```
-
-### 2. Add Control in XAML
-
-```xaml
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        x:Class="YourApp.MainWindow">
-    <Grid>
-        <syncfusion:SfSmartTextEditor 
-            x:Name="smartTextEditor"
-            Placeholder="Type your response..."
-            UserRole="Customer support agent responding to inquiries">
-            <syncfusion:SfSmartTextEditor.UserPhrases>
-                <x:String>Thank you for reaching out.</x:String>
-                <x:String>We'll investigate and get back to you shortly.</x:String>
-            </syncfusion:SfSmartTextEditor.UserPhrases>
-        </syncfusion:SfSmartTextEditor>
-    </Grid>
-</Window>
-```
-
-### 3. Configure AI Service (App.xaml.cs)
-
-```csharp
-using Azure.AI.OpenAI;
-using Microsoft.Extensions.AI;
-using Microsoft.Extensions.DependencyInjection;
-using Syncfusion.UI.Xaml.SmartComponents;
-using System.ClientModel;
-using System.Windows;
-
-public partial class App : Application
-{
-    protected override void OnStartup(StartupEventArgs e)
-    {
-        base.OnStartup(e);
-        
-        // Configure Azure OpenAI
-        string azureApiKey = "<YOUR-API-KEY>";
-        Uri azureEndpoint = new Uri("<YOUR-ENDPOINT>");
-        string deploymentName = "<YOUR-DEPLOYMENT>";
-
-        AzureOpenAIClient azureClient = new AzureOpenAIClient(
-            azureEndpoint, 
-            new ApiKeyCredential(azureApiKey)
-        );
-        IChatClient chatClient = azureClient
-            .GetChatClient(deploymentName)
-            .AsIChatClient();
-        
-        SyncfusionAIExtension.Services.AddSingleton<IChatClient>(chatClient);
-        SyncfusionAIExtension.ConfigureSyncfusionAIServices();
-    }
-}
-```
 
 ## Common Patterns
 
@@ -193,10 +115,10 @@ public partial class App : Application
     MaxLength="2000"
     SuggestionDisplayMode="Inline">
     <syncfusion:SfSmartTextEditor.UserPhrases>
-        <x:String>Thanks for contacting Syncfusion support.</x:String>
-        <x:String>Could you please share a reproducible sample?</x:String>
-        <x:String>We've logged this as a bug and will update you soon.</x:String>
-        <x:String>Let us know if you need further assistance.</x:String>
+        <sys:String>Thanks for contacting Syncfusion support.</sys:String>
+        <sys:String>Could you please share a reproducible sample?</sys:String>
+        <sys:String>We've logged this as a bug and will update you soon.</sys:String>
+        <sys:String>Let us know if you need further assistance.</sys:String>
     </syncfusion:SfSmartTextEditor.UserPhrases>
 </syncfusion:SfSmartTextEditor>
 ```
@@ -265,11 +187,11 @@ public class EditorViewModel : INotifyPropertyChanged
     Placeholder="Type your message..."
     UserRole="Sales representative responding to leads">
     <syncfusion:SfSmartTextEditor.UserPhrases>
-        <x:String>Thank you for your interest in our products.</x:String>
-        <x:String>I'd be happy to schedule a demo.</x:String>
-        <x:String>Our pricing starts at $99 per month.</x:String>
-        <x:String>Let me connect you with our solutions team.</x:String>
-        <x:String>Feel free to reach out with any questions.</x:String>
+        <sys:String>Thank you for your interest in our products.</sys:String>
+        <sys:String>I'd be happy to schedule a demo.</sys:String>
+        <sys:String>Our pricing starts at $99 per month.</sys:String>
+        <sys:String>Let me connect you with our solutions team.</sys:String>
+        <sys:String>Feel free to reach out with any questions.</sys:String>
     </syncfusion:SfSmartTextEditor.UserPhrases>
 </syncfusion:SfSmartTextEditor>
 ```
@@ -309,11 +231,6 @@ public class EditorViewModel : INotifyPropertyChanged
 - **Why:** Enterprise-grade AI with Azure security and compliance
 - **Reference:** [ai-service-configuration.md](references/ai-service-configuration.md)
 
-### When User Needs Custom AI Provider (Claude, Gemini, etc.)
-- **Action:** Implement `IChatInferenceService` interface
-- **Why:** Use alternative AI providers or custom inference logic
-- **Reference:** [custom-ai-services.md](references/custom-ai-services.md)
-
 ### When User Needs Character Limit
 - **Action:** Set `MaxLength` property
 - **Why:** Enforce input validation and prevent excessive text
@@ -339,5 +256,4 @@ public class EditorViewModel : INotifyPropertyChanged
 **Next Steps:**
 1. For initial setup and installation → Read [getting-started.md](references/getting-started.md)
 2. For AI provider configuration → Read [ai-service-configuration.md](references/ai-service-configuration.md)
-3. For custom AI services → Read [custom-ai-services.md](references/custom-ai-services.md)
-4. For appearance customization → Read [customization.md](references/customization.md)
+3. For appearance customization → Read [customization.md](references/customization.md)

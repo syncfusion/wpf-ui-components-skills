@@ -146,66 +146,24 @@ DockingManager.SetCanFloat(window, false);
 
 ## Window Layouts
 
-### MDI Layouts
-
 Arrange MDI documents in different patterns:
+
+**Available layouts (set MDIWindowLayout property):**
+- `Cascade`: Overlapping windows (default)
+- `HorizontalSplit`, `VerticalSplit`: Tiled arrangements
+- `TileHorizontal`, `TileVertical`: Grid layouts
 
 **XAML:**
 ```xml
-<syncfusion:DockingManager x:Name="dockManager"
-                          UseDocumentContainer="True"
-                          ContainerMode="MDI"
-                          MDIWindowLayout="Cascade">
-    <!-- MDIWindowLayout options:
-         - Cascade: Overlapping windows
-         - HorizontalSplit: Side-by-side
-         - VerticalSplit: Top and bottom
-         - TileHorizontal: Grid layout horizontal
-         - TileVertical: Grid layout vertical -->
+<syncfusion:DockingManager ContainerMode="MDI" MDIWindowLayout="Cascade">
 </syncfusion:DockingManager>
 ```
 
-**C#:**
+**C# (programmatic or via menu):**
 ```csharp
-// Apply layout programmatically
 dockManager.MDIWindowLayout = MDIWindowLayout.Cascade;
-dockManager.MDIWindowLayout = MDIWindowLayout.HorizontalSplit;
-dockManager.MDIWindowLayout = MDIWindowLayout.VerticalSplit;
 dockManager.MDIWindowLayout = MDIWindowLayout.TileHorizontal;
-dockManager.MDIWindowLayout = MDIWindowLayout.TileVertical;
-```
-
-### Layout Commands
-
-Provide UI controls for layout switching:
-
-**XAML:**
-```xml
-<Menu>
-    <MenuItem Header="Window">
-        <MenuItem Header="Cascade" Click="Cascade_Click" />
-        <MenuItem Header="Tile Horizontal" Click="TileHorizontal_Click" />
-        <MenuItem Header="Tile Vertical" Click="TileVertical_Click" />
-    </MenuItem>
-</Menu>
-```
-
-**C#:**
-```csharp
-private void Cascade_Click(object sender, RoutedEventArgs e)
-{
-    dockManager.MDIWindowLayout = MDIWindowLayout.Cascade;
-}
-
-private void TileHorizontal_Click(object sender, RoutedEventArgs e)
-{
-    dockManager.MDIWindowLayout = MDIWindowLayout.TileHorizontal;
-}
-
-private void TileVertical_Click(object sender, RoutedEventArgs e)
-{
-    dockManager.MDIWindowLayout = MDIWindowLayout.TileVertical;
-}
+// ... other layouts
 ```
 
 ## Tab Groups
@@ -516,90 +474,6 @@ public void ToggleFullScreen()
         dockManager.TDIFullScreenMode = FullScreenMode.None;
     }
 }
-```
-
-## Common Patterns
-
-### Open Document
-
-```csharp
-public void OpenDocument(string filePath)
-{
-    // Check if already open
-    var existing = dockManager.Children
-        .OfType<ContentControl>()
-        .FirstOrDefault(c => DockingManager.GetHeader(c).ToString() == Path.GetFileName(filePath));
-    
-    if (existing != null)
-    {
-        // Activate existing document
-        dockManager.ActiveWindow = existing;
-        return;
-    }
-    
-    // Create new document
-    ContentControl doc = new ContentControl();
-    doc.Content = LoadDocumentContent(filePath);
-    
-    DockingManager.SetHeader(doc, Path.GetFileName(filePath));
-    DockingManager.SetState(doc, DockState.Document);
-    DockingManager.SetCanClose(doc, true);
-    
-    // Store full path in Tag for saving
-    doc.Tag = filePath;
-    
-    dockManager.Children.Add(doc);
-    dockManager.ActiveWindow = doc;
-}
-```
-
-### Get All Open Documents
-
-```csharp
-public List<FrameworkElement> GetOpenDocuments()
-{
-    return dockManager.Children
-        .OfType<FrameworkElement>()
-        .Where(e => DockingManager.GetState(e) == DockState.Document)
-        .ToList();
-}
-```
-
-### Document Tab Ordering
-
-```csharp
-// Set tab order explicitly
-DockingManager.SetTabOrder(document, 0); // First position
-
-// Get current order
-int order = DockingManager.GetTabOrder(document);
-```
-
-### MDI-Style Application
-
-```xml
-<Window>
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File">
-                <MenuItem Header="New" Click="New_Click" />
-                <MenuItem Header="Open" Click="Open_Click" />
-                <MenuItem Header="Close" Click="Close_Click" />
-            </MenuItem>
-            <MenuItem Header="Window">
-                <MenuItem Header="Cascade" Click="Cascade_Click" />
-                <MenuItem Header="Tile Horizontal" Click="TileH_Click" />
-                <MenuItem Header="Tile Vertical" Click="TileV_Click" />
-            </MenuItem>
-        </Menu>
-        
-        <syncfusion:DockingManager x:Name="dockManager"
-                                  UseDocumentContainer="True"
-                                  ContainerMode="MDI"
-                                  MDIWindowLayout="Cascade">
-        </syncfusion:DockingManager>
-    </DockPanel>
-</Window>
 ```
 
 ## Troubleshooting
