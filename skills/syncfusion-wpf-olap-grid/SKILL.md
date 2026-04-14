@@ -223,7 +223,7 @@ using Syncfusion.Olap.Reports;
 public partial class MainWindow : Window
 {
     private OlapDataManager olapDataManager;
-    private string connectionString = "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll;Initial Catalog=Adventure Works DW 2008 SE;";
+    private string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=http://<your-ssas-server>/olap/msmdpump.dll;Initial Catalog=Adventure Works DW 2008 SE;";
     
     public MainWindow()
     {

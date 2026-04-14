@@ -15,27 +15,19 @@ EditControl has a built-in context menu which enables users to easily perform co
 
 Set the ShowDefaultContextMenu property of EditControl by using the following code.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 <sfedit:EditControl x:Name="editControl" ShowDefaultContextMenu="True"/>
 
+```
 
-{% endhighlight %}
-
-{% highlight C# %}
+```csharp
 editControl.ShowDefaultContextMenu = true;
 
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following image displays the Outlining Menu Expanded window.
 
 ![Default-Context-Menu_img1](Default-Context-Menu_images/Default-Context-Menu_img1.jpeg)
-
 
 **Functionalities supported by EditControl’s ContextMenu**
 

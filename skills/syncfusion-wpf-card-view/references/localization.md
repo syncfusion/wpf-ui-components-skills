@@ -12,20 +12,20 @@ CardView reads localized strings from a `.resx` resource file named `Syncfusion.
 
 ## Step 1: Set the Application Culture
 
-Set `CurrentUICulture` **after** `InitializeComponent()`:
+Set `CurrentUICulture` **before** `InitializeComponent()`:
 
 ```csharp
 public MainWindow()
 {
-    InitializeComponent();
-
     // Change to French
     System.Threading.Thread.CurrentThread.CurrentUICulture =
         new System.Globalization.CultureInfo("fr-FR");
+
+    InitializeComponent();
 }
 ```
 
-> Set the culture **before** the CardView is loaded/rendered for it to take effect.
+> Set the culture **before** `InitializeComponent()` for it to take effect.
 
 ---
 
@@ -69,10 +69,10 @@ Open the `.resx` file in the Resource Designer and add translations:
 // MainWindow.xaml.cs
 public MainWindow()
 {
-    InitializeComponent();
-
     System.Threading.Thread.CurrentThread.CurrentUICulture =
         new System.Globalization.CultureInfo("fr-FR");
+
+    InitializeComponent();
 }
 ```
 

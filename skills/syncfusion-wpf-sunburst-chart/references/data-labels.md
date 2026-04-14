@@ -297,10 +297,10 @@ For advanced scenarios, use the `LabelTemplate` property to create custom label 
 ### Available Binding Properties
 
 Within the template, you can bind to:
-- **Category** – Segment category name
-- **Value** – Segment numeric value
-- **Percentage** – Segment percentage of parent
-- **Interior** – Segment fill color
+- **Category** – Segment category name (`object`, maps to the GroupMemberPath value)
+- **Value** – Segment numeric value (`double`, maps to the ValueMemberPath value)
+
+> **Note:** Only `Category` and `Value` are bindable properties on `SunburstDataLabel` (the DataContext of `LabelTemplate`)
 
 ### Template with Value Display
 
@@ -328,8 +328,8 @@ Use segment color as label background:
 ```xml
 <sunburst:SunburstDataLabelInfo.LabelTemplate>
     <DataTemplate>
-        <Border Background="{Binding Interior}"
-                BorderBrush="{Binding Interior}"
+        <Border Background="#80000000"
+                BorderBrush="#CC000000"
                 BorderThickness="2"
                 CornerRadius="3"
                 Padding="3,1">
@@ -350,7 +350,7 @@ Add visual indicators:
     <DataTemplate>
         <StackPanel Orientation="Horizontal">
             <Ellipse Width="8" Height="8" 
-                     Fill="{Binding Interior}" 
+                     Fill="#CC0000" 
                      Margin="0,0,4,0"/>
             <TextBlock Text="{Binding Category}" 
                        FontSize="10"/>
@@ -456,7 +456,7 @@ Combining all features:
 
 **Custom template not displaying:**
 - Verify DataTemplate syntax is correct
-- Check binding paths (Category, Value, Interior)
+- Check binding paths (Category, Value)
 - Ensure template elements have proper sizing
 
 **Poor readability:**

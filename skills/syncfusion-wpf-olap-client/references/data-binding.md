@@ -23,7 +23,7 @@ Connect to an OLAP cube file (.cub) available on the local machine by setting th
 
 ```csharp
 // Physical path to offline cube file
-string connectionString = @"Datasource=C:\OfflineCube\Adventure_Works_Ext.cub; Provider=msolap;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Datasource=C:\OfflineCube\Adventure_Works_Ext.cub; Provider=msolap;";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 this.olapClient1.OlapDataManager = olapDataManager;
@@ -34,7 +34,7 @@ this.olapClient1.DataBind();
 
 ```vbnet
 ' Physical path to offline cube file
-Dim connectionString As String = "Datasource=C:\OfflineCube\Adventure_Works_Ext.cub; Provider=msolap;"
+Dim connectionString As String = "YOUR_END_POINT"; ' For e.g - "Datasource=C:\OfflineCube\Adventure_Works_Ext.cub; Provider=msolap;"
 
 Dim olapDataManager As OlapDataManager = New OlapDataManager(connectionString)
 Me.olapClient1.OlapDataManager = olapDataManager
@@ -63,7 +63,7 @@ Connect to OLAP cubes in SQL Server Analysis Services (SSAS) running on the loca
 
 ```csharp
 // Connection to local SQL Server Analysis Services
-string connectionString = "Data source=localhost; Initial Catalog=Adventure Works DW";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data source=localhost; Initial Catalog=Adventure Works DW";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 this.olapClient1.OlapDataManager = olapDataManager;
@@ -73,7 +73,7 @@ this.olapClient1.DataBind();
 **VB.NET:**
 
 ```vbnet
-Dim connectionString As String = "Data source=localhost; Initial Catalog=Adventure Works DW"
+Dim connectionString As String = "YOUR_END_POINT"; ' For e.g - "Data source=localhost; Initial Catalog=Adventure Works DW"
 
 Dim olapDataManager As OlapDataManager = New OlapDataManager(connectionString)
 Me.olapClient1.OlapDataManager = olapDataManager
@@ -89,10 +89,7 @@ Me.olapClient1.DataBind()
 
 ```csharp
 // With SQL Server authentication
-string connectionString = "Data source=localhost; " +
-                          "Initial Catalog=Adventure Works DW; " +
-                          "User ID=myUsername; " +
-                          "Password=myPassword;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data source=localhost; " + "Initial Catalog=<YourCatalogName>; " + "User ID=myUsername; " + "Password=myPassword;";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 this.olapClient1.OlapDataManager = olapDataManager;
@@ -103,9 +100,7 @@ this.olapClient1.DataBind();
 
 ```csharp
 // Use Windows integrated authentication (default)
-string connectionString = "Data source=localhost; " +
-                          "Initial Catalog=Adventure Works DW; " +
-                          "Integrated Security=SSPI;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data source=localhost; " + "Initial Catalog=<YourCatalogName>; " + "Integrated Security=SSPI;";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 this.olapClient1.OlapDataManager = olapDataManager;
@@ -120,8 +115,7 @@ Connect to SQL Server Analysis Services hosted on a remote server through XML/A 
 
 ```csharp
 // Connection via XML/A to online server
-string connectionString = "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " +
-                          "Initial Catalog=Adventure Works DW 2008 SE;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=http://<your-ssas-server-name>/olap/msmdpump.dll; " + "Initial Catalog=<YourCatalogName>;";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 this.olapClient1.OlapDataManager = olapDataManager;
@@ -131,8 +125,7 @@ this.olapClient1.DataBind();
 **VB.NET:**
 
 ```vbnet
-Dim connectionString As String = "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " & _
-                                  "Initial Catalog=Adventure Works DW 2008 SE;"
+Dim connectionString As String = "YOUR_END_POINT"; ' For e.g - "Data Source=http://<your-ssas-server-name>/olap/msmdpump.dll; " & _"Initial Catalog=<YourCatalogName>;"
 
 Dim olapDataManager As OlapDataManager = New OlapDataManager(connectionString)
 Me.olapClient1.OlapDataManager = olapDataManager
@@ -142,17 +135,14 @@ Me.olapClient1.DataBind()
 ### XML/A URL Format
 
 The Data Source URL typically follows this pattern:
-- `http://servername/olap/msmdpump.dll` (HTTP)
-- `https://servername/olap/msmdpump.dll` (HTTPS - recommended for production)
+- `http://<your-server-name>/olap/msmdpump.dll` (HTTP)
+- `https://<your-server-name>/olap/msmdpump.dll` (HTTPS - recommended for production)
 
 ### With Credentials
 
 ```csharp
 // With authentication credentials
-string connectionString = "Data Source=http://myserver.com/olap/msmdpump.dll; " +
-                          "Initial Catalog=Adventure Works DW; " +
-                          "User ID=myUsername; " +
-                          "Password=myPassword;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=http://<your-ssas-server-name>/olap/msmdpump.dll; " + "Initial Catalog=<YourCatalogName>; " + "User ID=<username>; Password=<password>;";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 this.olapClient1.OlapDataManager = olapDataManager;
@@ -174,8 +164,7 @@ Connect to Mondrian OLAP server (open-source OLAP engine) through XML/A protocol
 
 ```csharp
 // Connection to Mondrian server
-string connectionString = @"Data Source=http://localhost:8080/mondrian/xmla; " +
-                           "Initial Catalog=FoodMart;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = http://<your-mondrian-server-name>:<port>/mondrian/xmla; Initial Catalog = <YourCatalogName>;";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 
@@ -189,8 +178,7 @@ this.olapClient1.DataBind();
 **VB.NET:**
 
 ```vbnet
-Dim connectionString As String = "Data Source=http://localhost:8080/mondrian/xmla; " & _
-                                  "Initial Catalog=FoodMart;"
+Dim connectionString As String = "YOUR_END_POINT"; ' For e.g - "Data Source = http://<your-mondrian-server-name>:<port>/mondrian/xmla; " & _ "Initial Catalog = <YourCatalogName>;"
 
 Dim olapDataManager As OlapDataManager = New OlapDataManager(connectionString)
 
@@ -211,17 +199,14 @@ olapDataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Provide
 
 ### Mondrian URL Pattern
 
-- Default: `http://servername:8080/mondrian/xmla`
+- Default: `http://<your-mondrian-server-name>:<port>/mondrian/xmla;`
 - Port may vary based on your Tomcat/server configuration
 - Path typically ends with `/xmla`
 
 ### With Authentication
 
 ```csharp
-string connectionString = @"Data Source=http://localhost:8080/mondrian/xmla; " +
-                           "Initial Catalog=FoodMart; " +
-                           "User ID=admin; " +
-                           "Password=admin;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = http://<your-mondrian-server-name>:<port>/mondrian/xmla; " + @"Initial Catalog = <YourCatalogName>; " + @"User ID = <username>; Password = <password>;";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 olapDataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Providers.Mondrian;
@@ -237,8 +222,7 @@ Connect to ActivePivot OLAP server (real-time OLAP platform) through XML/A proto
 
 ```csharp
 // Connection to ActivePivot server
-string connectionString = @"Data Source=http://localhost:8080/cva_s/xmla; " +
-                           "Initial Catalog=CVAS;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = http://<your-activepivot-server-name>:<port>/cva_s/xmla; Initial Catalog = <YourCatalogName>;";
 
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 
@@ -252,8 +236,7 @@ this.olapClient1.DataBind();
 **VB.NET:**
 
 ```vbnet
-Dim connectionString As String = "Data Source=http://localhost:8080/cva_s/xmla; " & _
-                                  "Initial Catalog=CVAS;"
+Dim connectionString As String = "YOUR_END_POINT"; ' For e.g - "Data Source = http://<your-activepivot-server-name>:<port>/cva_s/xmla; " & _ "Initial Catalog = <YourCatalogName>;"
 
 Dim olapDataManager As OlapDataManager = New OlapDataManager(connectionString)
 
@@ -274,7 +257,7 @@ olapDataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Provide
 
 ### ActivePivot URL Pattern
 
-- Default: `http://servername:8080/cva_s/xmla`
+- Default: `http://<your-server-name>:<port>/cva_s/xmla;`
 - Port and path may vary based on your ActivePivot configuration
 
 ## Connection String Patterns
@@ -285,16 +268,16 @@ olapDataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Provide
 |-------------|-------------------|------------------|
 | **Offline Cube** | `Datasource=C:\path\file.cub; Provider=msolap;` | Not required |
 | **Local SSAS** | `Data source=localhost; Initial Catalog=DBName;` | Not required |
-| **Online SSAS** | `Data Source=http://server/olap/msmdpump.dll; Initial Catalog=DBName;` | Not required |
-| **Mondrian** | `Data Source=http://server:8080/mondrian/xmla; Initial Catalog=DBName;` | **Required**: `Providers.Mondrian` |
-| **ActivePivot** | `Data Source=http://server:8080/cva_s/xmla; Initial Catalog=DBName;` | **Required**: `Providers.ActivePivot` |
+| **Online SSAS** | `Data Source=http://<your-server-name>/olap/msmdpump.dll; Initial Catalog=<YourCatalogName>;` | Not required |
+| **Mondrian** | `Data Source=http://<your-server-name>:<port>/mondrian/xmla; Initial Catalog=<YourCatalogName>;` | **Required**: `Providers.Mondrian` |
+| **ActivePivot** | `Data Source=http://<your-server-name>:<port>/cva_s/xmla; Initial Catalog=<YourCatalogName>;` | **Required**: `Providers.ActivePivot` |
 
 ### Common Connection String Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|---------|
 | `Data source` / `Datasource` | Server name or cube file path | `localhost`, `C:\cube.cub` |
-| `Data Source` (URL) | XML/A endpoint URL | `http://server/olap/msmdpump.dll` |
+| `Data Source` (URL) | XML/A endpoint URL | `http://<your-server-name>/olap/msmdpump.dll` |
 | `Initial Catalog` | Database/catalog name | `Adventure Works DW` |
 | `User ID` | Username for authentication | `myUsername` |
 | `Password` | Password for authentication | `myPassword` |
@@ -307,24 +290,19 @@ olapDataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Provide
 
 ```csharp
 // For servers that don't require authentication
-string connectionString = "Data source=localhost; Initial Catalog=Adventure Works DW";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=localhost; Initial Catalog=Adventure Works DW;";
 ```
 
 ### SQL Server Authentication
 
 ```csharp
-string connectionString = "Data source=localhost; " +
-                          "Initial Catalog=Adventure Works DW; " +
-                          "User ID=myUsername; " +
-                          "Password=myPassword;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=localhost; Initial Catalog=Adventure Works DW; " + "User ID=myUsername; Password=myPassword;";
 ```
 
 ### Windows Integrated Authentication
 
 ```csharp
-string connectionString = "Data source=localhost; " +
-                          "Initial Catalog=Adventure Works DW; " +
-                          "Integrated Security=SSPI;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data source=localhost; " + "Initial Catalog=Adventure Works DW; " + "Integrated Security=SSPI;";
 ```
 
 ### Storing Credentials Securely
@@ -337,8 +315,7 @@ string connectionString = ConfigurationManager.ConnectionStrings["OlapConnection
 
 // Or read from secure storage
 string password = GetSecurePassword(); // Implement secure retrieval
-string connectionString = $"Data source=localhost; Initial Catalog=Adventure Works DW; " +
-                          $"User ID=myUsername; Password={password};";
+string connectionString = "YOUR_END_POINT"; // For e.g - $"Data source=localhost; Initial Catalog=Adventure Works DW; " + $"User ID=myUsername; Password={password};";
 ```
 
 ## Troubleshooting Connection Issues
@@ -396,9 +373,7 @@ olapDataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Provide
 **Solutions**:
 ```csharp
 // Increase timeout in connection string
-string connectionString = "Data source=localhost; " +
-                          "Initial Catalog=Adventure Works DW; " +
-                          "Connect Timeout=60;"; // 60 seconds
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data source=localhost; " + "Initial Catalog=Adventure Works DW; " + "Connect Timeout=60;"; // 60 seconds
 ```
 
 ### Offline Cube File Not Found

@@ -48,9 +48,9 @@ private void OlapGrid1_CellClick(object sender, CellClickEventArgs e)
 {
     if (e.Cell.IsDataCell)
     {
-        // Navigate to detailed report or URL
         string url = GetDrillThroughUrl(e.Cell);
-        System.Diagnostics.Process.Start(url);
+        // Navigate to detailed report or URL
+        // For e.g - System.Diagnostics.Process.Start(url);
     }
 }
 ```

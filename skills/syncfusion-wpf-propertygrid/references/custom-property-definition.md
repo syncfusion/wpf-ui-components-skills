@@ -23,9 +23,7 @@ N> When `AutoGenerateItems` is `false`, `AutoGeneratingPropertyGridItem` event w
 
 In the following example, `AutoGeneratingPropertyGridItem` event not triggered by disabling the `AutoGenerateItems` and items which are manually added in the `Items` collection only loaded in the `PropertyGrid`.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -54,13 +52,9 @@ public class ViewModel {
         };
     }
 }
-      
-{% endhighlight %}
-{% endtabs %} 
+``` 
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid AutoGenerateItems="False"
                          SelectedObject="{Binding SelectedEmployee}"
                          x:Name="propertyGrid1">
@@ -72,17 +66,14 @@ public class ViewModel {
         <syncfusion:PropertyGridItem PropertyName="DOB"/>
     </syncfusion:PropertyGrid.Items>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %} 
-{% highlight C# %}
-
+```csharp
 propertyGrid1.AutoGenerateItems = false;
 
 propertyGrid1.Items.Add(new PropertyGridItem() { PropertyName = "Name" });
 propertyGrid1.Items.Add(new PropertyGridItem() { PropertyName = "DOB" });
-
-{% endhighlight %} 
-{% endtabs %}
+```
 
 ![PropertyGridItem added manually](Property_definition_images\AddingItems.png)
 
@@ -92,9 +83,7 @@ N> [View Sample in GitHub](https://github.com/SyncfusionExamples/wpf-property-gr
 
 You can manually add or remove the property item at runtime by adding or removing that item from the [Items](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGridItem.html#Syncfusion_Windows_PropertyGrid_PropertyGridItem_Items) collection property. You can also clear all the property items from the `PropertyGrid`.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -123,13 +112,9 @@ public class ViewModel {
         };
     }
 }
-      
-{% endhighlight %}
-{% endtabs %} 
+``` 
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid AutoGenerateItems="False"
                          SelectedObject="{Binding SelectedEmployee}"
                          x:Name="propertyGrid1">
@@ -153,10 +138,9 @@ public class ViewModel {
             Click="ClearItems_Click"
             Content="Clear Items"></Button>
 </StackPanel>
+```
 
-{% endhighlight %} 
-{% highlight C# %}
-
+```csharp
 propertyGrid1.AutoGenerateItems = false;
 
 propertyGrid1.Items.Add(new PropertyGridItem()
@@ -171,15 +155,11 @@ propertyGrid1.Items.Add(new PropertyGridItem()
 addItems.Click += AddItems_Click;
 removeItems.Click += RemoveItems_Click;
 clearItems.Click += ClearItems_Click;
-
-{% endhighlight %} 
-{% endtabs %}
+```
 
 You can dynamically add the property item as follows,
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 private void AddItem_Click(object sender, RoutedEventArgs e) {
     propertyGrid1.Items.Add(new PropertyGridItem()
     {
@@ -195,8 +175,7 @@ private void ClearItems_Click(object sender, RoutedEventArgs e) {
     propertyGrid1.Items.Clear();
 }
 
-{% endhighlight %} 
-{% endtabs %}
+```
 
 ![PropertyGridItem adding and removing at runtime](Property_definition_images\Dynamic.gif)
 
@@ -226,9 +205,7 @@ If you want to add own value editor and categorize the property items manually, 
 
 N> You can refer [Create Custom Value Editor](https://help.syncfusion.com/wpf/propertygrid/customeditor-support#creating-the-custom-editor) page to know more about how to create a own value editors.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -264,14 +241,10 @@ public class ViewModel {
             EmailID = "john@123.c"
         };
     }
-}
-      
-{% endhighlight %}
-{% endtabs %} 
+}    
+``` 
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid AutoGenerateItems="False" 
                          EnableGrouping="True"
                          SelectedObject="{Binding SelectedEmployee}"
@@ -298,10 +271,9 @@ public class ViewModel {
     </syncfusion:PropertyGrid.Items>
 
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %} 
-{% highlight C# %}
-
+```csharp
 propertyGrid1.AutoGenerateItems = false;
 propertyGrid1.EnableGrouping = true;
 
@@ -330,8 +302,7 @@ propertyGrid1.Items.Add(new PropertyGridItem()
     PropertyName = "EmailID",
     CategoryName = "Additional Info" 
 });
-{% endhighlight %} 
-{% endtabs %}
+```
 
 ![PropertyGridItem category and value editor changed](Property_definition_images\Ediotor_Category.png)
 
@@ -343,9 +314,7 @@ N> [View Sample in GitHub](https://github.com/SyncfusionExamples/wpf-property-gr
 
 If you want to manually explore only particular nested properties of any property item, add that particular nested properties into the respective property item's `PropertyGridItem.Items` collection. You must enable nested property mode by using `PropertyGridItem.PropertyExpandMode` property value as `NestedMode` to explore the nested properties. The default value of `PropertyGridItem.PropertyExpandMode` property is `null`.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 public class Bank {
     public string BankName { get; set; }
     public int CustomerID { get; set; }
@@ -380,14 +349,10 @@ public class ViewModel {
             },
         };
     }
-}
-      
-{% endhighlight %}
-{% endtabs %} 
+}     
+``` 
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid AutoGenerateItems="False" 
                          PropertyExpandMode="NestedMode"
                          SelectedObject="{Binding SelectedEmployee}"
@@ -408,10 +373,9 @@ public class ViewModel {
         </syncfusion:PropertyGridItem>
     </syncfusion:PropertyGrid.Items>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %} 
-{% highlight C# %}
-
+```csharp
 propertyGrid1.AutoGenerateItems = false;
 propertyGrid1.PropertyExpandMode = PropertyExpandModes.NestedMode;
 
@@ -435,9 +399,7 @@ propertyGrid1.Items.Add(new PropertyGridItem()
     PropertyName = "DOB",
     Items = DOB_Items
 });
-
-{% endhighlight %} 
-{% endtabs %}
+```
 
 ![PropertyGrid displays particular nested properties](Property_definition_images\Dynamic_NestedProperty.png)
 
@@ -447,9 +409,7 @@ N> [View Sample in GitHub](https://github.com/SyncfusionExamples/wpf-property-gr
 
 You can customize the different UI for specific property's description panel by using the [PropertyGridItem.DescriptionTemplate](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGridItem.html#Syncfusion_Windows_PropertyGrid_PropertyGridItem_DescriptionTemplate) property. The `DataContext` of `PropertyGridItem.DescriptionTemplate` property is `PropertyGridItem`.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 using System;
 using System.ComponentModel;
 
@@ -479,13 +439,9 @@ public class ViewModel {
         };
     }
 }
-      
-{% endhighlight %}
-{% endtabs %} 
+``` 
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <Grid x:Name="grid">
     <Grid.Resources>
         <DataTemplate x:Key="template1">
@@ -537,9 +493,7 @@ public class ViewModel {
         </syncfusion:PropertyGrid.Items>
     </syncfusion:PropertyGrid>
 </Grid>
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGridItem with different custom description panel](Property_definition_images\DescriptionPanel.png)
 

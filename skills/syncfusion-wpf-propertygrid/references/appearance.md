@@ -15,24 +15,19 @@ This section explains different UI customization, styling, theming options avail
 
 We can change the foreground color for properties of [SelectedObject](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_SelectedObject) by setting the `Foreground` property. The default color value of `Foreground` property is `Blue`.
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid Foreground="Red" x:Name="propertyGrid1">
     <syncfusion:PropertyGrid.SelectedObject>
          <Button></Button>
     </syncfusion:PropertyGrid.SelectedObject>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.SelectedObject = new Button();
 propertyGrid1.Foreground = Brushes.Red;
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid with Red foreground](Appearance_images/Appearance_Foreground.png)
 
@@ -40,25 +35,21 @@ propertyGrid1.Foreground = Brushes.Red;
 
 We can change the background and font weight for all the properties by using the [ViewBackgroundColor](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_ViewBackgroundColor) and `FontWeight` properties.
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid ViewBackgroundColor="Cyan" FontWeight="Bold" 
                          x:Name="propertyGrid1">
     <syncfusion:PropertyGrid.SelectedObject>
         <Button></Button>
     </syncfusion:PropertyGrid.SelectedObject>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.SelectedObject = new Button();
 propertyGrid1.ViewBackgroundColor = Brushes.Cyan;
 propertyGrid1.FontWeight = FontWeights.Bold;
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid with Cyan background and bold font](Appearance_images/Appearance_Background-Font.png)
 
@@ -66,9 +57,7 @@ propertyGrid1.FontWeight = FontWeights.Bold;
 
 If we want to differentiate between editable and readonly properties, we can do this by using [EditableBackground](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_EditableBackground) and [EditableFontWeight](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_EditableFontWeight) properties to highlights the editable properties and use the [ReadOnlyBackground](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_ReadOnlyBackground) and [ReadOnlyFontWeight](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_ReadOnlyFontWeight) properties to highlights the readonly properties.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 class Employee {
     public string EmployeeName { get; set; }
     [Editable(false)]
@@ -90,13 +79,9 @@ public class ViewModel {
         };
     }
 }
+```
 
-{% endhighlight %}
-{% endtabs %}
-
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid EditableBackground="LightGreen" EditableFontWeight="Bold"
                          ReadOnlyBackground="LightPink"  ReadOnlyFontWeight="UltraLight"
                          SelectedObject="{Binding SelectedEmployee}" x:Name="propertyGrid1" >
@@ -104,10 +89,9 @@ public class ViewModel {
         <local:ViewModel></local:ViewModel>
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.DataContext = new ViewModel();
 propertyGrid1.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("SelectedEmployee"));
@@ -115,9 +99,7 @@ propertyGrid1.EditableBackground = Brushes.LightGreen;
 propertyGrid1.EditableFontWeight = FontWeights.Bold;
 propertyGrid1.ReadOnlyBackground = Brushes.LightPink;
 propertyGrid1.ReadOnlyFontWeight = FontWeights.UltraLight;
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![Different Background and FontWeight applyed to the Editable and Readonly Properties](Appearance_images/Appearance_CustomBackground.png)
 
@@ -130,26 +112,21 @@ N> If you use `EditableFontWeight` or `ReadOnlyFontWeight` properties with `Font
 We can change the background and foreground of the category header by setting the [LineColor](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_LineColor) property and [CategoryForeground](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_CategoryForeground) property. The `LineColor` property value applied to the background and `CategoryForeground` property value applied to the foreground of the category header only on category view. To enable category view, use the [EnableGrouping](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_EnableGrouping) property as `true`.
 
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid LineColor="Cyan" CategoryForeground="Red"
                          x:Name="propertyGrid1" >
     <syncfusion:PropertyGrid.SelectedObject>
         <Button></Button>
     </syncfusion:PropertyGrid.SelectedObject>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.SelectedObject = new Button();
 propertyGrid1.LineColor = Brushes.Cyan;
 propertyGrid1.CategoryForeground = Brushes.Red;
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid with group header Red foreground and Cyan background](Appearance_images/Appearance_Groupheader.png)
 
@@ -157,10 +134,7 @@ propertyGrid1.CategoryForeground = Brushes.Red;
 
 We can customize the height of [PropertyViewItem](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyViewItem.html) and [PropertyCatagoryViewItem](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyCatagoryViewItem.html) using its `Padding` property by overriding style in PropertyGrid. 
 
-{% tabs %}
-
-{% highlight xaml %}
-
+```xaml
 <Window x:Class="PropertyGrid_CustomEditor.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -186,17 +160,12 @@ We can customize the height of [PropertyViewItem](https://help.syncfusion.com/cr
         </syncfusion:PropertyGrid>
     </Grid>
 </Window>
+```
 
-{% endhighlight %}
-
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.SelectedObject = new Button();
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 ![Customized the height of PropertyViewItem in PropertyGrid](Appearance_images/wpf-propertygrid-customized-propertyviewitem.png)
 
@@ -204,9 +173,7 @@ propertyGrid1.SelectedObject = new Button();
 
 You can get the value and description about the property item through tooltip when hover the mouse on the respective property item and its value field. If the property item not contains any description, tooltip shows the property display name. You can restrict the tooltip support by setting the [EnableToolTip](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_EnableToolTip) property as `false`. The default value of `EnableToolTip` property is `true`.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -230,13 +197,9 @@ public class ViewModel {
         };
     }
 }
+```
 
-{% endhighlight %}
-{% endtabs %}
-
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid EnableToolTip="True"
                          SelectedObject="{Binding SelectedEmployee}"
                          x:Name="propertyGrid1">
@@ -244,18 +207,14 @@ public class ViewModel {
         <local:ViewModel></local:ViewModel>
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight c# %}
-
+```csharp
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.EnableToolTip = true;
 propertyGrid1.DataContext = new ViewModel();
 propertyGrid1.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("SelectedEmployee"));
-
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![Tooltip show the property description](Getting-Started_images/EnableTooltip.gif)
 

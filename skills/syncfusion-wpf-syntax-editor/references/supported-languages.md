@@ -45,21 +45,17 @@ The [`DocumentLanguage`](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.E
 
 The following code snippet demonstrates how to change the `DocumentLanguage` property:
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <sfedit:EditControl x:Name="editControl" DocumentLanguage="CSharp" DocumentSource="C:\Source.cs" FontSize="13"/>
 
-{% endhighlight %}
+```
 
-{% highlight C# %}
+```csharp
 
 editControl.DocumentLanguage = Languages.CSharp;
 
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following image displays the EditControl displaying contents.
 

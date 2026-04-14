@@ -1,5 +1,5 @@
 ---
-layout: post 
+layout: post
 title: File Support in WPF Syntax Editor control | Syncfusion
 description: Learn about File Support in Syncfusion Essential Studio WPF Syntax Editor control, its elements and more.
 platform: wpf
@@ -19,24 +19,16 @@ Opening a file in the `EditControl` can be done in the following three ways:
 
 The `DocumentSource` property of EditControl is used to specify the file to be opened with EditControl. The following code can be used to set the DocumentSource property.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 <sfedit:EditControl x:Name="editControl" DocumentSource="C:\Content.txt" ShowLineNumber="False" EnableOutlining="False"/>
 
+```
 
-
-{% endhighlight %}
-
-
-
-{% highlight C# %}
+```csharp
 
 editControl.DocumentSource = @"C:\Content.txt";
 
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following image displays the contents from file set as DocumentSource window.
 
@@ -46,15 +38,11 @@ The following image displays the contents from file set as DocumentSource window
 
 Files can also be opened using the LoadFile method. LoadFile method displays a FileOpenDialog to enable you to choose the file that needs to be opened in the EditControl.
 
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 editControl.LoadFile();
 
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following image displays the file open dialog.
 
@@ -63,14 +51,9 @@ The following image displays the file open dialog.
 ### Dropping a file
 The `EditControl` allows users to drop a file over it, by setting the `AllowDrop` property to true. Users can drop any type of file supported in the `EditControl`. The editor will automatically switch its `DocumentLanguage` based on dropped file's extension. When dropping, if any documents is already in open, it will be closed, and the `DocumentClosing` event will occur. Here, you can control the desired action before closing.
 
-{% tabs %}
-{% highlight c# %}
+```csharp
 this.editControl.AllowDrop = true;
-{% endhighlight %}
-{% highlight vb %}
-Me.editControl.AllowDrop = True
-{% endhighlight %}
-{% endtabs %} 
+```
 
 ## Saving the text in a file
 
@@ -78,17 +61,11 @@ SaveFile method in the EditControl class is used to save the text in EditControl
 
 Enable save file, by using the following code.
 
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 editControl.SaveFile();
 
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following image displays the save file dialog.
 
@@ -109,8 +86,7 @@ By default, the existing file will not be saved when loading or dropping a new f
 | Cancel | Cancels the current action that is being performed. |
 | Prompt | Opens a dialog for allowing users to choose one of the above actions. |
 
-{% tabs %}
-{% highlight c# %}
+```csharp
 
         public MainWindow()
         {
@@ -126,16 +102,4 @@ By default, the existing file will not be saved when loading or dropping a new f
            }
         }
 
-{% endhighlight %}
-{% highlight vb %}
-        
-        editControl.DocumentClosing += AddressOf EditControl_DocumentClosing
-
-        Private Sub EditControl_DocumentClosing(ByVal sender As Object, ByVal args As DocumentClosingEventArgs)
-        If HasUnsavedChanges Then
-        args.Action = SaveAction.Save
-        End Ifargs.Action = SaveAction.Save
-        End Sub
-
-{% endhighlight %}
-{% endtabs %}   
+```

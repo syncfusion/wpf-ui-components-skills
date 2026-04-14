@@ -99,7 +99,7 @@ using Syncfusion.Olap.Reports;
 public partial class MainWindow : Window
 {
     private OlapDataManager olapDataManager = null;
-    private string _connectionString = "Data Source=localhost; Initial Catalog=AdventureWorksDW";
+    private string _connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=localhost; Initial Catalog=AdventureWorksDW";
     
     public MainWindow()
     {
@@ -222,7 +222,7 @@ namespace WpfApplication1
             OlapGrid olapGrid1 = new OlapGrid();
             
             // Configure connection string
-            string connectionString = "Data Source=localhost; Initial Catalog=AdventureWorksDW";
+            string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=localhost; Initial Catalog=AdventureWorksDW";
             
             // Create OlapDataManager
             OlapDataManager olapDataManager = new OlapDataManager(connectionString);
@@ -284,16 +284,16 @@ The OLAP Grid follows this data flow:
 
 **For SSAS Server:**
 ```csharp
-string connectionString = "Data Source=<server>; Initial Catalog=<database>";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=<server>; Initial Catalog=<database>";
 // Example:
-string connectionString = "Data Source=localhost; Initial Catalog=AdventureWorksDW";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=localhost; Initial Catalog=AdventureWorksDW";
 ```
 
 **For Offline Cube:**
 ```csharp
-string connectionString = "DataSource=<path_to_cube_file>";
+string connectionString = "YOUR_END_POINT"; // For e.g - "DataSource=<path_to_cube_file>";
 // Example:
-string connectionString = "DataSource=C:\\Cubes\\AdventureWorks.cub";
+string connectionString = "YOUR_END_POINT"; // For e.g - "DataSource=C:\\Cubes\\AdventureWorks.cub";
 ```
 
 ### VB.NET Example
@@ -306,7 +306,7 @@ Partial Public Class MainWindow
     Inherits Window
     
     Private olapDataManager As OlapDataManager = Nothing
-    Private _connectionString As String = "Data Source=localhost; Initial Catalog=AdventureWorksDW"
+    Private _connectionString As String = "YOUR_END_POINT"; ' For e.g - "Data Source=localhost; Initial Catalog=AdventureWorksDW"
     
     Public Sub New()
         InitializeComponent()

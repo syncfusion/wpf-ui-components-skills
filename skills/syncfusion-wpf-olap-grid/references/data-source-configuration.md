@@ -34,12 +34,12 @@ Use when you have a local .cub file containing OLAP data.
 
 **Pattern:**
 ```csharp
-string connectionString = @"DataSource = <path_to_cube_file>; Provider = MSOLAP;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"DataSource = <path_to_cube_file>; Provider = MSOLAP;";
 ```
 
 **Example:**
 ```csharp
-string connectionString = @"DataSource = C:\OfflineCube\Adventure_Works_Ext.cub; Provider = MSOLAP;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"DataSource = C:\OfflineCube\Adventure_Works_Ext.cub; Provider = MSOLAP;";
 OlapDataManager dataManager = new OlapDataManager(connectionString);
 ```
 
@@ -55,19 +55,18 @@ Use when connecting to SQL Server Analysis Services on your local machine.
 
 **Pattern:**
 ```csharp
-string connectionString = "Data Source=<server>; Initial Catalog=<database>;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=<server>; Initial Catalog=<database>;";
 ```
 
 **Example:**
 ```csharp
-string connectionString = "Data Source=localhost; Initial Catalog=Adventure Works DW;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=localhost; Initial Catalog=Adventure Works DW;";
 OlapDataManager dataManager = new OlapDataManager(connectionString);
 ```
 
 **With Credentials:**
 ```csharp
-string connectionString = "Data Source=localhost; Initial Catalog=Adventure Works DW; " +
-                         "User ID=username; Password=password;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=localhost; Initial Catalog=Adventure Works DW; " + "User ID=username; Password=password;";
 OlapDataManager dataManager = new OlapDataManager(connectionString);
 ```
 
@@ -82,21 +81,18 @@ Use when connecting to SSAS hosted on a remote server accessible via HTTP/HTTPS.
 
 **Pattern:**
 ```csharp
-string connectionString = "Data Source=<http_url>; Initial Catalog=<database>;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=<http_url>; Initial Catalog=<database>;";
 ```
 
 **Example:**
 ```csharp
-string connectionString = "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " +
-                         "Initial Catalog=Adventure Works DW 2008 SE;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=http://<your-ssas-server>/olap/msmdpump.dll; " + "Initial Catalog=<YourCatalogName>;";
 OlapDataManager dataManager = new OlapDataManager(connectionString);
 ```
 
 **With Credentials:**
 ```csharp
-string connectionString = "Data Source=http://bi.company.com/olap/msmdpump.dll; " +
-                         "Initial Catalog=Sales_DW; " +
-                         "User ID=analyst; Password=secure123;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=http://<your-ssas-server>/olap/msmdpump.dll; " + "Initial Catalog=<YourCatalogName>; " + "User ID=<username>; Password=<password>;";
 ```
 
 **When to use:**
@@ -111,12 +107,12 @@ Use when connecting to Mondrian (open-source OLAP server) via XML/A.
 
 **Pattern:**
 ```csharp
-string connectionString = @"Data Source = <mondrian_url>; Initial Catalog = <catalog>;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = <mondrian_url>; Initial Catalog = <catalog>;";
 ```
 
 **Example:**
 ```csharp
-string connectionString = @"Data Source = http://localhost:8080/mondrian/xmla; Initial Catalog = FoodMart;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = http://<your-mondrian-server>:<port>/mondrian/xmla; Initial Catalog = <YourCatalogName>;";
 OlapDataManager dataManager = new OlapDataManager(connectionString);
 // IMPORTANT: Set provider name for Mondrian
 dataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Providers.Mondrian;
@@ -124,9 +120,7 @@ dataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Providers.M
 
 **With Credentials:**
 ```csharp
-string connectionString = @"Data Source = http://server:8080/mondrian/xmla; " +
-                          @"Initial Catalog = FoodMart; " +
-                          @"User ID = admin; Password = admin;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = http://<your-mondrian-server>:<port>/mondrian/xmla; " + @"Initial Catalog = <YourCatalogName>; " + @"User ID = <username>; Password = <password>;";
 OlapDataManager dataManager = new OlapDataManager(connectionString);
 dataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Providers.Mondrian;
 ```
@@ -139,12 +133,12 @@ Use when connecting to ActivePivot server via XML/A.
 
 **Pattern:**
 ```csharp
-string connectionString = @"Data Source = <activepivot_url>; Initial Catalog = <catalog>;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = <activepivot_url>; Initial Catalog = <catalog>;";
 ```
 
 **Example:**
 ```csharp
-string connectionString = @"Data Source = http://localhost:8080/cva_s/xmla; Initial Catalog = CVAS;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = http://<your-activepivot-server>:<port>/cva_s/xmla; Initial Catalog = <YourCatalogName>;";
 OlapDataManager dataManager = new OlapDataManager(connectionString);
 // IMPORTANT: Set provider name for ActivePivot
 dataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Providers.ActivePivot;
@@ -152,9 +146,7 @@ dataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Providers.A
 
 **With Credentials:**
 ```csharp
-string connectionString = @"Data Source = http://server:8080/cva_s/xmla; " +
-                          @"Initial Catalog = CVAS; " +
-                          @"User ID = user; Password = pass;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = http://<your-activepivot-server>:<port>/cva_s/xmla; " + @"Initial Catalog = <YourCatalogName>; " + @"User ID = <username>; Password = <password>;";
 OlapDataManager dataManager = new OlapDataManager(connectionString);
 dataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Providers.ActivePivot;
 ```
@@ -194,7 +186,7 @@ olapGrid1.DataBind();
 public void InitializeOlapGrid()
 {
     // Step 1: Create connection
-    string connectionString = "Data Source=localhost; Initial Catalog=AdventureWorksDW;";
+    string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=localhost; Initial Catalog=AdventureWorksDW;";
     OlapDataManager dataManager = new OlapDataManager(connectionString);
     
     // Step 2: Create and set report

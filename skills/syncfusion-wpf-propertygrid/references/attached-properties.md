@@ -15,10 +15,7 @@ The [PropertyGrid](https://www.syncfusion.com/wpf-ui-controls/propertygrid) cont
 
 We can show or hide the attached properties of SelectedObject by handling the [AutoGeneratingPropertyGridItem](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html) event with [AutoGeneratingPropertyGridItemEventArgs.Cancel](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.AutoGeneratingPropertyGridItemEventArgs.html) property. Below example shows, how to hide the attached properties using `AutoGeneratingPropertyGridItem` event.
 
-{% tabs %}
-
-{% highlight xaml %}
-
+```xaml
 <Grid>
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="0.6*"/>
@@ -37,11 +34,9 @@ We can show or hide the attached properties of SelectedObject by handling the [A
                           Grid.Column="1" 
                           syncfusion:SkinStorage.VisualStyle="Default" />
 </Grid>
+```
 
-{% endhighlight %}
-
-{% highlight C# %}
-
+```csharp
 private void PropertyGrid_AutoGeneratingPropertyGridItem(object sender, AutoGeneratingPropertyGridItemEventArgs e)
 {
     if (e.DisplayName == "Grid.Column" || e.DisplayName == "SkinStorage.VisualStyle")
@@ -49,10 +44,7 @@ private void PropertyGrid_AutoGeneratingPropertyGridItem(object sender, AutoGene
         e.Cancel = true;
     }
 }
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 Here, `Grid.Column` and `SkinStorage.VisualStyle` are the attached properties of SelectedObject.
 

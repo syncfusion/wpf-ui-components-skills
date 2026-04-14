@@ -77,17 +77,15 @@ Save and load chart configuration.
 using Syncfusion.Windows.Shared;
 using System.Xml;
 
-// Serialize chart
-sfChart.Serialize();
-
+// Serialize chart state to an XML file
+sfChart.Serialize("chart_state.xml");
 ```
 
 ### Load Chart State
 
 ```csharp
-// Deserialize chart
-sfChart.Deserialize();
-
+// Deserialize chart state from an XML file
+sfChart.Deserialize("chart_state.xml");
 ```
 
 ## Complete Export Example
@@ -279,8 +277,8 @@ Clipboard.SetImage(rtb);
 | `Print()` | Print chart directly |
 | `Save(filename, encoder)` | Export to image file |
 | `Save(stream, encoder)` | Export to stream |
-| `Serialize()` | Save chart configuration |
-| `Deserialize()` | Load chart configuration |
+| `Serialize(filename)` | Save chart configuration to an XML file in the given file path.|
+| `Deserialize(filename)` | Load chart configuration from an XML file  in the given file path. |
 
 ## Supported Image Formats
 

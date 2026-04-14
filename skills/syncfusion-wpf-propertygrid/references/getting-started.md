@@ -43,9 +43,7 @@ To add the `PropertyGrid` control manually in XAML, follow these steps:
  
 3. Import Syncfusion WPF schema **http://schemas.syncfusion.com/wpf** and declare the `PropertyGrid` control in XAML page.
 
-{% capture codesnippet1 %}
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <Window x:Class="PropertyGridSample.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -61,10 +59,7 @@ To add the `PropertyGrid` control manually in XAML, follow these steps:
     </Grid>
 </Window>
 
-{% endhighlight %}
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet1 | OrderList_Indent_Level_1 }}
+```
 
 ## Adding WPF PropertyGrid via C#
 
@@ -79,9 +74,7 @@ To add the `PropertyGrid` control manually in C#, follow these steps:
 
 3. Include the required namespace and create an instance of `PropertyGrid` and add it to the window.
 
-{% capture codesnippet2 %}
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 using Syncfusion.Windows.PropertyGrid;
 
@@ -101,10 +94,7 @@ public partial class MainWindow : Window {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet2 | OrderList_Indent_Level_1 }}
+```
 
 ![WPF PropertyGrid control added to Window by code](getting-started_images/wpf-propertygrid-added-by-code.png)
 
@@ -112,8 +102,7 @@ public partial class MainWindow : Window {
 
 We can display the properties of any object using the [SelectedObject](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.Property.html#Syncfusion_Windows_PropertyGrid_Property_SelectedObject) property. When the `SelectedObject` property is bound with an object, the properties of that object are parsed and displayed in the `PropertyGrid`.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 // Employee class to be explored in property grid.
 public class Employee {
@@ -137,13 +126,11 @@ public class ViewModel {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 We can populate the properties of the `SelectedObject` using XAML or C#.
 
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid SelectedObject="{Binding SelectedEmployee}"
                          Name="propertyGrid1" >
@@ -152,15 +139,15 @@ We can populate the properties of the `SelectedObject` using XAML or C#.
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight c# %}
+```
+
+```csharp
 
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.DataContext = new ViewModel();
 propertyGrid1.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("SelectedEmployee"));
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![ Populating the SelectedEmployee object properties into the PropertyGrid control](getting-started_images/wpf-propertygrid-populating-properties.png)
 
@@ -176,8 +163,7 @@ For example, if we create an `EmailID` property as a string type, `TextBox` will
 
 To create `CustomEditor`, we need to implement `ITypeEditor` interface.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 //Custom Editor with email id mask.
 public class EmailEditor : ITypeEditor {
@@ -216,15 +202,13 @@ public class EmailEditor : ITypeEditor {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ### Assigning a Custom Editor for the Property
 
 We will assign the `EmailEditor` as value editor for the `EmailID` property.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 //CustomEditor for the EmailID property
 [Editor("EmailID", typeof(EmailEditor))]
@@ -248,11 +232,9 @@ class ViewModel {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid SelectedObject="{Binding SelectedEmployee}"
                          x:Name="propertyGrid1" >
@@ -261,15 +243,15 @@ class ViewModel {
    </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight C# %}
+```
+
+```csharp
 
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.DataContext = new ViewModel();
 propertyGrid1.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("SelectedEmployee"));
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 
 Here, The `EmailID` property is accepts only the inputs which are in the email-id format by the `EmailEditor`.
@@ -282,8 +264,7 @@ Click [here](https://github.com/SyncfusionExamples/wpf-property-grid-examples/tr
 
 The property item selection changed in `PropertyGrid` can be examined using [SelectedPropertyItemChanged](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_SelectedPropertyItemChanged) event. The `SelectedPropertyItemChanged` event contains the old and newly selected property item details in the `OldValue` and  `NewValue` properties.
 
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid SelectedPropertyItemChanged="PropertyGrid_SelectedPropertyItemChanged"
                          SelectedObject="{Binding SelectedEmployee}"
@@ -293,34 +274,31 @@ The property item selection changed in `PropertyGrid` can be examined using [Sel
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight C# %}
+```
+
+```csharp
 
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.SelectedPropertyItemChanged += PropertyGrid_SelectedPropertyItemChanged;
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 You can handle this event as follows,
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 private void PropertyGrid_SelectedPropertyItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
     var oldPropertyItem = e.OldValue;
     var newPropertyItem = e.NewValue;            
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ## Disable animation on loading selected object
 
 You can load the selected's object property items without any animation into the `PropertyGrid` by using the [DisableAnimationOnObjectSelection](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_DisableAnimationOnObjectSelection) property value as `true`. The default value of `DisableAnimationOnObjectSelection` property is `false`.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 using System;
 using System.ComponentModel;
@@ -346,11 +324,9 @@ public class ViewModel {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
-{% tabs %}
-{% highlight xaml %}
+```xml
 
 <syncfusion:PropertyGrid DisableAnimationOnObjectSelection="True"
                          SelectedObject="{Binding SelectedEmployee}"
@@ -360,8 +336,9 @@ public class ViewModel {
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight c# %}
+```
+
+```csharp
 
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.DisableAnimationOnObjectSelection = true;
@@ -369,8 +346,7 @@ propertyGrid1.DataContext = new ViewModel();
 propertyGrid1.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("SelectedEmployee"));
 
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![Loading selected object without animation in WPF PropertyGrid](getting-started_images/wpf-propertygrid-object-selection.png)
 
@@ -380,8 +356,7 @@ N> [View Sample in GitHub](https://github.com/SyncfusionExamples/wpf-property-gr
 
 You can get the value and description about the property item through tooltip when hover the mouse on the respective property item and its value field. If the property item not contains any description, tooltip shows the property display name. You can restrict the tooltip support by setting the [EnableToolTip](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_EnableToolTip) property as `false`. The default value of `EnableToolTip` property is `true`.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 using System;
 using System.ComponentModel;
@@ -407,11 +382,9 @@ public class ViewModel {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid EnableToolTip="True"
                          SelectedObject="{Binding SelectedEmployee}"
@@ -421,8 +394,9 @@ public class ViewModel {
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight c# %}
+```
+
+```csharp
 
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.EnableToolTip = true;
@@ -430,8 +404,7 @@ propertyGrid1.DataContext = new ViewModel();
 propertyGrid1.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("SelectedEmployee"));
 
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![Tooltip show the property description](Getting-Started_images/EnableTooltip.gif)
 
@@ -451,8 +424,7 @@ The `PropertyGrid` control notifies the users when a property item is created an
 * [**OriginalSource**](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.AutoGeneratingPropertyGridItemEventArgs.html#Syncfusion_Windows_PropertyGrid_AutoGeneratingPropertyGridItemEventArgs_OriginalSource) - Gets the PropertyItem that is being added to the property collection of PropertyGrid.
 * [**ReadOnly**](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.AutoGeneratingPropertyGridItemEventArgs.html#Syncfusion_Windows_PropertyGrid_AutoGeneratingPropertyGridItemEventArgs_ReadOnly) - Gets or sets a value indicating whether the property item is ready only or not.
 
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid SelectedObject="{Binding SelectedEmployee}"
                         AutoGeneratingPropertyGridItem="propertyGrid1_AutoGeneratingPropertyGridItem"
@@ -462,19 +434,18 @@ The `PropertyGrid` control notifies the users when a property item is created an
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight C# %}
+```
+
+```csharp
 
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.AutoGeneratingPropertyGridItem += propertyGrid1_AutoGeneratingPropertyGridItem;
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 You can handle this event as follows,
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 private void propertyGrid1_AutoGeneratingPropertyGridItem(object sender, Syncfusion.Windows.PropertyGrid.AutoGeneratingPropertyGridItemEventArgs e)
 {
@@ -488,15 +459,13 @@ private void propertyGrid1_AutoGeneratingPropertyGridItem(object sender, Syncfus
     var descriptionTemplate = e.DescriptionTemplate;
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ## Override editor
 
 You can also apply a custom editor or change an existing custom editor of the property items in `PropertyGrid` in the [`AutoGeneratingPropertyGridItem`](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_AutoGeneratingPropertyGridItem) event as shown below.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 private void propertyGrid1_AutoGeneratingPropertyGridItem(object sender, Syncfusion.Windows.PropertyGrid.AutoGeneratingPropertyGridItemEventArgs e)
 {
@@ -510,8 +479,7 @@ private void propertyGrid1_AutoGeneratingPropertyGridItem(object sender, Syncfus
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![WPF PropertyGrid change editor in AutoGeneratingPropertyGridItem event](getting-started_images/wpf-propertygrid-auto-generating-items.png)
 
@@ -519,9 +487,7 @@ private void propertyGrid1_AutoGeneratingPropertyGridItem(object sender, Syncfus
 
 The property item value changed in `PropertyGrid` can be examined using [ValueChanged](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_ValueChanged) event. The `ValueChanged` event contains the old and newly changed property values by the `OldValue` and `NewValue` properties and `Property` contains the property item whose values is changed.
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid ValueChanged="PropertyGrid_ValueChanged"
                          SelectedObject="{Binding SelectedEmployee}"
                          Name="propertyGrid1" >
@@ -529,29 +495,22 @@ The property item value changed in `PropertyGrid` can be examined using [ValueCh
         <local:ViewModel></local:ViewModel>
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.ValueChanged += PropertyGrid_ValueChanged;
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 You can handle this event as follows,
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 private void PropertyGrid_ValueChanged(object sender, ValueChangedEventArgs args) {
     var valueChangedPropertyItem = args.Property;
     var newValue = args.NewValue;
     var oldValue = args.OldValue;
 }
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 Click [here](https://github.com/SyncfusionExamples/wpf-property-grid-examples/tree/master/Samples/Common) to download the sample that showcases the `PropertyGrid` overall features.
 

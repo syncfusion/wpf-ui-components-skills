@@ -13,8 +13,7 @@ Localization is the process of translating the application resources into differ
 
 Below application culture changed to `French`.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 public MainWindow()
 {
@@ -22,8 +21,7 @@ public MainWindow()
     System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fr-FR");
 }    
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 To localize the `PropertyGrid` based on `CurrentUICulture` using resource files, follow the below steps. 
 

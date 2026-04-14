@@ -370,30 +370,33 @@ using (FileStream stream = new FileStream("output.cs", FileMode.Create))
 ### Pattern 2: Custom IntelliSense with Auto-Completion
 
 ```csharp
-// Enable IntelliSense
+// Enable IntelliSense in Custom mode
 editControl.EnableIntellisense = true;
-editControl.IntellisenseMode = IntellisenseMode.Automatic;
+editControl.IntellisenseMode = IntellisenseMode.Custom;
 
-// Add custom IntelliSense items
-editControl.IntellisenseItems.Add(new IntellisenseItem
+// Business object must implement IIntellisenseItem
+public class MyIntellisenseItem : IIntellisenseItem
 {
-    Text = "CustomMethod",
-    Description = "My custom method",
-    ImageSource = myIcon
-});
+    public ImageSource Icon { get; set; }
+    public string Text { get; set; }
+    public IEnumerable<IIntellisenseItem> NestedItems { get; set; }
+}
 
-// Handle IntellisenseOpening event
-editControl.IntellisenseOpening += (s, e) =>
+// Build custom items collection and assign to IntellisenseCustomItemsSource
+var customItems = new ObservableCollection<MyIntellisenseItem>
 {
-    // Add context-specific items
-    if (editControl.Text.Contains("using System"))
-    {
-        e.IntellisenseItems.Add(new IntellisenseItem
-        {
-            Text = "Console",
-            Description = "System.Console class"
-        });
-    }
+    new MyIntellisenseItem { Text = "CustomMethod" },
+    new MyIntellisenseItem { Text = "CustomProperty" },
+    new MyIntellisenseItem { Text = "Console" }
+};
+editControl.IntellisenseCustomItemsSource = customItems;
+
+// Handle IntelliSenseBoxOpening event to filter items at runtime
+editControl.IntelliSenseBoxOpening += (s, e) =>
+{
+    // e.ItemsSource contains current items; set e.Cancel = true to suppress popup
+    if (string.IsNullOrEmpty(editControl.Text))
+        e.Cancel = true;
 };
 ```
 
@@ -432,46 +435,49 @@ while (editControl.FindNext("oldText", FindOptions.None))
 
 ### Pattern 4: Custom Language Definition
 
+Define formats and lexems as XAML resources, then apply them to a class that inherits `ProceduralLanguageBase`:
+
+```xml
+<!-- Define formats in XAML Resources -->
+<syncfusion:FormatsCollection x:Key="myLangFormats">
+    <syncfusion:EditFormats Foreground="Blue"  FormatName="KeywordFormat"/>
+    <syncfusion:EditFormats Foreground="Green" FormatName="CommentFormat"/>
+    <syncfusion:EditFormats Foreground="Brown" FormatName="StringFormat"/>
+</syncfusion:FormatsCollection>
+
+<!-- Define lexems in XAML Resources -->
+<syncfusion:LexemCollection x:Key="myLangLexems">
+    <syncfusion:Lexem StartText="function" LexemType="Keyword"  FormatName="KeywordFormat" ContainsEndText="False" IsMultiline="False"/>
+    <syncfusion:Lexem StartText="if"       LexemType="Keyword"  FormatName="KeywordFormat" ContainsEndText="False" IsMultiline="False"/>
+    <syncfusion:Lexem StartText="while"    LexemType="Keyword"  FormatName="KeywordFormat" ContainsEndText="False" IsMultiline="False"/>
+    <syncfusion:Lexem StartText="//"       EndText="\r\n" LexemType="Comment" FormatName="CommentFormat" ContainsEndText="True" IsMultiline="False"/>
+    <syncfusion:Lexem StartText="&quot;"  EndText="&quot;" LexemType="Literals" FormatName="StringFormat" ContainsEndText="True" IsMultiline="False"/>
+</syncfusion:LexemCollection>
+```
+
 ```csharp
-// Create custom language
-public class CustomLanguage : ProceduralLanguageBase
+// Create custom language class inheriting ProceduralLanguageBase
+public class MyLanguage : ProceduralLanguageBase
 {
-    public CustomLanguage(EditControl control) : base(control)
+    public MyLanguage(EditControl control) : base(control)
     {
         Name = "MyLanguage";
-        FileExtension = ".mylang";
-        
-        // Define keywords
-        Lexems.Add(new LexemDefinition
-        {
-            Type = EditTokenType.Keyword,
-            Lexem = "function|class|if|else|while|for",
-            IsRegex = true,
-            ForeColor = Colors.Blue
-        });
-        
-        // Define strings
-        Lexems.Add(new LexemDefinition
-        {
-            Type = EditTokenType.String,
-            Lexem = "\".*?\"",
-            IsRegex = true,
-            ForeColor = Colors.Brown
-        });
-        
-        // Define comments
-        Lexems.Add(new LexemDefinition
-        {
-            Type = EditTokenType.Comment,
-            Lexem = "//.*",
-            IsRegex = true,
-            ForeColor = Colors.Green
-        });
+        FileExtension = "mylang";
+        ApplyColoring = true;
+        SupportsOutlining = false;
+        SupportsIntellisense = false;
+        TextForeground = Brushes.Black;
     }
 }
 
-// Apply custom language
-editControl.DocumentLanguage = new CustomLanguage(editControl);
+// Wire up resources and apply the custom language
+EditControl editControl = new EditControl();
+editControl.DocumentLanguage = Languages.Custom;
+
+MyLanguage customLanguage = new MyLanguage(editControl);
+customLanguage.Lexem    = Application.Current.Resources["myLangLexems"]   as LexemCollection;
+customLanguage.Formats  = Application.Current.Resources["myLangFormats"]  as FormatsCollection;
+editControl.CustomLanguage = customLanguage;
 ```
 
 ### Pattern 5: Code Folding and Outlining

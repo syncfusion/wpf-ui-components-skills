@@ -16,31 +16,16 @@ Syntax Editor offers extensive support to text navigation. Users can perform nav
 
 The following functions enables text navigation in the Syntax Editor in terms of characters or columns.
 
-1. [MoveToPreviousIndex](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Edit.EditControl.html#Syncfusion_Windows_Edit_EditControl_MoveToPreviousIndex) to move cursor position in backward position. 
+1. [MoveToPreviousIndex](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Edit.EditControl.html#Syncfusion_Windows_Edit_EditControl_MoveToPreviousIndex) to move cursor position in backward position.
 
 2. [MoveToNextIndex](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Edit.EditControl.html#Syncfusion_Windows_Edit_EditControl_MoveToNextIndex) to move cursor position in forward position in .
 
-{% capture codesnippet1 %}
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 //To move cursor to previous index
 this.editControl.MoveToPreviousIndex();
 
-{% endhighlight %}
-
-{% highlight VB %}
-
-//To move cursor to previous index
-Me.editControl.MoveToPreviousIndex()
-
-{% endhighlight %}
-
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet1 | OrderList_Indent_Level_1 }}
-
+```
 
 ### Word based navigation
 
@@ -50,26 +35,12 @@ The following functions enables text navigation in the Syntax Editor in terms of
 
 2. [MoveToPreviousWord](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Edit.EditControl.html#Syncfusion_Windows_Edit_EditControl_MoveToPreviousWord) moves cursor to start position of previous word.
 
-{% capture codesnippet2 %}
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 //To move cursor to next word
 this.editControl.MoveToNextWord();
 
-{% endhighlight %}
-
-{% highlight VB %}
-
-//To move cursor to next word
-Me.editControl.MoveToPreviousWord()
-
-{% endhighlight %}
-
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet2 | OrderList_Indent_Level_1 }}
+```
 
 ### Line based navigation
 
@@ -83,26 +54,12 @@ The following functions enables text navigation in the Syntax Editor in terms of
 
 4. [MoveToLineEnd](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Edit.EditControl.html#Syncfusion_Windows_Edit_EditControl_MoveToLineEnd) to move cursor to end postion of current line.
 
-{% capture codesnippet3 %}
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 //To move cursor to next line
 this.editControl.MoveToNextLine();
 
-{% endhighlight %}
-
-{% highlight VB %}
-
-//To move cursor to next line
-Me.editControl.MoveToNextLine()
-
-{% endhighlight %}
-
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet3 | OrderList_Indent_Level_1 }}
+```
 
 ## Keyboard Navigation
 

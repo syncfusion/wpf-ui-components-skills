@@ -162,7 +162,7 @@ Handle annotation interactions:
 ```
 
 ```csharp
-private void Annotation_MouseDown(object sender, MouseButtonEventHandler e)
+private void Annotation_MouseDown(object sender, MouseButtonEventArgs e)
 {
     var annotation = sender as TextAnnotation;
     // Handle click

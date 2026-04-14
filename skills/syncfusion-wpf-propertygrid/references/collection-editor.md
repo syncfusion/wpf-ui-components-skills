@@ -25,8 +25,7 @@ N> You will not be able to edit a collection of primitive type, such as `List<in
 
 If you directly assign the collection instance as [SelectedObject](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_SelectedObject), it generates value editor for the each collection property items.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 public class Persons {
     public string Name { get; set; }
@@ -54,11 +53,9 @@ public class ViewModel {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
  
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid PropertyExpandMode="NestedMode"
                          SelectedObject="{Binding Persons}" 
@@ -68,16 +65,17 @@ public class ViewModel {
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight C# %}
+```
+
+```csharp
+
 
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.DataContext = new ViewModel();
 propertyGrid.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("Persons"));
 propertyGrid1.PropertyExpandMode = PropertyExpandModes.NestedMode;
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid collection Editor with collection as selected object](CollectionEditor_Images/Direct.png)
 
@@ -87,8 +85,7 @@ N> View [Sample](https://github.com/SyncfusionExamples/wpf-property-grid-example
 
 You can add, remove or edit the collection type property item by using the `Collection Editor`.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 public class Customer {
     public int ID { get; set; }
@@ -146,11 +143,9 @@ public class ViewModel {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
  
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid SelectedObject="{Binding DemoProduct}" 
                          x:Name="propertyGrid">
@@ -159,15 +154,16 @@ public class ViewModel {
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight C# %}
+```
+
+```csharp
+
 
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.DataContext = new ViewModel();
 propertyGrid.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("DemoProduct"));
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid with Collection Editor](CollectionEditor_Images/CollectionEditor.gif)
 
@@ -179,8 +175,7 @@ You can update the nested collection property item by using the `Collection Edit
 
 ![PropertyGrid with nested Collection Editor](CollectionEditor_Images/Nested.png)
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 public class AddressDetails {
     public int DoorNo { get; set; }
@@ -232,11 +227,9 @@ public ViewModel() {
     };
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
  
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid SelectedObject="{Binding DemoProduct}" 
                          x:Name="propertyGrid">
@@ -245,15 +238,16 @@ public ViewModel() {
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight C# %}
+```
+
+```csharp
+
 
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.DataContext = new ViewModel();
 propertyGrid.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("DemoProduct"));
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid with nested Collection Editor](CollectionEditor_Images/CollectionEditor_Nested.gif)
 
@@ -265,8 +259,7 @@ If you want to restrict the user to add or remove the items in the collection ty
 
 N> You will not be able to add or remove the items into the collection type properties. But, you can edit and save the existing items that are available in the collection type properties.
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 public class Customer {
     public int ID { get; set; }
@@ -324,11 +317,9 @@ public class ViewModel {
     }
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
-{% tabs %}
-{% highlight xaml %}
+```xaml
 
 <syncfusion:PropertyGrid CollectionEditorOpening="propertyGrid_CollectionEditorOpening"
                          SelectedObject="{Binding DemoProduct}" 
@@ -338,21 +329,21 @@ public class ViewModel {
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
 
-{% endhighlight %}
-{% highlight C# %}
+```
+
+```csharp
+
 
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.DataContext = new ViewModel();
 propertyGrid.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("DemoProduct"));
 propertyGrid.CollectionEditorOpening += propertyGrid_CollectionEditorOpening;
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 You can handle the `CollectionEditorOpening` event as follows,
 
-{% tabs %}
-{% highlight C# %}
+```c sharp
 
 private void propertyGrid_CollectionEditorOpening(object sender, CollectionEditorOpeningEventArgs e)
 {
@@ -360,8 +351,7 @@ private void propertyGrid_CollectionEditorOpening(object sender, CollectionEdito
     e.IsReadonly = true;
 }
 
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![Collection editor loaded in readonly mode](CollectionEditor_Images/CollectionEditorredonly.png)
 
@@ -375,9 +365,7 @@ If you want to restrict the user to add or remove the items in the specific prop
 
 N> You will not be able to add or remove the items into the readonly collection type properties. But, you can edit and save the existing items that are available in the readonly collection type properties.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 public class Customer
 {
     public int ID { get; set; }
@@ -431,29 +419,22 @@ public class ViewModel
         };             
     }
 }
+```
 
-{% endhighlight %}
-{% endtabs %}
-
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid SelectedObject="{Binding DemoProduct}" 
                          x:Name="propertyGrid">
     <syncfusion:PropertyGrid.DataContext>
         <local:ViewModel></local:ViewModel>
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.DataContext = new ViewModel();
 propertyGrid.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("DemoProduct"));
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![Specific collection type property is loaded in readonly mode](CollectionEditor_Images/SpecificCollectionEditorredonly.png)
 
@@ -465,9 +446,7 @@ N> [View Sample in GitHub](https://github.com/SyncfusionExamples/wpf-property-gr
 
 You can restrict the opening of collection editor window which used to edit the collection type properties in `PropertyGrid` by handling the [CollectionEditorOpening](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_CollectionEditorOpening) event and set the [CollectionEditorOpeningEventArgs.Cancel](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.CollectionEditorOpeningEventArgs.html) property value as `true`. The default value of `CollectionEditorOpeningEventArgs.Cancel` property is `false`.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 public class Customer {
     public int ID { get; set; }
     public string Name { get; set; }
@@ -523,13 +502,9 @@ public class ViewModel {
         };
     }
 }
+```
 
-{% endhighlight %}
-{% endtabs %}
-
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid CollectionEditorOpening="propertyGrid_CollectionEditorOpening"
                          SelectedObject="{Binding DemoProduct}" 
                          x:Name="propertyGrid">
@@ -537,31 +512,24 @@ public class ViewModel {
         <local:ViewModel></local:ViewModel>
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.DataContext = new ViewModel();
 propertyGrid.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("DemoProduct"));
 propertyGrid.CollectionEditorOpening += propertyGrid_CollectionEditorOpening;
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 You can handle the `CollectionEditorOpening` event as follows,
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 private void propertyGrid_CollectionEditorOpening(object sender, CollectionEditorOpeningEventArgs e)
 {
     //Restrict collection editor window opening
     e.Cancel = false;
 }
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid restrict the collection editor window opening](CollectionEditor_Images/CollectionEditorOpening.png)
 

@@ -225,7 +225,7 @@ sunburst.ColorModel = colorModel;
 Using hex color codes for brand colors:
 
 ```xml
-<sunburst:SunburstChart.ColorModel>
+<sunburst:SfSunburstChart.ColorModel>
     <sunburst:SunburstColorModel>
         <sunburst:SunburstColorModel.CustomBrushes>
             <SolidColorBrush Color="#FF1E88E5"/>  <!-- Primary Blue -->

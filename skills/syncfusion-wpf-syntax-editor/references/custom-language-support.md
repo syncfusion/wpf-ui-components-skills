@@ -46,9 +46,7 @@ This section of the documentation discusses on creating a Custom Language config
 
 Create a new class inheriting from ProceduralLanguageBase class and set basic properties of the language, by using the following code.
 
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 public class PythonLanguage : ProceduralLanguageBase
 
 {
@@ -67,13 +65,7 @@ public class PythonLanguage : ProceduralLanguageBase
 
 }
 
-
-
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 Create Lexem and Formats collection for Custom Language, to enable data binding with Lexem and Format properties; we have modified the `Lexem` and `Formats` property type to IEnumerable from LexemCollection and FormatCollection respectively.
 
@@ -81,13 +73,11 @@ N> In previous versions,Lexem and Formats were added directly to Lexems and Form
 
 **Formats** **for** **IronPython**
 
-Create a collection of IFormat implemented classes to apply in Formats property of custom language, by using the following code. 
+Create a collection of IFormat implemented classes to apply in Formats property of custom language, by using the following code.
 
 N> EditControl uses this collection to fetch the color to be applied to the tokens.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <syncfusion:FormatsCollection x:Key="pythonLanguageFormats">
     <syncfusion:EditFormats Foreground="Green" FormatName="CommentFormat" />
@@ -97,19 +87,15 @@ N> EditControl uses this collection to fetch the color to be applied to the toke
     <syncfusion:EditFormats Foreground="Gray" FormatName="LiteralsFormat" />
 </syncfusion:FormatsCollection>
 
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 **Lexem** **for** **IronPython**
 
-Create a collection of ILexem implemented class, by using the following code. 
+Create a collection of ILexem implemented class, by using the following code.
 
 N> This collection will be applied to Lexem property of the custom language.EditControl uses the Lexem property to retrieve all keywords,comments,literals,preprocessors etc.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <syncfusion:LexemCollection x:Key="pythonLanguageLexems">
     <syncfusion:Lexem StartText="class \w+[\s:\w,()]+" IsRegex="True" IsMultiline="True" ContainsEndText="True" LexemType="CodeSnippet" EndText="\r\n" ScopeLevel="Class" ShowAlternateIntellisenseText="True"  IntellisenseDisplayText="class"/>
@@ -192,15 +178,11 @@ N> This collection will be applied to Lexem property of the custom language.Edit
     <syncfusion:Lexem StartText="**;=" ContainsEndText="False" IsMultiline="False" LexemType="Operator" FormatName="OperatorFormat"/>
 </syncfusion:LexemCollection>
 
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 Initialize Lexem and Formats properties of PythonLanguage by using the following code.
 
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 EditControl Edit1 = new EditControl();
 Edit1.DocumentLanguage = Languages.Custom;
@@ -210,9 +192,7 @@ customLanguage.Lexem = this.Resources["pythonLanguageLexems"] as LexemCollection
 customLanguage.Formats = this.Resources["pythonLanguageFormats"] as FormatsCollection;
 Edit1.CustomLanguage = customLanguage;
 
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 Syntax highlighting will work with these changes itself as the implementations are same for procedural languages. Moreover, if there are any tweaks needs to be done, ApplyColoring method can be overridden to apply syntax colorings.
 
@@ -307,8 +287,6 @@ Source<br/><br/></td><td>
 Returns a collection of LineItemExpandInformation for all lines in EditControl.<br/><br/></td><td>
 List (LineItemExpandInformation)<br/><br/></td></tr>
 </table>
-
-
 
 Here we proceed to override the ApplyExpandCollapse method of LanguageBase class to apply custom outlining. In this method, use LanguageBlocks property from argument as reference for Block definitions. These block definitions are generated using the Lexem property.
 
@@ -544,7 +522,7 @@ public class PythonLanguage : ProceduralLanguageBase
         return true;
 
     }
-    
+
     #endregion
 }
 
@@ -553,4 +531,3 @@ The following screenshot displays Custom Language Demo Window.
 ![CustomLanguageSupport_img4](CustomLanguageSupport_images/WPF_SyntaxEditor_CustomLanguage_Support.jpg)
 
 N> Refer to Custom Language Demo in the Essential Studio WPF SampleBrowser to view its functionality or debug the application. You can explore demo from [Custom Language](https://github.com/syncfusion/wpf-demos/tree/master/syntaxeditor).
-

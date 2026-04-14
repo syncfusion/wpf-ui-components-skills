@@ -3,7 +3,7 @@ layout: post
 title: Virtualization in WPF PropertyGrid control | Syncfusion
 description: Learn about Virtualization support in Syncfusion Essential Studio WPF PropertyGrid control, its elements and more.
 platform: wpf
-control: CheckListBox
+control: PropertyGrid
 documentation: ug
 ---
 
@@ -11,26 +11,21 @@ documentation: ug
 
 By loading only items that are within viewport, UI virtualization allows `PropertyGrid` to load faster. Virtualization is enabled by default.
 
-{% tabs %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.IsVirtualizing = true;
 propertyGrid.EnableGrouping = true;
 propertyGrid.PropertyExpandMode = PropertyExpandModes.NestedMode;
 propertyGrid.SelectedObject = new Button();
+```
 
-{% endhighlight %}
-{% highlight XAML %}
-
+```xaml
 <syncfusion:PropertyGrid x:Name="propertyGrid" IsVirtualizing="True" PropertyExpandMode="NestedMode" EnableGrouping="True">
     <syncfusion:PropertyGrid.SelectedObject>
         <Button />
     </syncfusion:PropertyGrid.SelectedObject>
 </syncfusion:PropertyGrid>
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid in the Virtualization mode](Virtualization-images/Virtualization.png)
 

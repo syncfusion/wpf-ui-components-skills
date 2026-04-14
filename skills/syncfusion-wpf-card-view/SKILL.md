@@ -1,6 +1,6 @@
 ---
 name: syncfusion-wpf-card-view
-description: Implement Syncfusion WPF CardView for card-based data display with grouping, sorting, filtering, and editing. Use this when implementing card panels, binding data with ItemsSource, or customizing card layouts in WPF. Covers CardViewItem population, GroupCards, CanSort, CanFilter, CanEdit, EditItemTemplate, HeaderTemplate, ItemTemplate, and SfSkinManager theming. 
+description: Implement Syncfusion WPF CardView for card-based data display with grouping, sorting, filtering, and editing. Use this when implementing card panels, binding data with ItemsSource, or customizing card layouts in WPF. Covers CardViewItem population, GroupCards, CanSort, CanEdit, EditItemTemplate, HeaderTemplate, ItemTemplate, and SfSkinManager theming.
 metadata:
   author: "Syncfusion Inc"
   version: "33.1.44"
@@ -74,7 +74,7 @@ xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 📄 **Read:** [references/sorting-and-filtering.md](references/sorting-and-filtering.md)
 - `CanSort` enable/disable; click field name to cycle sort order
 - Sorting grouped items via drop region
-- `CanFilter` enable/disable; popup-based field value filter
+- Filtering via popup-based field value selection (enabled when `ShowHeader="True"`)
 - Clear Filter button behavior
 - `ShowHeader` to hide sorting/filtering header
 
@@ -164,7 +164,7 @@ public class ViewModel : NotificationObject
 
 | Scenario | Properties / Methods |
 |---|---|
-| Enable all interactive modes | `CanGroup="True" CanSort="True" CanFilter="True" CanEdit="True"` |
+| Enable all interactive modes | `CanGroup="True" CanSort="True" CanEdit="True"` |
 | Programmatic group by field | `cardView.GroupCards("LastName")` |
 | Programmatic edit control | `cardView.BeginEdit()` / `cardView.EndEdit()` |
 | Hide group/sort/filter header | `ShowHeader="False"` |

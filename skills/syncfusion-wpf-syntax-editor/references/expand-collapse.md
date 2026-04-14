@@ -15,39 +15,28 @@ The EditControl automatically identify the collapsible blocks using the language
 
 ## Enabling expand-collapse button
 
-
 Expand-collapse feature can be enabled/disabled using `EnableOutlining` property of EditControl class. The following code can be used to set the EnableOutlining property.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 <sfedit:EditControl x:Name="editControl" DocumentLanguage="CSharp" DocumentSource="C:\Source.cs" FontSize="13" EnableOutlining="False"/>
 
+```
 
-
-{% endhighlight %}
-
-{% highlight C# %}
+```csharp
 
 editControl.EnableOutlining = false;
 
-{% endhighlight %}
-
-{% endtabs %}
-
+```
 
 The following image displays the EnableOutlining Is Set to False Window.
 
 ![Expand-Collapse-Support_img1](Expand-Collapse-Support_images/Expand-Collapse-Support_img1.jpeg)
 
-
 The following image displays EnableOutlining Set to True Window.
 
 ![Expand-Collapse-Support_img2](Expand-Collapse-Support_images/Expand-Collapse-Support_img2.jpeg)
 
-
 ## ToolTip and selection support
-
 
 The EditControl is enhanced with ToolTip displaying the collapsed lines of text when mouse is hovered on a collapsed region or ellipses. It also enables the users to select the entire collapsed area by clicking on collapsed region or ellipses.
 
@@ -55,14 +44,10 @@ The following screenshot displays the Tooltip.
 
 ![Expand-Collapse-Support_img3](Expand-Collapse-Support_images/Expand-Collapse-Support_img3.jpeg)
 
-
 The following screenshot displays the Collapsed Region Window.
 
 ![Expand-Collapse-Support_img4](Expand-Collapse-Support_images/Expand-Collapse-Support_img4.jpeg)
 
-
 The following screenshot displays the Text Selection Window.
 
 ![Expand-Collapse-Support_img5](Expand-Collapse-Support_images/Expand-Collapse-Support_img5.jpeg)
-
-

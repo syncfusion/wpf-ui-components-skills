@@ -17,43 +17,34 @@ Essential Edit WPF is now enhanced with Find and Replace feature, which enables 
 * Substring
 * Prefix
 
-
 To enable/disable Find and Replace feature, use `ShowFindAndReplace` property in EditControl.
 The following code can be used to set the ShowFindAndReplace property of EditControl class.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <sfedit:EditControl x:Name="editControl" DocumentSource="C:\Content.txt" FontSize="13" EnableOutlining="False" ShowFindAndReplace="True"/>
 
+```
 
-
-{% endhighlight %}
-
-{% highlight C# %}
+```csharp
 
 editControl.ShowFindAndReplace = true;
 
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following image displays the Find and Replace Window.
 
 ![Find-and-Replace_img1](Find-and-Replace_images/Find-and-Replace_img1.jpeg)
 
-
-The Find and Replace dialog provides the basic search functionality as mentioned below. 
+The Find and Replace dialog provides the basic search functionality as mentioned below.
 
 * Quick Find
 * Quick Replace
 * Find Symbol
 
-**Quick** **Find**: Quick Find tab enables to search a text in an open document or a selection for a string. 
+**Quick** **Find**: Quick Find tab enables to search a text in an open document or a selection for a string.
 
-**Find** **Symbol**: Find Symbol tab enables to search for words and the position of the word in the document. 
+**Find** **Symbol**: Find Symbol tab enables to search for words and the position of the word in the document.
 
 **Quick** **Replace**: Quick Replace tab enables to find a text and replace it with an alternative text.
 
@@ -65,7 +56,6 @@ The following image displays Quick Find Tab.
 
 ![Find-and-Replace_img2](Find-and-Replace_images/Find-and-Replace_img2.jpeg)
 
-
 **Find** **what**: Enter the search text in Find what field to search the text in the document.
 
 **Look** **in**: You can choose the search area (the whole document or a selection) in this field.
@@ -76,8 +66,7 @@ The following image displays look in field in Find and Replace Window.
 
 ![Find-and-Replace_img4](Find-and-Replace_images/Find-and-Replace_img4.jpeg)
 
-
-## Find options 
+## Find options
 
 Find options are placed under collapsible GroupBox control to have a compact view of the Find and Replace window.
 
@@ -92,13 +81,11 @@ The following image displays Find Options Collapsed window.
 
 ![Find-and-Replace_img5](Find-and-Replace_images/Find-and-Replace_img5.jpeg)
 
-
 Click the Find Next or Enter to search the text in document. The Find Next Button will be enabled only when the search text is entered in Find what field.
 
 The following image displays EditControl Sample Window.
 
 ![Find-and-Replace_img6](Find-and-Replace_images/Find-and-Replace_img6.jpeg)
-
 
 ## Find symbol
 
@@ -108,11 +95,9 @@ The following image displays Find and Replace Window.
 
 ![Find-and-Replace_img7](Find-and-Replace_images/Find-and-Replace_img7.jpeg)
 
-
 The following image displays Find Symbol Tab in Find and Replace Window.
 
 ![Find-and-Replace_img8](Find-and-Replace_images/Find-and-Replace_img8.jpeg)
-
 
 Find Symbol tab supports the following search options to refine the search results.
 
@@ -129,7 +114,6 @@ The following image displays EditControl Sample Window.
 
 ![Find-and-Replace_img9](Find-and-Replace_images/Find-and-Replace_img9.jpeg)
 
-
 Click the Find All or Enter to search the text in document.
 
 N> Find Symbol results tab is a dockable so that it can be hidden,pinned or closed as necessary.
@@ -141,7 +125,6 @@ The following image displays Find Symbol Results.
 The following image displays Find Symbol Results tab in Hidden State Window.
 
 ![Find-and-Replace_img12](Find-and-Replace_images/Find-and-Replace_img12.jpeg)
-
 
 ## Quick replace
 
@@ -179,50 +162,29 @@ This function helps to show the GoToLine Window programmatically and current cur
 </td></tr>
 <tr>
 <td>
-ShowGoToLine(int LineNumber)   
+ShowGoToLine(int LineNumber)
 </td><td>
 This function helps to show the GoToLine Window programmatically with the given line number included. </td></tr>
 </table>
 
 **GoToLine method**
- 
-{% tabs %}
-{% highlight C# %}
+
+```csharp
 //Places the Cursor at the given line number
 editcontrol.GoToLine(1);
 
-{% endhighlight %}
-
-{% highlight VB %}
-
-‘Places the Cursor at the given line number
-editcontrol.GoToLine(100)
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 **ShowGoToLine**
 
 The GoToLine Window is invoked using the ShowGoToLine method. The KeyBoard Shortcut key is <kbd>Ctrl+G</kbd>.
 
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 // Method used to invoke the GoToLine Dialog Box
 editcontrol.ShowGoToLine();
 
-{% endhighlight %}
-
-{% highlight VB %}
-
-‘Method used to invoke the GoToLine Dialog Box
-editcontrol.ShowGoToLine()
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following output shows the GoToLine Dialog Window.
 
@@ -230,24 +192,12 @@ The following output shows the GoToLine Dialog Window.
 
 **ShowGoToLine with LineNumber**
 
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 // Method used to invoke the GoToLine Window with user given line number
 editcontrol.ShowGoToLine(1000);
 
-{% endhighlight %}
-
-{% highlight VB %}
-
-‘Method used to invoke the GoToLine Window with user given line number
-editcontrol.ShowGoToLine(1000)
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 ![Find-and-Replace_img15](Find-and-Replace_images/Find-and-Replace_img15.jpg)
 
@@ -256,7 +206,6 @@ editcontrol.ShowGoToLine(1000)
 EditControl also provides the Localization support for the GoToLine functionality. This allows to configure the content of the GoToLine window in the multi-lingual according to the cultures.
 
 As explained in the [Localization](https://help.syncfusion.com/wpf/localization) section, you can localize the content of the EditControl using the same steps.
-
 
 The key text associated with the GoToLine Dialog Window can be localized as follows:
 <table>
@@ -273,11 +222,11 @@ Helps to localize the OK Button Text.</td></tr>
 <td>
 GoToLineHeaderText</td>
 <td>
-Helps to localize the GoToLine Dialog Window Header Text.   
+Helps to localize the GoToLine Dialog Window Header Text.
 </td></tr>
 <tr>
 <td>
-LineNumberText 
+LineNumberText
 </td><td>
 Helps to Localize the Line Number Text </td></tr>
 <tr>
@@ -290,10 +239,7 @@ Helps to localize the Cancel Button Text.
 
 ![Find-and-Replace_img16](Find-and-Replace_images/Find-and-Replace_img16.jpg)
 
-
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 public MainWindow()
 {
@@ -302,23 +248,8 @@ System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalizatio
 InitializeComponent();
 }
 
-{% endhighlight %}
-
-{% highlight VB %}
-
-Public Sub New()
-used to assign the culture
-System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo("fr-FR")
-InitializeComponent()
-End Sub
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following output shows the GoToLine Window localized in French culture.
 
-
 ![Find-and-Replace_img17](Find-and-Replace_images/Find-and-Replace_img17.jpg)
-
-

@@ -179,7 +179,7 @@ namespace OlapClientApp
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Example connection string (replace with your server or offline cube path)
-            string connectionString = "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; Initial Catalog=Adventure Works DW 2008 SE;";
+            string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=http://<your-server-name>/olap/msmdpump.dll; " + "Initial Catalog=<YourCatalogName>;";
             // Create OlapDataManager with connection and assign to control
             OlapDataManager olapDataManager = new OlapDataManager(connectionString);
             this.olapClient1.OlapDataManager = olapDataManager;
@@ -195,7 +195,7 @@ namespace OlapClientApp
 
 ```csharp
 // For offline .cub files on local machine
-string connectionString = @"Datasource=C:\OfflineCube\Adventure_Works_Ext.cub; Provider=msolap;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Datasource=<path_to_cube_file>; Provider=msolap;";
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 this.olapClient1.OlapDataManager = olapDataManager;
 this.olapClient1.DataBind();
@@ -205,7 +205,7 @@ this.olapClient1.DataBind();
 
 ```csharp
 // For SQL Server Analysis Services on localhost
-string connectionString = "Data source=localhost; Initial Catalog=Adventure Works DW";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data source=localhost; Initial Catalog=Adventure Works DW";
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 this.olapClient1.OlapDataManager = olapDataManager;
 this.olapClient1.DataBind();
@@ -215,7 +215,7 @@ this.olapClient1.DataBind();
 
 ```csharp
 // For Mondrian OLAP server
-string connectionString = @"Data Source=http://localhost:8080/mondrian/xmla; Initial Catalog=FoodMart;";
+string connectionString = "YOUR_END_POINT"; // For e.g - @"Data Source = http://<your-server-name>:<port>/mondrian/xmla; Initial Catalog = <YourCatalogName>;";
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 // Set provider to Mondrian
 olapDataManager.DataProvider.ProviderName = Syncfusion.Olap.DataProvider.Providers.Mondrian;
@@ -228,8 +228,8 @@ this.olapClient1.DataBind();
 ```csharp
 // Complete code-behind instantiation
 OlapClient olapClient1 = new OlapClient();
-string connectionString = "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " +
-                          "Initial Catalog=Adventure Works DW 2008 SE;";
+string connectionString = "YOUR_END_POINT"; // For e.g - "Data Source=http://<your-server-name>/olap/msmdpump.dll; " + "Initial Catalog=<YourCatalogName>;";
+
 OlapDataManager olapDataManager = new OlapDataManager(connectionString);
 olapClient1.OlapDataManager = olapDataManager;
 olapClient1.DataBind();

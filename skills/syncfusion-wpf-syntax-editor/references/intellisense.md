@@ -17,7 +17,7 @@ When you type the text in the EditControl, it displays a list of possible words 
 
 **Important features**
 
-* **IntelliSense** in Edit WPF works in two modes namely **Auto** or **Custom**. 
+* **IntelliSense** in Edit WPF works in two modes namely **Auto** or **Custom**.
   * **Auto** **mode**: This automatically generates the list of items to be displayed from the pre-built assemblies specified in `AssemblyReferences` property. This mode of operation is currently supported for C# and Visual Basic language respectively.
   * **Custom** **mode**: This enables the users to provide the list of items to be displayed in the IntelliSense.
 * Exclusive properties in EditControl enable the users to customize the look and feel of the IntelliSense pop-up and its items.
@@ -38,18 +38,15 @@ N> Auto IntelliSense mode is currently supported for C# and Visual Basic languag
 
 Add EditControl to the application and set its IntelliSenseMode to Auto by using the following code.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <!--Adding EditControl to application and setting its IntelliSenseMode to Auto-->
 
 <syncfusion:EditControl Background="White" DocumentLanguage="CSharp" Name="EditControl1" IntellisenseMode="Auto"/>
 
+```
 
-{% endhighlight %}
-
-{% highlight C# %}
+```csharp
 
 public partial class MainWindow : Window
 
@@ -93,18 +90,13 @@ uriList.Add(new Uri(fileDialog.FileName));
 
 }
 
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 N> Having an INotifyCollectionChanged implemented collection as AssemblyReferences will update the IntelliSense items automatically when an assembly reference is added at runtime.
 
 The following image displays the Intellisense Demo Window.
 
 ![IntelliSense support](IntelliSense-Support_images/IntelliSense-Support_img3.jpeg)
-
 
 **Custom mode**
 
@@ -120,9 +112,7 @@ This ensures that your business object is implemented from IIntelliSenseItem int
 
 Create DataTemplate in the ResourceDictionary to apply it as `IntellisenseItemTemplate` property of EditControl by using the following code.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <DataTemplate x:Key="CustomIntelliSenseItemTemplate">
 
@@ -144,42 +134,30 @@ Create DataTemplate in the ResourceDictionary to apply it as `IntellisenseItemTe
 
 </DataTemplate>
 
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 Apply `IntellisenseMode` and `IntellisenseItemTemplate` properties by using the following code.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <!--Adding EditControl to application and setting its IntelliSenseMode to Custom-->
 
 <syncfusion:EditControl Background="White" Name="EditControl1"  IntellisenseMode="Custom"
 
-IntellisenseItemTemplate="{StaticResource 
+IntellisenseItemTemplate="{StaticResource
 
 CustomIntelliSenseItemTemplate}"/>
 
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 ### Creating a custom business object
 
 Create a Custom Business Object implemented using IIntellisenseItem interface by using the following code.
 
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 /// <summary>
 
-/// Business object implemented from IIntelliSenseItem interface in 
+/// Business object implemented from IIntelliSenseItem interface in
 
 /// Syncfusion.Windows.Edit namespace
 
@@ -188,7 +166,6 @@ Create a Custom Business Object implemented using IIntellisenseItem interface by
 public class CustomIntelliSenseItem : IIntellisenseItem
 
 {
-
 
 /// <summary>
 
@@ -238,24 +215,17 @@ set;
 
 }
 
-
 }
 
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 ### Creating a custom collection of the business object
 
 Now, create a Custom Collection of the Business Object and set as Custom ItemsSource using `IntellisenseCustomItemsSource` property by using the following code.
 
-{% tabs %}
+```csharp
 
-{% highlight C# %}
-
-// Initializing custom business object collection 
+// Initializing custom business object collection
 
 ObservableCollection<CustomIntelliSenseItem> customItems = new
 
@@ -295,13 +265,7 @@ Icon = new BitmapImage(new Uri("/CustomIntelliSenseDemo;component/Resources/wpf.
 
 EditControl1.IntellisenseCustomItemsSource = customItems;
 
-
-
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 When the code runs, the following output displays.
 
@@ -309,16 +273,13 @@ The following image displays the Custom Intellisense Demo Window.
 
 ![IntelliSense support](IntelliSense-Support_images/IntelliSense-Support_img4.jpeg)
 
-
 ### Customizing IntelliSense list box style
 
 The EditControl enables the users to customize the look and feel of the IntelliSense listbox by applying custom style to the IntelliSense listbox. The `IntelliSenseBoxStyle` property of EditControl class can be used to apply custom style for IntelliSense listbox.
 
 Customize the IntelliSense List Box Style, by using the following code.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
 
@@ -344,16 +305,11 @@ Customize the IntelliSense List Box Style, by using the following code.
 
 <syncfusion:EditControl Name="EditControl1"  IntellisenseBoxStyle="{StaticResource ListBoxStyle}"/>
 
-
-
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 The following figure displays displays the window that appears after applying IntelliSenseBox Style.
 
 ![Customizing intellisense list box style](IntelliSense-Support_images/IntelliSense-Support_img5.jpeg)
-
 
 ### Applying multi-level IntelliSense items in custom mode
 
@@ -361,9 +317,7 @@ As mentioned in earlier topics, EditControl supports applying custom collection 
 
 Create a Custom IntelliSense for tables and fields for SQL language by using the following code.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <!--Resources-->
 
@@ -375,18 +329,16 @@ Create a Custom IntelliSense for tables and fields for SQL language by using the
 
 <!--Adding EditControl to application and setting its IntelliSenseMode to Auto-->
 
-<syncfusion:EditControl Background="White" Name="EditControl1" DocumentLanguage="SQL"  IntellisenseMode="Custom" 
+<syncfusion:EditControl Background="White" Name="EditControl1" DocumentLanguage="SQL"  IntellisenseMode="Custom"
 
 IntellisenseItemTemplate="{StaticResource CustomIntelliSenseItemTemplate}"/>
 
+```
 
-
-{% endhighlight %}
-
-{% highlight C# %}
+```csharp
 /// <summary>
 
-/// Business object implemented from IIntelliSenseItem interface in 
+/// Business object implemented from IIntelliSenseItem interface in
 
 /// Syncfusion.Windows.Edit namespace
 
@@ -395,8 +347,6 @@ IntellisenseItemTemplate="{StaticResource CustomIntelliSenseItemTemplate}"/>
 public class CustomIntelliSenseItem : IIntellisenseItem
 
 {
-
-
 
 /// <summary>
 
@@ -446,14 +396,11 @@ set;
 
 }
 
-
 }
 
+```
 
-
-{% endhighlight %}
-
-{% highlight C# %}
+```csharp
 
 ObservableCollection<CustomIntelliSenseItem> customItems = new
 
@@ -553,20 +500,15 @@ customerSubItem
 
 EditControl1.IntellisenseCustomItemsSource = customItems;
 
+```
 
-
-{% endhighlight %}
-
-{% endtabs %}
 The following screenshot illustrates IntelliSense displaying first-level of items from custom collection.
 
 ![IntelliSense displaying first-level of items from custom collection](IntelliSense-Support_images/IntelliSense-Support_img6.jpeg)
 
-
 The following screenshot illustrates IntelliSense displaying sub-items from selected item.
 
 ![IntelliSense displaying sub-items from selected item](IntelliSense-Support_images/IntelliSense-Support_img7.jpeg)
-
 
 Following classes in EditControl will be helpful to perform various operations related to IntelliSense.
 
@@ -609,10 +551,7 @@ DataTemplate<br/><br/></td><td>
 DataTemplate object<br/><br/></td></tr>
 </table>
 
-
 Following classes in LanguageBase will be helpful to perform various operations related to IntelliSense specific support and custom languages. These properties can be modified in custom language classes inherited from LanguageBase or ProceduralLanguageBase or MarkupLanguageBase class. It can also be modified using `CurrentLanguage` property of EditControl class.
-
-
 
 <table>
 <tr>

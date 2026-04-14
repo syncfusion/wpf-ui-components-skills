@@ -17,27 +17,21 @@ documentation: ug
 
 Set a simple string as EditControl’s Text by using the following line of code.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <syncfusion:EditControl x:Name="editControl" Text="This is Syncfusion's EditControl"/>
 
-{% endhighlight %}
+```
 
-{% highlight C# %}
+```csharp
 
 editControl.Text = "Setting Text property from code behind (C#)";
 
-{% endhighlight %}
-
-{% endtabs %}
+```
 
 To set a multi-line string as Text property through **XAML**, String class in **mscorlib**.**dll** can be used with **xml**:**space**=”**preserve**”. The following lines of code can be used to set a multiline text from **XAML**.
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <syncfusion:EditControl x:Name="editControl">
 
@@ -51,26 +45,15 @@ When preserve is used, XAML considers the indentation spaces as empty spaces.
 
 </syncfusion:EditControl>
 
-
-
-{% endhighlight %}
-
-{% endtabs %}
-
+```
 
 ![MultiLine in EditContro in XAML](Editing-Text-in-EditControl_images/Editing-Text-in-EditControl_img1.jpeg)
 
-{% tabs %}
-
-{% highlight C# %}
+```csharp
 
 editControl.Text = @"Setting multi-line text" + Environment.NewLine + "from C# using" + Environment.NewLine + "Environment.NewLine.";
 
-
-{% endhighlight %}
-
-{% endtabs %}
-
+```
 
 ![MultiLine in EditControl in CodeBehind](Editing-Text-in-EditControl_images/Editing-Text-in-EditControl_img2.jpeg)
 
@@ -89,39 +72,32 @@ editControl.Text = @"Setting multi-line text" + Environment.NewLine + "from C# u
 
 ![IndentingOption as Smart](Editing-Text-in-EditControl_images/EditControl_IndentingOption_Smart.gif)
 
-{% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <syncfusion:EditControl Name="Edit1" Background="White" Margin="0" IsAutoIndentationEnabled="True" IndentingOptions="Smart" Foreground="Black" />
 
-{% endhighlight %}
+```
 
-{% highlight C# %}
+```csharp
 
 EditControl editControl = new EditControl() {IsAutoIndentationEnabled = true, Height = 200, Width = 200, Background = Brushes.White, Foreground = Brushes.Black };
 editControl.IndentingOptions = IndentingOptions.Smart;
 
-{% endhighlight %}    
-{% endtabs %}   
+```
 
 ### TabSpaces in EditControl
 
 [EditControl](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Edit.EditControl.html) supports for changing the number of empty spaces to be added for singe Tab key press by setting  [TabSpaces](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Edit.EditControl.html#Syncfusion_Windows_Edit_EditControl_TabSpaces) property. The default value is 4.
 
- {% tabs %}
-
-{% highlight XAML %}
+```xml
 
 <syncfusion:EditControl Name="Edit1" Background="White" Margin="0" IsAutoIndentationEnabled="True" TabSpaces="10" IndentingOptions="Smart" Foreground="Black" ShowLineNumber="True" />
 
-{% endhighlight %}
+```
 
-{% highlight C# %}
+```csharp
 
 EditControl editControl = new EditControl() {Height = 200, Width = 200, Background = Brushes.White, Foreground = Brushes.Black };
 editControl.TabSpaces = 10;
 
-{% endhighlight %}    
-{% endtabs %}        
-
+```

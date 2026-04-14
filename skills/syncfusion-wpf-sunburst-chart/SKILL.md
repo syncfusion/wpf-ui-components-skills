@@ -248,10 +248,8 @@ public class ViewModel
 ### 4. XAML Configuration
 
 ```xml
-<sunburst:SfSunburstChart ItemsSource="{Binding Data}" 
-                          ValueMemberPath="EmployeeCount"
-                          Header="Employee Distribution"
-                          FontSize="20">
+<sunburst:SfSunburstChart ItemsSource="{Binding Data}" ValueMemberPath="EmployeeCount"
+                          Header="Employee Distribution" FontSize="20">
     
     <!-- Define hierarchy levels -->
     <sunburst:SfSunburstChart.Levels>
@@ -305,8 +303,7 @@ public MainWindow()
 ### Pattern 2: Interactive Chart with Selection and Tooltips
 
 ```xml
-<sunburst:SfSunburstChart ItemsSource="{Binding Data}" 
-                          ValueMemberPath="Value">
+<sunburst:SfSunburstChart ItemsSource="{Binding Data}" ValueMemberPath="Value">
     
     <sunburst:SfSunburstChart.Behaviors>
         <!-- Enable selection -->
@@ -345,9 +342,7 @@ public MainWindow()
 ### Pattern 4: Custom Palette with Gradient Brushes
 
 ```xml
-<sunburst:SfSunburstChart ItemsSource="{Binding Data}" 
-                          ValueMemberPath="Value"
-                          Palette="Custom">
+<sunburst:SfSunburstChart ItemsSource="{Binding Data}" ValueMemberPath="Value" Palette="Custom">
     
     <sunburst:SfSunburstChart.ColorModel>
         <sunburst:SunburstColorModel>
@@ -501,9 +496,3 @@ public MainWindow()
 - Verify Legend property is set (not null)
 - Check that DockPosition is valid
 - Ensure first-level categories exist in data
-
-## Related Documentation
-
-For the parent library and other WPF components:
-- [Implementing Syncfusion WPF Components](../../SKILL.md) - Main library guide
-- [Implementing Charts](../implementing-charts/SKILL.md) - Other chart types (if available)

@@ -197,9 +197,7 @@ namespace OlapGaugeApp
             var olapGauge = new OlapGauge();
             
             // Create and configure data manager
-            var olapDataManager = new OlapDataManager(
-                "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " +
-                "Initial Catalog=Adventure Works DW 2008 SE;");
+            var olapDataManager = new OlapDataManager("YOUR_END_POINT"); // For e.g - "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " + "Initial Catalog=Adventure Works DW 2008 SE;"
             
             olapDataManager.SetCurrentReport(CreateOlapReport());
             
@@ -237,9 +235,7 @@ Namespace OlapGaugeApp
             Dim olapGauge = New OlapGauge()
             
             ' Create and configure data manager
-            Dim olapDataManager = New OlapDataManager(
-                "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " & _
-                "Initial Catalog=Adventure Works DW 2008 SE;")
+            Dim olapDataManager = New OlapDataManager("YOUR_END_POINT") // For e.g - "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " & _"Initial Catalog=Adventure Works DW 2008 SE;"
             
             olapDataManager.SetCurrentReport(CreateOlapReport())
             
@@ -482,9 +478,7 @@ namespace OlapGaugeApp
             InitializeComponent();
             
             // Initialize data manager with connection string
-            var olapDataManager = new OlapDataManager(
-                "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " +
-                "Initial Catalog=Adventure Works DW 2008 SE;");
+            var olapDataManager = new OlapDataManager("YOUR_END_POINT"); // For e.g - "Data Source=http://bi.syncfusion.com/olap/msmdpump.dll; " + "Initial Catalog=Adventure Works DW 2008 SE;"
             
             // Set the OLAP report
             olapDataManager.SetCurrentReport(CreateOlapReport());

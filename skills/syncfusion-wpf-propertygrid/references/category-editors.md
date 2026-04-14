@@ -19,10 +19,7 @@ For example, the `Background`, `BorderBrush` and `Foreground` are brush type pro
 
 a. `ColorEdit` control visibility converter
 
-{% capture codesnippet1 %}
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 using System;
 using System.Windows;
 using System.Windows.Data;
@@ -49,18 +46,11 @@ public class SelectedIndexToVisibility : IValueConverter {
         return null;
     }
 }
+```
 
-{% endhighlight %}
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet1 | OrderList_Indent_Level_1 }}
- 
  b. Creating the CategoryEditor for the properties:
 
-{% capture codesnippet2 %}
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <Window.Resources>
     <local:SelectedIndexToVisibility x:Key="VisConv"/>
 </Window.Resources>
@@ -131,11 +121,7 @@ public class SelectedIndexToVisibility : IValueConverter {
                 HorizontalAlignment="Center" Content="Click me"/>
     </StackPanel>
 </Grid>
-
-{% endhighlight %}
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet2 | OrderList_Indent_Level_1 }}
+```
 
 By Default, the properties are arranged like the key-value pairs with its value editor. Using the `CategoryEditor`, the `Background`, `Foreground` and `BorderBrush` property value editors are arranged by our wish.
 

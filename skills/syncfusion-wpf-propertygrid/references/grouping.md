@@ -17,9 +17,7 @@ We can combine the properties and club them into expandable groups according to 
 
 Properties in the [PropertyGrid](https://www.syncfusion.com/wpf-ui-controls/propertygrid) will be grouped based on the name specified in the [Category](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.categoryattribute?view=netframework-4.8) attribute and `GroupName` field of the `Display` attribute. If the property item doesn't have any category name, that property will be grouped under `Misc` category.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 using System;
 using System.ComponentModel;
 
@@ -48,30 +46,23 @@ public class ViewModel {
         };
     }
 }
+```
 
-{% endhighlight %} 
-{% endtabs %} 
-
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid SelectedObject="{Binding SelectedEmployee}"  EnableGrouping="True"          
                          x:Name="propertyGrid1">
     <syncfusion:PropertyGrid.DataContext>
         <local:ViewModel></local:ViewModel>
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.DataContext = new ViewModel();
 propertyGrid1.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("SelectedEmployee"));
 propertyGrid1.EnableGrouping = true;
-
-{% endhighlight %} 
-{% endtabs %} 
+```
 
 ![Properties are grouped based on the value specified in the Category attribute and Display.GroupName field](Grouping-and-sorting-Images\Category-Attribute.png)
 
@@ -84,9 +75,7 @@ N> If we use both the `Category` attribute and `GroupName` field of the `Display
 
 We can group the properties in the `PropertyGrid` without using the attributes at runtime by handling the [AutoGeneratingPropertyGridItem](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html) event with [AutoGeneratingPropertyGridItemEventArgs.Category](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.AutoGeneratingPropertyGridItemEventArgs.html#Syncfusion_Windows_PropertyGrid_AutoGeneratingPropertyGridItemEventArgs_Category) property. Based on the value of `Category` property, the properties are grouped.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -111,13 +100,9 @@ public class ViewModel {
         };
     }
 }
+```
 
-{% endhighlight %} 
-{% endtabs %} 
-
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid AutoGeneratingPropertyGridItem="PropertyGrid1_AutoGeneratingPropertyGridItem"
                          EnableGrouping = "True"
                          SelectedObject="{Binding SelectedEmployee}"
@@ -126,22 +111,17 @@ public class ViewModel {
         <local:ViewModel></local:ViewModel>
     </syncfusion:PropertyGrid.DataContext>
 </syncfusion:PropertyGrid>
+```
 
-{% endhighlight %} 
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid1 = new PropertyGrid();
 propertyGrid1.DataContext = new ViewModel();
 propertyGrid1.SetBinding(PropertyGrid.SelectedObjectProperty, new Binding("SelectedEmployee"));
 propertyGrid1.AutoGeneratingPropertyGridItem += PropertyGrid1_AutoGeneratingPropertyGridItem;
 propertyGrid1.EnableGrouping= true;
+```
 
-{% endhighlight %} 
-{% endtabs %} 
-
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 private void PropertyGrid1_AutoGeneratingPropertyGridItem(object sender, AutoGeneratingPropertyGridItemEventArgs e) {
     //Experience and DOB properties grouped under 'Additional Info' category.
     if (e.DisplayName == "Experience") {
@@ -159,8 +139,7 @@ private void PropertyGrid1_AutoGeneratingPropertyGridItem(object sender, AutoGen
     }
 }
 
-{% endhighlight %} 
-{% endtabs %} 
+```
 
 ![Properties are grouped based on the value specified in the Category property of the AutoGeneratingPropertyGridItem event](Grouping-and-sorting-Images\AutoGeneratingPropertyGridItem.png)
 
@@ -176,16 +155,12 @@ We can expand or collapse the grouped properties programmatically by using [Expa
 
 `ExpandCategory` method will expand the specified category if it is in collapsed view.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 //Expand the Identity category group
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid1.EnableGrouping= true;
 propertyGrid1.ExpandCategory("Identity");
-
-{% endhighlight %} 
-{% endtabs %} 
+```
 
 ![Itentity group has been expanded](Grouping-and-sorting-Images\Expand-Category.png)
 
@@ -193,16 +168,12 @@ propertyGrid1.ExpandCategory("Identity");
 
 `CollapseCategory` method will collapse the specified category if it is in expand view.
 
-{% tabs %}
-{% highlight C# %}
-
+```c sharp
 //Collapse the Identity category group
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid1.EnableGrouping= true;
 propertyGrid1.CollapseCategory("Identity");
-
-{% endhighlight %} 
-{% endtabs %} 
+```
 
 ![Itentity group has been collapsed](Grouping-and-sorting-Images\Collapse-Category.png)
 
@@ -210,27 +181,21 @@ propertyGrid1.CollapseCategory("Identity");
 
 We can change the view of the properties from sorted view to grouped view by the `GroupButton`. We can show or hide the group button by using the [ButtonPanelVisibility](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.PropertyGrid.PropertyGrid.html#Syncfusion_Windows_PropertyGrid_PropertyGrid_ButtonPanelVisibility) property. If we want to hide the `GroupButton`, set the `ButtonPanelVisibility` property as `Collapsed`. The Default value of the `ButtonPanelVisibility` property is `Visible`.
 
-{% tabs %}
-{% highlight xaml %}
-
+```xaml
 <syncfusion:PropertyGrid x:Name="propertyGrid1" Width="350" Height="400"
                          ButtonPanelVisibility="Collapsed">
     <syncfusion:PropertyGrid.SelectedObject>
         <Button></Button>
     </syncfusion:PropertyGrid.SelectedObject>
 </syncfusion:PropertyGrid>
+```
 
-
-{% endhighlight %}
-{% highlight C# %}
-
+```csharp
 PropertyGrid propertyGrid = new PropertyGrid();
 propertyGrid.Width = 350;
 propertyGrid.Height = 400;propertyGrid.SelectedObject = new Button();
 propertyGrid1.ButtonPanelVisibility = Visibility.Collapsed;
-
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![PropertyGrid with and without Group button panel](Sorting-Images/GroupButton_visibility.png)
 
