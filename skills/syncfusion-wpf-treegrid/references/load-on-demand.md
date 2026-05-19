@@ -228,35 +228,24 @@ public class ViewModel
     public ViewModel()
     {
         EmployeeDetails = new ObservableCollection<EmployeeInfo>();
-        LoadOnDemandCommand = new RelayCommand<TreeGridNodeEventArgs>(ExecuteLoadOnDemand);
+        LoadOnDemandCommand = new RelayCommand<object>(ExecuteLoadOnDemand);
         
         // Load initial root items
         LoadRootItems();
     }
 
-    private void ExecuteLoadOnDemand(TreeGridNodeEventArgs args)
+  
+    private void ExecuteLoadOnDemand(object parameter)
     {
-        if (args.Node.Item == null)
+        var node = parameter as TreeNode;
+        if (node == null) return;
+
+        var employee = node.Item as EmployeeInfo;
+
+        if (employee != null)
         {
-            // Load root items if not already loaded
-            var rootItems = GetRootEmployees();
-            foreach (var item in rootItems)
-            {
-                args.Node.ChildNodes.Add(new TreeNode { Item = item });
-            }
-        }
-        else
-        {
-            // Load child items
-            var employee = args.Node.Item as EmployeeInfo;
-            if (employee != null)
-            {
-                var childItems = GetSubordinates(employee.ID);
-                foreach (var item in childItems)
-                {
-                    args.Node.ChildNodes.Add(new TreeNode { Item = item });
-                }
-            }
+            var childItems = GetSubordinates(employee.ID);
+            node.PopulateChildNodes(childItems);
         }
     }
 
@@ -369,30 +358,20 @@ public class ViewModel
 
     public ViewModel()
     {
-        LoadOnDemandCommand = new AsyncRelayCommand<TreeGridNodeEventArgs>(ExecuteLoadOnDemandAsync);
+        LoadOnDemandCommand = new AsyncRelayCommand<object>(ExecuteLoadOnDemandAsync);
     }
 
-    private async Task ExecuteLoadOnDemandAsync(TreeGridNodeEventArgs args)
+    private async Task ExecuteLoadOnDemandAsync(object parameter)
     {
-        if (args.Node.Item == null)
+        var node = parameter as TreeNode;
+        if (node == null) return;
+
+        var employee = node.Item as EmployeeInfo;
+
+        if (employee != null)
         {
-            var rootItems = await LoadRootEmployeesAsync();
-            foreach (var item in rootItems)
-            {
-                args.Node.ChildNodes.Add(new TreeNode { Item = item });
-            }
-        }
-        else
-        {
-            var employee = args.Node.Item as EmployeeInfo;
-            if (employee != null)
-            {
-                var childItems = await LoadSubordinatesAsync(employee.ID);
-                foreach (var item in childItems)
-                {
-                    args.Node.ChildNodes.Add(new TreeNode { Item = item });
-                }
-            }
+            var childItems = await LoadSubordinatesAsync(employee.ID);
+            node.PopulateChildNodes(childItems);
         }
     }
 }
@@ -434,9 +413,9 @@ public class EmployeeViewModel : INotifyPropertyChanged
     public EmployeeViewModel()
     {
         EmployeeDetails = new ObservableCollection<EmployeeInfo>();
-        LoadOnDemandCommand = new AsyncRelayCommand<TreeGridNodeEventArgs>(LoadChildNodesAsync);
-        
-        // Load initial data
+
+        LoadOnDemandCommand = new AsyncRelayCommand<object>(LoadChildNodesAsync);
+
         LoadInitialData();
     }
 
@@ -464,24 +443,25 @@ public class EmployeeViewModel : INotifyPropertyChanged
         }
     }
 
-    private async Task LoadChildNodesAsync(TreeGridNodeEventArgs args)
+    private async Task LoadChildNodesAsync(object parameter)
     {
+        var node = parameter as TreeNode;
+        if (node == null) return;
+
         IsLoading = true;
 
         try
         {
-            if (args.Node.Item == null)
+            var parent = node.Item as EmployeeInfo;
+
+            if (parent != null)
             {
-                StatusMessage = "Loading root nodes...";
-                var items = await LoadRootEmployeesAsync();
-                AddNodesToCollection(args.Node, items);
-            }
-            else
-            {
-                var parent = args.Node.Item as EmployeeInfo;
                 StatusMessage = $"Loading subordinates of {parent.FirstName} {parent.LastName}...";
+
                 var items = await LoadSubordinatesAsync(parent.ID);
-                AddNodesToCollection(args.Node, items);
+
+                node.PopulateChildNodes(items);
+
                 StatusMessage = $"Loaded {items.Count()} subordinates";
             }
         }
@@ -495,23 +475,15 @@ public class EmployeeViewModel : INotifyPropertyChanged
         }
     }
 
-    private void AddNodesToCollection(TreeNode parentNode, IEnumerable<EmployeeInfo> items)
-    {
-        foreach (var item in items)
-        {
-            parentNode.ChildNodes.Add(new TreeNode { Item = item });
-        }
-    }
-
     private async Task<IEnumerable<EmployeeInfo>> LoadRootEmployeesAsync()
     {
-        await Task.Delay(500); // Simulate network delay
+        await Task.Delay(500);
         return EmployeeRepository.GetEmployees().Where(x => x.ReportsTo == -1);
     }
 
     private async Task<IEnumerable<EmployeeInfo>> LoadSubordinatesAsync(int managerId)
     {
-        await Task.Delay(500); // Simulate network delay
+        await Task.Delay(500);
         return EmployeeRepository.GetEmployees().Where(x => x.ReportsTo == managerId);
     }
 
@@ -542,44 +514,32 @@ public class CachedLoadOnDemandViewModel
     {
         _childCache = new Dictionary<int, List<EmployeeInfo>>();
         _loadedNodes = new HashSet<int>();
-        LoadOnDemandCommand = new AsyncRelayCommand<TreeGridNodeEventArgs>(LoadWithCacheAsync);
+        LoadOnDemandCommand = new AsyncRelayCommand<object>(LoadWithCacheAsync);
     }
 
-    private async Task LoadWithCacheAsync(TreeGridNodeEventArgs args)
+    private async Task LoadWithCacheAsync(object parameter)
     {
-        if (args.Node.Item == null)
-        {
-            // Root items - no caching needed
-            var items = await LoadRootEmployeesAsync();
-            AddNodesToCollection(args.Node, items);
-            return;
-        }
+        var node = parameter as TreeNode;
+        if (node == null) return;
 
-        var employee = args.Node.Item as EmployeeInfo;
+        var employee = node.Item as EmployeeInfo;
         if (employee == null) return;
-
-        // Check if already loaded
         if (_loadedNodes.Contains(employee.ID))
-        {
-            return; // Already loaded, skip
-        }
+            return;
 
-        // Check cache
         if (_childCache.ContainsKey(employee.ID))
         {
-            AddNodesToCollection(args.Node, _childCache[employee.ID]);
+            node.PopulateChildNodes(_childCache[employee.ID]); 
             _loadedNodes.Add(employee.ID);
             return;
         }
 
-        // Load from source
         var subordinates = (await LoadSubordinatesAsync(employee.ID)).ToList();
-        
-        // Update cache
+
         _childCache[employee.ID] = subordinates;
         _loadedNodes.Add(employee.ID);
-        
-        AddNodesToCollection(args.Node, subordinates);
+
+        node.PopulateChildNodes(subordinates);   
     }
 
     // Clear cache method
@@ -614,88 +574,49 @@ public class PagedLoadOnDemandViewModel
     public PagedLoadOnDemandViewModel()
     {
         _currentPages = new Dictionary<int, int>();
-        LoadOnDemandCommand = new AsyncRelayCommand<TreeGridNodeEventArgs>(LoadPagedDataAsync);
+
+        LoadOnDemandCommand = new AsyncRelayCommand<object>(LoadPagedDataAsync);
         LoadMoreCommand = new AsyncRelayCommand<TreeNode>(LoadMoreDataAsync);
     }
 
-    private async Task LoadPagedDataAsync(TreeGridNodeEventArgs args)
+    private async Task LoadPagedDataAsync(object parameter)
     {
-        if (args.Node.Item == null)
-        {
-            var items = await LoadRootEmployeesAsync();
-            AddNodesToCollection(args.Node, items);
-            return;
-        }
+        var node = parameter as TreeNode;
+        if (node == null) return;
 
-        var employee = args.Node.Item as EmployeeInfo;
+        var employee = node.Item as EmployeeInfo;
         if (employee == null) return;
 
-        // Initialize page counter
         if (!_currentPages.ContainsKey(employee.ID))
-        {
             _currentPages[employee.ID] = 0;
-        }
 
-        // Load first page
         var page = _currentPages[employee.ID];
         var items = await LoadSubordinatesPageAsync(employee.ID, page, PageSize);
-        
-        AddNodesToCollection(args.Node, items);
 
-        // Check if more pages available
-        if (items.Count() == PageSize)
-        {
-            // Add "Load More" indicator node
-            var loadMoreNode = new TreeNode
-            {
-                Item = new LoadMoreIndicator { ParentId = employee.ID }
-            };
-            args.Node.ChildNodes.Add(loadMoreNode);
-        }
+        node.PopulateChildNodes(items);
     }
 
-    private async Task LoadMoreDataAsync(TreeNode loadMoreNode)
+    private async Task LoadMoreDataAsync(TreeNode node)
     {
-        var indicator = loadMoreNode.Item as LoadMoreIndicator;
-        if (indicator == null) return;
+        if (node?.Item is not EmployeeInfo employee) return;
 
-        // Get parent node
-        var parentNode = loadMoreNode.ParentNode;
-        
-        // Remove "Load More" node
-        parentNode.ChildNodes.Remove(loadMoreNode);
+        _currentPages[employee.ID]++;
 
-        // Load next page
-        _currentPages[indicator.ParentId]++;
-        var page = _currentPages[indicator.ParentId];
-        
-        var items = await LoadSubordinatesPageAsync(indicator.ParentId, page, PageSize);
-        AddNodesToCollection(parentNode, items);
+        var page = _currentPages[employee.ID];
+        var items = await LoadSubordinatesPageAsync(employee.ID, page, PageSize);
 
-        // Add "Load More" node again if needed
-        if (items.Count() == PageSize)
-        {
-            parentNode.ChildNodes.Add(new TreeNode
-            {
-                Item = new LoadMoreIndicator { ParentId = indicator.ParentId }
-            });
-        }
+        node.PopulateChildNodes(items); 
     }
 
     private async Task<IEnumerable<EmployeeInfo>> LoadSubordinatesPageAsync(int managerId, int page, int pageSize)
     {
         await Task.Delay(300);
-        
+
         return EmployeeRepository.GetEmployees()
             .Where(x => x.ReportsTo == managerId)
             .Skip(page * pageSize)
             .Take(pageSize);
     }
-}
-
-public class LoadMoreIndicator
-{
-    public int ParentId { get; set; }
 }
 ```
 
@@ -714,45 +635,34 @@ public class RemoteLoadOnDemandViewModel
     public RemoteLoadOnDemandViewModel(string apiBaseUrl)
     {
         _apiBaseUrl = apiBaseUrl;
+
         _httpClient = new HttpClient
         {
             Timeout = TimeSpan.FromSeconds(30)
         };
-        
-        LoadOnDemandCommand = new AsyncRelayCommand<TreeGridNodeEventArgs>(LoadFromApiAsync);
+        LoadOnDemandCommand = new AsyncRelayCommand<object>(LoadFromApiAsync);
     }
 
-    private async Task LoadFromApiAsync(TreeGridNodeEventArgs args)
+    private async Task LoadFromApiAsync(object parameter)
     {
+        var node = parameter as TreeNode;
+        if (node == null) return;
+
         try
         {
-            if (args.Node.Item == null)
-            {
-                // Load root employees from API
-                var url = $"{_apiBaseUrl}/employees/roots";
-                var employees = await GetEmployeesFromApiAsync(url);
-                AddNodesToCollection(args.Node, employees);
-            }
-            else
-            {
-                var employee = args.Node.Item as EmployeeInfo;
-                if (employee != null)
-                {
-                    // Load subordinates from API
-                    var url = $"{_apiBaseUrl}/employees/{employee.ID}/subordinates";
-                    var subordinates = await GetEmployeesFromApiAsync(url);
-                    AddNodesToCollection(args.Node, subordinates);
-                }
-            }
+            var employee = node.Item as EmployeeInfo;
+            if (employee == null) return;
+
+            var url = $"{_apiBaseUrl}/employees/{employee.ID}/subordinates";
+            var subordinates = await GetEmployeesFromApiAsync(url);
+            node.PopulateChildNodes(subordinates);
         }
         catch (HttpRequestException ex)
         {
-            // Handle network errors
             MessageBox.Show($"Network error: {ex.Message}");
         }
         catch (TaskCanceledException)
         {
-            // Handle timeout
             MessageBox.Show("Request timed out");
         }
     }
@@ -761,10 +671,10 @@ public class RemoteLoadOnDemandViewModel
     {
         var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
-        
+
         var json = await response.Content.ReadAsStringAsync();
         var employees = JsonConvert.DeserializeObject<List<EmployeeInfo>>(json);
-        
+
         return employees;
     }
 
@@ -822,21 +732,22 @@ public class EmployeeInfo : INotifyPropertyChanged
 ### 3. Handle Empty Results
 
 ```csharp
-private async Task LoadSubordinatesAsync(TreeGridNodeEventArgs args)
+private async Task LoadSubordinatesAsync(object parameter)
 {
-    var employee = args.Node.Item as EmployeeInfo;
+    var node = parameter as TreeNode;
+    if (node == null) return;
+
+    var employee = node.Item as EmployeeInfo;
     if (employee == null) return;
 
     var subordinates = await GetSubordinatesAsync(employee.ID);
-    
+
     if (subordinates == null || !subordinates.Any())
     {
-        // No children - mark node as leaf
-        args.Node.HasChildNodes = false;
         return;
     }
 
-    AddNodesToCollection(args.Node, subordinates);
+    node.PopulateChildNodes(subordinates);
 }
 ```
 
@@ -1000,16 +911,20 @@ public ICommand LoadOnDemandCommand { get; set; }
 
 public ViewModel()
 {
-    LoadOnDemandCommand = new RelayCommand<TreeGridNodeEventArgs>(
+    LoadOnDemandCommand = new RelayCommand<object>(
         execute: LoadNodes,
-        canExecute: args => args != null
+        canExecute: param => param is TreeNode
     );
 }
 
 // Debug command execution
-private void LoadNodes(TreeGridNodeEventArgs args)
+private void LoadNodes(object parameter)
 {
-    Debug.WriteLine($"Command executed for node: {args.Node.Level}");
+    var node = parameter as TreeNode;
+    if (node == null) return;
+
+    Debug.WriteLine($"Command executed for node level: {node.Level}");
+
     // Load logic...
 }
 ```

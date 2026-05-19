@@ -112,8 +112,8 @@ Customize the chromeless window appearance.
 ```xml
 <syncfusion:SfChromelessWindow 
     WindowType="Tabbed"
-    TitleBarBackground="#0078D4"
-    TitleBarForeground="White"
+    CaptionBackground="#0078D4"
+    CaptionForeground="White"
     BorderBrush="#0078D4">
     
     <!-- Content -->
@@ -125,7 +125,7 @@ Customize the chromeless window appearance.
 ```xml
 <syncfusion:SfChromelessWindow 
     WindowType="Tabbed"
-    TitleBarHeight="35">
+    CaptionHeight="35">
     
     <!-- Content -->
 </syncfusion:SfChromelessWindow>
@@ -135,21 +135,7 @@ Customize the chromeless window appearance.
 
 ```xml
 <syncfusion:SfChromelessWindow 
-    Icon="/Images/app-icon.png"
-    ShowIcon="True">
-    
-    <!-- Content -->
-</syncfusion:SfChromelessWindow>
-```
-
-### Removing Window Controls
-
-```xml
-<syncfusion:SfChromelessWindow 
-    ShowMinimizeButton="True"
-    ShowMaximizeButton="True"
-    ShowCloseButton="True"
-    ShowHelpButton="False">
+    Icon="/Images/app-icon.png">
     
     <!-- Content -->
 </syncfusion:SfChromelessWindow>

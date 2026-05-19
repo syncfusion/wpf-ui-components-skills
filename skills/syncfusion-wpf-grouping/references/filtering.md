@@ -405,17 +405,17 @@ new RecordFilterDescriptor("[date] BETWEEN {TODAY, }"); // from today onwards
 ### Pattern 1: Dynamic Filter Builder
 
 ```csharp
-public void ApplyFilter(string propertyName, string operator, object value)
+public void ApplyFilter(string propertyName, string op, object value)
 {
     string expression = "";
     
     if (value is string)
     {
-        expression = $"[{propertyName}] {operator} '{value}'";
+        expression = $"[{propertyName}] {op} '{value}'";
     }
     else
     {
-        expression = $"[{propertyName}] {operator} {value}";
+        expression = $"[{propertyName}] {op} {value}";
     }
     
     groupingEngine.TableDescriptor.RecordFilters.Clear();

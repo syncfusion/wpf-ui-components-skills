@@ -24,7 +24,7 @@ Customize what the label displays:
 
 ```xml
 <syncfusion:ChartAdornmentInfo ShowLabel="True"
-                               LabelPosition="Outer"
+                               AdornmentsPosition="Outer"
                                SegmentLabelContent="LabelContentPath"/>
 ```
 
@@ -54,10 +54,10 @@ Common formats:
 
 ```xml
 <syncfusion:ChartAdornmentInfo ShowLabel="True"
-                               LabelPosition="Top"/>
+                               AdornmentsPosition="Top"/>
 ```
 
-**LabelPosition options:**
+**AdornmentsPosition options:**
 - `Auto` - Automatic positioning
 - `Top` - Above data point
 - `Bottom` - Below data point
@@ -125,8 +125,10 @@ Display symbols at data points.
 - `InvertedTriangle`
 - `Pentagon`
 - `Plus`
-- `Rectangle`
+- `Square`
 - `Triangle`
+- `HorizontalLine`
+- `VerticalLine`
 
 ### Marker Size
 
@@ -173,7 +175,7 @@ Display both labels and markers:
         <syncfusion:ChartAdornmentInfo ShowLabel="True"
                                        ShowMarker="True"
                                        Symbol="Ellipse"
-                                       LabelPosition="Top"
+                                       AdornmentsPosition="Top"
                                        SegmentLabelFormat="0.0"/>
     </syncfusion:LineSeries.AdornmentsInfo>
 </syncfusion:LineSeries>
@@ -216,7 +218,7 @@ Special adornment features for circular charts:
         <syncfusion:ChartAdornmentInfo ShowLabel="True"
                                        SegmentLabelContent="Percentage"
                                        SegmentLabelFormat="0'%'"
-                                       LabelPosition="OutsideExtended"
+                                       AdornmentsPosition="OutsideExtended"
                                        ShowConnectorLine="True"/>
     </syncfusion:PieSeries.AdornmentsInfo>
 </syncfusion:PieSeries>
@@ -230,7 +232,7 @@ Special adornment features for circular charts:
 <syncfusion:ColumnSeries>
     <syncfusion:ColumnSeries.AdornmentsInfo>
         <syncfusion:ChartAdornmentInfo ShowLabel="True"
-                                       LabelPosition="Top"
+                                       AdornmentsPosition="Top"
                                        SegmentLabelFormat="0"/>
     </syncfusion:ColumnSeries.AdornmentsInfo>
 </syncfusion:ColumnSeries>
@@ -248,7 +250,7 @@ Special adornment features for circular charts:
                                        SymbolWidth="10"
                                        SymbolInterior="White"
                                        SymbolStroke="{Binding Interior, RelativeSource={RelativeSource Mode=Self}}"
-                                       LabelPosition="Top"
+                                       AdornmentsPosition="Top"
                                        Foreground="Black"/>
     </syncfusion:LineSeries.AdornmentsInfo>
 </syncfusion:LineSeries>
@@ -262,7 +264,7 @@ Special adornment features for circular charts:
         <syncfusion:ChartAdornmentInfo ShowLabel="True"
                                        SegmentLabelContent="Percentage"
                                        SegmentLabelFormat="0.0'%'"
-                                       LabelPosition="Outside"
+                                       AdornmentsPosition="Outside"
                                        ShowConnectorLine="True"
                                        ConnectorHeight="30"/>
     </syncfusion:PieSeries.AdornmentsInfo>
@@ -273,7 +275,7 @@ Special adornment features for circular charts:
 
 ### Label Properties
 - `ShowLabel` - Enable/disable labels
-- `LabelPosition` - Label placement
+- `AdornmentsPosition` - Label placement
 - `SegmentLabelFormat` - Format string
 - `LabelRotationAngle` - Rotation in degrees
 - `SegmentLabelContent` - What to display

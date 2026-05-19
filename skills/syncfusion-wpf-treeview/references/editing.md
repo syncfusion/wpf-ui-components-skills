@@ -38,7 +38,7 @@ Control how users enter edit mode using the `EditTrigger` property:
 ### None (Default - F2 Key Only)
 
 ```xml
-<syncfusion:SfTreeView EditTrigger="None"/>
+<syncfusion:SfTreeView EditTrigger="F2"/>
 ```
 
 **Behavior:**
@@ -207,19 +207,28 @@ if (treeView.Nodes.Count > 0)
 var folderToEdit = viewModel.Folders.FirstOrDefault(f => f.FolderName == "Documents");
 if (folderToEdit != null)
 {
-    // Find TreeViewNode for the data item
-    var node = treeView.GetNode(folderToEdit);
-    if (node != null)
+    foreach (var node in treeView.Nodes)
     {
-        treeView.BeginEdit(node);
+        if (node.Content == folderToEdit)
+        {
+            treeView.BeginEdit(node);
+            break;
+        }
     }
 }
+
 
 // Edit selected item
 if (treeView.SelectedItem != null)
 {
-    var selectedNode = treeView.GetNode(treeView.SelectedItem);
-    treeView.BeginEdit(selectedNode);
+    foreach (var node in treeView.Nodes)
+    {
+        if (node.Content == treeView.SelectedItem)
+        {
+            treeView.BeginEdit(node);
+            break;
+        }
+    }
 }
 ```
 
@@ -235,10 +244,9 @@ var nodeBeingEdited = treeView.Nodes[0];
 treeView.EndEdit(nodeBeingEdited);
 
 // End current edit
-if (treeView.CurrentItem != null)
+if (treeView.Nodes.Count > 0)
 {
-    var currentNode = treeView.GetNode(treeView.CurrentItem);
-    treeView.EndEdit(currentNode);
+    treeView.EndEdit(treeView.Nodes[0]);
 }
 ```
 
@@ -516,10 +524,13 @@ private void RenameButton_Click(object sender, RoutedEventArgs e)
 {
     if (treeView.SelectedItem != null)
     {
-        var node = treeView.GetNode(treeView.SelectedItem);
-        if (node != null)
+        foreach (var node in treeView.Nodes)
         {
-            treeView.BeginEdit(node);
+            if (node.Content == treeView.SelectedItem)
+            {
+                treeView.BeginEdit(node);
+                break;
+            }
         }
     }
     else

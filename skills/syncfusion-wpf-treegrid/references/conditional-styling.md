@@ -196,18 +196,6 @@ public class EmployeeRowStyleSelector : StyleSelector
 
 ## Cell Styling
 
-### Alternating Row Colors
-
-```xaml
-<syncfusion:SfTreeGrid>
-    <syncfusion:SfTreeGrid.AlternatingRowStyle>
-        <Style TargetType="syncfusion:TreeGridRowControl">
-            <Setter Property="Background" Value="AliceBlue"/>
-        </Style>
-    </syncfusion:SfTreeGrid.AlternatingRowStyle>
-</syncfusion:SfTreeGrid>
-```
-
 ### Conditional Cell Background
 
 ```xaml
@@ -342,12 +330,7 @@ public class CachedStyleSelector : StyleSelector
 public Style GetStyle()
 {
     var style = new Style(typeof(TreeGridCell));
-    style.Setters.Add(new Setter(TreeGridCell.BackgroundProperty, Brushes.Red));
-    
-    // Freeze for better performance
-    if (style.CanFreeze)
-        style.Freeze();
-    
+    style.Setters.Add(new Setter(TreeGridCell.BackgroundProperty, Brushes.Red));    
     return style;
 }
 ```

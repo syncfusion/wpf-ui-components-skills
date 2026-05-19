@@ -59,12 +59,12 @@ Checkboxes are not managed by TreeView. Manual handling required.
 <syncfusion:SfTreeView CheckBoxMode="None"/>
 ```
 
-### Default
+### Individual
 
 Independent checkbox states. No parent-child relationship.
 
 ```xml
-<syncfusion:SfTreeView CheckBoxMode="Default"/>
+<syncfusion:SfTreeView CheckBoxMode="Individual"/>
 ```
 
 **Behavior:**
@@ -411,41 +411,31 @@ node.IsChecked = !node.IsChecked;
 Fires when an item is checked:
 
 ```csharp
-treeView.ItemChecked += TreeView_ItemChecked;
+treeView.NodeChecked += SfTreeView_NodeChecked;
 
-private void TreeView_ItemChecked(object sender, ItemCheckedEventArgs e)
+private void SfTreeView_NodeChecked(object sender, NodeCheckedEventArgs e)
 {
-    var checkedNode = e.Node;
-    var checkedItem = checkedNode.Content;
-    
-    Console.WriteLine($"Checked: {checkedItem}");
-    
-    // Perform action on checked item
-    if (checkedItem is CategoryModel category)
+    // Get the node and its data
+    var node = e.Node;                  
+    var data = node.Content;            
+
+    // Determine checked state
+    bool isChecked = node.IsChecked == true;
+
+    // Log output
+    Console.WriteLine($"{(isChecked ? "Checked" : "Unchecked")}: {data}");
+
+    // Handle business logic
+    if (data is CategoryModel category)
     {
-        EnableCategory(category);
-    }
-}
-```
-
-### ItemUnchecked Event
-
-Fires when an item is unchecked:
-
-```csharp
-treeView.ItemUnchecked += TreeView_ItemUnchecked;
-
-private void TreeView_ItemUnchecked(object sender, ItemUncheckedEventArgs e)
-{
-    var uncheckedNode = e.Node;
-    var uncheckedItem = uncheckedNode.Content;
-    
-    Console.WriteLine($"Unchecked: {uncheckedItem}");
-    
-    // Perform action on unchecked item
-    if (uncheckedItem is CategoryModel category)
-    {
-        DisableCategory(category);
+        if (isChecked)
+        {
+            EnableCategory(category);
+        }
+        else
+        {
+            DisableCategory(category);
+        }
     }
 }
 ```

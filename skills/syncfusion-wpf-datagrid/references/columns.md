@@ -47,7 +47,7 @@ Displays DateTime values with customizable formatting.
 ```xaml
 <syncfusion:GridDateTimeColumn HeaderText="Order Date" 
                                MappingName="OrderDate"
-                               FormatString="d" />
+                               Pattern="LongDate" />
 ```
 
 ### GridCheckBoxColumn
@@ -323,7 +323,6 @@ foreach (var name in childColumns)
                           AllowDragging="True"
                           IsHidden="False"
                           TextAlignment="Left"
-                          HeaderTextAlignment="Center"
                           VerticalAlignment="Center" />
 ```
 
@@ -352,7 +351,10 @@ var numericColumn = new GridNumericColumn()
 {
     MappingName = "UnitPrice",
     HeaderText = "Unit Price",
-    FormatString = "C",  // Currency format
+    ValueBinding = new Binding("UnitPrice")
+    {
+        StringFormat = "C2" 
+    }
     NumberDecimalDigits = 2
 };
 
@@ -361,7 +363,7 @@ var dateColumn = new GridDateTimeColumn()
 {
     MappingName = "OrderDate",
     HeaderText = "Order Date",
-    FormatString = "d"  // Short date format
+    Pattern = DateTimePattern.ShortDate
 };
 ```
 

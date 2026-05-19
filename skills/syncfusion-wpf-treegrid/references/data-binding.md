@@ -353,21 +353,20 @@ public class ViewModel
 
     public ViewModel()
     {
-        LoadOnDemandCommand = new RelayCommand<TreeGridNodeEventArgs>(ExecuteLoadOnDemand);
+        LoadOnDemandCommand = new RelayCommand<object>(ExecuteLoadOnDemand);
     }
 
-    private void ExecuteLoadOnDemand(TreeGridNodeEventArgs args)
+    private void ExecuteLoadOnDemand(object parameter)
     {
-        if (args.Node.Item == null)
+        var node = parameter as TreeNode;
+        if (node == null) return;
+
+        var emp = node.Item as EmployeeInfo;
+
+        if (emp != null)
         {
-            // Load root items
-            args.Node.ChildNodes.AddRange(GetRootItems());
-        }
-        else
-        {
-            var parentItem = args.Node.Item as EmployeeInfo;
-            var childItems = GetChildItems(parentItem.ID);
-            args.Node.ChildNodes.AddRange(childItems);
+            var childItems = GetChildItems(emp.ID);
+            node.PopulateChildNodes(childItems);
         }
     }
 }
@@ -494,24 +493,6 @@ public class TreeGridRequestTreeItemsEventArgs : EventArgs
     public IEnumerable ChildItems { get; set; } // Set child items here
 }
 ```
-
-### NodePopulating Event
-
-Fired before node is populated:
-
-```csharp
-this.treeGrid.NodePopulating += TreeGrid_NodePopulating;
-
-private void TreeGrid_NodePopulating(object sender, TreeGridNodePopulatingEventArgs e)
-{
-    // Customize node before it's created
-    if (e.Node.Level == 0)
-    {
-        // Root node customization
-    }
-}
-```
-
 ## Best Practices
 
 ### 1. Choose Appropriate Binding Mode
@@ -647,19 +628,12 @@ public class EmployeeInfo : ITreeNode
 
 **Solutions**:
 1. Use ObservableCollection
-2. Call RefreshNode or Refresh methods
+2. Call Refresh method
 3. Ensure INotifyPropertyChanged is implemented
 
 ```csharp
-// Refresh specific node
-var node = treeGrid.View.Nodes[0];
-treeGrid.View.RefreshNode(node);
-
 // Refresh all nodes
 treeGrid.View.Refresh();
-
-// Refresh with reset
-treeGrid.View.Refresh(true);
 ```
 
 ### Issue: Self-Relational Binding Shows Duplicates

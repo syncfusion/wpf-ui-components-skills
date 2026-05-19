@@ -41,7 +41,7 @@ gridControl.Model.Options.DataObjectConsumerOptions =
 
 ```csharp
 // Prevent a specific range from being dragged
-gridControl.QueryCanOleDragRange += (s, e) =>
+gridControl.QueryCanDragRange += (s, e) =>
 {
     if (e.Range.Top == 0)   // disallow dragging the header row
         e.Cancel = true;
@@ -72,11 +72,11 @@ gridControl.MouseControllerDispatcher.Remove(colResizer);
 ```csharp
 gridControl.ResizingColumns += (s, e) =>
 {
-    if (e.Column == 0) e.Cancel = true;  // lock the first column
+    if (e.Columns.Left == 0) e.AllowResize = false;  // lock the first column
 };
 gridControl.ResizingRows += (s, e) =>
 {
-    if (e.Row == 0) e.Cancel = true;     // lock the header row
+    if (e.Rows.Top == 0) e.AllowResize = false;      // lock the header row
 };
 ```
 

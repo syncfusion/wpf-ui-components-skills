@@ -738,7 +738,7 @@ private void RestoreSelection()
 
 ```csharp
 // Efficient bulk selection
-dataGrid.SelectionController.SuspendUpdates();
+dataGrid.BeginInit();
 try
 {
     foreach (var item in itemsToSelect)
@@ -748,6 +748,6 @@ try
 }
 finally
 {
-    dataGrid.SelectionController.ResumeUpdates();
+    dataGrid.EndInit();
 }
 ```

@@ -109,8 +109,8 @@ gridControl.Model.InsertRows(7, 2);
 Track insertions with events:
 
 ```csharp
-gridControl.Model.RowsInserted    += (s, e) => Debug.WriteLine($"Rows inserted at {e.Index}");
-gridControl.Model.ColumnsInserted += (s, e) => Debug.WriteLine($"Cols inserted at {e.Index}");
+gridControl.Model.RowsInserted    += (s, e) => Debug.WriteLine($"Rows inserted at {e.InsertAt}");
+gridControl.Model.ColumnsInserted += (s, e) => Debug.WriteLine($"Cols inserted at {e.InsertAt}");
 ```
 
 ---
@@ -146,8 +146,8 @@ gridControl.Model.RemoveColumns(5, 2);
 Track removals:
 
 ```csharp
-gridControl.Model.RowsRemoved    += (s, e) => Debug.WriteLine($"Rows removed from {e.Index}");
-gridControl.Model.ColumnsRemoved += (s, e) => Debug.WriteLine($"Cols removed from {e.Index}");
+gridControl.Model.RowsRemoved    += (s, e) => Debug.WriteLine($"Rows removed from {e.RemoveAt}");
+gridControl.Model.ColumnsRemoved += (s, e) => Debug.WriteLine($"Cols removed from {e.RemoveAt}");
 ```
 
 ---
@@ -171,10 +171,10 @@ To prevent resizing of **specific** rows or columns only, handle the events and 
 ```csharp
 gridControl.ResizingColumns += (s, e) =>
 {
-    if (e.Column == 0) e.Cancel = true; // lock column 0
+     if (e.Columns.Left == 0) e.AllowResize = false; // lock column 0
 };
 gridControl.ResizingRows += (s, e) =>
 {
-    if (e.Row == 0) e.Cancel = true;    // lock row 0
+    if (e.Rows.Top == 0) e.AllowResize = false;    // lock row 0
 };
 ```

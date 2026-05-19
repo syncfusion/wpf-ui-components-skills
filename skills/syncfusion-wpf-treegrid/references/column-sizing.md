@@ -24,7 +24,7 @@ Fits columns to content:
 
 ```csharp
 // Auto-size all columns
-treeGrid.ColumnSizer = GridLengthUnitType.Auto;
+treeGrid.ColumnSizer = TreeColumnSizer.Auto;
 
 // Auto-size specific column
 treeGrid.Columns["FirstName"].Width = double.NaN;
@@ -34,21 +34,21 @@ treeGrid.Columns["FirstName"].Width = double.NaN;
 Sizes based on cell content:
 
 ```csharp
-treeGrid.ColumnSizer = GridLengthUnitType.SizeToCells;
+treeGrid.ColumnSizer = TreeColumnSizer.SizeToCells;
 ```
 
 ### SizeToHeader
 Sizes based on header text:
 
 ```csharp
-treeGrid.ColumnSizer = GridLengthUnitType.SizeToHeader;
+treeGrid.ColumnSizer = TreeColumnSizer.SizeToHeader;
 ```
 
 ### FillColumn
 Fills remaining space:
 
 ```csharp
-treeGrid.ColumnSizer = GridLengthUnitType.FillColumn;
+treeGrid.ColumnSizer = TreeColumnSizer.FillColumn;
 ```
 
 ## TreeGridColumnSizer
@@ -58,12 +58,6 @@ treeGrid.ColumnSizer = GridLengthUnitType.FillColumn;
 ```csharp
 // Refresh all columns
 treeGrid.TreeGridColumnSizer.Refresh();
-
-// Refresh specific column
-treeGrid.TreeGridColumnSizer.Refresh("FirstName");
-
-// Refresh with options
-treeGrid.TreeGridColumnSizer.Refresh(true); // Reset cached sizes
 ```
 
 ### Custom Column Sizer
@@ -115,13 +109,13 @@ treeGrid.Columns["FirstName"].Width = double.NaN;
 
 ```csharp
 // For responsive layouts
-treeGrid.ColumnSizer = GridLengthUnitType.Star;
+treeGrid.ColumnSizer = TreeColumnSizer.Star;
 
 // For content-based sizing
-treeGrid.ColumnSizer = GridLengthUnitType.Auto;
+treeGrid.ColumnSizer = TreeColumnSizer.Auto;
 
 // For manual control
-treeGrid.ColumnSizer = GridLengthUnitType.None;
+treeGrid.ColumnSizer = TreeColumnSizer.None;
 ```
 
 ### 2. Set Min/Max Widths
@@ -167,10 +161,10 @@ treeGrid.TreeGridColumnSizer.Refresh();
 
 ```csharp
 // Limit auto-sizing to visible rows
-treeGrid.ColumnSizer = GridLengthUnitType.SizeToCells;
+treeGrid.ColumnSizer = TreeColumnSizer.SizeToCells;
 
 // Or use fixed widths for large datasets
-treeGrid.ColumnSizer = GridLengthUnitType.None;
+treeGrid.ColumnSizer = TreeColumnSizer.None;
 foreach (var column in treeGrid.Columns)
 {
     column.Width = 150;

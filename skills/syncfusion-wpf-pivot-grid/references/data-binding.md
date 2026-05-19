@@ -285,7 +285,7 @@ public partial class MainWindow : Window
     async void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
         // Show loading indicator
-        loadingIndicator.Visibility = Visibility.Visible;
+        pivotGrid.LoadInBackground = true;
         
         // Load data asynchronously
         var data = await Task.Run(() => SalesDataGenerator.GetSalesData());
@@ -293,8 +293,6 @@ public partial class MainWindow : Window
         // Bind data on UI thread
         pivotGrid.ItemSource = data;
         
-        // Hide loading indicator
-        loadingIndicator.Visibility = Visibility.Collapsed;
     }
 }
 ```

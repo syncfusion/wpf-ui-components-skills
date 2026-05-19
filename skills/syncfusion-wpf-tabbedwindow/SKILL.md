@@ -127,12 +127,10 @@ When you need to:
 
 **XAML:**
 ```xml
-<Window x:Class="TabbedWindowApp.MainWindow"
+<syncfusion:SfChromelessWindow x:Class="TabbedWindowApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
-    
-    <syncfusion:SfChromelessWindow 
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         Title="Document Manager"
         WindowType="Tabbed"
         Height="600" 
@@ -158,10 +156,8 @@ When you need to:
             </syncfusion:SfTabItem>
             
         </syncfusion:SfTabControl>
-        
-    </syncfusion:SfChromelessWindow>
-    
-</Window>
+            
+</syncfusion:SfChromelessWindow> 
 ```
 
 **Code-Behind:**

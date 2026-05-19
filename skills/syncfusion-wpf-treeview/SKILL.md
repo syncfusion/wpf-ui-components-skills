@@ -241,21 +241,44 @@ public class Folder : INotifyPropertyChanged
 <syncfusion:SfTreeView x:Name="treeView"
                        ItemsSource="{Binding Items}"
                        ChildPropertyName="Children"
-                       LoadOnDemand="TreeView_LoadOnDemand"/>
+                       LoadOnDemandCommand="{Binding LoadOnDemandCommand}"/>
 ```
 
 ```csharp
-private void TreeView_LoadOnDemand(object sender, LoadOnDemandEventArgs e)
+public class TreeViewViewModel
 {
-    var node = e.Node;
-    var model = node.Content as MyModel;
-    
-    // Load child items asynchronously
-    var childItems = LoadChildItemsFromDatabase(model.Id);
-    node.PopulateChildNodes(childItems);
-    
-    e.HasChildNodes = childItems.Count > 0;
+    public ICommand LoadOnDemandCommand { get; }
+
+    public TreeViewViewModel()
+    {
+        LoadOnDemandCommand = new RelayCommand(LoadChildren);
+    }
+
+    private void LoadChildren(object param)
+    {
+        var node = param as TreeViewNode;
+
+        if (node.ChildNodes.Count == 0)
+        {
+            node.PopulateChildNodes(new List<MyModel>
+            {
+                new MyModel { Name = "Child 1" },
+                new MyModel { Name = "Child 2" }
+            });
+
+            node.IsExpanded = true;
+        }
+    }
 }
+
+public class MyModel
+{
+    public string Name { get; set; }
+
+    // Used for hierarchical binding (important for TreeView)
+    public List<MyModel> Children { get; set; }
+}
+
 ```
 
 ### TreeView with Drag and Drop

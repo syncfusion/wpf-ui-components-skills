@@ -167,6 +167,87 @@ ConnectorPortViewModel connectorPort = new ConnectorPortViewModel()
 (connector.Ports as PortCollection).Add(connectorPort);
 ```
 
+## Dock Port
+
+A `DockPort` defines a **line segment** on a node boundary — connectors snap to the nearest point along that line. Unlike `NodePort` (fixed point), multiple connectors can attach at different positions on the same dock line.  
+[`SourcePoint`](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.Diagram.DockPortViewModel.html#Syncfusion_UI_Xaml_Diagram_DockPortViewModel_SourcePoint) and [`TargetPoint`](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.Diagram.DockPortViewModel.html#Syncfusion_UI_Xaml_Diagram_DockPortViewModel_TargetPoint) are fractions `(X, Y)` of the node width/height — same coordinate system as `NodeOffsetX`/`NodeOffsetY`.
+
+> **Important:** `SourcePoint`, `TargetPoint`, and `ConnectorGeometryStyle` are all **required**. Omitting `ConnectorGeometryStyle` makes the dock line invisible.
+
+### Common DockPort Positions
+
+| SourcePoint | TargetPoint | Dock line |
+|-------------|-------------|-----------|
+| `0,1` | `1,1` | Full bottom edge |
+| `0,0` | `1,0` | Full top edge |
+| `0,0` | `0,1` | Full left edge |
+| `1,0` | `1,1` | Full right edge |
+| `0,0.5` | `1,0.5` | Horizontal center line |
+
+### XAML
+```xaml
+<syncfusion:NodeViewModel OffsetX="100" OffsetY="100"
+                          UnitHeight="100" UnitWidth="100"
+                          Shape="{StaticResource Rectangle}">
+    <syncfusion:NodeViewModel.Ports>
+        <syncfusion:PortCollection>
+            <syncfusion:DockPortViewModel ID="bottomDock"
+                                          SourcePoint="0,1"
+                                          TargetPoint="1,1">
+                <syncfusion:DockPortViewModel.ConnectorGeometryStyle>
+                    <Style TargetType="Path">
+                        <Setter Property="Stroke"          Value="Black"/>
+                        <Setter Property="StrokeThickness" Value="3"/>
+                    </Style>
+                </syncfusion:DockPortViewModel.ConnectorGeometryStyle>
+            </syncfusion:DockPortViewModel>
+        </syncfusion:PortCollection>
+    </syncfusion:NodeViewModel.Ports>
+</syncfusion:NodeViewModel>
+```
+
+### C#
+```csharp
+// ConnectorGeometryStyle is required — omitting it makes the dock line invisible
+var dockLineStyle = new Style(typeof(Path));
+dockLineStyle.Setters.Add(new Setter(Path.StrokeProperty, new SolidColorBrush(Colors.Black)));
+dockLineStyle.Setters.Add(new Setter(Path.StrokeThicknessProperty, 3.0));
+
+var node = new NodeViewModel
+{
+    ID        = "node1",
+    UnitWidth = 100, UnitHeight = 100,
+    OffsetX   = 100, OffsetY    = 100,
+    Shape     = App.Current.Resources["Rectangle"],
+    Ports     = new PortCollection()   // must initialise — Ports is null by default
+};
+
+(node.Ports as PortCollection).Add(new DockPortViewModel()
+{
+    ID                     = "bottomDock",
+    SourcePoint            = new Point(0, 1),
+    TargetPoint            = new Point(1, 1),
+    ConnectorGeometryStyle = dockLineStyle
+});
+
+(diagram.Nodes as NodeCollection).Add(node);
+```
+
+### Connecting a Connector to a Dock Port
+
+Reference the dock port `ID` via `SourcePortID` or `TargetPortID`. The connector snaps to the nearest point on the dock line automatically.
+
+```csharp
+var connector = new ConnectorViewModel()
+{
+    SourceNodeID = "node1",
+    SourcePortID = "bottomDock",  // DockPort ID
+    TargetNodeID = "node2",
+    TargetPortID = "topPort"      // NodePort ID on target node
+};
+(diagram.Connectors as ConnectorCollection).Add(connector);
+```
+
 ## Port Constraints
 
 ```csharp
@@ -189,6 +270,8 @@ NodePortViewModel port = new NodePortViewModel()
 - **Ports not visible:** Set `diagram.PortVisibility = PortVisibility.Visible` to always show, or `PortVisibility.MouseOver` to show on hover.
 - **Connector not snapping to port:** Ensure `SourcePortID`/`TargetPortID` matches the port's `ID` exactly.
 - **Port ID not set:** Always assign an `ID` to ports you want to reference in connectors.
+- **DockPort not rendering:** `DockPort` requires `SourcePoint`, `TargetPoint`, **and** `ConnectorGeometryStyle` all set. Omitting `ConnectorGeometryStyle` makes the dock line completely invisible even though the port is functional.
+- **NullReferenceException when adding ports in C#:** `NodeViewModel.Ports` is `null` by default. Always initialise it before adding: `node.Ports = new PortCollection();`
 
 ## Related
 - Connector source/target ports → `references/connectors.md`

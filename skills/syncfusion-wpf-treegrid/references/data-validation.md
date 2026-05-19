@@ -188,9 +188,7 @@ private bool ValidateEmployee(Employee employee, out string errorMessage)
 
 treeGrid.CurrentCellValidating += (s, e) =>
 {
-    var node = treeGrid.GetNodeAtRowIndex(e.RowColumnIndex.RowIndex);
-    var employee = node?.Item as Employee;
-    
+    var employee = e.Node?.Item as Employee;
     if (employee != null)
     {
         string errorMessage;

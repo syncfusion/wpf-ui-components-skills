@@ -74,16 +74,9 @@ WPF TreeGrid supports extensive customization through styles and templates for h
     <syncfusion:SfTreeGrid.StackedHeaderRows>
         <syncfusion:StackedHeaderRow>
             <syncfusion:StackedHeaderRow.StackedColumns>
-                <syncfusion:StackedColumn ChildColumns="FirstName,LastName" HeaderText="Name">
-                    <syncfusion:StackedColumn.HeaderStyle>
-                        <Style TargetType="syncfusion:TreeGridStackedHeaderCell">
-                            <Setter Property="Background" Value="#FF4CAF50"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="FontSize" Value="14"/>
-                        </Style>
-                    </syncfusion:StackedColumn.HeaderStyle>
-                </syncfusion:StackedColumn>
+                <syncfusion:StackedColumn 
+                    ChildColumns="FirstName,LastName" 
+                    HeaderText="Name" />
             </syncfusion:StackedHeaderRow.StackedColumns>
         </syncfusion:StackedHeaderRow>
     </syncfusion:SfTreeGrid.StackedHeaderRows>
@@ -136,18 +129,6 @@ WPF TreeGrid supports extensive customization through styles and templates for h
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
         </Style>
     </syncfusion:SfTreeGrid.RowStyle>
-</syncfusion:SfTreeGrid>
-```
-
-### Alternating Row Style
-
-```xaml
-<syncfusion:SfTreeGrid>
-    <syncfusion:SfTreeGrid.AlternatingRowStyle>
-        <Style TargetType="syncfusion:TreeGridRowControl">
-            <Setter Property="Background" Value="#FFF5F5F5"/>
-        </Style>
-    </syncfusion:SfTreeGrid.AlternatingRowStyle>
 </syncfusion:SfTreeGrid>
 ```
 
@@ -223,41 +204,6 @@ WPF TreeGrid supports extensive customization through styles and templates for h
 </syncfusion:TreeGridTemplateColumn>
 ```
 
-## Row Templates
-
-### Custom Row Template
-
-```xaml
-<syncfusion:SfTreeGrid>
-    <syncfusion:SfTreeGrid.RowTemplate>
-        <DataTemplate>
-            <Border Background="White" BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="10">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <Image Grid.Column="0" Source="{Binding Photo}" Width="48" Height="48" Margin="0,0,10,0"/>
-                    
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" FontSize="16"/>
-                        <TextBlock Text="{Binding Title}" Foreground="Gray"/>
-                        <TextBlock Text="{Binding Department}" FontSize="12"/>
-                    </StackPanel>
-                    
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
-                        <TextBlock Text="{Binding Salary, StringFormat=C}" FontWeight="Bold" FontSize="16"/>
-                        <TextBlock Text="Annual Salary" FontSize="10" Foreground="Gray"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
-        </DataTemplate>
-    </syncfusion:SfTreeGrid.RowTemplate>
-</syncfusion:SfTreeGrid>
-```
-
 ## Theme Customization
 
 ### Override Theme Colors
@@ -306,27 +252,17 @@ WPF TreeGrid supports extensive customization through styles and templates for h
 ## Selection Style
 
 ```xaml
-<syncfusion:SfTreeGrid>
-    <syncfusion:SfTreeGrid.SelectionStyle>
-        <Style TargetType="syncfusion:TreeGridCell">
-            <Setter Property="Background" Value="#FF2196F3"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-    </syncfusion:SfTreeGrid.SelectionStyle>
-</syncfusion:SfTreeGrid>
+<syncfusion:SfTreeGrid 
+    SelectionBackground="#FF2196F3"
+    SelectionForeground="White"/>
 ```
 
 ## Current Cell Style
 
 ```xaml
-<syncfusion:SfTreeGrid>
-    <syncfusion:SfTreeGrid.CurrentCellStyle>
-        <Style TargetType="syncfusion:TreeGridCell">
-            <Setter Property="BorderBrush" Value="DarkBlue"/>
-            <Setter Property="BorderThickness" Value="2"/>
-        </Style>
-    </syncfusion:SfTreeGrid.CurrentCellStyle>
-</syncfusion:SfTreeGrid>
+<syncfusion:SfTreeGrid 
+    CurrentCellBorderBrush="DarkBlue"
+    CurrentCellBorderThickness="2"/>
 ```
 
 ## Best Practices

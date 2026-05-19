@@ -121,13 +121,16 @@ import/export, clipboard operations, covered cells, and 20+ built-in cell types.
 ## Quick Start Example
 
 ```csharp
-// 1. Add assemblies: Syncfusion.Grid.Wpf, Syncfusion.GridCommon.Wpf,
-//    Syncfusion.Core.dll, Syncfusion.Shared.Wpf
+   1. Add assemblies: 
+      Syncfusion.Grid.Wpf
+      Syncfusion.GridCommon.Wpf,
+      Syncfusion.Linq.Base, 
+      Syncfusion.Shared.Wpf
 
-// 2. XAML — place GridControl inside a ScrollViewer
-// <ScrollViewer>
-//     <syncfusion:GridControl x:Name="gridControl" />
-// </ScrollViewer>
+  // 2. XAML — place GridControl inside a ScrollViewer
+<ScrollViewer>
+     <syncfusion:GridControl x:Name="gridControl" />
+</ScrollViewer>
 
 // 3. Code-behind: set size and populate
 gridControl.Model.RowCount = 100;

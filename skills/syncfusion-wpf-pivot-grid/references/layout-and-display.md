@@ -765,19 +765,19 @@ public partial class MainWindow : Window
 public void SwitchLayout(GridLayout layout)
 {
     pivotGrid.GridLayout = layout;
-    pivotGrid.RefreshGrid();
+    pivotGrid.Refresh();
 }
 
 public void ToggleFreezeHeaders()
 {
     pivotGrid.FreezeHeaders = !pivotGrid.FreezeHeaders;
-    pivotGrid.RefreshGrid();
+    pivotGrid.Refresh();
 }
 
 public void ToggleSubtotals()
 {
     pivotGrid.ShowSubTotals = !pivotGrid.ShowSubTotals;
-    pivotGrid.RefreshGrid();
+    pivotGrid.Refresh();
 }
 ```
 

@@ -479,9 +479,6 @@ void DataGrid_FilterItemsPopulating(object sender, GridFilterItemsPopulatingEven
     {
         e.FilterControl.FilterMode = FilterMode.AdvancedFilter;
     }
-    
-    // Customize filter control
-    e.FilterControl.CanGenerateUniqueItems = false;
 }
 ```
 
@@ -529,7 +526,7 @@ void DataGrid_FilterChanging(object sender, GridFilterEventArgs e)
     // Cancel filtering for specific column
     if (e.Column.MappingName == "OrderID")
     {
-        e.Cancel = true;
+        e.Handled = true;
         return;
     }
     

@@ -239,7 +239,7 @@ private void SfMultiColumn_AutoGeneratingColumn(object sender, AutoGeneratingCol
     {
         if (e.Column is GridDateTimeColumn dateColumn)
         {
-            dateColumn.Format = "MM/dd/yyyy";
+            dateColumn.Pattern = DateTimePattern.ShortDate;  
             dateColumn.HeaderText = "Order Date";
         }
     }

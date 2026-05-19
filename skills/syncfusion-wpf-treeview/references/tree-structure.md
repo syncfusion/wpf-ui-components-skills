@@ -229,43 +229,6 @@ public class FolderModel : INotifyPropertyChanged
 }
 ```
 
-**Step 2:** Handle `LoadOnDemand` event:
-
-```xml
-<syncfusion:SfTreeView ItemsSource="{Binding RootFolders}"
-                       ChildPropertyName="SubFolders"
-                       LoadOnDemand="TreeView_LoadOnDemand"/>
-```
-
-```csharp
-private void TreeView_LoadOnDemand(object sender, LoadOnDemandEventArgs e)
-{
-    var node = e.Node;
-    var folder = node.Content as FolderModel;
-    
-    if (folder != null && folder.SubFolders.Count == 0)
-    {
-        // Load child items from database or service
-        var childFolders = LoadChildFoldersFromDatabase(folder.FolderId);
-        
-        // Add to collection
-        foreach (var child in childFolders)
-        {
-            folder.SubFolders.Add(child);
-        }
-        
-        // Notify TreeView
-        e.HasChildNodes = childFolders.Count > 0;
-    }
-}
-
-private List<FolderModel> LoadChildFoldersFromDatabase(int parentId)
-{
-    // Query database for child folders
-    return database.Folders.Where(f => f.ParentId == parentId).ToList();
-}
-```
-
 ### Using ICommand for Load on Demand
 
 ```csharp

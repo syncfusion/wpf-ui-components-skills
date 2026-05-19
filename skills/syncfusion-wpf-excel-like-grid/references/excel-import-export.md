@@ -36,9 +36,33 @@ gridControl.Model.ExportToExcel(@"C:\Output\Report.xlsx", ExcelVersion.Excel2007
 
 ```csharp
 // Get current selection and export that range
-var selectedRanges = gridControl.Model.SelectedRanges;
-gridControl.Model.ExportToExcel(@"C:\Output\Selection.xlsx",
-    ExcelVersion.Excel2007, selectedRanges);
+ExcelEngine excelEngine = new ExcelEngine();
+IApplication application = excelEngine.Excel;
+IWorkbook myWorkbook = excelEngine.Excel.Workbooks.Add();
+IWorksheet mySheet = myWorkbook.Worksheets[1];
+IChart chartShape = mySheet.Charts.Add();
+IChartSeries series1 = chartShape.Series.Add();
+series1.SerieType = ExcelChartType.Column_Clustered;
+chartShape.ChartTitle = "Column_Clustered";
+series1.Values = mySheet.Range["B1:B5"];
+series1.CategoryLabels = mySheet.Range["A1:A5"];
+Random r = new Random();
+
+for (int i = 1; i <= 4; i++)
+{
+    mySheet.Range[i, 1].Number = i;
+    mySheet.Range[i, 2].Number = r.Next(4000, 6000);
+}
+
+for (int i = 1; i <= 4; i++)
+{
+    mySheet.Range[i + 5, 1].Number = i;
+    mySheet.Range[i + 5, 2].Number = r.Next(4000, 6000);
+}
+IRange excelRange = mySheet.Range[21, 5];
+GridRangeInfoList rangeList = gridControl.Model.SelectedRanges;
+GridRangeInfo range = rangeList[0];
+gridControl.Model.ExportToExcel(range, mySheet, excelRange, @"Sample2.xls", ExcelVersion.Excel97to2003);
 ```
 
 ### Export using an existing Excel Engine
@@ -46,19 +70,13 @@ gridControl.Model.ExportToExcel(@"C:\Output\Selection.xlsx",
 When you need to control the `ExcelEngine` lifecycle (e.g., to add multiple sheets):
 
 ```csharp
-using (var excelEngine = new ExcelEngine())
-{
-    var application = excelEngine.Excel;
-    application.DefaultVersion = ExcelVersion.Excel2007;
-
-    var workbook = application.Workbooks.Create(1);
-    var sheet = workbook.Worksheets[0];
-
-    // Pass the engine and sheet to the converter
-    gridControl.Model.ExportToExcel(sheet);
-
-    workbook.SaveAs(@"C:\Output\Custom.xlsx");
-}
+ExcelEngine excelEngine = new ExcelEngine();
+IApplication application = excelEngine.Excel;
+IWorkbook myWorkbook = application.Workbooks.Add();
+IWorksheet mySheet = myWorkbook.Worksheets[0];
+// Pass the engine and sheet to the converter
+gridControl.Model.ExportToExcel(range,excelEngine,0, mySheet.Range[5, 5]);
+myWorkbook.SaveAs("Sample.xlsx");
 ```
 
 ### What is exported

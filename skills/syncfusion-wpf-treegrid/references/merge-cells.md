@@ -42,7 +42,7 @@ public class TreeGridCoveredCellInfo
 ```csharp
 treeGrid.QueryCoveredRange += (s, e) =>
 {
-    var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(e.GridColumn.MappingName);
+    var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(e.GridColumn));
     
     // Only merge cells in "Department" column
     if (e.GridColumn.MappingName == "Department")
@@ -97,7 +97,7 @@ treeGrid.QueryCoveredRange += (s, e) =>
 {
     if (_mergingColumns.Contains(e.GridColumn.MappingName))
     {
-        var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(e.GridColumn.MappingName);
+        var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(e.GridColumn));
         var range = GetMergeRange(e.RowColumnIndex, columnIndex);
         
         if (range != null)
@@ -116,24 +116,27 @@ treeGrid.QueryCoveredRange += (s, e) =>
 ```csharp
 treeGrid.QueryCoveredRange += (s, e) =>
 {
-    var node = treeGrid.GetNodeAtRowIndex(e.RowColumnIndex.RowIndex);
-    
-    // Merge cells for parent nodes only
+    var node = treeGrid.View.Nodes[e.RowColumnIndex.RowIndex];
+                
     if (node != null && node.HasChildNodes)
     {
-        var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(e.GridColumn.MappingName);
-        
-        // Merge across all columns for parent row
-        e.Range = new TreeGridCoveredCellInfo()
+        int left = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(treeGrid.Columns[0]));
+
+        int right = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(treeGrid.Columns[treeGrid.Columns.Count - 1]));
+
+        if (e.RowColumnIndex.ColumnIndex == left)
         {
-            Left = 1, // Start from first column after expander
-            Right = treeGrid.Columns.Count - 1,
-            Top = e.RowColumnIndex.RowIndex,
-            Bottom = e.RowColumnIndex.RowIndex
-        };
-        e.Handled = true;
+            e.Range = new TreeGridCoveredCellInfo(
+                            left,
+                            right,
+                            e.RowColumnIndex.RowIndex
+                        );
+
+            e.Handled = true;
+        }
     }
 };
+
 ```
 
 ## Conditional Merging
@@ -145,8 +148,10 @@ treeGrid.QueryCoveredRange += (s, e) =>
 {
     if (e.GridColumn.MappingName == "Status")
     {
-        var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(e.GridColumn.MappingName);
-        var currentValue = treeGrid.GetCellValue(e.RowColumnIndex.RowIndex, columnIndex);
+        var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(e.GridColumn));
+        var node = treeGrid.View.Nodes[e.RowColumnIndex.RowIndex];
+        var record = node?.Item;
+        var currentValue = record?.GetType().GetProperty(e.GridColumn.MappingName)?.GetValue(record);
         
         // Only merge if status is "Active"
         if (currentValue?.ToString() == "Active")
@@ -172,7 +177,7 @@ treeGrid.QueryCoveredRange += (s, e) =>
     // Merge cells at specific level
     if (node != null && node.Level == 0)
     {
-        var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(e.GridColumn.MappingName);
+        var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(e.GridColumn));
         var range = GetMergeRange(e.RowColumnIndex, columnIndex);
         
         if (range != null)
@@ -206,30 +211,31 @@ private bool AreValuesEqual(object value1, object value2)
 
 treeGrid.QueryCoveredRange += (s, e) =>
 {
-    var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(e.GridColumn.MappingName);
+    var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(e.GridColumn));
     var startRowIndex = e.RowColumnIndex.RowIndex;
     var endRowIndex = startRowIndex;
-    
-    var startValue = treeGrid.GetCellValue(startRowIndex, columnIndex);
-    
+
+    var startNode = treeGrid.View.Nodes[startRowIndex];
+    var startRecord = startNode?.Item;
+
+    var startValue = startRecord?.GetType().GetProperty(e.GridColumn.MappingName)?.GetValue(startRecord);
+
     for (int i = startRowIndex + 1; i < treeGrid.View.Nodes.Count; i++)
     {
-        var currentValue = treeGrid.GetCellValue(i, columnIndex);
+        var node = treeGrid.View.Nodes[i];
+        var record = node?.Item;
+
+        var currentValue = record?.GetType().GetProperty(e.GridColumn.MappingName)?.GetValue(record);
         if (AreValuesEqual(startValue, currentValue))
             endRowIndex = i;
         else
             break;
     }
-    
+
     if (endRowIndex > startRowIndex)
     {
-        e.Range = new TreeGridCoveredCellInfo()
-        {
-            Left = columnIndex,
-            Right = columnIndex,
-            Top = startRowIndex,
-            Bottom = endRowIndex
-        };
+        e.Range = new TreeGridCoveredCellInfo(
+        columnIndex, columnIndex,startRowIndex );
         e.Handled = true;
     }
 };
@@ -240,24 +246,26 @@ treeGrid.QueryCoveredRange += (s, e) =>
 ```csharp
 treeGrid.QueryCoveredRange += (s, e) =>
 {
-    var node = treeGrid.GetNodeAtRowIndex(e.RowColumnIndex.RowIndex);
+    var node = treeGrid.View.Nodes[e.RowColumnIndex.RowIndex];
     var employee = node?.Item as Employee;
-    
-    // Merge "First Name" and "Last Name" columns for specific condition
-    if (employee != null && string.IsNullOrEmpty(employee.LastName))
+
+    if (employee == null)
+        return;
+    if (string.IsNullOrEmpty(employee.LastName))
     {
-        var firstNameIndex = treeGrid.ResolveToGridVisibleColumnIndex("FirstName");
-        var lastNameIndex = treeGrid.ResolveToGridVisibleColumnIndex("LastName");
-        
+
+        var firstNameColumn = treeGrid.Columns["FirstName"];
+        var lastNameColumn = treeGrid.Columns["LastName"];
+
+        var firstNameIndex = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(firstNameColumn));
+
+        var lastNameIndex = treeGrid.ResolveToGridVisibleColumnIndex(treeGrid.Columns.IndexOf(lastNameColumn));
+
         if (e.RowColumnIndex.ColumnIndex == firstNameIndex)
         {
-            e.Range = new TreeGridCoveredCellInfo()
-            {
-                Left = firstNameIndex,
-                Right = lastNameIndex,
-                Top = e.RowColumnIndex.RowIndex,
-                Bottom = e.RowColumnIndex.RowIndex
-            };
+
+            e.Range = new TreeGridCoveredCellInfo(firstNameIndex, lastNameIndex, e.RowColumnIndex.RowIndex);
+
             e.Handled = true;
         }
     }
@@ -270,7 +278,7 @@ treeGrid.QueryCoveredRange += (s, e) =>
 // Refresh after data changes
 public void RefreshMergedCells()
 {
-    treeGrid.InvalidateCells();
+    treeGrid.InvalidateMeasure();
 }
 ```
 
@@ -296,10 +304,10 @@ private int GetColumnIndex(string mappingName)
 
 ```csharp
 // Refresh merged cells after sorting/filtering
-treeGrid.SortColumnsChanged += (s, e) => treeGrid.InvalidateCells();
+treeGrid.SortColumnsChanged += (s, e) => treeGrid.InvalidateMeasure();
 treeGrid.View.Filter = item => /* filter logic */;
 treeGrid.View.RefreshFilter();
-treeGrid.InvalidateCells();
+treeGrid.InvalidateMeasure();
 ```
 
 ### 3. Consider Edit Mode
@@ -308,8 +316,11 @@ treeGrid.InvalidateCells();
 // Disable editing for merged cells if needed
 treeGrid.CurrentCellBeginEdit += (s, e) =>
 {
-    var columnIndex = treeGrid.ResolveToGridVisibleColumnIndex(e.Column.MappingName);
-    var cellValue = treeGrid.GetCellValue(e.RowColumnIndex.RowIndex, columnIndex);
+    var colIndex = treeGrid.Columns.IndexOf(e.Column);
+    var visibleColumnIndex = treeGrid.ResolveToGridVisibleColumnIndex(colIndex);
+    var node = treeGrid.View.Nodes[e.RowColumnIndex.RowIndex];
+    var record = node?.Item;
+    var cellValue = record?.GetType().GetProperty(e.Column.MappingName)?.GetValue(record);
     
     // Check if cell is part of merged range
     // Cancel edit if necessary
@@ -325,19 +336,20 @@ treeGrid.CurrentCellBeginEdit += (s, e) =>
 e.Handled = true;
 
 // Verify range is valid
-Debug.WriteLine($"Merge range: Left={e.Range.Left}, Right={e.Range.Right}, Top={e.Range.Top}, Bottom={e.Range.Bottom}");
+Debug.WriteLine($"Merge range: Left={e.Range.Left}, Right={e.Range.Right}");
 
 // Check if values are actually equal
-var value1 = treeGrid.GetCellValue(e.Range.Top, e.Range.Left);
-var value2 = treeGrid.GetCellValue(e.Range.Bottom, e.Range.Left);
+var value1 = treeGrid.View.Nodes[e.Range.RowIndex].Item?.GetType().GetProperty(column.MappingName)?.GetValue(record);
+var nextIndex = e.Range.RowIndex + 1;
+var value2 = treeGrid.View.Nodes[nextIndex].Item?.GetType().GetProperty(column.MappingName)?.GetValue(nextRecord);
 Debug.WriteLine($"Value1: {value1}, Value2: {value2}, Equal: {Equals(value1, value2)}");
 ```
 
 ### Issue: Merged Cells Not Updating
 
 ```csharp
-// Call InvalidateCells after data changes
-treeGrid.InvalidateCells();
+// Call InvalidateMeasure after data changes
+treeGrid.InvalidateMeasure();
 
 // Or refresh the entire view
 treeGrid.View.Refresh();

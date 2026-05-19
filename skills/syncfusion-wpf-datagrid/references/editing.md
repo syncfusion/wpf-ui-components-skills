@@ -84,7 +84,7 @@ void DataGrid_CurrentCellBeginEdit(object sender, CurrentCellBeginEditEventArgs 
         e.Cancel = true;
     
     // Cancel editing based on data
-    var record = e.RowData as OrderInfo;
+    var record = dataGrid.GetRecordAtRowIndex(e.RowColumnIndex.RowIndex) as OrderInfo;
     if (record != null && record.IsShipped)
         e.Cancel = true;
 }
@@ -99,13 +99,12 @@ dataGrid.CurrentCellEndEdit += DataGrid_CurrentCellEndEdit;
 
 void DataGrid_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
 {
-    // Perform actions after editing completes
-    var newValue = e.NewValue;
-    var oldValue = e.OldValue;
-    
-    // Log changes
+    var record = dataGrid.GetRecordAtRowIndex(e.RowColumnIndex.RowIndex);
+    var column = dataGrid.Columns[e.RowColumnIndex.ColumnIndex];
+    var newValue = record?.GetType().GetProperty(column.MappingName)?.GetValue(record);
     Debug.WriteLine($"Cell edited: {newValue}");
 }
+
 ```
 
 ### CurrentCellValueChanged Event
@@ -155,7 +154,7 @@ dataGrid.SelectionController.CurrentCellManager.BeginEdit();
 // Edit specific cell
 int rowIndex = 3;
 int columnIndex = 2;
-dataGrid.MoveToCurrentCell(new RowColumnIndex(rowIndex, columnIndex));
+dataGrid.MoveCurrentCell(new RowColumnIndex(rowIndex, columnIndex));
 dataGrid.SelectionController.CurrentCellManager.BeginEdit();
 ```
 
@@ -165,14 +164,6 @@ Complete editing and commit changes:
 
 ```csharp
 dataGrid.SelectionController.CurrentCellManager.EndEdit();
-```
-
-### CancelEdit Method
-
-Cancel editing and restore original value:
-
-```csharp
-dataGrid.SelectionController.CurrentCellManager.CancelEdit();
 ```
 
 ## IEditableObject Interface
@@ -268,9 +259,10 @@ Control focus behavior for UIElements in templates:
             <StackPanel Orientation="Horizontal">
                 <Button Content="Edit" 
                         syncfusion:FocusManagerHelper.FocusedElement="True"
-                        syncfusion:FocusManagerHelper.WantsKeyInput="True" />
+                        syncfusion:VisualContainer.WantsMouseInput="True" />
                 <Button Content="Delete" 
-                        syncfusion:FocusManagerHelper.WantsKeyInput="True" />
+                        syncfusion:FocusManagerHelper.FocusedElement="True"
+                        syncfusion:VisualContainer.WantsMouseInput="True"/>
             </StackPanel>
         </DataTemplate>
     </syncfusion:GridTemplateColumn.CellTemplate>
@@ -285,7 +277,8 @@ Allow keyboard input for custom controls:
 <syncfusion:GridTemplateColumn MappingName="Rating">
     <syncfusion:GridTemplateColumn.CellTemplate>
         <DataTemplate>
-            <ComboBox syncfusion:FocusManagerHelper.WantsKeyInput="True"
+            <ComboBox syncfusion:FocusManagerHelper.FocusedElement="True"
+                      syncfusion:VisualContainer.WantsMouseInput="True"
                       ItemsSource="{Binding RatingOptions}" />
         </DataTemplate>
     </syncfusion:GridTemplateColumn.CellTemplate>
@@ -431,7 +424,7 @@ For GridTextColumn with multi-line text:
 ```csharp
 dataGrid.CurrentCellBeginEdit += (s, e) =>
 {
-    var record = e.RowData as OrderInfo;
+    var record = dataGrid.GetRecordAtRowIndex(e.RowColumnIndex.RowIndex) as OrderInfo;
     
     // Allow editing UnitPrice only if Quantity > 0
     if (e.Column.MappingName == "UnitPrice" && record.Quantity == 0)

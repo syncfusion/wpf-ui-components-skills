@@ -378,7 +378,7 @@ private void TreeGrid_RequestTreeItems(object sender, TreeGridRequestTreeItemsEv
                                           NumberDecimalDigits="0"/>
         <syncfusion:TreeGridDateTimeColumn HeaderText="DOB" 
                                            MappingName="DateOfBirth"
-                                           FormatString="MM/dd/yyyy"/>
+                                           Pattern="ShortDate"/>
         <syncfusion:TreeGridCheckBoxColumn HeaderText="Active" 
                                            MappingName="IsActive"/>
     </syncfusion:SfTreeGrid.Columns>

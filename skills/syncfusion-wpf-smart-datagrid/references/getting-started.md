@@ -124,7 +124,7 @@ xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 
 Or use the full namespace:
 ```xml
-xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.SmartComponents;assembly=Syncfusion.SfSmartComponents.WPF"
+    xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.SmartComponents;assembly=Syncfusion.SfSmartComponents.WPF"
 ```
 
 3. **Declare the SfSmartDataGrid control**:

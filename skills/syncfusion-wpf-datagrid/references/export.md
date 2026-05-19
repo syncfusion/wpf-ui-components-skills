@@ -14,7 +14,7 @@
 
 ## Overview
 
-SfDataGrid provides support to export data to Excel and PDF files with grouping, filtering, sorting, paging, unbound rows, merged cells, stacked headers, and Details View.
+SfDataGrid supports exporting data to Excel (using XlsIO) and PDF (using Essential PDF), including grouping, filtering, sorting, paging, unbound rows, merged cells, stacked headers, and Details View.
 
 ## Required Assemblies
 
@@ -27,7 +27,7 @@ SfDataGrid provides support to export data to Excel and PDF files with grouping,
 - `Syncfusion.Pdf.Base`
 
 ### NuGet Package
-Install [Syncfusion.DataGridExcelExport.WPF](https://www.nuget.org/packages/Syncfusion.DataGridExcelExport.WPF) package.
+Install [Syncfusion.DataGridExcelExport.WPF](https://www.nuget.org/packages/Syncfusion.DataGridExcelExport.WPF) package for both Excel and PDF export support.
 
 ## Export to Excel
 
@@ -300,6 +300,14 @@ options.ExportAllPages = true;
 var excelEngine = dataGrid.ExportToExcel(dataGrid.View, options);
 var workBook = excelEngine.Excel.Workbooks[0];
 workBook.SaveAs("Sample.xlsx");
+```
+#### ExportPageOptions
+Export each page to different worksheets:
+
+```csharp
+var options = new ExcelExportingOptions();
+options.ExportAllPages = true;
+options.ExportPageOptions = ExportPageOptions.ExportToDifferentSheets;
 ```
 
 ## Export to PDF
@@ -587,6 +595,13 @@ if (sfd.ShowDialog() == true)
     }
 }
 ```
+### Open without Saving
+
+```csharp
+PdfViewerControl viewer = new PdfViewerControl();
+viewer.Load(stream);
+```
+
 
 ## Troubleshooting
 

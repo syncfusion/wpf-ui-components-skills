@@ -43,53 +43,45 @@ The following steps help you add ChromelessWindow:
      * Syncfusion.Shared.WPF.dll.
 2. Include an XML namespace for the above assemblies to the Main window.
 
-{% capture codesnippet1 %}
-{% tabs %}
-{% highlight XAML %}
-<Window x:Class="Chromelesswindow.MainWindow" 
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="MainWindow" Height="350" Width="525"
-    xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF">
-</Window>
-{% endhighlight %}
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet1 | OrderList_Indent_Level_1 }}
+### XAML
 
+```xml
+<Window x:Class="Chromelesswindow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF">
+</Window>
+```
 3. Change the Window to ChromelessWindow.
 
-{% capture codesnippet2 %}
-{% tabs %}
-{% highlight XAML %}
+### XAML
+
+```xml
 <syncfusion:ChromelessWindow x:Class="Chromelesswindow.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="MainWindow" Height="350" Width="525"
-    xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF">
 </syncfusion:ChromelessWindow>
-{% endhighlight %}
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet2 | OrderList_Indent_Level_1 }}
+```
 
 4. Add the **Syncfusion.Windows.Shared namespace**, and inherit MainWindow from ChromelessWindow in code behind.
 
-{% capture codesnippet3 %}
-{% tabs %}
-{% highlight C# %}
+### C#
+
+```csharp
 using Syncfusion.Windows.Shared;
+
 public partial class MainWindow : ChromelessWindow
 {
     public MainWindow()
     {
         InitializeComponent();
-    } 
+    }
 }
-{% endhighlight %}
-{% endtabs %}
-{% endcapture %}
-{{ codesnippet3 | OrderList_Indent_Level_1 }}
+```
+
 
 ![wpf chromeless window application](Getting-Started_images/wpf-chromeless-window.jpeg)
 
@@ -100,21 +92,22 @@ public partial class MainWindow : ChromelessWindow
 
 You can customize the background of the title bar by setting the [TitleBarBackground](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shared.ChromelessWindow.html#Syncfusion_Windows_Shared_ChromelessWindow_TitleBarBackground) property of ChromelessWindow.
 
-{% tabs %}
-{% highlight XAML %}
+### XAML
+
+```xml
 <syncfusion:ChromelessWindow
     x:Class="WPF_CalendarEdit.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     TitleBarBackground="Red"
     Title="ChromelessWindow Sample" Height="350" Width="525">
     <Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
-{% endhighlight %}
-{% endtabs %}
+```
+
 
 ![wpf chromeless window title bar backcolor](Getting-Started_images/wpf-chromeless-window-title-back-color.png)
 
@@ -123,21 +116,21 @@ You can customize the background of the title bar by setting the [TitleBarBackgr
 
 The font of the caption in the title bar can be customized using the [TitleFontSize](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shared.ChromelessWindow.html#Syncfusion_Windows_Shared_ChromelessWindow_TitleFontSize) property.
 
-{% tabs %}
-{% highlight XAML %}
+### XAML
+
+```xml
 <syncfusion:ChromelessWindow
     x:Class="WPF_CalendarEdit.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     TitleFontSize="15"
     Title="ChromelessWindow Sample" Height="350" Width="525">
     <Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![wpf chromeless window title font size](Getting-Started_images/wpf-chromeless-window-title-font-size.png)
 
@@ -146,22 +139,24 @@ The font of the caption in the title bar can be customized using the [TitleFontS
 
 You can customize the caption height by setting the [TitleBarHeight](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shared.ChromelessWindow.html#Syncfusion_Windows_Shared_ChromelessWindow_TitleBarHeight) of ChromelessWindow.
 
-{% tabs %}
-{% highlight XAML %}
+
+### XAML
+
+```xml
 <syncfusion:ChromelessWindow
     x:Class="WPF_CalendarEdit.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:local="clr-namespace:WPF_CalendarEdit"
-	TitleBarHeight="50"
+    TitleBarHeight="50"
     Title="ChromelessWindow Sample" Height="350" Width="525">
-	<Grid>
+    <Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
-{% endhighlight %}
-{% endtabs %}
+```
+
 
 ![wpf chromeless window title bar height](Getting-Started_images/wpf-chromeless-window-title-height.png)
 
@@ -174,8 +169,9 @@ The text alignment of the title can be set using the [`TitleTextAlignment`](http
 * Center
 * Stretch
 
-{% tabs %}
-{% highlight XAML %}
+### XAML
+
+```xml
 <syncfusion:ChromelessWindow x:Class="Chromeless_Window_Sample.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -189,8 +185,8 @@ The text alignment of the title can be set using the [`TitleTextAlignment`](http
     <Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
-{% endhighlight %}
-{% endtabs %}
+```
+
 
 ![Title text alignment](Getting-Started_images/TitleTextAlignment.png)
 
@@ -200,21 +196,21 @@ The text alignment of the title can be set using the [`TitleTextAlignment`](http
 
 You can set the caption icon by setting the [Icon](https://learn.microsoft.com/de-de/dotnet/api/system.windows.window.icon?view=netframework-4.7.2) property.
 
-{% tabs %}
-{% highlight XAML %}
+### XAML
+
+```xml
 <syncfusion:ChromelessWindow
-    x:Class="WPF_CalendarEdit.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
-	Icon="App.ico"
-    Title="ChromelessWindow Sample" Height="350" Width="525">
+        x:Class="WPF_CalendarEdit.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        Icon="App.ico"
+        Title="ChromelessWindow Sample" Height="350" Width="525">
     <Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![wpf chromeless window icon](Getting-Started_images/wpf-chromeless-window-icon.png)
 
@@ -225,8 +221,9 @@ The title bar icon can be aligned to `Left` or `Right` using the [`IconAlignment
 * Left
 * Right
 
-{% tabs %}
-{% highlight XAML %}
+### XAML
+
+```xml
 <syncfusion:ChromelessWindow x:Class="Chromeless_Window_Sample.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -240,8 +237,7 @@ The title bar icon can be aligned to `Left` or `Right` using the [`IconAlignment
     <Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![Chromeless Window icon alignment](Getting-Started_images/wpf-chromeless-window-icon-alignment.png)
 
@@ -249,21 +245,21 @@ The title bar icon can be aligned to `Left` or `Right` using the [`IconAlignment
 
 You can change the border color of the chromeless window by setting the [ResizeBorderBrush](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Shared.ChromelessWindow.html#Syncfusion_Windows_Shared_ChromelessWindow_ResizeBorderBrush) property.
 
-{% tabs %}
-{% highlight XAML %}
+### XAML
+
+```xml
 <syncfusion:ChromelessWindow
     x:Class="WpfApplication2.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
-	ResizeBorderBrush="Red"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    ResizeBorderBrush="Red"
     Title="ChromelessWindow Sample" Height="350" Width="525">
-	<Grid>
-	</Grid>
+    <Grid>
+    </Grid>
 </syncfusion:ChromelessWindow>
-{% endhighlight %}
-{% endtabs %}
+```
 
 ![wpf chromeless window border color](Getting-Started_images/wpf-chromeless-window-border-color.png)
 

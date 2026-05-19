@@ -170,10 +170,10 @@ public partial class MainWindow : Window
         pivotGrid.SelectionChanged += PivotGrid_SelectionChanged;
     }
     
-    private void PivotGrid_SelectionChanged(object sender, GridRangeInfoEventArgs e)
+    private void PivotGrid_SelectionChanged(object sender, PivotGridSelectionChangedEventArgs e)
     {
         // Handle selection change
-        var selectedRows = e.Range.Top + " to " + e.Range.Bottom;
+        var selectedRows = e.CellRangeInfo.Top + " to " + e.CellRangeInfo.Bottom;
         Console.WriteLine($"Selected Rows: {selectedRows}");
     }
 }
@@ -196,16 +196,16 @@ Click a column header to select all cells in that column.
 ### Implementation Example
 
 ```csharp
-private void PivotGrid_SelectionChanged(object sender, GridRangeInfoEventArgs e)
+private void PivotGrid_SelectionChanged(object sender, PivotGridSelectionChangedEventArgs e)
 {
     // Get selected column range
-    var selectedColumns = e.Range.Left + " to " + e.Range.Right;
+    var selectedColumns = e.CellRangeInfo.Left + " to " + e.CellRangeInfo.Right;
     Console.WriteLine($"Selected Columns: {selectedColumns}");
     
     // Access selected cell values
-    for (int row = e.Range.Top; row <= e.Range.Bottom; row++)
+    for (int row = e.CellRangeInfo.Top; row <= e.CellRangeInfo.Bottom; row++)
     {
-        for (int col = e.Range.Left; col <= e.Range.Right; col++)
+        for (int col = e.CellRangeInfo.Left; col <= e.CellRangeInfo.Right; col++)
         {
             var cellInfo = pivotGrid.InternalGrid.Model[row, col];
             Console.WriteLine($"Cell [{row},{col}]: {cellInfo.Text}");
@@ -370,145 +370,19 @@ public partial class MainWindow : Window
         pivotGrid.SelectionChanged += PivotGrid_SelectionChanged;
     }
     
-    private void PivotGrid_SelectionChanged(object sender, GridRangeInfoEventArgs e)
+    private void PivotGrid_SelectionChanged(object sender, PivotGridSelectionChangedEventArgs e)
     {
         Console.WriteLine($"Selection Changed:");
-        Console.WriteLine($"  Top: {e.Range.Top}");
-        Console.WriteLine($"  Left: {e.Range.Left}");
-        Console.WriteLine($"  Bottom: {e.Range.Bottom}");
-        Console.WriteLine($"  Right: {e.Range.Right}");
-        Console.WriteLine($"  Cell Count: {e.Range.Height * e.Range.Width}");
+        Console.WriteLine($"  Top: {e.CellRangeInfo.Top}");
+        Console.WriteLine($"  Left: {e.CellRangeInfo.Left}");
+        Console.WriteLine($"  Bottom: {e.CellRangeInfo.Bottom}");
+        Console.WriteLine($"  Right: {e.CellRangeInfo.Right}");
+        Console.WriteLine($"  Cell Count: {e.CellRangeInfo.Height * e.CellRangeInfo.Width}");
     }
-}
-```
-
-### SelectionChanging Event
-
-```csharp
-pivotGrid.SelectionChanging += PivotGrid_SelectionChanging;
-
-private void PivotGrid_SelectionChanging(object sender, GridRangeInfoCancelEventArgs e)
-{
-    // Cancel selection based on condition
-    if (e.Range.Height > 100 || e.Range.Width > 100)
-    {
-        e.Cancel = true;
-        MessageBox.Show("Selection too large");
-    }
-}
-```
-
-## Advanced Selection Patterns
-
-### Multi-Range Selection
-
-```csharp
-public void SelectMultipleRanges()
-{
-    var selections = new List<GridRangeInfo>
-    {
-        GridRangeInfo.Cells(2, 2, 5, 5),
-        GridRangeInfo.Cells(10, 10, 15, 15),
-        GridRangeInfo.Cells(20, 2, 25, 5)
-    };
-    
-    foreach (var range in selections)
-    {
-        pivotGrid.InternalGrid.SelectCells(range, true); // true = add to selection
-    }
-}
-```
-
-### Conditional Selection
-
-```csharp
-public void SelectCellsWithCondition(Func<string, bool> condition)
-{
-    var gridModel = pivotGrid.InternalGrid.Model;
-    
-    for (int row = 1; row <= gridModel.RowCount; row++)
-    {
-        for (int col = 1; col <= gridModel.ColumnCount; col++)
-        {
-            var cellValue = gridModel[row, col].Text;
-            if (condition(cellValue))
-            {
-                pivotGrid.InternalGrid.SelectCells(
-                    GridRangeInfo.Cell(row, col), true);
-            }
-        }
-    }
-}
-
-// Usage:
-SelectCellsWithCondition(value => 
-{
-    double num;
-    return double.TryParse(value, out num) && num > 1000;
-});
-```
-
-### Get Selected Cell Values
-
-```csharp
-public List<string> GetSelectedValues()
-{
-    var values = new List<string>();
-    var selection = pivotGrid.InternalGrid.SelectedRanges;
-    
-    foreach (var range in selection)
-    {
-        for (int row = range.Top; row <= range.Bottom; row++)
-        {
-            for (int col = range.Left; col <= range.Right; col++)
-            {
-                var cellInfo = pivotGrid.InternalGrid.Model[row, col];
-                values.Add(cellInfo.Text);
-            }
-        }
-    }
-    
-    return values;
-}
-```
-
-### Export Selected Data
-
-```csharp
-public void ExportSelectedToClipboard()
-{
-    var selectedValues = GetSelectedValues();
-    var data = string.Join(Environment.NewLine, selectedValues);
-    Clipboard.SetText(data);
 }
 ```
 
 ## Selection Customization
-
-### Custom Selection Styling
-
-```csharp
-public partial class MainWindow : Window
-{
-    public MainWindow()
-    {
-        InitializeComponent();
-        
-        // Configure PivotGrid...
-        
-        pivotGrid.Loaded += PivotGrid_Loaded;
-    }
-    
-    private void PivotGrid_Loaded(object sender, RoutedEventArgs e)
-    {
-        // Customize selection appearance
-        var grid = pivotGrid.InternalGrid;
-        grid.Properties.AlphaBlendSelectionColor = Color.FromArgb(100, 135, 206, 250);
-        grid.Properties.ShowCurrentCellBorderBehavior = 
-            GridShowCurrentCellBorder.GrayWhenLostFocus;
-    }
-}
-```
 
 ### Selection Validation
 
@@ -520,15 +394,14 @@ public class SelectionValidator
     public SelectionValidator(PivotGridControl grid)
     {
         pivotGrid = grid;
-        pivotGrid.SelectionChanging += OnSelectionChanging;
+        pivotGrid.SelectionChanged += PivotGrid_SelectionChanged;
     }
     
-    private void OnSelectionChanging(object sender, GridRangeInfoCancelEventArgs e)
+    private void PivotGrid_SelectionChanged(object sender, PivotGridSelectionChangedEventArgs e)
     {
         // Validate selection
-        if (!IsValidSelection(e.Range))
+        if (!IsValidSelection(e.CellRangeInfo))
         {
-            e.Cancel = true;
             MessageBox.Show("Invalid selection");
         }
     }
@@ -557,15 +430,14 @@ pivotGrid.AllowSelection = false;
 ### Handle Large Selections
 
 ```csharp
-private void PivotGrid_SelectionChanging(object sender, GridRangeInfoCancelEventArgs e)
+private void PivotGrid_SelectionChanged(object sender, PivotGridSelectionChangedEventArgs e)
 {
     // Limit selection size for performance
     const int MaxCells = 10000;
-    int cellCount = e.Range.Height * e.Range.Width;
+     int cellCount = e.CellRangeInfo.Height * e.CellRangeInfo.Width;
     
     if (cellCount > MaxCells)
     {
-        e.Cancel = true;
         MessageBox.Show($"Selection limited to {MaxCells} cells");
     }
 }
@@ -574,64 +446,14 @@ private void PivotGrid_SelectionChanging(object sender, GridRangeInfoCancelEvent
 ### Provide User Feedback
 
 ```csharp
-private void PivotGrid_SelectionChanged(object sender, GridRangeInfoEventArgs e)
+private void PivotGrid_SelectionChanged(object sender, PivotGridSelectionChangedEventArgs e)
 {
-    int cellCount = e.Range.Height * e.Range.Width;
+    int cellCount = e.CellRangeInfo.Height * e.CellRangeInfo.Width;
     statusLabel.Text = $"{cellCount} cells selected";
     
     // Calculate sum of selected numeric values
-    double sum = CalculateSelectionSum(e.Range);
+    double sum = CalculateSelectionSum(e.CellRangeInfo);
     sumLabel.Text = $"Sum: {sum:C}";
-}
-```
-
-### Performance Optimization
-
-```csharp
-public void OptimizeSelectionPerformance()
-{
-    // Disable visual updates during batch selection
-    pivotGrid.InternalGrid.BeginUpdate();
-    
-    try
-    {
-        // Perform multiple selections
-        SelectMultipleRanges();
-    }
-    finally
-    {
-        pivotGrid.InternalGrid.EndUpdate();
-    }
-}
-```
-
-### Keyboard Shortcuts
-
-```csharp
-public void SetupKeyboardShortcuts()
-{
-    pivotGrid.KeyDown += (s, e) =>
-    {
-        if (e.Key == Key.A && Keyboard.Modifiers == ModifierKeys.Control)
-        {
-            // Ctrl+A: Select all
-            SelectAll();
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Escape)
-        {
-            // Esc: Clear selection
-            ClearSelection();
-            e.Handled = true;
-        }
-    };
-}
-
-private void SelectAll()
-{
-    var model = pivotGrid.InternalGrid.Model;
-    pivotGrid.InternalGrid.SelectCells(
-        GridRangeInfo.Cells(1, 1, model.RowCount, model.ColumnCount));
 }
 ```
 

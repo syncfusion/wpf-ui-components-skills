@@ -110,12 +110,12 @@ Customize the appearance of each tree item using `ItemTemplate`:
 
 Control the data context of item templates using `ItemTemplateDataContextType`:
 
-### Default (Data Model)
+### Item (Data Model)
 
-By default, `DataContext` is the data model object:
+By Item, `DataContext` is the data model object:
 
 ```xml
-<syncfusion:SfTreeView ItemTemplateDataContextType="Default">
+<syncfusion:SfTreeView ItemTemplateDataContextType="Node">
     <syncfusion:SfTreeView.ItemTemplate>
         <DataTemplate>
             <TextBlock Text="{Binding FolderName}"/>
@@ -435,23 +435,6 @@ Customize appearance for different interaction states:
 
 ## Common Patterns
 
-### Alternating Row Colors
-
-```csharp
-treeView.QueryNodeSize += (s, e) =>
-{
-    e.Height = 30;
-    e.Handled = true;
-};
-
-treeView.ItemPrepared += (s, e) =>
-{
-    var index = treeView.GetNodeIndex(e.Node);
-    e.Item.Background = (index % 2 == 0) 
-        ? new SolidColorBrush(Colors.White) 
-        : new SolidColorBrush(Color.FromRgb(245, 245, 245));
-};
-```
 
 ### Custom Expander Icon
 

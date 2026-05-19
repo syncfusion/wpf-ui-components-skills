@@ -32,15 +32,14 @@ Control how drop indicators are displayed:
 <syncfusion:SfDataGrid x:Name="dataGrid"
                        AllowDraggingRows="True"
                        AllowDrop="True"
-                       RowDropIndicatorMode="DropAboveAndBelow"
+                       RowDropIndicatorMode="Arrow"
                        ItemsSource="{Binding Orders}" />
 ```
 
 ```csharp
 // Available modes
-dataGrid.RowDropIndicatorMode = RowDropIndicatorMode.DropAboveAndBelow;  // Default
-dataGrid.RowDropIndicatorMode = RowDropIndicatorMode.DropAsChild;
-dataGrid.RowDropIndicatorMode = RowDropIndicatorMode.None;
+dataGrid.RowDropIndicatorMode = DropIndicatorMode.Arrow;
+dataGrid.RowDropIndicatorMode = DropIndicatorMode.Line;
 ```
 
 ## Dragging Multiple Rows
@@ -77,7 +76,6 @@ dataGrid.RowDragDropController.DragStart += RowDragDropController_DragStart;
 void RowDragDropController_DragStart(object sender, GridRowDragStartEventArgs e)
 {
     var draggingRecords = e.DraggingRecords;
-    var dataObject = e.Data;
     
     // Cancel drag for specific records
     var order = draggingRecords.FirstOrDefault() as OrderInfo;
@@ -100,7 +98,7 @@ void RowDragDropController_DragOver(object sender, GridRowDragOverEventArgs e)
 {
     var targetRecord = e.TargetRecord;
     var dropPosition = e.DropPosition;
-    var isFromOutsideSource = e.IsFromOutsideSource;
+    var IsFromOutSideSource = e.IsFromOutSideSource;
     
     // Prevent dropping on specific rows
     if (targetRecord is OrderInfo order && order.IsLocked)
@@ -155,15 +153,11 @@ dataGrid.RowDragDropController.Dropped += RowDragDropController_Dropped;
 
 void RowDragDropController_Dropped(object sender, GridRowDroppedEventArgs e)
 {
-    var draggingRecords = e.DraggingRecords;
+    var draggedRecord = e.Data;    
     var targetRecord = e.TargetRecord;
     var dropPosition = e.DropPosition;
-    
-    // Log drop operation
-    foreach (var record in draggingRecords)
-    {
-        LogRowMove(record, targetRecord, dropPosition);
-    }
+
+    Debug.WriteLine($"Moved: {draggedRecord} → {targetRecord} ({dropPosition})");
 }
 ```
 
@@ -182,7 +176,6 @@ dataGrid.RowDragDropController.DragStart += (s, e) =>
     if (order != null && order.IsShipped)
     {
         e.Handled = true;
-        e.ShowDragUI = false;
     }
 };
 ```
@@ -274,21 +267,20 @@ Handle cross-grid drag-drop:
 ```csharp
 sourceGrid.RowDragDropController.Dropped += (s, e) =>
 {
-    if (e.IsFromOutsideSource)
+
+    if (e.IsFromOutSideSource)
     {
-        // Add to target collection
         var targetCollection = targetGrid.ItemsSource as ObservableCollection<OrderInfo>;
-        foreach (var record in e.DraggingRecords.Cast<OrderInfo>())
-        {
-            targetCollection.Add(record);
-        }
-        
-        // Remove from source collection
         var sourceCollection = sourceGrid.ItemsSource as ObservableCollection<OrderInfo>;
-        foreach (var record in e.DraggingRecords.Cast<OrderInfo>())
-        {
-            sourceCollection.Remove(record);
-        }
+
+        var record = e.Data as OrderInfo;  
+
+        if (record == null) return;
+
+      
+        targetCollection?.Add(record);
+
+        sourceCollection?.Remove(record);
     }
 };
 ```
@@ -349,7 +341,7 @@ treeGrid.AllowDrop = true;
 
 dataGrid.RowDragDropController.Dropped += (s, e) =>
 {
-    if (e.IsFromOutsideSource)
+    if (e.IsFromOutSideSource)
     {
         // Add dragged items as children in tree
         var parentNode = treeGrid.GetNodeAtRowIndex(e.DropIndex);
@@ -368,7 +360,7 @@ Update the underlying collection when rows are reordered:
 ```csharp
 dataGrid.RowDragDropController.Dropped += (s, e) =>
 {
-    if (!e.IsFromOutsideSource)
+    if (!e.IsFromOutSideSource)
     {
         var collection = dataGrid.ItemsSource as ObservableCollection<OrderInfo>;
         
@@ -410,11 +402,6 @@ dataGrid.RowDragDropController.Dropped += (s, e) =>
         var targetGroup = e.TargetRecord as Group;
         if (targetGroup != null)
         {
-            // Add records to target group
-            foreach (var record in e.DraggingRecords)
-            {
-                UpdateGroupProperty(record, targetGroup.Key);
-            }
         }
     }
 };
@@ -539,6 +526,14 @@ Drag-drop works normally with frozen columns, but visual feedback may be affecte
 ### Handling Undo/Redo for Drag-Drop
 
 ```csharp
+public class DragDropOperation
+{
+    public List<OrderInfo> DraggedRecords { get; set; }
+    public OrderInfo TargetRecord { get; set; }
+    public object DropPosition { get; set; }
+    public int SourceIndex { get; set; }
+}
+
 private Stack<DragDropOperation> undoStack = new Stack<DragDropOperation>();
 
 dataGrid.RowDragDropController.Dropped += (s, e) =>
@@ -546,10 +541,10 @@ dataGrid.RowDragDropController.Dropped += (s, e) =>
     // Store operation for undo
     var operation = new DragDropOperation
     {
-        DraggedRecords = e.DraggingRecords.ToList(),
-        TargetRecord = e.TargetRecord,
+        DraggedRecords = new List<OrderInfo> { draggedRecord },
+        TargetRecord = e.TargetRecord as OrderInfo,
         DropPosition = e.DropPosition,
-        SourceIndex = GetRecordIndex(e.DraggingRecords.First())
+        SourceIndex = GetRecordIndex(draggedRecord)
     };
     
     undoStack.Push(operation);

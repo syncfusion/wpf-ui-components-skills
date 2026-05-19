@@ -160,6 +160,31 @@ public class SerializableCustomGridColumn : SerializableGridColumn
     [DataMember]
     public string DateMappingName { get; set; }
 }
+public class DatePickerColumn : GridColumn
+{        
+    public DatePickerColumn()
+    {
+        SetCellType("DatePicker");
+    }
+
+public static readonly DependencyProperty DateMappingNameProperty = DependencyProperty.Register("DateMappingName", typeof(string), typeof(DatePickerColumn));
+
+    public string DateMappingName
+    {
+        get { return (string)GetValue(DateMappingNameProperty); }
+        set { SetValue(DateMappingNameProperty, value); }
+    }
+
+    protected override Freezable CreateInstanceCore()
+    {
+        return new DatePickerColumn();
+    }
+
+    protected override void SetDisplayBindingConverter()
+    {
+        (this.DisplayBinding as Binding).Converter = new CustomConverter();      
+    }
+}
 
 // 2. Create custom SerializationController
 dataGrid.SerializationController = new SerializationControllerExt(dataGrid);

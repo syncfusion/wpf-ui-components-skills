@@ -22,13 +22,13 @@ WPF TreeGrid supports row, cell, and mixed selection with various modes and navi
 
 ```csharp
 // Select entire rows
-treeGrid.SelectionUnit = TreeGridSelectionUnit.Row;
+treeGrid.SelectionUnit = GridSelectionUnit.Row;
 
 // Select individual cells
-treeGrid.SelectionUnit = TreeGridSelectionUnit.Cell;
+treeGrid.SelectionUnit = GridSelectionUnit.Cell;
 
 // Select both rows and cells
-treeGrid.SelectionUnit = TreeGridSelectionUnit.Any;
+treeGrid.SelectionUnit = GridSelectionUnit.Any;
 ```
 
 ## Selection Modes
@@ -80,27 +80,26 @@ treeGrid.SelectedItems.Add(treeGrid.View.Nodes[1].Item);
 treeGrid.SelectAll();
 
 // Clear selection
-treeGrid.ClearSelection();
+treeGrid.ClearSelection(false);
 ```
 
 ### Cell Selection
 
 ```csharp
 // Select single cell
-var rowColumnIndex = new RowColumnIndex(5, 2);
-treeGrid.SelectCell(rowColumnIndex);
+var record = this.treeGrid.GetNodeAtRowIndex(3).Item;
+var column = this.treeGrid.Columns[1];
+this.treeGrid.SelectCell(record, column);
 
 // Select multiple cells
-var cellInfos = new List<TreeGridCellInfo>()
-{
-    new TreeGridCellInfo(5, "FirstName"),
-    new TreeGridCellInfo(5, "LastName"),
-    new TreeGridCellInfo(6, "FirstName")
-};
-treeGrid.SelectCells(cellInfos);
+var firstRecord = this.treeGrid.GetNodeAtRowIndex(3).Item;
+var lastRecord = this.treeGrid.GetNodeAtRowIndex(7).Item;
+var firstColumn = this.treeGrid.Columns[1];
+var lastColumn = this.treeGrid.Columns[3];
+this.treeGrid.SelectCells(firstRecord, firstColumn, lastRecord, lastColumn);
 
 // Get selected cells
-var selectedCells = treeGrid.SelectedCells;
+var selectedCells = treeGrid.GetSelectedCells();
 ```
 
 ## Selection Events
@@ -109,18 +108,19 @@ var selectedCells = treeGrid.SelectedCells;
 // Before current cell changes
 treeGrid.CurrentCellActivating += (s, e) =>
 {
-    Debug.WriteLine($"Activating cell: Row={e.RowColumnIndex.RowIndex}, Col={e.RowColumnIndex.ColumnIndex}");
-    
-    // Cancel navigation
-    if (e.RowColumnIndex.RowIndex == 0)
+    Debug.WriteLine($"Activating cell: Row={e.CurrentRowColumnIndex.RowIndex}, Col={e.CurrentRowColumnIndex.ColumnIndex}");
+
+    if (e.CurrentRowColumnIndex.RowIndex == 0)
         e.Cancel = true;
 };
 
 // After current cell changed
 treeGrid.CurrentCellActivated += (s, e) =>
 {
-    var rowData = treeGrid.GetRecordAtRowIndex(e.RowColumnIndex.RowIndex);
-    Debug.WriteLine($"Cell activated: {rowData}");
+    var node = treeGrid.View.Nodes[e.CurrentRowColumnIndex.RowIndex];
+    var record = node?.Item;
+
+    Debug.WriteLine($"Cell activated: {record}");
 };
 
 // Before selection changes
@@ -223,7 +223,7 @@ foreach (var item in treeGrid.SelectedItems)
 }
 
 // Get selected cells
-foreach (var cellInfo in treeGrid.SelectedCells)
+foreach (var cellInfo in treeGrid.GetSelectedCells())
 {
     Debug.WriteLine($"Row: {cellInfo.RowIndex}, Column: {cellInfo.Column.MappingName}");
 }
@@ -237,7 +237,7 @@ var currentCell = treeGrid.SelectionController.CurrentCellManager.CurrentCell;
 ```csharp
 public void SelectHighSalaryEmployees()
 {
-    treeGrid.ClearSelection();
+    treeGrid.ClearSelections(false);
     
     foreach (var node in treeGrid.View.Nodes)
     {
@@ -280,11 +280,9 @@ treeGrid.SelectionChanging += (s, e) =>
 
 ```xaml
 <!-- Customize selection colors -->
-<syncfusion:SfTreeGrid.SelectionStyle>
-    <Style TargetType="syncfusion:TreeGridCell">
-        <Setter Property="Background" Value="LightBlue"/>
-    </Style>
-</syncfusion:SfTreeGrid.SelectionStyle>
+<syncfusion:SfTreeGrid 
+    SelectionBackground="LightBlue"
+    SelectionForeground="Black" />
 ```
 
 ## Troubleshooting

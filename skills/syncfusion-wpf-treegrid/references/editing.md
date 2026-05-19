@@ -46,8 +46,6 @@ treeGrid.EditTrigger = EditTrigger.OnTap;
 // Double click (default)
 treeGrid.EditTrigger = EditTrigger.OnDoubleTap;
 
-// F2 key only
-treeGrid.EditTrigger = EditTrigger.OnF2;
 ```
 
 ## Edit Events
@@ -74,10 +72,13 @@ Occurs when leaving edit mode:
 ```csharp
 treeGrid.CurrentCellEndEdit += (s, e) =>
 {
-    var newValue = e.NewValue;
-    var oldValue = e.OldValue;
-    
-    Debug.WriteLine($"Value changed from {oldValue} to {newValue}");
+    var rowData = treeGrid.View.GetRecordAtRowIndex(e.RowColumnIndex.RowIndex);
+
+    var column = treeGrid.Columns[e.RowColumnIndex.ColumnIndex];
+
+    var newValue = rowData.GetType().GetProperty(column.MappingName)?.GetValue(rowData);
+
+    Debug.WriteLine($"Updated value: {newValue}");
 };
 ```
 
@@ -103,19 +104,14 @@ treeGrid.CurrentCellValueChanged += (s, e) =>
 
 ```csharp
 // Begin edit for current cell
-treeGrid.CurrentCellManager.BeginEdit();
-
+treeGrid.SelectionController.CurrentCellManager.BeginEdit();
 // End edit
-treeGrid.CurrentCellManager.EndEdit();
-
-// Cancel edit
-treeGrid.CurrentCellManager.CancelEdit();
-
+treeGrid.SelectionController.CurrentCellManager.EndEdit();
 // Move to next cell and edit
 var rowIndex = treeGrid.ResolveToRowIndex(employee);
 var columnIndex = treeGrid.ResolveToScrollColumnIndex(1);
 treeGrid.MoveCurrentCell(new RowColumnIndex(rowIndex, columnIndex));
-treeGrid.CurrentCellManager.BeginEdit();
+treeGrid.SelectionController.CurrentCellManager.BeginEdit();
 ```
 
 ## Validation
@@ -235,7 +231,7 @@ bool isEditing = treeGrid.SelectionController.CurrentCellManager.HasCurrentCell
 // Commit pending edits
 if (isEditing)
 {
-    treeGrid.CurrentCellManager.EndEdit();
+    treeGrid.SelectionController.CurrentCellManager.EndEdit();
 }
 ```
 

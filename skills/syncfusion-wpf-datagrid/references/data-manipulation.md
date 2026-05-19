@@ -128,16 +128,16 @@ Control the position of new item placeholder in grouped view:
 
 ```xaml
 <syncfusion:SfDataGrid x:Name="dataGrid"
-                       NewItemPlaceholderPosition="AtGroup"
+                       NewItemPlaceholderPosition="AtBeginning"
                        ItemsSource="{Binding Orders}" />
 ```
 
 ```csharp
 // Place at group
-dataGrid.NewItemPlaceholderPosition = NewItemPlaceholderPosition.AtGroup;
+dataGrid.NewItemPlaceholderPosition = NewItemPlaceholderPosition.AtBeginning;
 
 // Place at bottom
-dataGrid.NewItemPlaceholderPosition = NewItemPlaceholderPosition.AtBottom;
+dataGrid.NewItemPlaceholderPosition = NewItemPlaceholderPosition.AtEnd;
 
 // Hide placeholder
 dataGrid.NewItemPlaceholderPosition = NewItemPlaceholderPosition.None;
@@ -162,7 +162,7 @@ var newOrder = new OrderInfo
 dataGrid.View.AddNew(newOrder);
 ```
 
-### CommitAddNew Method
+### CommitNew Method
 
 Commit the new row addition:
 
@@ -173,16 +173,16 @@ dataGrid.View.AddNew();
 // ... User enters data ...
 
 // Commit the new row
-dataGrid.View.CommitAddNew();
+dataGrid.View.CommitNew();
 ```
 
-### CancelAddNew Method
+### CancelNew Method
 
 Cancel adding new row:
 
 ```csharp
 // Cancel the add operation
-dataGrid.View.CancelAddNew();
+dataGrid.View.CancelNew();
 ```
 
 ### Adding with Complex Properties

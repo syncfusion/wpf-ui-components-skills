@@ -17,6 +17,12 @@ Refer to the [Control Dependencies](https://help.syncfusion.com/wpf/control-depe
 
 Refer to this [documentation](https://help.syncfusion.com/wpf/visual-studio-integration/nuget-packages) to find more details about installing nuget packages in a WPF application.
 
+## NuGet Package
+
+```text
+Syncfusion.Edit.Wpf
+```
+
 ## Creating simple application with EditControl
 
 You can create Windows Forms application with [EditControl](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Edit.EditControl.html) as follows:

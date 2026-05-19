@@ -17,12 +17,12 @@
 Install the Syncfusion Tools package (contains Ribbon) from NuGet:
 
 ```powershell
-Install-Package Syncfusion.Tools.Wpf
+Install-Package Syncfusion.Tools.WPF
 ```
 
 Or via NuGet Package Manager:
 1. Right-click project → Manage NuGet Packages
-2. Search for "Syncfusion.Wpf.Ribbon"
+2. Search for "Syncfusion.Tools.WPF"
 3. Click Install
 
 ### Step 2: Add License (if required)

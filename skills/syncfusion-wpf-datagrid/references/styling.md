@@ -322,25 +322,6 @@ public class CustomRowStyleSelector : StyleSelector
     </syncfusion:SfDataGrid.Columns>
 </syncfusion:SfDataGrid>
 ```
-
-## Group Caption Style
-
-### Using GroupCaptionStyle
-
-```xaml
-<Window.Resources>
-    <Style x:Key="groupCaptionStyle" TargetType="syncfusion:GroupCaptionControl">
-        <Setter Property="Background" Value="LightGray" />
-        <Setter Property="Foreground" Value="DarkBlue" />
-    </Style>
-</Window.Resources>
-
-<syncfusion:SfDataGrid x:Name="dataGrid"
-                       ItemsSource="{Binding Orders}"
-                       ShowGroupDropArea="True"
-                       GroupCaptionStyle="{StaticResource groupCaptionStyle}"/>
-```
-
 ## Summary Cell Style
 
 ### Caption Summary Cell Style

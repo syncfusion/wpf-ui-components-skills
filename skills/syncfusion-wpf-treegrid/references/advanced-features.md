@@ -332,57 +332,91 @@ public class SerializableCustomTreeGridColumn : SerializableTreeGridColumn
 
 **Step 2: Create Custom Serialization Controller**
 ```csharp
-public class TreeGridSerializationControllerExt : TreeGridSerializationController
-{
-    public TreeGridSerializationControllerExt(SfTreeGrid treeGrid)
-        : base(treeGrid)
-    {
-    }
-    
-    protected override SerializableTreeGridColumn GetSerializableTreeGridColumn(TreeGridColumn column)
-    {
-        if (column.MappingName == "DOJ")
-        {
-            return new SerializableCustomTreeGridColumn();
-        }
-        return base.GetSerializableTreeGridColumn(column);
-    }
-    
-    protected override void StoreTreeGridColumnProperties(TreeGridColumn column, 
-                                                          SerializableTreeGridColumn serializableColumn)
-    {
-        base.StoreTreeGridColumnProperties(column, serializableColumn);
-        
-        if (column is TreeGridDatePickerColumn)
-            (serializableColumn as SerializableCustomTreeGridColumn).DateMappingName = 
-                (column as TreeGridDatePickerColumn).DateMappingName;
-    }
-    
-    public override Type[] KnownTypes()
-    {
-        var types = base.KnownTypes();
-        var list = types.Cast<Type>().ToList();
-        list.Add(typeof(SerializableCustomTreeGridColumn));
-        return list.ToArray();
-    }
-    
-    protected override TreeGridColumn GetTreeGridColumn(SerializableTreeGridColumn serializableColumn)
-    {
-        if (serializableColumn is SerializableCustomTreeGridColumn)
-            return new TreeGridDatePickerColumn();
-        return base.GetTreeGridColumn(serializableColumn);
-    }
-    
-    protected override void RestoreColumnProperties(SerializableTreeGridColumn serializableColumn, 
-                                                    TreeGridColumn column)
-    {
-        base.RestoreColumnProperties(serializableColumn, column);
-        
-        if (column is TreeGridDatePickerColumn)
-            (column as TreeGridDatePickerColumn).DateMappingName = 
-                (serializableColumn as SerializableCustomTreeGridColumn).DateMappingName;
-    }
-}
+ public class TreeGridSerializationControllerExt : TreeGridSerializationController
+ {
+     public TreeGridSerializationControllerExt(SfTreeGrid treeGrid)
+         : base(treeGrid)
+     {
+     }
+
+     protected override SerializableTreeGridColumn GetSerializableTreeGridColumn(TreeGridColumn column)
+     {
+         if (column.MappingName == "DOJ")
+         {
+             return new SerializableCustomTreeGridColumn();
+         }
+         return base.GetSerializableTreeGridColumn(column);
+     }
+
+     protected override void StoreTreeGridColumnProperties(TreeGridColumn column,
+                                                           SerializableTreeGridColumn serializableColumn)
+     {
+         base.StoreTreeGridColumnProperties(column, serializableColumn);
+
+         if (column is TreeGridDatePickerColumn)
+             (serializableColumn as SerializableCustomTreeGridColumn).DateMappingName =
+                 (column as TreeGridDatePickerColumn).DateMappingName;
+     }
+
+     public override Type[] KnownTypes()
+     {
+         var types = base.KnownTypes();
+         var list = types.Cast<Type>().ToList();
+         list.Add(typeof(SerializableCustomTreeGridColumn));
+         return list.ToArray();
+     }
+
+     protected override TreeGridColumn GetTreeGridColumn(SerializableTreeGridColumn serializableColumn)
+     {
+         if (serializableColumn is SerializableCustomTreeGridColumn)
+             return new TreeGridDatePickerColumn();
+         return base.GetTreeGridColumn(serializableColumn);
+     }
+
+     protected override void RestoreColumnProperties(SerializableTreeGridColumn serializableColumn,
+                                                     TreeGridColumn column)
+     {
+         base.RestoreColumnProperties(serializableColumn, column);
+
+         if (column is TreeGridDatePickerColumn)
+             (column as TreeGridDatePickerColumn).DateMappingName =
+                 (serializableColumn as SerializableCustomTreeGridColumn).DateMappingName;
+     }
+ }
+
+ public class TreeGridDatePickerColumn : TreeGridColumn
+ {
+     public TreeGridDatePickerColumn()
+     {
+         SetCellType("DatePickerRenderer");
+     }
+
+     public static readonly DependencyProperty DateMappingNameProperty = DependencyProperty.Register("DateMappingName",
+    typeof(string), typeof(TreeGridDatePickerColumn));
+
+     public string DateMappingName
+     {
+         get { return (string)GetValue(DateMappingNameProperty); }
+         set { SetValue(DateMappingNameProperty, value); }
+     }
+
+     protected override Freezable CreateInstanceCore()
+     {
+         return new TreeGridDatePickerColumn();
+     }
+
+     protected override void SetDisplayBindingConverter()
+     {
+         (this.DisplayBinding as Binding).Converter = new CustomConverter();
+     }
+ }
+
+ [DataContract(Name = "SerializableCustomTreeGridColumn")]
+ public class SerializableCustomTreeGridColumn : SerializableTreeGridColumn
+ {
+     [DataMember]
+     public string DateMappingName { get; set; }
+ }
 ```
 
 **Step 3: Use Custom Controller**
@@ -493,11 +527,6 @@ int nodeIndex = TreeGridIndexResolver.ResolveToNodeIndex(treeGrid, 5);
 **Resolve Row Index from Node Index:**
 ```csharp
 int rowIndex = TreeGridIndexResolver.ResolveToRowIndex(treeGrid, 3);
-```
-
-**Resolve Row Index from Data Object:**
-```csharp
-int rowIndex = TreeGridIndexResolver.ResolveToRowIndex(treeGrid, dataObject);
 ```
 
 **Resolve Row Index from TreeNode:**

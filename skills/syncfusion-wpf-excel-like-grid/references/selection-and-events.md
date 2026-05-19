@@ -114,22 +114,22 @@ Track structural changes to the grid model:
 
 ```csharp
 gridControl.Model.RowsInserted    += (s, e) =>
-    Debug.WriteLine($"{e.Count} row(s) inserted at index {e.Index}");
+    Debug.WriteLine($"{e.Count} row(s) inserted at index {e.InsertAt}");
 
 gridControl.Model.ColumnsInserted += (s, e) =>
-    Debug.WriteLine($"{e.Count} column(s) inserted at index {e.Index}");
+    Debug.WriteLine($"{e.Count} column(s) inserted at index {e.InsertAt}");
 
 gridControl.Model.RowsRemoved    += (s, e) =>
-    Debug.WriteLine($"{e.Count} row(s) removed from index {e.Index}");
+    Debug.WriteLine($"{e.Count} row(s) removed from index {e.RemoveAt}");
 
 gridControl.Model.ColumnsRemoved += (s, e) =>
-    Debug.WriteLine($"Column(s) removed from {e.Index}");
+    Debug.WriteLine($"Column(s) removed from {e.RemoveAt}");
 
 gridControl.Model.RowsMoved    += (s, e) =>
-    Debug.WriteLine($"Rows moved from {e.From} to {e.To}");
+    Debug.WriteLine($"Rows moved from {e.RemoveAt} to {e.InsertAt}");
 
 gridControl.Model.ColumnsMoved += (s, e) =>
-    Debug.WriteLine($"Columns moved from {e.From} to {e.To}");
+    Debug.WriteLine($"Columns moved from {e.RemoveAt} to {e.InsertAt}");
 ```
 
 ---
@@ -159,13 +159,13 @@ gridControl.CurrentCellDeactivating += (s, e) =>
 // Fires while the user drags a row border
 gridControl.ResizingRows += (s, e) =>
 {
-    if (e.Row == 0) e.Cancel = true; // prevent resizing the header row
+    if (e.Rows.Top == 0) e.AllowResize = false; // prevent resizing the header row
 };
 
 // Fires while the user drags a column border
 gridControl.ResizingColumns += (s, e) =>
 {
-    if (e.Column == 0) e.Cancel = true;
+    if (e.Columns.Left == 0) e.AllowResize = false; 
 };
 ```
 

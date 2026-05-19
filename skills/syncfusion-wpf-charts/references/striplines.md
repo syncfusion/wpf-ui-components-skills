@@ -51,13 +51,13 @@ Add a stripline to highlight a specific value range:
 
 ## Stripline Label
 
-Add text labels to striplines:
+Add labels to striplines:
 
 ```xml
 <syncfusion:ChartStripLine Start="40000"
                            Width="20000"
                            Background="LightBlue"
-                           Text="Target Range"
+                           Label="Target Range"
                            LabelAngle ="0">
 </syncfusion:ChartStripLine>
 ```
@@ -65,9 +65,9 @@ Add text labels to striplines:
 ### Label Positioning
 
 ```xml
-<syncfusion:ChartStripLine Text="Average"
+<syncfusion:ChartStripLine Label="Average"
                            LabelHorizontalAlignment="Center"
-                           LabelVerticalAlignment="Middle"/>
+                           LabelVerticalAlignment="Top"/>
 ```
 
 ## Multiple Striplines
@@ -82,21 +82,21 @@ Add several striplines to one axis:
                                    Width="40000"
                                    Background="LightCoral"
                                    Opacity="0.3"
-                                   Text="Below Target"/>
+                                   Label="Below Target"/>
         
         <!-- Target zone -->
         <syncfusion:ChartStripLine Start="40000" 
                                    Width="20000"
                                    Background="LightGreen"
                                    Opacity="0.3"
-                                   Text="Target Zone"/>
+                                   Label="Target Zone"/>
         
         <!-- Above target -->
         <syncfusion:ChartStripLine Start="60000" 
                                    Width="40000"
                                    Background="LightBlue"
                                    Opacity="0.3"
-                                   Text="Exceeded"/>
+                                   Label="Exceeded"/>
     </syncfusion:NumericalAxis.StripLines>
 </syncfusion:NumericalAxis>
 ```
@@ -125,7 +125,7 @@ This creates striplines at 0-10k, 20k-30k, 40k-50k, etc.
                                    Width="7"
                                    Background="Yellow"
                                    Opacity="0.3"
-                                   Text="Holiday Week"/>
+                                   Label="Holiday Week"/>
     </syncfusion:DateTimeAxis.StripLines>
 </syncfusion:DateTimeAxis>
 ```
@@ -144,7 +144,7 @@ stripLine.Start = new DateTime(2009, 1, 3).ToOADate();
                                    Width="2"
                                    Background="LightGreen"
                                    Opacity="0.4"
-                                   Text="Q2"/>
+                                   Label="Q2"/>
     </syncfusion:CategoryAxis.StripLines>
 </syncfusion:CategoryAxis>
 ```
@@ -178,7 +178,7 @@ Segment striplines for stacked series:
                                            Width="30000"
                                            Background="Red"
                                            Opacity="0.2"
-                                           Text="Critical"
+                                           Label="Critical"
                                            LabelVerticalAlignment="Top">
                   
                 </syncfusion:ChartStripLine>
@@ -188,14 +188,14 @@ Segment striplines for stacked series:
                                            Width="20000"
                                            Background="Yellow"
                                            Opacity="0.2"
-                                           Text="Warning"/>
+                                           Label="Warning"/>
                 
                 <!-- Safe zone -->
                 <syncfusion:ChartStripLine Start="50000"
                                            Width="50000"
                                            Background="Green"
                                            Opacity="0.2"
-                                           Text="Safe"/>
+                                           Label="Safe"/>
             </syncfusion:NumericalAxis.StripLines>
         </syncfusion:NumericalAxis>
     </syncfusion:SfChart.SecondaryAxis>
@@ -216,8 +216,8 @@ Segment striplines for stacked series:
                            Width="0"
                            BorderBrush="Red"
                            BorderThickness="2"
-                           Text="Average"
-                           LabelHorizontalAlignment="End"/>
+                           Label="Average"
+                           LabelHorizontalAlignment="Left"/>
 ```
 
 ### Pattern 2: Target Zone
@@ -229,7 +229,7 @@ Segment striplines for stacked series:
                            Opacity="0.3"
                            BorderBrush="Green"
                            BorderThickness="1"
-                           Text="Target: 45K - 55K"/>
+                           Label="Target: 45K - 55K"/>
 ```
 
 ### Pattern 3: Alternating Bands
@@ -254,7 +254,7 @@ Segment striplines for stacked series:
 | `Opacity` | Transparency (0-1) |
 | `BorderBrush` | Border color |
 | `BorderThickness` | Border width |
-| `Text` | Label text |
+| `Label` | Label text |
 | `LabelAngle` | Label rotation |
 | `LabelHorizontalAlignment` | Label horizontal position |
 | `LabelVerticalAlignment` | Label vertical position |

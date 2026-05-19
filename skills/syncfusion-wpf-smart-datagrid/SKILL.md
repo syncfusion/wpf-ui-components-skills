@@ -133,6 +133,7 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Syncfusion.UI.Xaml.SmartComponents;
 using System.ClientModel;
+using System.Windows;
 
 public partial class App : Application
 {

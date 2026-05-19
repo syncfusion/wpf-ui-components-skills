@@ -106,7 +106,7 @@ Display vertical and horizontal lines at cursor position.
 ```xml
 <syncfusion:SfChart>
     <syncfusion:SfChart.Behaviors>
-        <syncfusion:ChartCrosshairBehavior/>
+        <syncfusion:ChartCrossHairBehavior/>
     </syncfusion:SfChart.Behaviors>
 </syncfusion:SfChart>
 ```
@@ -114,23 +114,23 @@ Display vertical and horizontal lines at cursor position.
 ### Crosshair Customization
 
 ```xml
-<syncfusion:ChartCrosshairBehavior ShowTrackballInfo="True">
-    <syncfusion:ChartCrosshairBehavior.HorizontalLineStyle>
+<syncfusion:ChartCrossHairBehavior ShowTrackballInfo="True">
+    <syncfusion:ChartCrossHairBehavior.HorizontalLineStyle>
         <Style TargetType="Line">
             <Setter Property="Stroke" Value="Red"/>
             <Setter Property="StrokeThickness" Value="1"/>
             <Setter Property="StrokeDashArray" Value="2,2"/>
         </Style>
-    </syncfusion:ChartCrosshairBehavior.HorizontalLineStyle>
+    </syncfusion:ChartCrossHairBehavior.HorizontalLineStyle>
     
-    <syncfusion:ChartCrosshairBehavior.VerticalLineStyle>
+    <syncfusion:ChartCrossHairBehavior.VerticalLineStyle>
         <Style TargetType="Line">
             <Setter Property="Stroke" Value="Red"/>
             <Setter Property="StrokeThickness" Value="1"/>
             <Setter Property="StrokeDashArray" Value="2,2"/>
         </Style>
-    </syncfusion:ChartCrosshairBehavior.VerticalLineStyle>
-</syncfusion:ChartCrosshairBehavior>
+    </syncfusion:ChartCrossHairBehavior.VerticalLineStyle>
+</syncfusion:ChartCrossHairBehavior>
 ```
 
 ## Trackball
@@ -173,7 +173,7 @@ Enable selecting data points or series.
 ### Enable Selection on Series
 
 ```xml
-<syncfusion:ColumnSeries EnableSegmentSelection="True"/>
+<syncfusion:ChartSelectionBehavior EnableSegmentSelection="True"/>
 ```
 
 ### Selection Mode
@@ -189,14 +189,13 @@ Enable selecting data points or series.
 Select entire series:
 
 ```xml
-<syncfusion:LineSeries EnableSeriesSelection="True"/>
+<syncfusion:ChartSelectionBehavior EnableSeriesSelection="True"/>
 ```
 
 ### Selection Style
 
 ```xml
-<syncfusion:ColumnSeries EnableSegmentSelection="True" SegmentSelectionBrush="Green">
-</syncfusion:ColumnSeries>
+<syncfusion:ChartSelectionBehavior EnableSegmentSelection="True" SegmentSelectionBrush="Green"/>
 ```
 
 ### Handle Selection Changed Event
@@ -261,12 +260,11 @@ Use multiple interactive features together:
         <syncfusion:ChartTrackBallBehavior ShowLine="True"/>
         
         <!-- Selection -->
-        <syncfusion:ChartSelectionBehavior/>
+        <syncfusion:ChartSelectionBehavior EnableSegmentSelection="True"/>
     </syncfusion:SfChart.Behaviors>
     
     <!-- Series with tooltip -->
-    <syncfusion:LineSeries ShowTooltip="True"
-                           EnableSegmentSelection="True"/>
+    <syncfusion:LineSeries ShowTooltip="True"/>
 </syncfusion:SfChart>
 ```
 

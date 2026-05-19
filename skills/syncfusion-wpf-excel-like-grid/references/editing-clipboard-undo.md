@@ -30,12 +30,12 @@ gridControl.Model.Options.CopyPasteOption |= CopyPaste.ExcludeCurrentCell;
 Hook these events to validate or cancel clipboard actions:
 
 ```csharp
-gridControl.ClipboardCanCopy  += (s, e) => { /* set e.Handled = true to cancel */ };
-gridControl.ClipboardCanCut   += (s, e) => { };
-gridControl.ClipboardCanPaste += (s, e) => { };
-gridControl.ClipboardCopy     += (s, e) => { /* custom post-copy logic */ };
-gridControl.ClipboardCut      += (s, e) => { };
-gridControl.ClipboardPaste    += (s, e) => { };
+gridControl.Model.ClipboardCanCopy += (s, e) => { /* set e.Handled = true to cancel */ };
+gridControl.Model.ClipboardCanCut += (s, e) => { };
+gridControl.Model.ClipboardCanPaste += (s, e) => { };
+gridControl.Model.ClipboardCopy += (s, e) => { /* custom post-copy logic */ };
+gridControl.Model.ClipboardCut += (s, e) => { };
+gridControl.Model.ClipboardPaste += (s, e) => { };
 ```
 
 ---
@@ -58,8 +58,7 @@ int rows, cols;
 gridControl.Model.TextDataExchange.CopyTextToBuffer(
     out buffer,
     gridControl.Model.SelectedRanges,
-    out rows, out cols,
-    isCut: false);   // true = cut, false = copy
+    out rows, out cols,false);   // true = cut, false = copy
 // buffer now holds tab-delimited cell text
 ```
 

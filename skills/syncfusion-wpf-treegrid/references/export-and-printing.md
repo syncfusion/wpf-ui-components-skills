@@ -484,7 +484,8 @@ if (File.Exists(fileName))
 ```csharp
 // Required NuGet packages:
 // - Syncfusion.SfGrid.WPF
-// - Syncfusion.GridExport.WPF
+// - Syncfusion.GridExcelExport.WPF
+// - Syncfusion.DataGridExcelExport.Wpf
 // - Syncfusion.XlsIO.WPF (for Excel)
 // - Syncfusion.Pdf.WPF (for PDF)
 // - Syncfusion.PdfViewer.WPF (for printing)

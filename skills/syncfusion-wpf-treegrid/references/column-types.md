@@ -154,8 +154,8 @@ Handle date and time data:
 <syncfusion:TreeGridDateTimeColumn MappingName="DOB"
                                   HeaderText="Date of Birth"
                                   Pattern="ShortDate"
-                                  MinDate="1950-01-01"
-                                  MaxDate="2010-12-31"
+                                  MinDateTime="1950-01-01"
+                                  MaxDateTime="2010-12-31"
                                   NullText="Not Specified"
                                   AllowNullValue="True"/>
 ```
@@ -176,8 +176,8 @@ var dateColumn = new TreeGridDateTimeColumn
     MappingName = "DOB",
     HeaderText = "Date of Birth",
     Pattern = DateTimePattern.ShortDate,
-    MinDate = new DateTime(1950, 1, 1),
-    MaxDate = new DateTime(2010, 12, 31)
+    MinDateTime = new DateTime(1950, 1, 1),
+    MaxDateTime = new DateTime(2010, 12, 31)
 };
 
 // Custom pattern
@@ -196,7 +196,6 @@ Boolean value representation:
 ```xaml
 <syncfusion:TreeGridCheckBoxColumn MappingName="IsActive"
                                   HeaderText="Active"
-                                  AllowCheckBoxOnHeader="True"
                                   IsThreeState="False"/>
 ```
 
@@ -205,16 +204,9 @@ var checkBoxColumn = new TreeGridCheckBoxColumn
 {
     MappingName = "IsActive",
     HeaderText = "Active",
-    AllowCheckBoxOnHeader = true, // Header checkbox to toggle all
     IsThreeState = false          // True for Checked/Unchecked/Indeterminate
 };
 
-// Header checkbox events
-treeGrid.HeaderCheckBoxClick += (s, e) =>
-{
-    bool isChecked = e.IsChecked;
-    Debug.WriteLine($"Header checkbox: {isChecked}");
-};
 ```
 
 ## ComboBox Column
@@ -267,7 +259,6 @@ Clickable links:
 ```xaml
 <syncfusion:TreeGridHyperlinkColumn MappingName="WebSite"
                                    HeaderText="Website"
-                                   NavigateText="Visit"
                                    TextDecorations="Underline"/>
 ```
 
@@ -281,7 +272,8 @@ var hyperlinkColumn = new TreeGridHyperlinkColumn
 // Handle navigation
 treeGrid.CurrentCellRequestNavigate += (s, e) =>
 {
-    if (e.Column.MappingName == "WebSite")
+    var column = treeGrid.Columns[e.RowColumnIndex.ColumnIndex];
+    if (column.MappingName == "WebSite")
     {
         var url = e.NavigateText;
         Process.Start(new ProcessStartInfo
@@ -349,29 +341,21 @@ Formatted input with masks:
 <syncfusion:TreeGridMaskColumn MappingName="PhoneNumber"
                               HeaderText="Phone"
                               Mask="(999) 000-0000"
-                              MaskType="Simple"
+                              MaskFormat="ExcludePromptAndLiterals"
                               PromptChar="_"/>
 ```
 
 **Mask Types:**
 
 ```csharp
-// Simple mask
 var phoneMask = new TreeGridMaskColumn
 {
     MappingName = "PhoneNumber",
     Mask = "(999) 000-0000",  // 9=optional, 0=required digit
-    MaskType = MaskType.Simple,
     PromptChar = '_'
 };
 
-// RegEx mask
-var emailMask = new TreeGridMaskColumn
-{
-    MappingName = "Email",
-    Mask = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
-    MaskType = MaskType.RegEx
-};
+
 
 // Custom mask characters
 // 0 = Required digit (0-9)
@@ -517,8 +501,8 @@ var ageColumn = new TreeGridNumericColumn
 var dateColumn = new TreeGridDateTimeColumn
 {
     MappingName = "JoinDate",
-    MinDate = DateTime.Now.AddYears(-50),
-    MaxDate = DateTime.Now
+    MinDateTime = DateTime.Now.AddYears(-50),
+    MaxDateTime = DateTime.Now
 };
 ```
 
@@ -670,7 +654,7 @@ var phoneColumn = new TreeGridMaskColumn
     Mask = "(999) 000-0000", // Correct format
     MaskType = MaskType.Simple,
     PromptChar = '_',
-    ValidationMode = MaskValidationMode.Immediate
+    GridValidationMode = GridValidationMode.InView
 };
 
 // Handle validation events

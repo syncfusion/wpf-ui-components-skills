@@ -248,19 +248,25 @@ Set how columns are sized:
 
 ```csharp
 // Star sizing - distribute available width
-treeGrid.ColumnSizer = GridLengthUnitType.Star;
+treeGrid.ColumnSizer = TreeColumnSizer.Star;
 
 // Auto sizing based on content
-treeGrid.ColumnSizer = GridLengthUnitType.Auto;
+treeGrid.ColumnSizer = TreeColumnSizer.Auto;
 
 // No auto-sizing
-treeGrid.ColumnSizer = GridLengthUnitType.None;
+treeGrid.ColumnSizer = TreeColumnSizer.None;
 
 // SizeToCells - fit to cell content
-treeGrid.ColumnSizer = GridLengthUnitType.SizeToCells;
+treeGrid.ColumnSizer = TreeColumnSizer.SizeToCells;
 
 // SizeToHeader - fit to header text
-treeGrid.ColumnSizer = GridLengthUnitType.SizeToHeader;
+treeGrid.ColumnSizer = TreeColumnSizer.SizeToHeader;
+
+// Fill last column with remaining space
+treeGrid.ColumnSizer = TreeColumnSizer.FillColumn;
+
+// Auto fill last column along with content-based sizing
+treeGrid.ColumnSizer = TreeColumnSizer.AutoFillColumn;
 ```
 
 ### Programmatic Resizing
@@ -281,8 +287,6 @@ foreach (var column in treeGrid.Columns)
 // Auto-fit all columns to content
 treeGrid.TreeGridColumnSizer.Refresh();
 
-// Auto-fit specific column
-treeGrid.TreeGridColumnSizer.Refresh("FirstName");
 ```
 
 ### Disable Resizing
@@ -368,7 +372,6 @@ Freeze both rows and columns:
 ```csharp
 // Freeze rows and columns
 treeGrid.FrozenColumnCount = 2;
-treeGrid.FrozenRowsCount = 1;
 
 // Get frozen column count
 int frozenCount = treeGrid.FrozenColumnCount;
@@ -510,7 +513,7 @@ treeGrid.Columns.Add(new TreeGridCurrencyColumn
 
 ```csharp
 // Set explicit widths for better performance
-treeGrid.ColumnSizer = GridLengthUnitType.None;
+treeGrid.ColumnSizer = TreeColumnSizer.None;
 
 foreach (var column in treeGrid.Columns)
 {
@@ -518,7 +521,7 @@ foreach (var column in treeGrid.Columns)
 }
 
 // Use Star sizing for responsive layouts
-treeGrid.ColumnSizer = GridLengthUnitType.Star;
+treeGrid.ColumnSizer = TreeColumnSizer.Star;
 ```
 
 ### 3. Handle Column Events
@@ -526,16 +529,16 @@ treeGrid.ColumnSizer = GridLengthUnitType.Star;
 ```csharp
 treeGrid.ColumnDragging += (s, e) =>
 {
-    if (e.Reason == QueryColumnDraggingReason.DragEnded)
+    if (e.Reason == QueryColumnDraggingReason.Dropped)
     {
         // Save new column order
         SaveColumnLayout();
     }
 };
 
-treeGrid.Resizing += (s, e) =>
+treeGrid.ResizingColumns += (s, e) =>
 {
-    if (e.Reason == QueryResizingReason.ResizeEnded)
+    if (e.Reason == ColumnResizingReason.Resized)
     {
         // Save new column widths
         SaveColumnWidths();
@@ -584,7 +587,7 @@ public void LoadColumnLayout()
             var currentIndex = treeGrid.Columns.IndexOf(column);
             if (currentIndex != config.DisplayIndex)
             {
-                treeGrid.Columns.Move(currentIndex, config.DisplayIndex);
+                treeGrid.Columns.MoveTo(currentIndex, config.DisplayIndex);
             }
         }
     }
@@ -702,9 +705,9 @@ private void TreeGrid_Loaded(object sender, RoutedEventArgs e)
     LoadColumnLayout(); // Restore saved layout
 }
 
-private void TreeGrid_Resizing(object sender, ResizingEventArgs e)
+private void TreeGrid_Resizing(object sender, ResizingColumnsEventArgs e)
 {
-    if (e.Reason == QueryResizingReason.ResizeEnded)
+    if (e.Reason == ColumnResizingReason.Resized)
     {
         SaveColumnLayout(); // Save immediately
     }

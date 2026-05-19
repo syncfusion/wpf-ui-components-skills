@@ -57,15 +57,20 @@ For real-time dashboards where many cells change rapidly:
 2. Suspend layout during batch updates:
 
 ```csharp
-// Temporarily suspend redraw for bulk updates
-gridControl.BeginUpdate();
+// Suspend layout temporarily for bulk updates
+gridControl.BeginInit();
 
 for (int i = 1; i <= 1000; i++)
+{
     gridControl.Model[i, 1].CellValue = _liveData[i];
+}
 
-// Resume and repaint once
-gridControl.EndUpdate();
-gridControl.Refresh();
+// Resume layout and repaint once
+gridControl.EndInit();
+
+// Optional: Force final layout refresh
+gridControl.UpdateLayout();
+
 ```
 
 ---
@@ -95,7 +100,7 @@ A floating cell expands horizontally to show its full content when neighboring c
 
 ```csharp
 // Enable floating for a cell
-gridControl.Model[3, 1].FloatCell = true;
+gridControl.Model[3, 1].FloodCell = true;
 gridControl.Model[3, 1].CellValue = "This text floats over empty neighbors →";
 ```
 
@@ -107,13 +112,13 @@ The grid supports runtime zoom via the `ZoomFactor` property:
 
 ```csharp
 // Zoom to 150%
-gridControl.ZoomFactor = 1.5;
+gridControl.ZoomScale = 1.5;
 
 // Reset to 100%
-gridControl.ZoomFactor = 1.0;
+gridControl.ZoomScale = 1.0;
 
 // Zoom to 75%
-gridControl.ZoomFactor = 0.75;
+gridControl.ZoomScale = 0.75;
 ```
 
 Zooming scales both the grid cells and all text/controls within them.

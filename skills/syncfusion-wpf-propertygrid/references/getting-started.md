@@ -19,6 +19,12 @@ You can find more details about installing the NuGet package in a WPF applicatio
 
 [How to install nuget packages](https://help.syncfusion.com/wpf/visual-studio-integration/nuget-packages)
 
+## NuGet Package
+
+```text
+Syncfusion.PropertyGrid.Wpf
+```
+
 ## Adding WPF PropertyGrid via designer
 
 You can add the [PropertyGrid](https://www.syncfusion.com/wpf-controls/propertygrid) control to an application by dragging it from the toolbox to a view of the designer. The following dependent assembly will be added automatically:
