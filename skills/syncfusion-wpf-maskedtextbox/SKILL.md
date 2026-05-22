@@ -4,7 +4,7 @@ description: Comprehensive guide for implementing Syncfusion WPF MaskedTextBox (
 metadata:
   author: "Syncfusion Inc"
   version: "33.1.44"
-
+---
 
 # Implementing Syncfusion WPF MaskedTextBox (SfMaskedEdit)
 
