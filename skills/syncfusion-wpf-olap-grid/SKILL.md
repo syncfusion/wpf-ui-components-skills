@@ -3,7 +3,7 @@ name: syncfusion-wpf-olap-grid
 description: Implement Syncfusion WPF OLAP Grid for multi-dimensional OLAP data analysis. Use this when working with OLAP grids, multi-dimensional analysis, business intelligence grids, or SSAS data display. Covers OLAP data source connections, drill down/up operations, KPI display, dimensional analysis, and cube data visualization for WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing OLAP Grids

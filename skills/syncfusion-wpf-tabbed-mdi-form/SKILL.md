@@ -3,7 +3,7 @@ name: syncfusion-wpf-tabbed-mdi-form
 description: Implement Syncfusion WPF DocumentContainer (Tabbed MDI Form) control for creating MDI and TDI interfaces. Use this skill when working with DocumentContainer, Multiple Document Interface (MDI), Tabbed Document Interface (TDI), or Visual Studio-style document management. Covers document windows, tab groups, window switchers, state persistence for document layouts, and dockable document windows in WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF DocumentContainer

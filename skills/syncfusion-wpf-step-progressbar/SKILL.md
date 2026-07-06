@@ -3,7 +3,7 @@ name: syncfusion-wpf-step-progressbar
 description: Implement Syncfusion WPF SfStepProgressBar for multi-step process visualization. Use this when building wizard steps, order tracking, stepper indicators, checkout flows, registration wizards, or onboarding step sequences in WPF. Covers StepViewItem, SelectedIndex, SelectedItemStatus, step marker customization, connector lines, data binding, and template selectors based on step status.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF SfStepProgressBar

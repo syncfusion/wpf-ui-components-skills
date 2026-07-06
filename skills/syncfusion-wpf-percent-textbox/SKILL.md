@@ -3,7 +3,7 @@ name: syncfusion-wpf-percent-textbox
 description: Use this skill when implementing Syncfusion WPF PercentTextBox controls for percentage input handling. Provides comprehensive guidance on value binding, min/max validation, number formatting with culture support, appearance customization with positive/negative/zero foregrounds, interactive features like scroll intervals and range adorners, watermark text, and data binding patterns for percentage-based input controls with international format support.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF PercentTextBox

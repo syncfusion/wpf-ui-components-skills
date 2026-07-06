@@ -3,7 +3,7 @@ name: syncfusion-wpf-3d-chart
 description: Comprehensive guide for implementing Syncfusion WPF 3D Charts (SfChart3D) control for 3D data visualization in Windows Presentation Foundation applications. Use this when working with 3D charts, 3D visualization, or depth axis configurations. This skill covers 3D series types (column, pie, bar), Manhattan charts, 3D rotation, X/Y/Z coordinate plotting, and depth axis configuration for WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF 3D Charts

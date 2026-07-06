@@ -3,7 +3,7 @@ name: syncfusion-wpf-hub-tile
 description: Implement Syncfusion WPF Tile Controls (SfHubTile and SfPulsingTile) for animated tile UIs. Use this when building Windows-style live tiles, tile transitions, tile animations, or grouped tile layouts in WPF. Covers Slide/Fade transitions, pulsing/zooming content, tile grouping, freeze/unfreeze animations, and desktop-style live tile experiences.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF Tile Controls

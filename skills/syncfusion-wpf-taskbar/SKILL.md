@@ -3,7 +3,7 @@ name: syncfusion-wpf-taskbar
 description: Implement Syncfusion WPF TaskBar for Windows Explorer-style grouped task panels with collapsible TaskBarItem sections. Use this when building grouped collapsible panels, Windows XP-style sidebars, or expandable action panel sections in WPF. Covers TaskBarItem, GroupMargin, GroupPadding, GroupWidth, GroupOrientation, IsOpened, ButtonSize, and animation speed configuration.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF TaskBar

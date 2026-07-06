@@ -3,7 +3,7 @@ name: syncfusion-wpf-color-picker-palette
 description: Implements the Syncfusion WPF ColorPickerPalette control for color selection from themed and standard color palettes. Use this when adding color pickers with predefined palettes, customizing color options, or handling color selection events in WPF applications. Covers setup, color management, appearance customization, and interaction patterns.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF ColorPickerPalette

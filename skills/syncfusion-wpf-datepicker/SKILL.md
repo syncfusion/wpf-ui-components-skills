@@ -3,7 +3,7 @@ name: syncfusion-wpf-datepicker
 description: Implements the Syncfusion WPF DatePicker (SfDatePicker) control for touch-friendly date selection. Use this when adding date input controls, customizing date picker appearance, formatting date displays, or restricting date ranges in WPF applications. Covers installation, date formatting, styling, customization, value management, and event handling.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF DatePicker (SfDatePicker)

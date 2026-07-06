@@ -3,7 +3,7 @@ name: syncfusion-wpf-rating
 description: Implements the Syncfusion WPF SfRating control for star-based rating input. Use when adding user feedback or review ratings, configuring rating precision (standard/half/exact), or presenting read-only rating displays.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Rating

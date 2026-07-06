@@ -3,7 +3,7 @@ name: syncfusion-wpf-surface-chart
 description: Guide for implementing Syncfusion WPF Surface Chart (SfSurfaceChart) for three-dimensional data visualization. Use this when working with 3D surface charts, contour charts, wireframe charts, or mathematical surface plotting with X, Y, Z coordinates. This skill covers surface visualization, topographical charts, and 3D data plotting scenarios for WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Surface Chart

@@ -3,7 +3,7 @@ name: syncfusion-wpf-calculator
 description: Implement Syncfusion WPF Calculator (SfCalculator) for mathematical operations in Windows desktop applications. Use this when adding calculator functionality to WPF apps. Covers setup, value management, and memory operations.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF Calculator (SfCalculator)

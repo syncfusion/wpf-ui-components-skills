@@ -3,7 +3,7 @@ name: syncfusion-wpf-scheduler
 description: Implement Syncfusion WPF Scheduler (SfScheduler) for managing appointments and calendar views in desktop applications. Use this when building scheduling interfaces, appointment management systems, or resource booking applications. This skill covers calendar views, appointment handling, resource scheduling, timeline customization, and Outlook-style calendar functionality.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # WPF Scheduler (SfScheduler) Implementation

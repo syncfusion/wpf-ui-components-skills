@@ -3,7 +3,7 @@ name: syncfusion-wpf-map
 description: Implement Syncfusion WPF Maps (SfMap) control for geographical data visualization in Windows Presentation Foundation applications. Use this when displaying geographical data, rendering shape files, or integrating map layers with markers and bubbles. This skill covers ShapeFileLayer, ImageryLayer, map customization, legends, OpenStreetMap/Bing Maps integration, and interactive map features.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Maps (SfMap)

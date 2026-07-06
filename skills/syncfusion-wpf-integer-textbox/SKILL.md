@@ -3,7 +3,7 @@ name: syncfusion-wpf-integer-textbox
 description: Comprehensive guide for implementing Syncfusion WPF IntegerTextBox control for integer value input with validation, formatting, and customization. Use this skill when implementing integer input controls, numeric validation for integers, or integer value entry in WPF. Covers integer data entry forms, min/max value restrictions, number formatting with culture support, integer value scrolling, range adorner progress visualization, and integer-specific input control implementation.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing IntegerTextBox

@@ -3,7 +3,7 @@ name: syncfusion-wpf-range-selector
 description: Comprehensive guide for implementing Syncfusion WPF Range Selector (SfDateTimeRangeNavigator) for time-bound data visualization with interactive scrolling, zooming, and range selection. Use this when working with range selectors, date-time range navigation, or time-bound data visualization. This skill covers interactive data range selection, chart range zooming, and dashboard time navigation features for large time-based datasets in WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Range Selectors

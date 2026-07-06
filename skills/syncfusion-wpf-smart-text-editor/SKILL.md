@@ -3,7 +3,7 @@ name: syncfusion-wpf-smart-text-editor
 description: Implements Syncfusion WPF Smart Text Editor (SfSmartTextEditor), an AI-powered multiline input control with intelligent text completion. Use this when implementing smart text editors, AI-powered text input, or predictive text suggestions in WPF applications. The control provides context-aware typing assistance through integration with AI services including Azure OpenAI, OpenAI, Ollama, Claude, Gemini, Groq, and DeepSeek. Features include dual suggestion display modes (inline/popup), custom phrase libraries for offline suggestions, full text customization, and comprehensive command handling for workflow integration.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Smart Text Editor

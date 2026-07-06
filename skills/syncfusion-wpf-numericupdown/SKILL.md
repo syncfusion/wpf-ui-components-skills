@@ -3,7 +3,7 @@ name: syncfusion-wpf-numericupdown
 description: Learn to implement and configure the Syncfusion WPF NumericUpdown (UpDown) control for numeric value input. Use when creating numeric input fields with spin buttons, value restrictions, number formatting, and cultural support. Includes guidance for getting started, managing values, formatting numbers, styling, and advanced configurations.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF NumericUpdown (UpDown)

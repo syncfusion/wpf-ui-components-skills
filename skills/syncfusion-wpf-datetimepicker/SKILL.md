@@ -3,7 +3,7 @@ name: syncfusion-wpf-datetimepicker
 description: Implements the Syncfusion WPF DateTimeEdit (DateTimePicker) control for date and time selection with dropdown calendar/clock support. Use this when adding datetime pickers, masked datetime input, or datetime selection controls in WPF applications. Covers DateTime binding, mask/free-form editing, pattern formatting, CultureInfo localization, dropdown views, date range restrictions, blackout dates, null value handling, watermarks, and theming with SfSkinManager.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing DateTimeEdit (WPF)

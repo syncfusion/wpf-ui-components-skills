@@ -3,7 +3,7 @@ name: syncfusion-wpf-colorpicker
 description: Implement Syncfusion WPF ColorPicker for color and gradient selection. Use this skill whenever users need to add color picking functionality, select solid colors, create linear/radial gradients, customize palettes, apply themes, or handle color-changed events in WPF applications. Covers XAML and C# implementations.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF ColorPicker

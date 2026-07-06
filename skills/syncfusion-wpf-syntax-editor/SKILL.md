@@ -3,7 +3,7 @@ name: syncfusion-wpf-syntax-editor
 description: Implement Syncfusion WPF Syntax Editor (EditControl) for code editors and advanced text editing applications. Use this when building syntax-highlighted code editors, IDE-like editors, or source code editing interfaces in WPF. Covers syntax highlighting, IntelliSense, find/replace, programming language support, and Visual Studio-style editing features.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syntax Editor

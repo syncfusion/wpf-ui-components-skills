@@ -3,7 +3,7 @@ name: syncfusion-wpf-range-slider
 description: Implements the Syncfusion WPF SfRangeSlider control for selecting numeric ranges with single or dual thumbs. Use when building value-range selection UIs, sliders with ticks/tooltips, or custom orientation and snapping behaviors.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Range Slider

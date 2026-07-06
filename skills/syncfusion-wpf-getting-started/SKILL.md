@@ -3,7 +3,7 @@ name: syncfusion-wpf-getting-started
 description: Comprehensive guide for setting up and getting started with Syncfusion WPF components in Windows Presentation Foundation applications. Covers installation methods (web installer, NuGet, offline installer), system requirements verification, adding controls to projects, configuring themes and localization, and troubleshooting setup issues. Use this skill when users need help with installing Syncfusion WPF, configuring NuGet packages, upgrading versions, or resolving setup and configuration problems.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion Getting Started

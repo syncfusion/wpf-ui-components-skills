@@ -3,7 +3,7 @@ name: syncfusion-wpf-domain-updown
 description: Implements the Syncfusion WPF DomainUpDown (SfDomainUpDown) control for cycling through predefined item lists using spin buttons. Use this when adding domain selectors, item selectors with up/down buttons, or controls that navigate through collections using increment/decrement buttons in WPF applications. Covers item population, spin button alignment, styling, auto-reverse, and data binding with custom templates.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF DomainUpDown

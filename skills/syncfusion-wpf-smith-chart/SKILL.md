@@ -3,7 +3,7 @@ name: syncfusion-wpf-smith-chart
 description: Implement and configure Syncfusion WPF SmithChart (SfSmithChart) component for visualizing impedance and admittance in transmission line applications. Use this when working with high-frequency circuit analysis, RF engineering, or telecommunications data. This skill covers series configuration, dual-axis systems, data markers, legends, appearance customization, and interactive features.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF SmithCharts

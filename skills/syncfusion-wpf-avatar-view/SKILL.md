@@ -3,7 +3,7 @@ name: syncfusion-wpf-avatar-view
 description: Implement Syncfusion WPF SfAvatarView for displaying user profile avatars and initials. Use this when working with avatar controls, user profile displays, group avatars, or badge integration in WPF. Covers all content types (Default, Initials, CustomImage, AvatarCharacter, Group, ContentTemplate), visual styles (Circle, Square, custom shape/size), appearance customization, and SfBadge integration.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing SfAvatarView (WPF)

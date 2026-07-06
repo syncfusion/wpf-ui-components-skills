@@ -3,7 +3,7 @@ name: syncfusion-wpf-radial-slider
 description: Implement Syncfusion WPF SfRadialSlider for circular and radial numeric value selection. Use this when working with radial sliders, circular range selectors, or radial numeric inputs in WPF. Covers Value, Minimum, Maximum, TickFrequency, StartAngle, EndAngle, SweepDirection, rim radius factors, custom tick/label/pointer templates, and theming with SfSkinManager.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing SfRadialSlider (WPF)

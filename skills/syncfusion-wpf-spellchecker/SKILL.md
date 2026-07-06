@@ -3,7 +3,7 @@ name: syncfusion-wpf-spellchecker
 description: Guide for implementing Syncfusion WPF SpellChecker (SfSpellChecker) control in WPF applications. Use this skill when implementing spell checking, text validation, dictionary management, or spelling error detection in WPF. Covers checking spelling mistakes in TextBox/RichTextBox controls, language dictionaries, custom dictionaries, context menu suggestions, and spelling validation requirements.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF SpellChecker

@@ -3,7 +3,7 @@ name: syncfusion-wpf-grouping
 description: Implements Syncfusion Essential Grouping for WPF, a data organization engine that works without UI controls. Use this when working with GroupingEngine, TableDescriptor, or organizing tabular data with hierarchical grouping, custom sorting, and filtering. Supports binary tree data structures, expression fields, summary calculations, and aggregate operations for WPF data analysis applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion Essential Grouping for WPF

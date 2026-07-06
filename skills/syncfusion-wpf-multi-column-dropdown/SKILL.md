@@ -3,7 +3,7 @@ name: syncfusion-wpf-multi-column-dropdown
 description: Implements Syncfusion WPF Multi Column Dropdown (SfMultiColumnDropDownControl) for displaying searchable dropdown lists with grid view. Use this when creating dropdowns with multiple columns, autocomplete functionality, or filterable data grids in combo boxes. Supports data binding, column configuration, multi-row selection, and popup customization.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Multi Column Dropdown

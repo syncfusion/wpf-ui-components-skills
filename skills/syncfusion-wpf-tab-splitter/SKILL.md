@@ -3,7 +3,7 @@ name: syncfusion-wpf-tab-splitter
 description: Implement Syncfusion WPF TabSplitter for VS 2008-style split tab views with top and bottom panel sections. Use this when building split tab layouts, dual-pane views, or side-by-side tabbed views in WPF. Covers SplitterPage, TopPanelItems, BottomPanelItems, TabSplitterItem, and collapsible split panel configuration.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF TabSplitter

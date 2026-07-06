@@ -3,7 +3,7 @@ name: syncfusion-wpf-kanban-board
 description: Implement Syncfusion WPF Kanban (SfKanban) control for workflow visualization and task management. Use this when building agile project tracking interfaces, workflow boards, or task management systems. This skill covers card configuration, column management, swim lanes, WIP limits, drag-and-drop functionality, workflows, sorting, and event handling.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Kanban (SfKanban)

@@ -3,7 +3,7 @@ name: syncfusion-wpf-timespan-editor
 description: How to implement the Syncfusion WPF TimeSpanEdit (TimeSpan Editor) control for time duration inputs. Use this skill when creating time duration inputs, capturing Days:Hours:Minutes:Seconds values, building time interval editors, or implementing time range controls with keyboard and mouse-based time entry. Includes setup, formatting, user interactions, constraints, and styling.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF TimeSpanEdit

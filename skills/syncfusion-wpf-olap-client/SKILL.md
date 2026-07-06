@@ -3,7 +3,7 @@ name: syncfusion-wpf-olap-client
 description: Implement Syncfusion WPF OLAP Client for business intelligence and multidimensional data analysis. Use this when working with OLAP Client controls, cube analysis, SSAS (SQL Server Analysis Services), or multidimensional data. Covers cube database connections (offline cubes, Mondrian, ActivePivot), dimension browsing, OLAP reports, drill-through operations, and KPI analysis.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF OLAP Client

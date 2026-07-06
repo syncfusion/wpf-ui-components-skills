@@ -3,7 +3,7 @@ name: syncfusion-wpf-chromeless-window
 description: Implements the Syncfusion WPF ChromelessWindow for custom window chrome and title bar customization. Use this when creating custom window designs, customizing title bars, or implementing borderless windows in WPF applications. Covers title bar customization, background styling, border radius, custom buttons, and native chrome integration.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Chromeless Window

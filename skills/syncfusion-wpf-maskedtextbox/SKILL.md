@@ -3,7 +3,7 @@ name: syncfusion-wpf-maskedtextbox
 description: Comprehensive guide for implementing Syncfusion WPF MaskedTextBox (SfMaskedEdit) control for restricted input with mask patterns. Use this skill when implementing masked input, input masks, or input restrictions with predefined patterns in WPF. Covers phone number input, email validation, credit card input, formatted input with prompt characters, RegEx masks, and custom patterns for dates, currency, product keys, and zip codes.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF MaskedTextBox (SfMaskedEdit)

@@ -3,7 +3,7 @@ name: syncfusion-wpf-combobox
 description: Implement Syncfusion WPF ComboBoxAdv with multiselection, editable support, autocomplete, data binding, and token features. Use this when working with dropdown selection, multiselect dropdowns, editable dropdowns, or autocomplete in WPF. Covers tokens, watermarks, delimiters, custom item templates, and dropdown behavior configuration.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF ComboBox (ComboBoxAdv)

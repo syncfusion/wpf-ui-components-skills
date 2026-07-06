@@ -3,7 +3,7 @@ name: syncfusion-wpf-markdown-viewer
 description: Implement Syncfusion WPF SfMarkdownViewer for rendering and displaying Markdown content in WPF applications. Use this when rendering Markdown text, loading Markdown from strings or application-controlled local files, handling hyperlink clicks with URL validation, or displaying Mermaid diagrams with input sanitization. Covers the Source property, HyperlinkClicked events with allowlist-based navigation, and MermaidBlockTemplate customization with input validation. Always validate and sanitize Markdown content before assigning to Source, especially when the content originates from remote or user-supplied sources.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF SfMarkdownViewer

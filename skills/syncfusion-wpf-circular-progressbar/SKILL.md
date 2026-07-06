@@ -3,7 +3,7 @@ name: syncfusion-wpf-circular-progressbar
 description: Implement Syncfusion WPF SfCircularProgressBar for circular and radial progress indicators. Use this when building circular progress displays, determinate or indeterminate progress animations, buffer/secondary progress, segmented progress rings, or arc-shaped progress with custom center content. Covers RangeColors, StartAngle, EndAngle, SegmentCount, and ProgressContent using Syncfusion.SfProgressBar.WPF.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing SfCircularProgressBar (WPF)

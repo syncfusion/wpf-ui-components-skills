@@ -3,7 +3,7 @@ name: syncfusion-wpf-treemap
 description: Implement Syncfusion WPF TreeMap (SfTreeMap) control for hierarchical data visualization using nested rectangles. Use this when visualizing large datasets with hierarchical structure, creating heat maps, or displaying proportional data. This skill covers TreeMap configuration, layout algorithms, color mapping, data binding, and interactive features for stock analysis, data categorization, and hierarchical visualization scenarios.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF TreeMap (SfTreeMap)

@@ -3,7 +3,7 @@ name: syncfusion-wpf-calendar
 description: Guide to using the Syncfusion WPF CalendarEdit control for date selection and navigation. Use this skill whenever the user needs to implement calendar functionality, select dates, restrict date ranges, customize calendar appearance, or work with multi-date selection. Essential for building date picker interfaces, booking systems, scheduling applications, and any WPF project requiring calendar controls.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # WPF Calendar (CalendarEdit) Implementation Guide

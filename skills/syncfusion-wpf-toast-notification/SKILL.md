@@ -3,7 +3,7 @@ name: syncfusion-wpf-toast-notification
 description: Guide for implementing Syncfusion WPF Toast Notification (SfToastNotification) control for displaying temporary notification messages. Use this skill when implementing toast notifications, pop-up alerts, status messages, or non-intrusive notifications in WPF applications. Covers showing success/error/warning messages, notification systems, and temporary UI feedback without blocking the main window.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Toast Notifications in WPF

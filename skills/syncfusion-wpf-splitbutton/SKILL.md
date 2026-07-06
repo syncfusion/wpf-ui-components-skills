@@ -3,7 +3,7 @@ name: syncfusion-wpf-splitbutton
 description: Implement Syncfusion WPF SplitButton (SplitButtonAdv) with dropdown menus, command binding, and data binding. Use this when working with split buttons, dropdown buttons with menus, or button-menu combinations. This skill covers SplitButtonAdv setup, default actions with dropdown menus, command binding, MVVM implementation, and data-bound dropdown items in WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF SplitButton

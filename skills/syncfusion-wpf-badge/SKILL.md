@@ -3,7 +3,7 @@ name: syncfusion-wpf-badge
 description: Implements the Syncfusion WPF Badge (SfBadge) component for notification badges and indicators. Use this when adding notification badges to buttons, displaying counts or status indicators, or customizing badge appearance in WPF applications. Covers badge positioning with alignment and anchor properties, color customization with Fill property, shapes, animations, and attachment using SfBadge.Badge property.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Badge (SfBadge)

@@ -3,7 +3,7 @@ name: syncfusion-wpf-autocomplete
 description: Implements the Syncfusion WPF SfTextBoxExt autocomplete features for intelligent suggestions, filtering, and tokenized multi-selection. Use when adding predictive text input, filtered suggestion lists, or multi-select search boxes.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF Autocomplete (SfTextBoxExt)

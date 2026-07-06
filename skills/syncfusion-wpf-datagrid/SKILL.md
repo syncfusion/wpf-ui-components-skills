@@ -3,7 +3,7 @@ name: syncfusion-wpf-datagrid
 description: Implements Syncfusion WPF DataGrid (SfDataGrid) component for displaying and manipulating tabular data in Windows Presentation Foundation applications. Use this when working with data grids, table views, or data binding scenarios. Supports sorting, filtering, grouping, editing, Excel/PDF export, drag and drop, master-detail views, summaries, and extensive styling options.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Syncfusion WPF DataGrid

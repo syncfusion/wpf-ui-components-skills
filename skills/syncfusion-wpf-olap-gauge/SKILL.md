@@ -3,7 +3,7 @@ name: syncfusion-wpf-olap-gauge
 description: Guide for implementing Syncfusion WPF OLAP Gauge control for displaying Key Performance Indicators (KPI) from OLAP data sources. Use this when working with OLAP KPI visualization, business intelligence dashboards, or XML/A data binding in WPF. This skill covers connecting to OLAP cubes, SQL Server Analysis Services, Mondrian servers, and configuring KPI displays for executive dashboards and BI applications.
 metadata:
     author: "Syncfusion Inc"
-    version: "33.1.44"
+    version: "34.1.29"
 ---
 
 # Implementing OLAP Gauges

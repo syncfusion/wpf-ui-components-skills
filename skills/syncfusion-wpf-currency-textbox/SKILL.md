@@ -3,7 +3,7 @@ name: syncfusion-wpf-currency-textbox
 description: Implements the Syncfusion WPF CurrencyTextBox control for formatted currency input with culture-specific formatting and validation. Use this when adding currency input fields, financial data entry controls, or decimal value inputs with currency symbols in WPF applications. Covers currency formatting, culture support, min/max validation, NumberFormatInfo customization, and value binding.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # WPF CurrencyTextBox -- Quick Reference

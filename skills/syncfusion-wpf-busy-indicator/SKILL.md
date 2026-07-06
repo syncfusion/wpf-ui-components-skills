@@ -3,7 +3,7 @@ name: syncfusion-wpf-busy-indicator
 description: Comprehensive guide for implementing the Syncfusion WPF Busy Indicator (SfBusyIndicator) control in Windows Presentation Foundation applications. Use this skill when working with loading indicators, progress animations, or visual feedback during async and long-running operations in WPF. Covers IsBusy binding, AnimationType configuration, header customization, MVVM integration, and sizing with ViewboxHeight/ViewboxWidth.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Busy Indicator

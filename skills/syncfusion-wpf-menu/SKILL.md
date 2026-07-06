@@ -3,7 +3,7 @@ name: syncfusion-wpf-menu
 description: Implement Syncfusion WPF MenuAdv for hierarchical menus, context menus, and application menu bars. Use this when building nested menus, menus with icons, keyboard shortcuts, checkbox/radio button menu items, or command-bound menus in WPF. Covers ItemsSource data binding with HierarchicalDataTemplate, MenuItemSeparator, orientation, expand mode, animation, and theming.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing MenuAdv (WPF)

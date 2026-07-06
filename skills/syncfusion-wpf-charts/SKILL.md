@@ -3,7 +3,7 @@ name: syncfusion-wpf-charts
 description: Comprehensive guide for implementing Syncfusion WPF Charts (SfChart) in Windows Presentation Foundation applications. Use this when working with WPF charts, data visualization, or interactive charting features. This skill covers chart series types, axes configuration, data binding, appearance customization, financial charts, technical indicators, and interactive features like zooming and tooltips for WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Charts (SfChart)

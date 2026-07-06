@@ -3,7 +3,7 @@ name: syncfusion-wpf-navigation-pane
 description: Implement Syncfusion WPF GroupBar (Navigation Pane) for Outlook-style expandable category navigation. Use this when creating a navigation pane, GroupBar, sidebar with collapsible sections, or stack-mode navigation in WPF. Covers item hierarchy, visual modes, data binding, drag-and-drop, orientation, behavior, appearance, and themes.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF GroupBar (Navigation Pane)

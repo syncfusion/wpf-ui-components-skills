@@ -3,7 +3,7 @@ name: syncfusion-wpf-bullet-graph
 description: Implement Syncfusion WPF Bullet Graph (SfBulletGraph) components for performance indicators and KPI visualization. Use this when displaying metrics against targets, creating dashboard gauges, or visualizing performance in qualitative ranges. This skill covers featured measures, comparative measures, qualitative ranges, goal tracking, and compact data visualization for dashboards.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Bullet Graphs in WPF

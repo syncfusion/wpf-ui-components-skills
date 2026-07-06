@@ -3,7 +3,7 @@ name: syncfusion-wpf-gridsplitter
 description: Guide for implementing Syncfusion WPF GridSplitter (SfGridSplitter) control for dynamic layout resizing. Use this skill when implementing WPF GridSplitter, split panels, or resizable grid layouts. Covers splitting grid rows or columns with movable splitters, collapse/expand functionality, resizable panels, drag behavior configuration, and splitter appearance customization in WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF GridSplitter

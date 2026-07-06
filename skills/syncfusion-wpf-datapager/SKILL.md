@@ -3,7 +3,7 @@ name: syncfusion-wpf-datapager
 description: Implements Syncfusion WPF DataPager (SfDataPager) for paginating large datasets in WPF applications. Use this when implementing pagination controls, page navigation, or splitting large data into manageable chunks. Supports configurable page sizes, navigation buttons, numeric page buttons, and works with DataGrid, ListBox, ListView, and ItemsControl.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing DataPager

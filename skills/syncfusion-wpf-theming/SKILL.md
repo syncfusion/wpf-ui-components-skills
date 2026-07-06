@@ -3,7 +3,7 @@ name: syncfusion-wpf-theming
 description: Implement and customize themes for Syncfusion WPF controls using SfSkinManager. Apply built-in themes (Windows 11, Fluent, Material, Office 2019), create custom themes with Theme Studio, and control visual effects like reveal animations and acrylic backgrounds. Use this skill whenever user needs to theme WPF applications, apply Syncfusion themes, customize colors/fonts, or configure theme-based visual effects and accessibility features.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Theming

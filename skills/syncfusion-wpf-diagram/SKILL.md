@@ -3,7 +3,7 @@ name: syncfusion-wpf-diagram
 description: Complete guide for implementing Syncfusion WPF Diagram (SfDiagram) in Windows Presentation Foundation applications. Use this when working with diagrams like flowcharts, org charts, BPMN, or UML in WPF. Covers creating diagrams, adding nodes and connectors, configuring automatic layouts, implementing BPMN and UML shapes, setting up symbol palettes, data binding, export functionality, and appearance customization.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Diagram (SfDiagram)

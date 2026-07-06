@@ -3,7 +3,7 @@ name: syncfusion-wpf-pivot-grid
 description: Comprehensive guide for implementing Syncfusion WPF PivotGrid control, a powerful pivot table component for cross-tabulated data analysis. Use this when working with WPF pivot tables, PivotGridControl, or cross-tabulated data scenarios. Covers pivot rows/columns configuration, PivotSchemaDesigner, grouping bar, pivot field list, pivot calculations, filtering, sorting, and data binding for business intelligence applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF PivotGrid

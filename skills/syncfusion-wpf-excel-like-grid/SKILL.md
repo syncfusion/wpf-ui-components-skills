@@ -3,7 +3,7 @@ name: syncfusion-wpf-excel-like-grid
 description: Complete guide for implementing the Syncfusion WPF GridControl — an Excel-like, cell-based virtual grid for Windows Presentation Foundation applications. Use this when working with WPF GridControl or Syncfusion grid components, including cell types, virtual grids, formula cells, clipboard operations, and Excel import/export. Covers QueryCellInfo events, GridStyleInfo, GridModel, row/column management, and appearance customization for desktop applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF GridControl

@@ -3,7 +3,7 @@ name: syncfusion-wpf-color-palette
 description: Implements the Syncfusion WPF Color Palette (SfColorPalette) control for color selection interfaces with swatches. Use this when implementing color picker functionality, color swatches, or color binding in WPF applications. Covers setup, color selection, data binding, swatch navigation, appearance customization, and theming.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Color Palettes

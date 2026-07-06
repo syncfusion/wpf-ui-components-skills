@@ -3,7 +3,7 @@ name: syncfusion-wpf-accordion
 description: Implement Syncfusion WPF SfAccordion for collapsible and expandable panel layouts. Use this when working with accordion controls, expandable panels, or collapsible section navigation in WPF. Covers populating items declaratively or via data binding, selection modes (One/OneOrMore/ZeroOrOne/ZeroOrMore), programmatic selection, appearance customization (AccentBrush, HeaderTemplate, ContentTemplate), and theming with SfSkinManager.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing SfAccordion (WPF)

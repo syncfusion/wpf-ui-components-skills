@@ -3,7 +3,7 @@ name: syncfusion-wpf-licensing
 description: Comprehensive guide for implementing, registering, and troubleshooting Syncfusion licensing across all platforms. Covers license key registration, license validation errors, RegisterLicense API, SyncfusionLicenseProvider configuration, trial vs. licensed versions, CI/CD build server setup, and platform-specific licensing requirements. Use this skill when users need help with Syncfusion license registration, licensing validation issues, or license-related troubleshooting.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion Licensing

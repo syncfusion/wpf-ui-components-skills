@@ -3,7 +3,7 @@ name: syncfusion-wpf-checkedlistbox
 description: Implements the Syncfusion WPF CheckedListBox (CheckListBox) control for multi-select lists with checkboxes. Use this when adding checklist controls, checkbox-enabled item lists, or SelectAll functionality in WPF applications. Covers data binding, appearance customization, grouping/sorting, item selection handling, and virtualization.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF CheckedListBox

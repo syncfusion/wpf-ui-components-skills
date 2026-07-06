@@ -3,7 +3,7 @@ name: syncfusion-wpf-carousel
 description: Implements the Syncfusion WPF Carousel for displaying items in rotating or custom path interfaces with navigation support. Use when building image carousels, rotating galleries, or custom-path item displays with templates and data binding.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Carousels

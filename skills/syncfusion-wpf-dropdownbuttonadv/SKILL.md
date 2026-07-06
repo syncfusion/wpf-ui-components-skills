@@ -3,7 +3,7 @@ name: syncfusion-wpf-dropdownbuttonadv
 description: Implement Syncfusion WPF DropDownButtonAdv for dropdown button controls with popup menus. Use this when adding a dropdown button, dropdown menu, or button with a list of options in WPF. Covers menu items, data binding, command binding, dropdown direction, events, multiline text, styles, and themes.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF DropDownButtonAdv

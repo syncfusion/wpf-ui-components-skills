@@ -3,7 +3,7 @@ name: syncfusion-wpf-double-textbox
 description: Implements the Syncfusion WPF DoubleTextBox control for numeric double-precision input with formatting and validation. Use this when adding numeric textboxes, configuring value ranges (MinValue, MaxValue), or customizing number formatting in WPF applications. Covers culture-specific formatting, scroll intervals, watermarks, null values, and range adorners.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing DoubleTextBox

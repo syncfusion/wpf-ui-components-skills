@@ -3,7 +3,7 @@ name: syncfusion-wpf-tree-navigator
 description: Implement Syncfusion WPF SfTreeNavigator for in-place hierarchical tree navigation and drill-down panels. Use this when building hierarchical navigation panels, drill-down navigation, or breadcrumb-style tree navigation in WPF. Covers declarative item creation, ItemsSource data binding with HierarchicalDataTemplate, Default and Extended navigation modes, HeaderTemplate customization, and MVVM-based SelectedItem selection.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing SfTreeNavigator (WPF)

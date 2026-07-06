@@ -3,7 +3,7 @@ name: syncfusion-wpf-sparkline
 description: Comprehensive guide for implementing Syncfusion WPF Sparkline (SfSparkline) controls in Windows Presentation Foundation applications. Use this when working with sparklines, mini charts, or trend visualization. This skill covers sparkline types (line, column, area, WinLoss), markers, track ball, range bands, axis controls, and segment customization for compact data visualization in WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF Sparklines

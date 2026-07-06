@@ -3,7 +3,7 @@ name: syncfusion-wpf-image-editor
 description: Comprehensive guide for implementing the Syncfusion WPF ImageEditor control (SfImageEditor) for image editing and annotation. Use this when building applications that require image transformations (crop, rotate, flip), visual annotations (shapes, text, pen drawings), and image serialization. Supports loading images from multiple sources, customizing the editor toolbar, managing annotation layers, implementing undo/redo functionality, and localizing the interface. Essential for photo editing tools, document processing applications, and image review workflows.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Image Editor in WPF

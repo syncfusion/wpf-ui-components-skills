@@ -3,7 +3,7 @@ name: syncfusion-wpf-card-view
 description: Implement Syncfusion WPF CardView for card-based data display with grouping, sorting, filtering, and editing. Use this when implementing card panels, binding data with ItemsSource, or customizing card layouts in WPF. Covers CardViewItem population, GroupCards, CanSort, CanEdit, EditItemTemplate, HeaderTemplate, ItemTemplate, and SfSkinManager theming.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing CardView (WPF)

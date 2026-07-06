@@ -3,7 +3,7 @@ name: syncfusion-wpf-smart-datagrid
 description: Guide for implementing Syncfusion WPF Smart DataGrid (SfSmartDataGrid) with AI-powered natural language commands. Use this when creating AI-assisted data grids with natural language sorting, filtering, grouping, and highlighting in WPF applications. Covers Azure OpenAI integration, data binding, and natural language prompt handling for grid operations.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   platform: "WPF"
 ---
 

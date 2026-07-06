@@ -3,7 +3,7 @@ name: syncfusion-wpf-navigation-drawer
 description: Implements the Syncfusion WPF SfNavigationDrawer for slide-out navigation panels and sidebars. Use when building collapsible side panels, hierarchical navigation menus, or responsive drawer display modes (compact/expanded).
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Navigation Drawer

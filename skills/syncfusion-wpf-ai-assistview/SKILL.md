@@ -3,7 +3,7 @@ name: syncfusion-wpf-ai-assistview
 description: Implement Syncfusion WPF SfAIAssistView for AI chat and conversational assistant interfaces. Use this when building AI assistant UIs, message threads with AI responses, or integrating OpenAI/SemanticKernel in WPF. Covers typing indicators, suggestions, input/response toolbars, stop-responding features, and PromptRequest events using Syncfusion.SfChat.Wpf.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing SfAIAssistView (WPF)

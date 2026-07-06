@@ -3,7 +3,7 @@ name: syncfusion-wpf-treeview
 description: Comprehensive guide for implementing Syncfusion WPF TreeView (SfTreeView) control to display hierarchical data in Windows Presentation Foundation applications. Use this when working with tree structures, folder hierarchies, organizational charts, or parent-child data relationships. Supports drag-and-drop reordering, checkbox selection, load-on-demand for large datasets, and inline editing of tree nodes.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF TreeView (SfTreeView)

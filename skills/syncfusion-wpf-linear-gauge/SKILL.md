@@ -3,7 +3,7 @@ name: syncfusion-wpf-linear-gauge
 description: Implement Syncfusion WPF Linear Gauge (SfLinearGauge) in Windows Presentation Foundation applications. Use this when working with linear meters, thermometer displays, or progress indicators with scales. This skill covers scale configuration, adding pointers (bar or symbol), creating colored ranges, customizing labels and ticks, setting horizontal or vertical orientation, and implementing thermometer-style visualizations.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Linear Gauges

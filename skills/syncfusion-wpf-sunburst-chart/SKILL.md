@@ -3,7 +3,7 @@ name: syncfusion-wpf-sunburst-chart
 description: Implement Syncfusion WPF Sunburst Chart (SfSunburstChart) for hierarchical data visualization. Use this when working with sunburst charts, hierarchical data visualization, multi-level circular charts, or drill-down visualizations. This skill covers displaying organizational hierarchies, file system structures, sales data by region/category, and other multi-level categorical data in concentric circles for WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 ## Assembly Requirements

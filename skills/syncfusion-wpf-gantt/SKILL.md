@@ -3,7 +3,7 @@ name: syncfusion-wpf-gantt
 description: Implement Syncfusion WPF Gantt control for project management and task scheduling in Windows Presentation Foundation applications. Use this when building project planning tools, task timeline visualizations, or resource management systems. This skill covers Gantt chart configuration, task dependencies, drag-drop interactions, resource allocation, baseline tracking, and customization options.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF Gantt Control

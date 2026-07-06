@@ -3,7 +3,7 @@ name: syncfusion-wpf-breadcrumb
 description: Implement the Syncfusion WPF HierarchyNavigator (Breadcrumb) control for hierarchical path navigation. Use this when building breadcrumb or address-bar UIs, binding hierarchical data to a navigation control, or enabling edit mode with AutoComplete path entry in WPF. Covers navigation history, refresh button, progress bar during navigation, and keyboard-driven hierarchical navigation.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF HierarchyNavigator (Breadcrumb)

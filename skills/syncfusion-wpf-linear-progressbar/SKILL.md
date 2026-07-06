@@ -3,7 +3,7 @@ name: syncfusion-wpf-linear-progressbar
 description: Implement Syncfusion WPF SfLinearProgressBar for horizontal or vertical linear progress indicators. Use this when building determinate progress displays, indeterminate loading bars, buffer/secondary progress, or segmented progress bars in WPF. Covers RangeColors, gradient progress, IndicatorPadding, IndicatorCornerRadius, and IsIndeterminate using Syncfusion.SfProgressBar.WPF.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing SfLinearProgressBar (WPF)

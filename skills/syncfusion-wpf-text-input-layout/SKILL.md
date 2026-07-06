@@ -3,7 +3,7 @@ name: syncfusion-wpf-text-input-layout
 description: Implements the Syncfusion WPF SfTextInputLayout control to provide floating labels, assistive labels, and input validation UI for WPF text inputs. Use when adding floating labels, customizing input container styles, or showing validation/helper text.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF TextInputLayout 

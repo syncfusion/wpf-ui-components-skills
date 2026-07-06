@@ -3,7 +3,7 @@ name: syncfusion-wpf-wizard-control
 description: Implement Syncfusion WPF WizardControl for step-by-step wizard UIs. Use this when building multi-page wizard flows, installation wizards, or setup wizard interfaces in WPF. Covers adding WizardPages, setting page types (Blank, Interior, Exterior), controlling navigation buttons (Back, Next, Finish, Cancel, Help), ItemsSource data binding, non-linear navigation, and banner image customization.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF WizardControl

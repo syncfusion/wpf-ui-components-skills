@@ -3,7 +3,7 @@ name: syncfusion-wpf-tile-view
 description: Create and configure WPF TileView controls for organizing and displaying content in tile layouts. Use this skill whenever users need to implement tile-based layouts, arrange tiles in matrix positions, add drag-drop functionality to tiles, maximize/minimize tile items, customize tile headers and appearance, bind data to tile views, or create responsive dashboard-like layouts. Essential for building WPF applications with interactive tiled interfaces.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # WPF TileView Implementation

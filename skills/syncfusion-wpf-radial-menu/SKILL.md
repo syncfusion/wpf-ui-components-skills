@@ -3,7 +3,7 @@ name: syncfusion-wpf-radial-menu
 description: Implements the Syncfusion WPF SfRadialMenu for circular/contextual menu layouts and hierarchical circular navigation. Use when you need drill-down circular menus, radial item layouts, or compact contextual command sets.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Radial Menu

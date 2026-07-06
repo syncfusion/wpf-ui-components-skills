@@ -3,7 +3,7 @@ name: syncfusion-wpf-docking
 description: Implements the Syncfusion WPF DockingManager control for Visual Studio-like docking interfaces with MDI/TDI support, floating windows, and auto-hide panels. Use this when creating docking layouts, window management systems, tabbed document interfaces, or IDE-style layouts in WPF applications. Covers dock panels, floating windows, auto-hide functionality, state persistence, and window management.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF DockingManager

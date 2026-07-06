@@ -3,7 +3,7 @@ name: syncfusion-wpf-tab-navigation
 description: Implement Syncfusion WPF TabNavigationControl for animated content switching with slide, fade, zoom, and blur transitions. Use this when building tab navigation with transition effects, ad-rotator style content displays, or animated item switching in WPF. Covers all seven TransitionEffect values, ItemsSource data binding, and appearance customization (HeaderVisibility, NavigationButtonVisibility, TabStripVisibility).
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing TabNavigationControl (WPF)

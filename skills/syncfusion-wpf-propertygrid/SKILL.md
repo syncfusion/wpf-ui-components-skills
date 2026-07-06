@@ -3,7 +3,7 @@ name: syncfusion-wpf-propertygrid
 description: Implement Syncfusion WPF PropertyGrid for browsing and editing object properties with custom editors and category editors. Use this when building property inspectors, property panels similar to Visual Studio's Properties window, or dynamically inspecting and editing object properties in WPF. Covers custom value editors, category editors, collection editing, and design-time property editor customization.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing PropertyGrid

@@ -3,7 +3,7 @@ name: syncfusion-wpf-button
 description: Implement Syncfusion WPF ButtonAdv controls for configurable button UIs. Use this when adding, configuring, or customizing a Syncfusion WPF ButtonAdv — including labels, icons, size modes, toggle/checkable behavior, MVVM command binding, multiline text, corner radius, IsDefault/IsCancel modes, icon templates, and themes. 
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Button (ButtonAdv)

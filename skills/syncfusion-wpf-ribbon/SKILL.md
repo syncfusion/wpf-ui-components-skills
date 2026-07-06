@@ -3,7 +3,7 @@ name: syncfusion-wpf-ribbon
 description: Implement Syncfusion WPF Ribbon component for modern desktop applications. Use this skill when creating ribbon interfaces in WPF with tabs, groups, buttons, menus, and galleries. Covers advanced features like application menus, backstage views, state persistence, multi-document ribbon merge, keyboard accessibility, touch support, and ribbon customization.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Ribbon

@@ -3,7 +3,7 @@ name: syncfusion-wpf-toolbar
 description: Implement Syncfusion WPF ToolBarAdv controls for customizable toolbar layouts. Use this when creating toolbars with custom positioning, handling overflow items, implementing floating or docked states, or integrating ToolBarManager for multi-position layouts. Covers band positioning, gripper controls, add/remove button functionality, and dynamic state management.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF ToolBarAdv

@@ -4,7 +4,7 @@ description: Comprehensive guide for implementing Syncfusion WPF TreeGrid (SfTre
 metadata:
   author: "Syncfusion Inc"
   version : "1.0.0"
-version: "33.1.44"
+version: "34.1.29"
 ---
 
 # Implementing WPF TreeGrid (SfTreeGrid)

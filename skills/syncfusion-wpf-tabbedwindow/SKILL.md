@@ -3,7 +3,7 @@ name: syncfusion-wpf-tabbedwindow
 description: Comprehensive guide for implementing Syncfusion WPF Tabbed Window control that combines SfChromelessWindow with SfTabControl for document-based applications. Use this skill when implementing chromeless tabbed windows, browser-style tabs, document management windows, or Visual Studio-style tabs in WPF. Covers tear-off tabs, floating tab windows, tab merging between windows, drag-drop tab reordering, and MVVM tab binding scenarios.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion WPF Tabbed Windows

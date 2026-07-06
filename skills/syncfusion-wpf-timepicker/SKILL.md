@@ -3,7 +3,7 @@ name: syncfusion-wpf-timepicker
 description: Create and customize WPF time picker controls using Syncfusion's SfTimePicker component. Use this when implementing time selection UI, time input fields, or time value formatting. This skill covers SfTimePicker setup, time selector customization, value binding, and appearance styling in WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF TimePicker (SfTimePicker)

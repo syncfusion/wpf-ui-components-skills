@@ -3,7 +3,7 @@ name: syncfusion-wpf-tabcontrol
 description: Create and manage WPF TabControl (TabControlExt) components for organizing content into tabs. Use this skill when users need to implement tabbed interfaces, manage tab selection, configure close buttons, handle tab interactions (clicking, keyboard navigation), customize tab appearance (orientation, placement), or bind tab data. Covers tab creation via XAML/C#, tab item management, event handling, context menus, drag-and-drop reordering, and theming.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing WPF TabControl (TabControlExt)

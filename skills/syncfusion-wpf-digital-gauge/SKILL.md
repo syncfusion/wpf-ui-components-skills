@@ -3,7 +3,7 @@ name: syncfusion-wpf-digital-gauge
 description:  Implement Syncfusion WPF Digital Gauge (SfDigitalGauge) to display alphanumeric characters in digital LED-style segments. Use this when working with seven-segment displays, digital clocks, LED indicators, or digital counters. This skill covers segment display configuration, dot matrix displays, character-based digital visualizations, and creating virtual digital readouts in WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Digital Gauge (SfDigitalGauge)

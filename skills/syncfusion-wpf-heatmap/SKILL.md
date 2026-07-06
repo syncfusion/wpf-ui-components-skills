@@ -3,7 +3,7 @@ name: syncfusion-wpf-heatmap
 description: Implement Syncfusion WPF Heat Map (SfHeatMap) control for matrix-based data visualization using color gradients. Use this when visualizing tabular data with color-coded cells, creating heat map charts, or displaying data density patterns. This skill covers data mapping, color palette configuration, legend customization, and cell label formatting for WPF applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing SfHeatMap (WPF)

@@ -3,7 +3,7 @@ name: syncfusion-wpf-radial-gauge
 description: Comprehensive guide for implementing Syncfusion WPF Radial Gauge (SfCircularGauge) component for data visualization in Windows Presentation Foundation applications. Use this when working with circular gauges, speedometers, KPI displays, or progress meters. This skill covers gauge configuration with needles and pointers, scale customization, ranges and zones, interactive pointer dragging, animations, and annotations for creating rich dashboard visualizations.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Circular Gauges (Radial Gauge)
